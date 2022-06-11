@@ -1,0 +1,10 @@
+.color-white{
+    color: #ffffff;
+}
+.back-arrow-header{
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    z-index: 5;
+}

@@ -1,0 +1,711 @@
+<div *ngIf="isBookmarkPage === false">
+    <div *ngFor="let userPost of userPosts">
+        <div class="second-home-middle third-home-middle" *ngIf="userPost.type === 'poll'" [ngStyle]="{display: pollDuration(userPost.duration, userPost.postedAt)}">
+            <div class="poll-page r">
+                <div class="">
+                    <div class="col-md-12 ">
+                        <div class="headding-poll">
+                            <div class="poll-asked-user d-flex justify-content-between">
+                                <div class="wrapper-poll-asked-user" *ngIf="isMyProfilePage === true">
+                                    <img [src]="profilePicture" onError="this.src='assets/images/user.png'" alt="image" />
+                                    <div class="user-info-p-a">
+                                        <p class="font-14 font-bold color-49"> {{userFullName}} &nbsp;
+                                            <span class="iconify font-20 color-light-blue"
+                                                data-icon="ic:sharp-verified"></span>
+                                        </p>
+                                        <p class="font-14 color-49">@{{userName}}</p>
+                                    </div>
+                                </div>
+                                <div class="wrapper-poll-asked-user" *ngIf="isMyProfilePage === false">
+                                    <img [src]="userPost.userDetail[0]['profileImage']"
+                                        onError="this.src='assets/images/user.png'" alt="image" />
+                                    <div class="user-info-p-a">
+                                        <p class="font-14 font-bold color-49"> {{userPost.userDetail[0]['fullName']}} &nbsp;
+                                            <span class="iconify font-20 color-light-blue"
+                                                data-icon="ic:sharp-verified"></span>
+                                        </p>
+                                        <p class="font-14 color-49">@{{userPost.userDetail[0]['userName']}}</p>
+                                    </div>
+                                </div>
+                                <div class="a-for-h-3">
+                                    <a href="javascript:void(0)">{{userPost.postedAt |
+                                        date:'MMM dd'}} </a>
+                                    <a *ngIf="userPost.user === userId" href="javascript:void(0)" id="dropdownMenuButton"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span
+                                            class="iconify font-20" data-icon="fluent:more-circle-32-regular"></span></a>
+    
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="#edit-job" data-toggle="modal"
+                                            style="color: #212529;">
+                                            <svg width="11" height="11" viewBox="0 0 11 11" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M8.5146 0.169614C8.62749 0.0564292 8.77579 0 8.92393 0C9.07207 0 9.22008 0.0564292 9.33327 0.169614L10.8304 1.66674C11.0568 1.89252 11.0568 2.25903 10.8304 2.4854L9.8421 3.47368L7.52632 1.15789L8.5146 0.169614ZM0 8.68421L6.65789 2.02632L8.97368 4.3421L2.31579 11H0V8.68421Z"
+                                                    fill="#150AA1" />
+                                            </svg>
+                                            Edit Post
+                                        </a>
+    
+                                        <a class="dropdown-item" data-toggle="modal"
+                                            style="color: #212529; cursor: pointer;" (click)="deletePost(userPost._id)">
+                                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M5.20216 0.399219C5.45836 0.143019 5.80412 0 6.16602 0H7.83673C8.19863 0 8.54509 0.143019 8.80059 0.399219L9.10138 0.7H12.6014C12.8538 0.69643 13.0886 0.829063 13.2159 1.04711C13.3432 1.26516 13.3432 1.53484 13.2159 1.75289C13.0886 1.97094 12.8538 2.10357 12.6014 2.1H1.40138C1.14893 2.10357 0.914119 1.97094 0.786855 1.75289C0.65959 1.53484 0.65959 1.26516 0.786855 1.04711C0.914119 0.829063 1.14893 0.69643 1.40138 0.7H4.90138L5.20216 0.399219ZM2.72618 12.7846L1.65704 3.5H12.3457L11.2766 12.7791C11.1835 13.4784 10.5861 14 9.88751 14H4.11388C3.41528 14 2.81858 13.4776 2.72618 12.7846Z"
+                                                    fill="#FF6B6B" />
+                                            </svg>
+                                            Delete
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="poll-div-section">
+                            <div class="wrapper-poll-div-section">
+                                <div class="col-md-10">
+                                    <div class="first-div-upper-title">
+                                        <p class="font-medium font-16 color-41 "><span class="iconify font-26 color-blue"
+                                                data-icon="fa6-solid:square-poll-vertical"></span>
+                                            &nbsp; {{userPost.title}}</p>
+                                    </div>
+                                    <div class="poll-progressbar" [id]="userPost._id+'polloption'">
+                                        <div class="progress-run"
+                                            *ngFor="let pollOptions of userPost.pollData; let totalVote=index">
+                                            <div class="progress"
+                                                (click)="submitPollAnswer(userPost._id, pollOptions.text, userPost._id+'polloption', userPost._id+'pollanswer', userPost['pollData'], pollOptions._id)"
+                                                style="cursor: pointer;">
+                                                <div class="progress_inner" style="width: 0%">
+                                                </div>
+                                            </div>
+                                            <div class="opt">
+                                                <input class="change" type="number" [value]="" READONLY>
+                                                <label class="font-14 font-medium">{{pollOptions.text}}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="poll-progressbar" [id]="userPost._id+'pollanswer'" style="display: none;">
+                                        <div class="progress-run"
+                                            *ngFor="let pollOptions of userPost['pollData']; let totalVote=index">
+                                            <div class="progress">
+                                                <div class="progress_inner" [id]="pollOptions._id+'paid'">
+                                                </div>
+                                            </div>
+                                            <div class="opt">
+                                                <input class="change" type="number" [value]="pollOptions.choose" READONLY>
+                                                <label class="font-14 font-medium">{{pollOptions.text}}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="for-vote-div">
+                                    <div class="col-md-12">
+                                        <div class="wrapper-vote">
+                                            <p class="color-41 font-14">77 votes &nbsp;
+                                                <span><span class="iconify font-18" style="color: #C4C4C4;"
+                                                        data-icon="ci:dot-02-s"></span></span>
+                                                &nbsp;
+                                                <span>7 Days Left</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="white-patch-poll">
+                            <div class="col-md-7">
+                                <div class="under-second-poll">
+                                    <a class="favorite" style="cursor: pointer; " [id]="'fav'+userPost._id"
+                                        (click)="favoritePost('fav'+userPost._id,userPost._id,1)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em"
+                                            height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 36 36">
+                                            <path fill="#A8A8A8"
+                                                d="M18 32.43a1 1 0 0 1-.61-.21C11.83 27.9 8 24.18 5.32 20.51C1.9 15.82 1.12 11.49 3 7.64c1.34-2.75 5.19-5 9.69-3.69A9.87 9.87 0 0 1 18 7.72a9.87 9.87 0 0 1 5.31-3.77c4.49-1.29 8.35.94 9.69 3.69c1.88 3.85 1.1 8.18-2.32 12.87c-2.68 3.67-6.51 7.39-12.07 11.71a1 1 0 0 1-.61.21ZM10.13 5.58A5.9 5.9 0 0 0 4.8 8.51c-1.55 3.18-.85 6.72 2.14 10.81A57.13 57.13 0 0 0 18 30.16a57.13 57.13 0 0 0 11.06-10.83c3-4.1 3.69-7.64 2.14-10.81c-1-2-4-3.59-7.34-2.65a8 8 0 0 0-4.94 4.2a1 1 0 0 1-1.85 0a7.93 7.93 0 0 0-4.94-4.2a7.31 7.31 0 0 0-2-.29Z"
+                                                class="clr-i-outline clr-i-outline-path-1" />
+                                            <path fill="none" d="M0 0h36v36H0z" />
+                                        </svg>
+                                    </a>
+    
+                                    <a (click)="getComment(userPost._id, 'cm'+userPost._id)"
+                                        style="cursor: pointer; color: #A8A8A8;"><span class="iconify"
+                                            data-icon="uil:comment-alt-message"></span></a>
+    
+    
+                                    <a href="">
+                                        <p class="color7E font-medium"> <span class="iconify"
+                                                data-icon="nimbus:stats"></span>
+                                            &nbsp; Post Statistics
+                                        </p>
+                                    </a>
+                                </div>
+    
+                            </div>
+    
+                        </div>
+    
+                    </div>
+                    <div [id]="'cm'+userPost._id" style="display:none;">
+                        <div class="comment-section">
+                            <div class="comment-section-wrapper">
+                                <div class="input-in-comment-section">
+                                    <input type="text" class="w-100" placeholder="Write Comment" name=""
+                                        [id]="'cmtxt'+userPost._id"
+                                        (keydown.enter)="addComment($event.target, userPost._id, 'cmtxt'+userPost._id)" />
+                                </div>
+                                <div class="comment-section-div-forimage-and-text" *ngIf="isPostComment === true">
+                                    <div class="wrapper-poll-asked-user" *ngFor="let postComments of postComment"
+                                        [id]="postComments._id">
+                                        <img src="assets/images/Ellipse 14 (1).png"
+                                            onError="this.src='assets/images/user.png'" alt="image">
+                                        <div class="user-info-p-a">
+                                            <p class="font-14 font-bold color-49"> Talan Bergson
+                                            </p>
+                                            <p class="font-16 color-68">{{postComments.comment}}</p>
+                                        </div>
+                                        <div class="div-for-delete-edit-comment" *ngIf="userId === postComments.user"
+                                            style="margin-left: auto; margin-right: 0;">
+                                            <div class="d-flex">
+                                                <a (click)="editCommentTxt(postComments._id, postComments.comment, userPost._id, 'cmtxt'+userPost._id)"
+                                                    style="cursor: pointer;"><span class="iconify color-blue"
+                                                        data-icon="dashicons:edit"></span></a>
+                                                <a (click)="deleteComment(postComments._id, userPost._id)"
+                                                    style="cursor: pointer;"><span class="iconify color-blue"
+                                                        data-icon="ep:delete-filled"></span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="col-md-12 second-home-middle forth-home-middle" *ngIf="userPost.type != 'poll'">
+            <div class="headding-poll">
+                <div class="poll-asked-user d-flex justify-content-between">
+                    <div class="wrapper-poll-asked-user" *ngIf="isMyProfilePage === true">
+                        <img [src]="profilePicture" onError="this.src='assets/images/user.png'" alt="image" />
+                        <div class="user-info-p-a">
+                            <p class="font-14 font-bold color-49"> {{userFullName}} &nbsp;
+                                <span class="iconify font-20 color-light-blue" data-icon="ic:sharp-verified"></span>
+                            </p>
+                            <p class="font-14 color-49">@{{userName}}</p>
+                        </div>
+                    </div>
+                    <div class="wrapper-poll-asked-user" *ngIf="isMyProfilePage === false">
+                        <img [src]="userPost.userDetail[0]['profileImage']" onError="this.src='assets/images/user.png'"
+                            alt="image" *ngIf="userPost.userDetail[0]" />
+                        <div class="user-info-p-a" *ngIf="userPost.userDetail[0]">
+                            <p class="font-14 font-bold color-49"> {{userPost.userDetail[0]['fullName']}} &nbsp;
+                                <span class="iconify font-20 color-light-blue" data-icon="ic:sharp-verified"></span>
+                            </p>
+                            <p class="font-14 color-49">@{{userPost.userDetail[0]['userName']}}</p>
+                        </div>
+                    </div>
+                    <div class="a-for-h-3">
+                        <a href="javascript:void(0)">{{userPost.postedAt |
+                            date:'MMM dd'}} </a>
+                        <a *ngIf="userPost.user === userId" href="javascript:void(0)" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="iconify font-20"
+                                data-icon="fluent:more-circle-32-regular"></span></a>
+    
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#edit-job" data-toggle="modal" style="color: #212529;">
+                                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M8.5146 0.169614C8.62749 0.0564292 8.77579 0 8.92393 0C9.07207 0 9.22008 0.0564292 9.33327 0.169614L10.8304 1.66674C11.0568 1.89252 11.0568 2.25903 10.8304 2.4854L9.8421 3.47368L7.52632 1.15789L8.5146 0.169614ZM0 8.68421L6.65789 2.02632L8.97368 4.3421L2.31579 11H0V8.68421Z"
+                                        fill="#150AA1" />
+                                </svg>
+                                Edit Post
+                            </a>
+    
+                            <a class="dropdown-item" data-toggle="modal" style="color: #212529; cursor: pointer;"
+                                (click)="deletePost(userPost._id)">
+                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M5.20216 0.399219C5.45836 0.143019 5.80412 0 6.16602 0H7.83673C8.19863 0 8.54509 0.143019 8.80059 0.399219L9.10138 0.7H12.6014C12.8538 0.69643 13.0886 0.829063 13.2159 1.04711C13.3432 1.26516 13.3432 1.53484 13.2159 1.75289C13.0886 1.97094 12.8538 2.10357 12.6014 2.1H1.40138C1.14893 2.10357 0.914119 1.97094 0.786855 1.75289C0.65959 1.53484 0.65959 1.26516 0.786855 1.04711C0.914119 0.829063 1.14893 0.69643 1.40138 0.7H4.90138L5.20216 0.399219ZM2.72618 12.7846L1.65704 3.5H12.3457L11.2766 12.7791C11.1835 13.4784 10.5861 14 9.88751 14H4.11388C3.41528 14 2.81858 13.4776 2.72618 12.7846Z"
+                                        fill="#FF6B6B" />
+                                </svg>
+                                Delete
+                            </a>
+                        </div>
+    
+                        <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuLinks">
+                            <div class="radio-button-vault">
+                                <div class="form-group">
+                                    <svg width="11" height="11" viewBox="0 0 11 11" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M8.5146 0.169614C8.62749 0.0564292 8.77579 0 8.92393 0C9.07207 0 9.22008 0.0564292 9.33327 0.169614L10.8304 1.66674C11.0568 1.89252 11.0568 2.25903 10.8304 2.4854L9.8421 3.47368L7.52632 1.15789L8.5146 0.169614ZM0 8.68421L6.65789 2.02632L8.97368 4.3421L2.31579 11H0V8.68421Z"
+                                        fill="#150AA1" />
+                                </svg>
+                                    <label for="rdo1" class="color-black font-16">
+                                        Edit
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M5.20216 0.399219C5.45836 0.143019 5.80412 0 6.16602 0H7.83673C8.19863 0 8.54509 0.143019 8.80059 0.399219L9.10138 0.7H12.6014C12.8538 0.69643 13.0886 0.829063 13.2159 1.04711C13.3432 1.26516 13.3432 1.53484 13.2159 1.75289C13.0886 1.97094 12.8538 2.10357 12.6014 2.1H1.40138C1.14893 2.10357 0.914119 1.97094 0.786855 1.75289C0.65959 1.53484 0.65959 1.26516 0.786855 1.04711C0.914119 0.829063 1.14893 0.69643 1.40138 0.7H4.90138L5.20216 0.399219ZM2.72618 12.7846L1.65704 3.5H12.3457L11.2766 12.7791C11.1835 13.4784 10.5861 14 9.88751 14H4.11388C3.41528 14 2.81858 13.4776 2.72618 12.7846Z"
+                                        fill="#FF6B6B" />
+                                </svg>
+                                    <label for="rdo2" class="color-black font-16">
+                                        Delete
+                                    </label>
+                                </div>
+                            </div>
+                        </div> -->
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="mi-home-w-d">
+                <div class="w-100">
+                    <div class="profile-div-page-t-p" *ngIf="userPost.type === 'text'">
+                        <p>{{userPost.title}}</p>
+                    </div>
+                    <div class="profile-div-page-t-p" *ngIf="userPost.type === 'image'">
+                        <p>{{userPost.title}}</p>
+                        <img [src]="userPost.fileName" onError="this.src='assets/images/8.png'" alt="image" />
+                    </div>
+                    <div class="profile-div-page-t-p" *ngIf="userPost.type === 'video'">
+                        <p>{{userPost.title}}</p>
+                        <video controls style="width: 100%; height: auto;">
+                            <source [src]="userPost.fileName" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+            </div>
+            <div class="middle-up-i">
+                <div class="d-flex justify-content-between">
+                    <div class="first-h-c-t">
+                        <a class="favorite" style="cursor: pointer; " [id]="'fav'+userPost._id"
+                            (click)="favoritePost('fav'+userPost._id,userPost._id,1)">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
+                                preserveAspectRatio="xMidYMid meet" viewBox="0 0 36 36">
+                                <path fill="#A8A8A8"
+                                    d="M18 32.43a1 1 0 0 1-.61-.21C11.83 27.9 8 24.18 5.32 20.51C1.9 15.82 1.12 11.49 3 7.64c1.34-2.75 5.19-5 9.69-3.69A9.87 9.87 0 0 1 18 7.72a9.87 9.87 0 0 1 5.31-3.77c4.49-1.29 8.35.94 9.69 3.69c1.88 3.85 1.1 8.18-2.32 12.87c-2.68 3.67-6.51 7.39-12.07 11.71a1 1 0 0 1-.61.21ZM10.13 5.58A5.9 5.9 0 0 0 4.8 8.51c-1.55 3.18-.85 6.72 2.14 10.81A57.13 57.13 0 0 0 18 30.16a57.13 57.13 0 0 0 11.06-10.83c3-4.1 3.69-7.64 2.14-10.81c-1-2-4-3.59-7.34-2.65a8 8 0 0 0-4.94 4.2a1 1 0 0 1-1.85 0a7.93 7.93 0 0 0-4.94-4.2a7.31 7.31 0 0 0-2-.29Z"
+                                    class="clr-i-outline clr-i-outline-path-1" />
+                                <path fill="none" d="M0 0h36v36H0z" />
+                            </svg>
+                        </a>
+    
+                        <a (click)="getComment(userPost._id, 'cm'+userPost._id)"
+                            style="cursor: pointer; color: #A8A8A8;"><span class="iconify"
+                                data-icon="uil:comment-alt-message"></span></a>
+    
+                        <a href=""><img src="assets/images/mask-4.png" alt="image" /> &nbsp; Send
+                            Tip</a>
+                        <p class="font-14 color-a8">{{numFormatter(userPost['favoritedata'].length)}} likes this</p>
+                    </div>
+                    <div class="first-h-c-t">
+                        <a class="bookmark" style="cursor: pointer; color: #A8A8A8;" [id]="'bm'+userPost._id"
+                            (click)="bookmartPost('bm'+userPost._id,userPost._id,1)">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
+                                preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16">
+                                <path fill="currentColor"
+                                    d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div [id]="'cm'+userPost._id" style="display:none;">
+                    <div class="comment-section">
+                        <div class="comment-section-wrapper">
+                            <div class="input-in-comment-section">
+                                <input type="text" class="w-100" placeholder="Write Comment" name=""
+                                    [id]="'cmtxt'+userPost._id"
+                                    (keydown.enter)="addComment($event.target, userPost._id, 'cmtxt'+userPost._id)" />
+                            </div>
+                            <div class="comment-section-div-forimage-and-text" *ngIf="isPostComment === true">
+                                <div class="wrapper-poll-asked-user" *ngFor="let postComments of postComment"
+                                    [id]="postComments._id">
+                                    <img src="assets/images/Ellipse 14 (1).png" onError="this.src='assets/images/user.png'"
+                                        alt="image">
+                                    <div class="user-info-p-a">
+                                        <p class="font-14 font-bold color-49"> Talan Bergson
+                                        </p>
+                                        <p class="font-16 color-68">{{postComments.comment}}</p>
+                                    </div>
+                                    <div class="div-for-delete-edit-comment" *ngIf="userId === postComments.user"
+                                        style="margin-left: auto; margin-right: 0;">
+                                        <div class="d-flex">
+                                            <a (click)="editCommentTxt(postComments._id, postComments.comment, userPost._id, 'cmtxt'+userPost._id)"
+                                                style="cursor: pointer;"><span class="iconify color-blue"
+                                                    data-icon="dashicons:edit"></span></a>
+                                            <a (click)="deleteComment(postComments._id, userPost._id)"
+                                                style="cursor: pointer;"><span class="iconify color-blue"
+                                                    data-icon="ep:delete-filled"></span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="isBookmarkPage === true">
+    <div *ngFor="let userPost of userPosts">
+        <div class="second-home-middle third-home-middle" *ngIf="userPost.type === 'poll'">
+            <div class="poll-page r">
+                <div class="">
+                    <div class="col-md-12 ">
+                        <div class="headding-poll">
+                            <div class="poll-asked-user d-flex justify-content-between">
+                                <div class="wrapper-poll-asked-user" *ngIf="isMyProfilePage === true">
+                                    <img [src]="profilePicture" onError="this.src='assets/images/user.png'" alt="image" />
+                                    <div class="user-info-p-a">
+                                        <p class="font-14 font-bold color-49"> {{userFullName}} &nbsp;
+                                            <span class="iconify font-20 color-light-blue"
+                                                data-icon="ic:sharp-verified"></span>
+                                        </p>
+                                        <p class="font-14 color-49">@{{userName}}</p>
+                                    </div>
+                                </div>
+                                <div class="wrapper-poll-asked-user" *ngIf="isMyProfilePage === false">
+                                    <img [src]="userPost.userDetail[0]['profileImage']"
+                                        onError="this.src='assets/images/user.png'" alt="image" />
+                                    <div class="user-info-p-a">
+                                        <p class="font-14 font-bold color-49"> {{userPost.userDetail[0]['fullName']}} &nbsp;
+                                            <span class="iconify font-20 color-light-blue"
+                                                data-icon="ic:sharp-verified"></span>
+                                        </p>
+                                        <p class="font-14 color-49">@{{userPost.userDetail[0]['userName']}}</p>
+                                    </div>
+                                </div>
+                                <div class="a-for-h-3">
+                                    <a href="javascript:void(0)">{{userPost.createdAt |
+                                        date:'MMM dd'}} </a>
+                                    <a *ngIf="userPost.user === userId" href="javascript:void(0)" id="dropdownMenuButton"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span
+                                            class="iconify font-20" data-icon="fluent:more-circle-32-regular"></span></a>
+    
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="#edit-job" data-toggle="modal"
+                                            style="color: #212529;">
+                                            <svg width="11" height="11" viewBox="0 0 11 11" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M8.5146 0.169614C8.62749 0.0564292 8.77579 0 8.92393 0C9.07207 0 9.22008 0.0564292 9.33327 0.169614L10.8304 1.66674C11.0568 1.89252 11.0568 2.25903 10.8304 2.4854L9.8421 3.47368L7.52632 1.15789L8.5146 0.169614ZM0 8.68421L6.65789 2.02632L8.97368 4.3421L2.31579 11H0V8.68421Z"
+                                                    fill="#150AA1" />
+                                            </svg>
+                                            Edit Post
+                                        </a>
+    
+                                        <a class="dropdown-item" data-toggle="modal"
+                                            style="color: #212529; cursor: pointer;" (click)="deleteBookmark(userPost._id)">
+                                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M5.20216 0.399219C5.45836 0.143019 5.80412 0 6.16602 0H7.83673C8.19863 0 8.54509 0.143019 8.80059 0.399219L9.10138 0.7H12.6014C12.8538 0.69643 13.0886 0.829063 13.2159 1.04711C13.3432 1.26516 13.3432 1.53484 13.2159 1.75289C13.0886 1.97094 12.8538 2.10357 12.6014 2.1H1.40138C1.14893 2.10357 0.914119 1.97094 0.786855 1.75289C0.65959 1.53484 0.65959 1.26516 0.786855 1.04711C0.914119 0.829063 1.14893 0.69643 1.40138 0.7H4.90138L5.20216 0.399219ZM2.72618 12.7846L1.65704 3.5H12.3457L11.2766 12.7791C11.1835 13.4784 10.5861 14 9.88751 14H4.11388C3.41528 14 2.81858 13.4776 2.72618 12.7846Z"
+                                                    fill="#FF6B6B" />
+                                            </svg>
+                                            Delete
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="poll-div-section">
+                            <div class="wrapper-poll-div-section">
+                                <div class="col-md-10">
+                                    <div class="first-div-upper-title">
+                                        <p class="font-medium font-16 color-41 "><span class="iconify font-26 color-blue"
+                                                data-icon="fa6-solid:square-poll-vertical"></span>
+                                            &nbsp; {{userPost.title}}</p>
+                                    </div>
+                                    <div class="poll-progressbar" [id]="userPost._id+'polloption'">
+                                        <div class="progress-run"
+                                            *ngFor="let pollOptions of userPost['pollData']; let totalVote=index">
+                                            <div class="progress"
+                                                (click)="submitPollAnswer(userPost._id, pollOptions.text, userPost._id+'polloption', userPost._id+'pollanswer', userPost['pollData'], pollOptions._id)"
+                                                style="cursor: pointer;">
+                                                <div class="progress_inner" style="width: 0%">
+                                                </div>
+                                            </div>
+                                            <div class="opt">
+                                                <input class="change" type="number" [value]="" READONLY>
+                                                <label class="font-14 font-medium">{{pollOptions.text}}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="poll-progressbar" [id]="userPost._id+'pollanswer'" style="display: none;">
+                                        <div class="progress-run"
+                                            *ngFor="let pollOptions of userPost['pollData']; let totalVote=index">
+                                            <div class="progress">
+                                                <div class="progress_inner" [id]="pollOptions._id+'paid'">
+                                                </div>
+                                            </div>
+                                            <div class="opt">
+                                                <input class="change" type="number" [value]="pollOptions.choose" READONLY>
+                                                <label class="font-14 font-medium">{{pollOptions.text}}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="for-vote-div">
+                                    <div class="col-md-12">
+                                        <div class="wrapper-vote">
+                                            <p class="color-41 font-14">77 votes &nbsp;
+                                                <span><span class="iconify font-18" style="color: #C4C4C4;"
+                                                        data-icon="ci:dot-02-s"></span></span>
+                                                &nbsp;
+                                                <span>7 Days Left</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="white-patch-poll">
+                            <div class="col-md-7">
+                                <div class="under-second-poll">
+                                    <a class="favorite" style="cursor: pointer; " [id]="'fav'+userPost._id"
+                                        (click)="favoritePost('fav'+userPost._id,userPost._id,1)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em"
+                                            height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 36 36">
+                                            <path fill="#A8A8A8"
+                                                d="M18 32.43a1 1 0 0 1-.61-.21C11.83 27.9 8 24.18 5.32 20.51C1.9 15.82 1.12 11.49 3 7.64c1.34-2.75 5.19-5 9.69-3.69A9.87 9.87 0 0 1 18 7.72a9.87 9.87 0 0 1 5.31-3.77c4.49-1.29 8.35.94 9.69 3.69c1.88 3.85 1.1 8.18-2.32 12.87c-2.68 3.67-6.51 7.39-12.07 11.71a1 1 0 0 1-.61.21ZM10.13 5.58A5.9 5.9 0 0 0 4.8 8.51c-1.55 3.18-.85 6.72 2.14 10.81A57.13 57.13 0 0 0 18 30.16a57.13 57.13 0 0 0 11.06-10.83c3-4.1 3.69-7.64 2.14-10.81c-1-2-4-3.59-7.34-2.65a8 8 0 0 0-4.94 4.2a1 1 0 0 1-1.85 0a7.93 7.93 0 0 0-4.94-4.2a7.31 7.31 0 0 0-2-.29Z"
+                                                class="clr-i-outline clr-i-outline-path-1" />
+                                            <path fill="none" d="M0 0h36v36H0z" />
+                                        </svg>
+                                    </a>
+    
+                                    <a (click)="getComment(userPost._id, 'cm'+userPost._id)"
+                                        style="cursor: pointer; color: #A8A8A8;"><span class="iconify"
+                                            data-icon="uil:comment-alt-message"></span></a>
+    
+    
+                                    <a href="">
+                                        <p class="color7E font-medium"> <span class="iconify"
+                                                data-icon="nimbus:stats"></span>
+                                            &nbsp; Post Statistics
+                                        </p>
+                                    </a>
+                                </div>
+    
+                            </div>
+    
+                        </div>
+    
+                    </div>
+                    <div [id]="'cm'+userPost._id" style="display:none;">
+                        <div class="comment-section">
+                            <div class="comment-section-wrapper">
+                                <div class="input-in-comment-section">
+                                    <input type="text" class="w-100" placeholder="Write Comment" name=""
+                                        [id]="'cmtxt'+userPost._id"
+                                        (keydown.enter)="addComment($event.target, userPost._id, 'cmtxt'+userPost._id)" />
+                                </div>
+                                <div class="comment-section-div-forimage-and-text" *ngIf="isPostComment === true">
+                                    <div class="wrapper-poll-asked-user" *ngFor="let postComments of postComment"
+                                        [id]="postComments._id">
+                                        <img src="assets/images/Ellipse 14 (1).png"
+                                            onError="this.src='assets/images/user.png'" alt="image">
+                                        <div class="user-info-p-a">
+                                            <p class="font-14 font-bold color-49"> Talan Bergson
+                                            </p>
+                                            <p class="font-16 color-68">{{postComments.comment}}</p>
+                                        </div>
+                                        <div class="div-for-delete-edit-comment" *ngIf="userId === postComments.user"
+                                            style="margin-left: auto; margin-right: 0;">
+                                            <div class="d-flex">
+                                                <a (click)="editCommentTxt(postComments._id, postComments.comment, userPost._id, 'cmtxt'+userPost._id)"
+                                                    style="cursor: pointer;"><span class="iconify color-blue"
+                                                        data-icon="dashicons:edit"></span></a>
+                                                <a (click)="deleteComment(postComments._id, userPost._id)"
+                                                    style="cursor: pointer;"><span class="iconify color-blue"
+                                                        data-icon="ep:delete-filled"></span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="col-md-12 second-home-middle forth-home-middle" *ngIf="userPost.type != 'poll'">
+            <div class="headding-poll">
+                <div class="poll-asked-user d-flex justify-content-between">
+                    <div class="wrapper-poll-asked-user" *ngIf="isMyProfilePage === true">
+                        <img [src]="profilePicture" onError="this.src='assets/images/user.png'" alt="image" />
+                        <div class="user-info-p-a">
+                            <p class="font-14 font-bold color-49"> {{userFullName}} &nbsp;
+                                <span class="iconify font-20 color-light-blue" data-icon="ic:sharp-verified"></span>
+                            </p>
+                            <p class="font-14 color-49">@{{userName}}</p>
+                        </div>
+                    </div>
+                    <div class="wrapper-poll-asked-user" *ngIf="isMyProfilePage === false">
+                        <img [src]="userPost.userDetail[0]['profileImage']" onError="this.src='assets/images/user.png'"
+                            alt="image" *ngIf="userPost.userDetail[0]" />
+                        <div class="user-info-p-a" *ngIf="userPost.userDetail[0]">
+                            <p class="font-14 font-bold color-49"> {{userPost.userDetail[0]['fullName']}} &nbsp;
+                                <span class="iconify font-20 color-light-blue" data-icon="ic:sharp-verified"></span>
+                            </p>
+                            <p class="font-14 color-49">@{{userPost.userDetail[0]['userName']}}</p>
+                        </div>
+                    </div>
+                    <div class="a-for-h-3">
+                        <a href="javascript:void(0)">{{userPost.createdAt |
+                            date:'MMM dd'}} </a>
+                        <a *ngIf="userPost.user === userId" href="javascript:void(0)" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="iconify font-20"
+                                data-icon="fluent:more-circle-32-regular"></span></a>
+    
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#edit-job" data-toggle="modal" style="color: #212529;">
+                                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M8.5146 0.169614C8.62749 0.0564292 8.77579 0 8.92393 0C9.07207 0 9.22008 0.0564292 9.33327 0.169614L10.8304 1.66674C11.0568 1.89252 11.0568 2.25903 10.8304 2.4854L9.8421 3.47368L7.52632 1.15789L8.5146 0.169614ZM0 8.68421L6.65789 2.02632L8.97368 4.3421L2.31579 11H0V8.68421Z"
+                                        fill="#150AA1" />
+                                </svg>
+                                Edit Post
+                            </a>
+    
+                            <a class="dropdown-item" data-toggle="modal" style="color: #212529; cursor: pointer;"
+                                (click)="deleteBookmark(userPost.postDetail['_id'])">
+                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M5.20216 0.399219C5.45836 0.143019 5.80412 0 6.16602 0H7.83673C8.19863 0 8.54509 0.143019 8.80059 0.399219L9.10138 0.7H12.6014C12.8538 0.69643 13.0886 0.829063 13.2159 1.04711C13.3432 1.26516 13.3432 1.53484 13.2159 1.75289C13.0886 1.97094 12.8538 2.10357 12.6014 2.1H1.40138C1.14893 2.10357 0.914119 1.97094 0.786855 1.75289C0.65959 1.53484 0.65959 1.26516 0.786855 1.04711C0.914119 0.829063 1.14893 0.69643 1.40138 0.7H4.90138L5.20216 0.399219ZM2.72618 12.7846L1.65704 3.5H12.3457L11.2766 12.7791C11.1835 13.4784 10.5861 14 9.88751 14H4.11388C3.41528 14 2.81858 13.4776 2.72618 12.7846Z"
+                                        fill="#FF6B6B" />
+                                </svg>
+                                Delete
+                            </a>
+                        </div>
+    
+                        <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuLinks">
+                            <div class="radio-button-vault">
+                                <div class="form-group">
+                                    <svg width="11" height="11" viewBox="0 0 11 11" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M8.5146 0.169614C8.62749 0.0564292 8.77579 0 8.92393 0C9.07207 0 9.22008 0.0564292 9.33327 0.169614L10.8304 1.66674C11.0568 1.89252 11.0568 2.25903 10.8304 2.4854L9.8421 3.47368L7.52632 1.15789L8.5146 0.169614ZM0 8.68421L6.65789 2.02632L8.97368 4.3421L2.31579 11H0V8.68421Z"
+                                        fill="#150AA1" />
+                                </svg>
+                                    <label for="rdo1" class="color-black font-16">
+                                        Edit
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M5.20216 0.399219C5.45836 0.143019 5.80412 0 6.16602 0H7.83673C8.19863 0 8.54509 0.143019 8.80059 0.399219L9.10138 0.7H12.6014C12.8538 0.69643 13.0886 0.829063 13.2159 1.04711C13.3432 1.26516 13.3432 1.53484 13.2159 1.75289C13.0886 1.97094 12.8538 2.10357 12.6014 2.1H1.40138C1.14893 2.10357 0.914119 1.97094 0.786855 1.75289C0.65959 1.53484 0.65959 1.26516 0.786855 1.04711C0.914119 0.829063 1.14893 0.69643 1.40138 0.7H4.90138L5.20216 0.399219ZM2.72618 12.7846L1.65704 3.5H12.3457L11.2766 12.7791C11.1835 13.4784 10.5861 14 9.88751 14H4.11388C3.41528 14 2.81858 13.4776 2.72618 12.7846Z"
+                                        fill="#FF6B6B" />
+                                </svg>
+                                    <label for="rdo2" class="color-black font-16">
+                                        Delete
+                                    </label>
+                                </div>
+                            </div>
+                        </div> -->
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="mi-home-w-d">
+                <div class="w-100">
+                    <div class="profile-div-page-t-p" *ngIf="userPost.postDetail['type'] === 'text'">
+                        <p>{{userPost.postDetail['title']}}</p>
+                    </div>
+                    <div class="profile-div-page-t-p" *ngIf="userPost.postDetail['type'] === 'image'">
+                        <p>{{userPost.postDetail['title']}}</p>
+                        <img [src]="userPost.postDetail['fileName']" onError="this.src='assets/images/8.png'" alt="image" />
+                    </div>
+                    <div class="profile-div-page-t-p" *ngIf="userPost.postDetail['type'] === 'video'">
+                        <p>{{userPost.postDetail['title']}}</p>
+                        <video controls style="width: 100%; height: auto;">
+                            <source [src]="userPost.postDetail['fileName']" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+            </div>
+            <div class="middle-up-i">
+                <div class="d-flex justify-content-between">
+                    <div class="first-h-c-t">
+                        <a class="favorite" style="cursor: pointer; " [id]="'fav'+userPost._id"
+                            (click)="favoritePost('fav'+userPost._id,userPost.postid,1)">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
+                                preserveAspectRatio="xMidYMid meet" viewBox="0 0 36 36">
+                                <path fill="#A8A8A8"
+                                    d="M18 32.43a1 1 0 0 1-.61-.21C11.83 27.9 8 24.18 5.32 20.51C1.9 15.82 1.12 11.49 3 7.64c1.34-2.75 5.19-5 9.69-3.69A9.87 9.87 0 0 1 18 7.72a9.87 9.87 0 0 1 5.31-3.77c4.49-1.29 8.35.94 9.69 3.69c1.88 3.85 1.1 8.18-2.32 12.87c-2.68 3.67-6.51 7.39-12.07 11.71a1 1 0 0 1-.61.21ZM10.13 5.58A5.9 5.9 0 0 0 4.8 8.51c-1.55 3.18-.85 6.72 2.14 10.81A57.13 57.13 0 0 0 18 30.16a57.13 57.13 0 0 0 11.06-10.83c3-4.1 3.69-7.64 2.14-10.81c-1-2-4-3.59-7.34-2.65a8 8 0 0 0-4.94 4.2a1 1 0 0 1-1.85 0a7.93 7.93 0 0 0-4.94-4.2a7.31 7.31 0 0 0-2-.29Z"
+                                    class="clr-i-outline clr-i-outline-path-1" />
+                                <path fill="none" d="M0 0h36v36H0z" />
+                            </svg>
+                        </a>
+    
+                        <a (click)="getComment(userPost.postid, 'cm'+userPost._id)"
+                            style="cursor: pointer; color: #A8A8A8;"><span class="iconify"
+                                data-icon="uil:comment-alt-message"></span></a>
+    
+                        <a href=""><img src="assets/images/mask-4.png" alt="image" /> &nbsp; Send
+                            Tip</a>
+                        <p class="font-14 color-a8">122 likes this</p>
+                    </div>
+                    <div class="first-h-c-t">
+                        <a class="bookmark active" style="cursor: pointer; color: #A8A8A8;" [id]="'bm'+userPost._id"
+                            (click)="bookmartPost('bm'+userPost._id,userPost.postid,1)">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
+                                preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16">
+                                <path fill="currentColor"
+                                    d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div [id]="'cm'+userPost._id" style="display:none;">
+                    <div class="comment-section">
+                        <div class="comment-section-wrapper">
+                            <div class="input-in-comment-section">
+                                <input type="text" class="w-100" placeholder="Write Comment" name=""
+                                    [id]="'cmtxt'+userPost._id"
+                                    (keydown.enter)="addComment($event.target, userPost.postid, 'cmtxt'+userPost._id)" />
+                            </div>
+                            <div class="comment-section-div-forimage-and-text" *ngIf="isPostComment === true">
+                                <div class="wrapper-poll-asked-user" *ngFor="let postComments of postComment"
+                                    [id]="postComments._id">
+                                    <img src="assets/images/Ellipse 14 (1).png" onError="this.src='assets/images/user.png'"
+                                        alt="image">
+                                    <div class="user-info-p-a">
+                                        <p class="font-14 font-bold color-49"> Talan Bergson
+                                        </p>
+                                        <p class="font-16 color-68">{{postComments.comment}}</p>
+                                    </div>
+                                    <div class="div-for-delete-edit-comment" *ngIf="userId === postComments.user"
+                                        style="margin-left: auto; margin-right: 0;">
+                                        <div class="d-flex">
+                                            <a (click)="editCommentTxt(postComments._id, postComments.comment, userPost.postid, 'cmtxt'+userPost._id)"
+                                                style="cursor: pointer;"><span class="iconify color-blue"
+                                                    data-icon="dashicons:edit"></span></a>
+                                            <a (click)="deleteComment(postComments._id, userPost.postid)"
+                                                style="cursor: pointer;"><span class="iconify color-blue"
+                                                    data-icon="ep:delete-filled"></span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

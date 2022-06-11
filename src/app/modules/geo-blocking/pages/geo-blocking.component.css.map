@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "geo-blocking.component.scss"
+    ],
+    "names": [],
+    "file": "geo-blocking.component.css"
+}

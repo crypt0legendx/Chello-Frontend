@@ -1,0 +1,84 @@
+<app-header></app-header>
+
+<div class="poll-page">
+    <div class="wrapper-poll">
+        <div class="width-poll">
+            <div class="headding-poll">
+                <p class="color-blue font-26 font-bold">New Post</p>
+            </div>
+            <div class="poll-div-section">
+                <div class="wrapper-poll-div-section">
+                    <form [formGroup]="pollForm" (ngSubmit)="createPoll()">
+                        <div class="col-md-7">
+                            <div class="first-div-upper-title">
+                                <p class="font-medium font-16 color-blue"><span class="iconify font-26"
+                                        data-icon="fa6-solid:square-poll-vertical"></span> &nbsp; Poll Duration</p>
+                                <!-- <button>7 Days <span class="iconify" data-icon="ant-design:arrow-down-outlined"></span></button> -->
+                                <div class="dropdown show">
+                                    <a class="button" href="#" role="button" id="dropdownMenuLink"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        {{pollDuration}} Days <span class="iconify" data-icon="ant-design:arrow-down-outlined"></span>
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        <a class="dropdown-item" (click)="changePollDuration(5)" style="cursor: pointer;">5 days</a>
+                                        <a class="dropdown-item" (click)="changePollDuration(3)" style="cursor: pointer;">3 days</a>
+                                        <a class="dropdown-item" (click)="changePollDuration(1)" style="cursor: pointer;">1 days</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="poll-inputs" formArrayName="pollOption">
+                                <div class="form-group position-relative" *ngFor="let pollOptions of pollOption().controls; let i=index" [formGroupName]="i">
+                                    <input type="text" [placeholder]="'Enter Option '+ (i+1)" class="w-100" formControlName="options"
+                                        [ngClass]="{ 'is-invalid': submitted && pollOptions.invalid }">
+                                    <div *ngIf="submitted && pollOptions.invalid" class="invalid-feedback">
+                                        <div *ngIf="pollOptions.invalid" style="color:red;">Option {{i+1}} is required</div>
+                                    </div>
+                                    <a (click)="removePollOption(i)" style="cursor: pointer;"><span  class="iconify" data-icon="ic:round-cancel" *ngIf="i > 1" ></span></a>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-12">
+                            <div class="div-for-new-post-poll">
+                                <div class="wrapper-new-post-poll">
+                                    <div class="wrapper-new-poll-post headding" *ngIf="optionCounter != 4">
+                                        <p class="font-medium font-16 color-blue" (click)="addPollOption()" style="cursor: pointer;"> <span class="font-18">+</span> &nbsp;
+                                            Add
+                                            another option</p>
+                                    </div>
+                                    <div class="text-area-for-poll">
+                                        <div class="form-group position-relative">
+                                            <textarea rows="4" class="w-100" formControlName="pollTitle"
+                                            [ngClass]="{ 'is-invalid': submitted && f.pollTitle.errors }">Compose new post</textarea>
+                                    <div *ngIf="submitted && f.pollTitle.errors" class="invalid-feedback">
+                                        <div *ngIf="f.pollTitle.errors.required" style="color:red;">Title is required</div>
+                                    </div>
+                                            <div class="option-selected-for-ta">
+                                                <a href=""><span class="iconify"
+                                                        data-icon="icon-park-outline:picture-one"></span></a>
+                                                <a href=""><span class="iconify"
+                                                        data-icon="ph:video-camera-bold"></span></a>
+                                                <a href=""><span class="iconify"
+                                                        data-icon="bxs:microphone-alt"></span></a>
+                                                <a href=""><span class="iconify active"
+                                                        data-icon="fa6-solid:square-poll-vertical"></span></a>
+                                                <a href=""><span class="iconify"
+                                                        data-icon="mdi:calendar-range"></span></a>
+                                                <a href=""><span class="iconify" data-icon="fa:hourglass-3"></span></a>
+                                            </div>
+                                        </div>
+                                        <div class="right-side-button text-right">
+                                            <button type="submit">Post</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>

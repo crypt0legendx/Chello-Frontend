@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "features.component.scss"
+    ],
+    "names": [],
+    "file": "features.component.css"
+}

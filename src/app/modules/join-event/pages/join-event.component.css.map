@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "join-event.component.scss"
+    ],
+    "names": [],
+    "file": "join-event.component.css"
+}

@@ -1,0 +1,46 @@
+<div class="abc">
+    <div class="accordion-content collapse show-side" id="sidebar">
+        <div class="sidebar-div-home">
+            <div class="wrapper-sidebar-home">
+                <div class="user-image-home">
+                    <img [src]="profilePicture" alt="image" onError="this.src='assets/images/user.png'"
+                        class="round-image" alt="image" style="border: 1px solid #5858FA; border-radius: 100%;" />
+                </div>
+                <div class="list-for-user-sidemenu">
+                    <li><a routerLink="/home" [routerLinkActive]="['active']"><span class="iconify"
+                                data-icon="akar-icons:home"></span>Home</a>
+                    </li>
+                    <li><a routerLink="/notification" [routerLinkActive]="['active']"><span class="iconify"
+                                data-icon="carbon:notification-new"></span>Notifications</a></li>
+                    <li><a routerLink="/message" [routerLinkActive]="['active']"><span class="iconify"
+                                data-icon="charm:messages"></span>Messages</a>
+                    </li>
+                    <li><a routerLink="/bookmark" [routerLinkActive]="['active']"><span class="iconify"
+                                data-icon="bi:bookmark"></span>Bookmarks</a>
+                    </li>
+                    <li><a routerLink="/list" [routerLinkActive]="['active']"><span class="iconify"
+                                data-icon="ant-design:unordered-list-outlined"></span>Lists</a>
+                    </li>
+                    <li><a routerLink="/group-new" [routerLinkActive]="['active']"><span class="iconify"
+                                data-icon="akar-icons:people-group"></span>Groups</a></li>
+                    <li><a routerLink="/subscriptions" [routerLinkActive]="['active']"><span class="iconify"
+                                data-icon="carbon:user-favorite"></span>Subscriptions</a></li>
+                    <li><a routerLink="/add-card" [routerLinkActive]="['active']"><span class="iconify"
+                                data-icon="ic:twotone-add-card"></span>Add
+                            Card</a></li>
+                    <li><a routerLink="/profile" [routerLinkActive]="['active']"><span class="iconify"
+                                data-icon="bx:user"></span>My Profile</a></li>
+                    <li><a routerLink="/more" [routerLinkActive]="['active']"><span class="iconify"
+                                data-icon="fluent:more-circle-32-regular"></span>More</a></li>
+                    <li><a style="cursor: pointer;" (click)="logout()"><span class="iconify"
+                                data-icon="ant-design:logout-outlined"></span>Logout</a></li>
+                    <div class="right-side-button ">
+                        <a routerLink="/poll" [routerLinkActive]="['active']"> <button>+ New Post</button></a>
+                    </div>
+                    <li style="margin-top: 100px;"><a routerLink="/event" [routerLinkActive]="['active']"><span class="iconify"
+                        data-icon="ic:twotone-event-busy"></span>Private Event</a></li>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

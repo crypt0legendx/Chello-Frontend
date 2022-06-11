@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,eAAe,CAAA;EACX,OAAO,EAAE,KAAK;CACf",
+    "sources": [
+        "profile-vault.component.scss"
+    ],
+    "names": [],
+    "file": "profile-vault.component.css"
+}

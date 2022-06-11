@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Chello</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <link rel="icon" type="image/x-icon" href="assets/images/Chello.png">
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+
+  <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <!-- slider  -->
+  <!-- <link rel="stylesheet" type="text/css" href="assets/css/swiper.css" />
+  <link rel="stylesheet" type="text/css" href="assets/css/swiper.min.css"> -->
+  <!-- <link rel="stylesheet" href="assets/css/style-slider.css">
+  <link href="https://www.cssscript.com/demo/sticky.css" rel="stylesheet" type="text/css"> -->
+
+   <!-- zuck lib styles -->
+  <link rel="stylesheet" href="assets/css/snapssenger.css">
+  <link rel="stylesheet" href="assets/css/zuck.min.css">
+
+  <!-- animation -->
+  <link rel="stylesheet" type="text/css" href="assets/css/aos.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400&display=swap" rel="stylesheet">
+
+  <!-- icon -->
+  <script src="https://code.iconify.design/2/2.0.4/iconify.min.js"></script>
+  <link href="assets/css/slick.css" rel="stylesheet">
+  <link href="assets/css/selectric.css" rel="stylesheet">
+  <link href="assets/css/jquery.mCustomScrollbar.css" rel="stylesheet">
+
+
+
+</head>
+
+<body>
+  <app-root></app-root>
+
+
+  <script src="assets/js/jquery-3.1.1.min.js"></script>
+  <script src="assets/js/popper.min.js"></script>
+  <script src="assets/js/bootstrap.min.js"></script>
+  <!-- <script src="assets/js/swiper.min.js"></script> -->
+  <script type="text/javascript" src="assets/js/aos.js"></script>
+  <script src="assets/js/slick.js"></script>
+
+  <!-- selectric select -->
+  <script src="assets/js/jquery.selectric.js"></script>
+
+  <!-- mCustomScrollbar select -->
+  <script src="assets/js/jquery.mCustomScrollbar.js"></script>
+  <script src="assets/js/script.js"></script>
+
+  <script type="text/javascript">
+    $(document).click(function (e) {
+      if (!$(e.target).is('.panel-body')) {
+        $('.collapse').collapse('hide');
+      }
+    });
+  </script>
+
+  <script>
+    $('#myButton').click(function () {
+      $('#welcomeDiv').toggle('slow', function () {
+      });
+    });
+  </script>
+  <script>
+    function openCity(evt, cityName) {
+      var i, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+      document.getElementById(cityName).style.display = "block";
+      evt.currentTarget.className += " active";
+    }
+
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+  </script>
+
+<script>
+  
+</script>
+
+
+  <script src="assets/js/zuck.min.js"></script>
+ 
+</body>
+
+</html>

@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "notification-setting.component.scss"
+    ],
+    "names": [],
+    "file": "notification-setting.component.css"
+}

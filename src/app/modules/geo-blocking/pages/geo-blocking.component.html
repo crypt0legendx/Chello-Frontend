@@ -1,0 +1,199 @@
+
+<app-header-new></app-header-new>
+<div class="homepage margin-minus-header">
+    <div class="homepage-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3">
+                    <app-sidebar></app-sidebar>
+                </div>
+                <div class="wid-2">
+                    <div class="more-side-bar mar-top-m">
+                        <div class="more-search-div-head">
+                            <div class="search-bar-home">
+                                <input type="text" placeholder="Search" class="w-100" />
+                                <span class="iconify" data-icon="akar-icons:search"></span>
+                            </div>
+                        </div>
+                        <div class="more-div-option">
+                            <div class="text-group-2-link">
+                                <a href="">
+                                    <p class="font-16 font-medium color-a9">Creator Unique URL</p>
+                                </a>
+                                <a href="">
+                                    <p class="font-16 font-medium color-a9">ChitChat</p>
+                                </a>
+                                <a href="">
+                                    <p class="font-16 font-medium color-a9">Pay Per View Message</p>
+                                </a>
+                                <a href="">
+                                    <p class="font-16 font-medium color-a9">Tips</p>
+                                </a>
+                                <a href="">
+                                    <p class="font-16 font-medium color-a9">Schedule Post</p>
+                                </a>
+                                <a href="">
+                                    <p class="font-16 font-medium color-a9">Elite Fans</p>
+                                </a>
+                                <a href="">
+                                    <p class="font-16 font-medium color-a9">#Hashtag Trending</p>
+                                </a>
+                                <a routerLink='/poll'>
+                                    <p class="font-16 font-medium color-a9">Polls</p>
+                                </a>
+                                <a routerLink='/geo-blocking'>
+                                    <p class="font-16 font-medium color-blue">Geo-Blocking</p>
+                                </a>
+                                <a routerLink='/page-state'>
+                                    <p class="font-16 font-medium color-a9">Page Stats</p>
+                                </a>
+                                <a href="">
+                                    <p class="font-16 font-medium color-a9">Customize Subscriptions</p>
+                                </a>
+                                <div class="more-radio-option">
+                                    <p class="font-16 font-medium color-blue">Theme</p>
+                                    <div class="radio-div-more">
+                                        <div class="first-radio-div">
+                                            <span class="iconify font-20 color-blue"
+                                                data-icon="bi:moon-fill"></span>
+                                            <input type="radio" id="test1" name="radio-group" (click)="toggleDarkTheme()" [checked]="isDarkMode">
+                                            <label for="test1">
+                                            </label>
+                                        </div>
+                                        <div class="first-radio-div">
+                                            <span class="iconify font-20" data-icon="emojione:sun"></span>
+                                            <input type="radio" id="test2" name="radio-group" (click)="toggleLightTheme()" [checked]="isLightMode">
+                                            <label for="test2">
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-7 ">
+                    <div class="row">
+                        <div class="home-middle-div w-100 ">
+                            <div class="main-more-div">
+                                <div class="wrapper-main-more-div ">
+                                    <div class="div-f-fore-more-geo">
+                                        <div class="col-md-5">
+                                            <div class="p-e-input-div">
+                                                <div class="headding-input-pe position-relative">
+                                                    <p class="font-16 color-blue font-bold">Block By Country</p>
+                                                    <input type="text" placeholder="United States of America"
+                                                        class="w-100 extra-loc">
+                                                    <div class="position-icon-input">
+                                                        <span class="iconify color-blue font-16"
+                                                            data-icon="carbon:location-filled"></span>
+                                                    </div>
+                                                    <div class="button-change-pe">
+                                                        <button>Block</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="p-e-input-div">
+                                                <div class="headding-input-pe position-relative">
+                                                    <p class="font-16 color-blue font-bold">Block By State</p>
+                                                    <input type="text" placeholder="Florida"
+                                                        class="w-100 extra-loc">
+                                                    <div class="position-icon-input">
+                                                        <span class="iconify color-blue font-16"
+                                                            data-icon="carbon:location-filled"></span>
+                                                    </div>
+                                                    <div class="button-change-pe">
+                                                        <button>Block</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- <div class="p-e-input-div">
+                                                <div class="headding-input-pe position-relative">
+                                                    <p class="font-16 color-blue font-bold">Block By State</p>
+                                                    <input type="text" placeholder="Florida"
+                                                        class="w-100 extra-loc">
+                                                    <div class="position-icon-input">
+                                                        <span class="iconify color-blue font-16"
+                                                            data-icon="carbon:location-filled"></span>
+                                                    </div>
+                                                    <div class="button-change-pe">
+                                                        <button>Block</button>
+                                                    </div>
+                                                </div>
+                                            </div> -->
+                                            <div class="p-e-input-div">
+                                                <div class="headding-input-pe position-relative">
+                                                    <p class="font-16 color-blue font-bold">Block by City, State</p>
+                                                    <input type="text" placeholder="Miami, Florida"
+                                                        class="w-100 extra-loc">
+                                                    <div class="position-icon-input">
+                                                        <span class="iconify color-blue font-16"
+                                                            data-icon="carbon:location-filled"></span>
+                                                    </div>
+                                                    <div class="button-change-pe">
+                                                        <button>Block</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="p-e-input-div">
+                                                <div class="headding-input-pe position-relative">
+                                                    <p class="font-16 color-blue font-bold">Block By IP Address</p>
+                                                    <input type="text" placeholder="123.444.555.098" class="w-100 ">
+                                                    <div class="button-change-pe">
+                                                        <button>Block</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <div class="blue-div-p-w2">
+                                                <p class="font-14 color-blue">Please use the following format
+                                                    1.2.3.4 for a signle IP address, 1.2.3.4/24 for networks or
+                                                    1.2.*.4 for wildcard masks. Each address on the new line.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="div-f-fore-more-geo">
+                                        <div class="col-md-5">
+                                            <div class="p-e-input-div">
+                                                <div class="headding-input-pe position-relative">
+                                                    <p class="font-16 color-blue font-bold">Block Account</p>
+                                                    <input type="text" placeholder="Search Account"
+                                                        class="w-100 extra-loc">
+                                                    <div class="position-icon-input">
+                                                        <span class="iconify color-9a" data-icon="akar-icons:search"></span>
+                                                    </div>
+                                                    <div class="button-change-pe">
+                                                        <button>Block</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="p-e-input-div">
+                                                <div class="headding-input-pe position-relative">
+                                                    <p class="font-16 color-blue font-bold">Restrict Account</p>
+                                                    <input type="text" placeholder="Search Account"
+                                                        class="w-100 extra-loc">
+                                                    <div class="position-icon-input">
+                                                        <span class="iconify color-9a" data-icon="akar-icons:search"></span>
+                                                    </div>
+                                                    <div class="button-change-pe">
+                                                        <button>Restrict</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

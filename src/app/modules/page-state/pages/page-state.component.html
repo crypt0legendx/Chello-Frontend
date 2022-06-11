@@ -1,0 +1,228 @@
+<app-header-new></app-header-new>
+<div class="homepage margin-minus-header">
+    <div class="homepage-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3">
+                    <app-sidebar></app-sidebar>
+                </div>
+                <div class="wid-2">
+                    <div class="more-side-bar mar-top-m">
+                        <div class="more-search-div-head">
+                            <div class="search-bar-home">
+                                <input type="text" placeholder="Search" class="w-100" />
+                                <span class="iconify" data-icon="akar-icons:search"></span>
+                            </div>
+                        </div>
+                        <div class="more-div-option">
+                            <div class="text-group-2-link">
+                                <a href="">
+                                    <p class="font-16 font-medium color-a9">Creator Unique URL</p>
+                                </a>
+                                <a href="">
+                                    <p class="font-16 font-medium color-a9">ChitChat</p>
+                                </a>
+                                <a href="">
+                                    <p class="font-16 font-medium color-a9">Pay Per View Message</p>
+                                </a>
+                                <a href="">
+                                    <p class="font-16 font-medium color-a9">Tips</p>
+                                </a>
+                                <a href="">
+                                    <p class="font-16 font-medium color-a9">Schedule Post</p>
+                                </a>
+                                <a href="">
+                                    <p class="font-16 font-medium color-a9">Elite Fans</p>
+                                </a>
+                                <a href="">
+                                    <p class="font-16 font-medium color-a9">#Hashtag Trending</p>
+                                </a>
+                                <a routerLink='/poll'>
+                                    <p class="font-16 font-medium color-a9">Polls</p>
+                                </a>
+                                <a routerLink='/geo-blocking'>
+                                    <p class="font-16 font-medium color-a9">Geo-Blocking</p>
+                                </a>
+                                <a routerLink='/page-state'>
+                                    <p class="font-16 font-medium color-blue">Page Stats</p>
+                                </a>
+                                <a href="">
+                                    <p class="font-16 font-medium color-a9">Customize Subscriptions</p>
+                                </a>
+                                <div class="more-radio-option">
+                                    <p class="font-16 font-medium color-blue">Theme</p>
+                                    <div class="radio-div-more">
+                                        <div class="first-radio-div">
+                                            <span class="iconify font-20 color-blue"
+                                                data-icon="bi:moon-fill"></span>
+                                            <input type="radio" id="test1" name="radio-group" (click)="toggleDarkTheme()" [checked]="isDarkMode">
+                                            <label for="test1">
+                                            </label>
+                                        </div>
+                                        <div class="first-radio-div">
+                                            <span class="iconify font-20" data-icon="emojione:sun"></span>
+                                            <input type="radio" id="test2" name="radio-group" (click)="toggleLightTheme()" [checked]="isLightMode">
+                                            <label for="test2">
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-7 ">
+                    <div class="row">
+                        <div class="home-middle-div w-100 ">
+                            <div class="main-more-div">
+                                <div class="wrapper-main-more-div ">
+                                    <div class="page-state-theme">
+                                        <div class="page-satet-wrapper ">
+                                            <div class="p-1-div-state border-bottom-pe">
+                                                <div class="page-state-option">
+                                                    <div class="for-toggle-div-user">
+                                                        <div class="btn-group" role="group" aria-label="...">
+                                                            <button type="button" class="active btn-default"
+                                                                id="b1">24HR Stats</button>
+                                                            <button type="button" class=" btn-default" id="b2">30
+                                                                Days Stats</button>
+                                                            <button type="button" class=" btn-default" id="b3">12
+                                                                Months Stats</button>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="calender-date text-center">
+                                                    <span class="iconify calendar-page-s"
+                                                        data-icon="akar-icons:calendar"></span><br>
+                                                    <p class="font-12 color-black"> April 30, 2022</p>
+                                                </div>
+                                            </div>
+                                            <div class="page-state-2-div border-bottom-pe">
+                                                <div class="page-sate-2-detail-wrap">
+                                                    <p class="color-black font-12 font-medium">Subscriptions</p>
+                                                    <p class="color-black font-12 font-medium">$2500.00</p>
+                                                </div>
+                                            </div>
+                                            <div class="page-state-2-div border-bottom-pe">
+                                                <div class="page-sate-2-detail-wrap">
+                                                    <p class="color-black font-12 font-medium">Messages</p>
+                                                    <p class="color-black font-12 font-medium">$500.00</p>
+                                                </div>
+                                            </div>
+                                            <div class="page-state-2-div border-bottom-pe">
+                                                <div class="page-sate-2-detail-wrap">
+                                                    <p class="color-black font-12 font-medium">Posts</p>
+                                                    <p class="color-black font-12 font-medium">$400.00</p>
+                                                </div>
+                                            </div>
+                                            <div class="page-state-2-div border-bottom-pe">
+                                                <div class="page-sate-2-detail-wrap">
+                                                    <p class="color-black font-12 font-medium">Streams</p>
+                                                    <p class="color-black font-12 font-medium">$250.00</p>
+                                                </div>
+                                            </div>
+                                            <div class="page-state-2-div border-bottom-pe">
+                                                <div class="page-sate-2-detail-wrap">
+                                                    <p class="color-black font-12 font-medium">Fan Cam</p>
+                                                    <p class="color-black font-12 font-medium">$350.00</p>
+                                                </div>
+                                            </div>
+                                            <div class="page-state-2-div border-bottom-pe">
+                                                <div class="page-sate-2-detail-wrap">
+                                                    <p class="color-black font-12 font-medium">Shout Outs</p>
+                                                    <p class="color-black font-12 font-medium">$100.00</p>
+                                                </div>
+                                            </div>
+                                            <div class="page-state-2-div border-bottom-pe">
+                                                <div class="page-sate-2-detail-wrap">
+                                                    <p class="color-black font-12 font-medium">Audio</p>
+                                                    <p class="color-black font-12 font-medium">$625.00</p>
+                                                </div>
+                                            </div>
+                                            <div class="page-state-2-div border-bottom-pe">
+                                                <div class="page-sate-2-detail-wrap">
+                                                    <p class="color-black font-12 font-medium">Tips</p>
+                                                    <p class="color-black font-12 font-medium">$275.00</p>
+                                                </div>
+                                            </div>
+                                            <div class="page-state-2-div ">
+                                                <div class="page-sate-2-detail-wrap">
+                                                    <p class="color-black font-12 font-medium">Referrals</p>
+                                                    <p class="color-black font-12 font-medium">$0.00</p>
+                                                </div>
+                                            </div>
+                                            <div class="page-state-2-div ">
+                                                <div class="page-sate-2-detail-wrap top-bor-blue">
+                                                    <p class="color-blue font-12 font-medium">Gross</p>
+                                                    <p class="color-blue font-12 font-medium">$5000.00</p>
+                                                </div>
+                                            </div>
+                                            <div class="page-state-2-div ">
+                                                <div class="page-sate-2-detail-wrap top-bor-blue-doted">
+                                                    <p class="color-white font-12 font-medium">NET</p>
+                                                    <p class="color-white font-12 font-medium">$4700.00</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="page-state-theme">
+                                        <div class="page-satet-wrapper ">
+                                            <div class="page-state-2-div border-bottom-pe">
+                                                <div class="page-sate-2-detail-wrap">
+                                                    <p class="color-black font-12 font-medium">New Followers</p>
+                                                    <p class="color-black font-12 font-medium">7</p>
+                                                </div>
+                                            </div>
+                                            <div class="page-state-2-div border-bottom-pe">
+                                                <div class="page-sate-2-detail-wrap">
+                                                    <p class="color-black font-12 font-medium">New Fans</p>
+                                                    <p class="color-black font-12 font-medium">2</p>
+                                                </div>
+                                            </div>
+                                            <div class="page-state-2-div border-bottom-pe">
+                                                <div class="page-sate-2-detail-wrap">
+                                                    <p class="color-black font-12 font-medium">New Referrals</p>
+                                                    <p class="color-black font-12 font-medium">1</p>
+                                                </div>
+                                            </div>
+                                            <div class="page-state-2-div border-bottom-pe">
+                                                <div class="page-sate-2-detail-wrap">
+                                                    <p class="color-black font-12 font-medium">Total Followers</p>
+                                                    <p class="color-black font-12 font-medium">2423</p>
+                                                </div>
+                                            </div>
+                                            <div class="page-state-2-div border-bottom-pe">
+                                                <div class="page-sate-2-detail-wrap">
+                                                    <p class="color-black font-12 font-medium">Total Fans</p>
+                                                    <p class="color-black font-12 font-medium">275</p>
+                                                </div>
+                                            </div>
+                                            <div class="page-state-2-div border-bottom-pe">
+                                                <div class="page-sate-2-detail-wrap">
+                                                    <p class="color-black font-12 font-medium">Total Referrals</p>
+                                                    <p class="color-black font-12 font-medium">4</p>
+                                                </div>
+                                            </div>
+                                            <div class="page-state-2-div border-bottom-pe">
+                                                <div class="page-sate-2-detail-wrap">
+                                                    <p class="color-black font-12 font-medium">Audio</p>
+                                                    <p class="color-black font-12 font-medium">$625.00</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

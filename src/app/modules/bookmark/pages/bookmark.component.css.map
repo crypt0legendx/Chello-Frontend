@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,eAAe,CAAA;EACX,OAAO,EAAE,KAAK;CACf",
+    "sources": [
+        "bookmark.component.scss"
+    ],
+    "names": [],
+    "file": "bookmark.component.css"
+}

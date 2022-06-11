@@ -1,0 +1,235 @@
+<app-header-new></app-header-new>
+<div class="homepage margin-minus-header">
+    <div class="homepage-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3">
+                    <app-sidebar></app-sidebar>
+                </div>
+                <div class="col-md-6 mobile-margin-add">
+                    <div class="home-middle-div">
+                        <div class="wrapper-home-middle-div profile-first-s middle-div-cg-b">
+                            <div class="home-middle-div-one position-relative group-div-extraflex">
+                                <div class="d-flex justify-content-between group-headding align-items-baseline">
+                                    <div class="subscription-head d-flex">
+                                        <a routerLink="/group-new" class="margin-pr-head"><span
+                                                class="iconify color-grey font-20"
+                                                data-icon="akar-icons:arrow-left"></span></a>
+                                        <p class="font-20 font-bold color-white">
+                                            {{retrievedGroupDetails.title}}<br>
+                                            <span class="color-white font-16 font-reg">33 Posts</span> &nbsp; <span
+                                                class="color-white font-16 font-reg">{{numFormatter(totalGroupMember)}}
+                                                Members</span>
+                                        </p>
+                                    </div>
+                                    <div class="buttons-f-pr-e" *ngIf="userId === retrievedGroupDetails.user">
+                                        <a (click)="editGroup()" style="cursor: pointer;"
+                                            class="font-16 color-blue"><span class="iconify"
+                                                data-icon="ant-design:edit-filled"></span>Edit Group</a>
+                                        <a (click)="deleteGroup()" style="cursor: pointer;"
+                                            class="font-16 color-blue"><span class="iconify"
+                                                data-icon="fluent:delete-20-regular"></span>Delete Group</a>
+                                    </div>
+                                </div>
+                                <div class="profile-page-btn">
+                                    <div class="wrapper-profile-page-buttons">
+                                        <div class="">
+                                            <div
+                                                class="poll-asked-user d-flex justify-content-between abso-profile-btn">
+                                                <div class="wrapper-poll-asked-user">
+                                                    <img src="assets/images/Ellipse 10 (1).png" alt="image" />
+                                                    <div class="user-info-p-a">
+                                                        <p class="font-20 font-bold color-blue"><br></p>
+                                                        <p class="font-20 font-bold color-blue">
+                                                            {{retrievedGroupDetails.title}}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="buttons-f-pr-e">
+                                                    <a href="" class="font-16 color-blue" type="button"
+                                                        data-toggle="modal" data-target="#exampleModal"><span
+                                                            class="iconify"
+                                                            data-icon="akar-icons:person-add"></span>Invite
+                                                        Member</a>
+                                                    <a href="" class="font-16 color-blue"><span class="iconify"
+                                                            data-icon="bi:share-fill"></span>Share</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="main-tab-div-new-group">
+                            <div class="tab-div-profile">
+                                <div class="wrapper-tab-profile">
+                                    <div class="tab">
+                                        <button class="tablinks active" onclick="openCity(event, 'tab1')"
+                                            id="defaultOpen">Discussion</button>
+                                        <button class="tablinks" onclick="openCity(event, 'tab2')">Members
+                                            ({{numFormatter(totalGroupMember)}})</button>
+                                        <button class="tablinks" onclick="openCity(event, 'tab3')">Group
+                                            Rules</button>
+                                        <button class="tablinks" onclick="openCity(event, 'tab4')">Admin</button>
+                                    </div>
+
+                                    <div id="tab1" class="tabcontent d-block-active">
+                                        <div class="col-md-12 position-relative">
+                                            <div class="profile-page-wrapper-d">
+
+                                                <app-post-feed></app-post-feed>
+
+                                                <app-group-post-list></app-group-post-list>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="tab2" class="tabcontent">
+                                        <div class="member-new-group">
+                                            <div *ngFor="let groupMember of groupMembers">
+                                                <div class="wrapper-member-new-group" *ngIf="groupMember['status'] === 'accepted'">
+                                                    <div class="row align-items-center">
+                                                        <div class="col-md-5">
+                                                            <div class="wrapper-poll-asked-user">
+                                                                <img [src]="groupMember['userDetail']['profileImage']"
+                                                                onError="this.src='assets/images/user.png'" alt="image" />
+                                                                <div class="user-info-p-a">
+                                                                    <p class="font-14 font-bold color-49"> {{groupMember['userDetail']['fullName']}}
+                                                                        &nbsp; <span
+                                                                            class="iconify font-20 color-light-blue"
+                                                                            data-icon="ic:sharp-verified"></span>
+                                                                    </p>
+                                                                    <p class="font-14 color-49">@{{groupMember['userDetail']['userName']}}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="text-center text-member">
+                                                                <p class="font-12 color-7a">Joined {{dateFormatter(groupMember['createdAt'])}}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="button-member-remo">
+                                                                <button (click)="removeMemberFromGroup(groupMember['userDetail']['_id'])">Remove</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="tab3" class="tabcontent" *ngIf="retrievedGroupDetails.rules">
+                                        <div class="Group-rule"
+                                            *ngFor="let groupRules of retrievedGroupDetails.rules; let i=index;">
+                                            <div class="wrapper-group-rule">
+                                                <p class="color-blue font-14 font-bold">Rule No {{i+1}}</p>
+                                                <p class="font-14 color-68">{{groupRules}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="tab4" class="tabcontent">
+                                        <div class="member-new-group">
+                                            <div *ngFor="let groupAdminDatas of groupAdminData">
+                                                <div class="wrapper-member-new-group">
+                                                    <div class="row align-items-center">
+                                                        <div class="col-md-5">
+                                                            <div class="wrapper-poll-asked-user">
+                                                                <img [src]="groupAdminDatas['profileImage']"
+                                                                onError="this.src='assets/images/user.png'" alt="image" />
+                                                                <div class="user-info-p-a">
+                                                                    <p class="font-14 font-bold color-49"> {{groupAdminDatas['fullName']}}
+                                                                        &nbsp; <span
+                                                                            class="iconify font-20 color-light-blue"
+                                                                            data-icon="ic:sharp-verified"></span>
+                                                                    </p>
+                                                                    <p class="font-14 color-49">@{{groupAdminDatas['userName']}}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="text-center text-member">
+                                                                <p class="font-12 color-7a">Created {{dateFormatter(retrievedGroupDetails['createdAt'])}}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <app-suggestions></app-suggestions>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>
+
+<!-- Modal -->
+<div class="modal-in-gc">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog " role="document">
+            <div class="modal-content">
+                <div class="margin-l-r-a button-link">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="input-for-modal-group">
+                        <label class="font-16 color-49 font-bold">Enter Username to invite in your group</label>
+                        <input type="text" placeholder="Search" class="w-100" #searchUsers
+                            (input)="searchUser(searchUsers.value)" id="searchUsers" />
+                        <div class="member-new-group" style="margin-top: 10px; overflow-y: scroll; height:400px;"
+                            *ngFor="let groupMembersLists of groupMembersList" [id]="'gmid'+groupMembersLists._id"
+                            (click)="inviteMember(groupMembersLists._id)" style="cursor: pointer;"
+                            [ngStyle]="styleObject(groupMembersLists._id)">
+                            <div class="wrapper-member-new-group">
+                                <div class="row align-items-center">
+                                    <div class="col-md-8">
+                                        <div class="wrapper-poll-asked-user">
+                                            <img [src]="groupMembersLists.profileImage"
+                                                onError="this.src='assets/images/user.png'" alt="image" />
+                                            <div class="user-info-p-a">
+                                                <p class="font-14 font-bold color-49"> {{groupMembersLists.fullName}}
+                                                    &nbsp; <span class="iconify font-20 color-light-blue"
+                                                        data-icon="ic:sharp-verified"></span>
+                                                </p>
+                                                <p class="font-14 color-49">@{{groupMembersLists.userName}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="text-center text-member">
+                                            <p class="font-12 color-7a">Joined
+                                                {{dateFormatter(groupMembersLists.createdAt)}}</p>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="col-md-3">
+                                        <div class="button-member-remo">
+                                            <button>Remove from admin</button>
+                                        </div>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="button-to-invite-gc">
+                            <div class="right-side-button text-right" *ngIf="inviteMemberArr.length != 0">
+                                <button (click)="sendInvitation()">Invite</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

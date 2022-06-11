@@ -1,0 +1,781 @@
+<!-- loding -->
+<ngx-spinner bdColor="rgba(238,238,238,.4)" size="medium" color="#486ffa" type="ball-clip-rotate"></ngx-spinner>
+
+<app-header-new></app-header-new>
+<div class="homepage margin-minus-header">
+    <div class="homepage-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3">
+                    <app-sidebar></app-sidebar>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="home-middle-div">
+                        
+                        <div class="wrapper-home-middle-div profile-first-s" *ngIf="isUserCoverPicture === false">
+                            <div class="home-middle-div-one position-relative">
+                                <div class="profile-page-container">
+                                    <div class="headding-profile-middle-div d-flex">
+                                        <a routerLink="/profile" class="margin-pr-head"><span class="iconify color-grey font-20"
+                                                data-icon="akar-icons:arrow-left"></span></a>
+                                        <p class="font-20 font-bold color-blue">
+                                            {{displayName}}
+                                            <br>
+                                            <span class="font-16 font-reg color-grey">{{totalPosts}} posts</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="profile-page-btn">
+                                    <div class="wrapper-profile-page-buttons">
+                                        <div class=" Add-cover-pe text-center">
+                                            <div class="add-cover-photo-div">
+                                                <p (click)="openFileSelector('cover')" style="cursor: pointer;"><span
+                                                        class="iconify color-blue font-26"
+                                                        data-icon="ic:baseline-add-a-photo"></span></p>
+                                                <p class="font-16 color-light-blue" (click)="openFileSelector('cover')"
+                                                    style="cursor: pointer;">Add Cover Photo</p>
+                                                <input id="fileCover" type="file" class="form-control"
+                                                    (change)="selectProfileFile($event, 'coverImage')"
+                                                    style="display:none" accept="image/*" capture>
+                                            </div>
+                                            <div
+                                                class="poll-asked-user d-flex justify-content-between abso-profile-btn">
+                                                <div class="wrapper-poll-asked-user position-relative">
+                                                    <input id="file" type="file" class="form-control"
+                                                        (change)="selectProfileFile($event, 'profileImage')"
+                                                        style="display:none" accept="image/*" capture>
+                                                    <img [src]="userProfilePicture"
+                                                        onError="this.src='assets/images/user.png'"
+                                                        alt="image" (click)="openFileSelector('profile')"
+                                                        style="cursor: pointer;" />
+                                                    <div class="edit-icon-pe">
+                                                        <a href="javascript:void(0)"
+                                                            (click)="openFileSelector('profile')"> <span
+                                                                class="iconify color-blue"
+                                                                data-icon="ant-design:edit-filled"></span></a>
+                                                    </div>
+                                                    <div class="user-info-p-a">
+                                                        <p class="font-20 font-bold color-blue"> {{displayName}}
+                                                            &nbsp;
+                                                        </p>
+                                                        <p class="font-16 color-49">@{{username}}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="buttons-f-pr-e">
+                                                    <!-- <a href="" class="font-16 color-blue btn-sve-pe">Save</a> -->
+                                                    <a href="" class="font-16 color-blue"><span class="iconify"
+                                                            data-icon="bi:share-fill"></span>Share</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- If Cover Picture -->
+                        <div class="wrapper-home-middle-div profile-first-s middle-div-cg-b"
+                            *ngIf="isUserCoverPicture === true" [style.backgroundImage]="'url('+ userCoverPicture +')'">
+                            <div class="home-middle-div-one position-relative group-div-extraflex">
+                                <div class="d-flex justify-content-between group-headding align-items-baseline">
+                                    <div class="subscription-head d-flex">
+                                        <a routerLink="/profile" class="margin-pr-head"><span class="iconify color-black font-20"
+                                                data-icon="akar-icons:arrow-left"></span></a>
+                                        <p class="font-20 font-bold color-blue">
+                                            {{displayName}}<br>
+                                            <span class="color-grey font-16 font-reg">{{totalPosts}} posts</span>
+                                            &nbsp;
+                                        </p>
+                                    </div>
+                                    <div class="buttons-f-pr-e">
+                                        <a (click)="openFileSelector('cover')" style="cursor: pointer;"
+                                            class="font-16 color-blue"><span class="iconify"
+                                                data-icon="ant-design:edit-filled"></span>Edit Cover</a>
+                                        <input id="fileCover" type="file" class="form-control"
+                                            (change)="selectProfileFile($event, 'coverImage')" style="display:none"
+                                            accept="image/*" capture>
+                                    </div>
+                                </div>
+                                <div class="profile-page-btn">
+                                    <div class="wrapper-profile-page-buttons">
+                                        <div class=" Add-cover-pe text-center">
+                                            
+                                            <div
+                                                class="poll-asked-user d-flex justify-content-between abso-profile-btn">
+                                                <div class="wrapper-poll-asked-user position-relative">
+                                                    <input id="file" type="file" class="form-control"
+                                                        (change)="selectProfileFile($event, 'profileImage')"
+                                                        style="display:none" accept="image/*" capture>
+                                                    <img [src]="userProfilePicture"
+                                                        onError="this.src='assets/images/user.png'"
+                                                        alt="image" (click)="openFileSelector('profile')"
+                                                        style="cursor: pointer;" />
+                                                    <div class="edit-icon-pe">
+                                                        <a href="javascript:void(0)"
+                                                            (click)="openFileSelector('profile')"> <span
+                                                                class="iconify color-blue"
+                                                                data-icon="ant-design:edit-filled"></span></a>
+                                                    </div>
+                                                    <div class="user-info-p-a">
+                                                        <p class="font-20 font-bold color-blue"> {{displayName}}
+                                                            &nbsp;
+                                                        </p>
+                                                        <p class="font-16 color-49">@{{username}}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="buttons-f-pr-e">
+                                                    <!-- <a href="" class="font-16 color-blue btn-sve-pe">Save</a> -->
+                                                    <a href="" class="font-16 color-blue"><span class="iconify"
+                                                            data-icon="bi:share-fill"></span>Share</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 second-home-middle position-relative">
+                            <div class="help-abso">
+                                <a href="">
+                                    <img src="assets/images/help.png" alt="image" />
+                                </a>
+                            </div>
+                            <div class="profile-page-wrapper-d">
+                                <div class="poll-div-section-pe">
+                                    <div class="wrapper-poll-div-section">
+                                        <div class="headding-pe">
+                                            <p class="font-16 color-blue font-bold">Add Bio/About</p>
+                                        </div>
+                                        <form [formGroup]="aboutForm" (ngSubmit)="submitAbout()">
+                                            <div class="edit-profile-text-area">
+                                                <textarea rows="3" class="w-100" placeholder="Write here..."
+                                                    formControlName="about"
+                                                    [ngClass]="{ 'is-invalid': submittedAboutForm && aboutFormChecker.about.errors }"
+                                                    maxlength="888"></textarea>
+                                                <div *ngIf="submittedAboutForm && aboutFormChecker.about.errors"
+                                                    class="invalid-feedback">
+                                                    <div *ngIf="aboutFormChecker.about.errors.required"
+                                                        style="color:red;">Bio/About is required</div>
+                                                </div>
+                                                <div class="counter-pe">
+                                                    <p class="font-12 color-49">0/888</p>
+                                                </div>
+                                            </div>
+                                            <div class="right-side-button text-right">
+                                                <button type="submit">Save</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 second-home-middle position-relative">
+                            <div class="wrapper-p-edit">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div class="w-50">
+                                        <div class="p-e-input-div">
+                                            <div class="headding-input-pe position-relative">
+                                                <form [formGroup]="displayNameForm" (ngSubmit)="submitDisplayName()">
+                                                    <p class="font-16 color-blue font-bold">Change Display Name</p>
+                                                    <input type="text" placeholder="Jessica Alba" class="w-100"
+                                                        formControlName="displayName"
+                                                        [ngClass]="{ 'is-invalid': submittedDisplayNameForm && displayNameFormChecker.displayName.errors }">
+                                                    <div *ngIf="submittedDisplayNameForm && displayNameFormChecker.displayName.errors"
+                                                        class="invalid-feedback">
+                                                        <div *ngIf="displayNameFormChecker.displayName.errors.required"
+                                                            style="color:red;">Display Name is required</div>
+                                                    </div>
+                                                    <div class="button-change-pe">
+                                                        <button type="submit">Change</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="w-25"></div>
+                                    <div class="w-50">
+                                        <div class="p-e-input-div">
+                                            <div class="headding-input-pe position-relative">
+                                                <form [formGroup]="usernameForm" (ngSubmit)="submitUsername()">
+                                                    <p class="font-16 color-blue font-bold">Change Username</p>
+                                                    <input type="text" placeholder="Jessicaalba" class="w-100"
+                                                        formControlName="username"
+                                                        [ngClass]="{ 'is-invalid': submittedUsernameForm && usernameFormChecker.username.errors }">
+                                                    <div *ngIf="submittedUsernameForm && usernameFormChecker.username.errors"
+                                                        class="invalid-feedback">
+                                                        <div *ngIf="usernameFormChecker.username.errors.required"
+                                                            style="color:red;">Username is required</div>
+                                                    </div>
+                                                    <div class="button-change-pe">
+                                                        <button type="submit">Change</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div class="w-50">
+                                        <div class="p-e-input-div">
+                                            <div class="headding-input-pe position-relative">
+                                                <form [formGroup]="emailForm" (ngSubmit)="submitEmail()">
+                                                    <p class="font-16 color-blue font-bold">Change Email</p>
+                                                    <input type="text" placeholder="johndoe@gmail.com" class="w-100"
+                                                        formControlName="email"
+                                                        [ngClass]="{ 'is-invalid': submittedEmailForm && emailFormChecker.email.errors }">
+                                                    <div *ngIf="submittedEmailForm && emailFormChecker.email.errors"
+                                                        class="invalid-feedback">
+                                                        <div *ngIf="emailFormChecker.email.errors.required"
+                                                            style="color:red;">Email is required</div>
+                                                    </div>
+                                                    <div class="button-change-pe">
+                                                        <button type="submit">Change</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="w-25"></div>
+                                    <div class="w-50">
+                                        <div class="p-e-input-div">
+                                            <div class="headding-input-pe position-relative">
+                                                <form [formGroup]="passwordForm" (ngSubmit)="submitPassword()">
+                                                    <p class="font-16 color-blue font-bold margin-m-pe">Change Password
+                                                    </p>
+                                                    <input type="password" placeholder="Enter Old Password"
+                                                        class="w-100" formControlName="password"
+                                                        [ngClass]="{ 'is-invalid': submittedPasswordForm && passwordFormChecker.password.errors }">
+                                                    <div *ngIf="submittedPasswordForm && passwordFormChecker.password.errors"
+                                                        class="invalid-feedback">
+                                                        <div *ngIf="passwordFormChecker.password.errors.required"
+                                                            style="color:red;">Password is required</div>
+                                                    </div>
+
+                                                    <input type="password" placeholder="Enter New Password"
+                                                        class="w-100" formControlName="newPassword"
+                                                        [ngClass]="{ 'is-invalid': submittedPasswordForm && passwordFormChecker.newPassword.errors }">
+                                                    <div *ngIf="submittedPasswordForm && passwordFormChecker.newPassword.errors"
+                                                        class="invalid-feedback">
+                                                        <div *ngIf="passwordFormChecker.newPassword.errors.required"
+                                                            style="color:red;">New Password is required</div>
+                                                    </div>
+
+                                                    <input type="password" placeholder="Enter Confirm New Password"
+                                                        class="w-100" formControlName="confirmNewPassword"
+                                                        [ngClass]="{ 'is-invalid': submittedPasswordForm && passwordFormChecker.confirmNewPassword.errors }">
+                                                    <div *ngIf="submittedPasswordForm && passwordFormChecker.confirmNewPassword.errors"
+                                                        class="invalid-feedback">
+                                                        <div *ngIf="passwordFormChecker.confirmNewPassword.errors.required"
+                                                            style="color:red;">Confirm New Password is required</div>
+                                                    </div>
+
+                                                    <div class="button-change-pe">
+                                                        <button type="submit">Change</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 second-home-middle position-relative">
+                            <div class="wrapper-p-edit">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div class="w-50">
+                                        <div class="p-e-input-div">
+                                            <div class="headding-input-pe position-relative">
+                                                <form [formGroup]="locationForm" (ngSubmit)="submitLocation()">
+                                                    <p class="font-16 color-blue font-bold">Location</p>
+                                                    <input type="text" placeholder="Jacksonville, Florida"
+                                                        class="w-100 extra-loc" formControlName="location"
+                                                        [ngClass]="{ 'is-invalid': submittedLocationForm && locationFormChecker.location.errors }">
+                                                    <div *ngIf="submittedLocationForm && locationFormChecker.location.errors"
+                                                        class="invalid-feedback">
+                                                        <div *ngIf="locationFormChecker.location.errors.required"
+                                                            style="color:red;">Location is required</div>
+                                                    </div>
+                                                    <div class="position-icon-input">
+                                                        <span class="iconify color-blue font-16"
+                                                            data-icon="carbon:location-filled"></span>
+                                                    </div>
+                                                    <div class="button-change-pe">
+                                                        <button type="submit">Set</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="w-25"></div>
+                                    <div class="w-50">
+                                        <div class="p-e-input-div">
+                                            <div class="headding-input-pe position-relative">
+                                                <form [formGroup]="websiteForm" (ngSubmit)="submitWebsite()">
+                                                    <p class="font-16 color-blue font-bold"><span
+                                                            class="iconify font-26" data-icon="iconoir:www"></span>
+                                                        &nbsp; Website</p>
+                                                    <input type="text" placeholder="Insert Link here..." class="w-100"
+                                                        formControlName="website"
+                                                        [ngClass]="{ 'is-invalid': submittedWebsiteForm && websiteFormChecker.website.errors }">
+                                                    <div *ngIf="submittedWebsiteForm && websiteFormChecker.website.errors"
+                                                        class="invalid-feedback">
+                                                        <div *ngIf="websiteFormChecker.website.errors.required"
+                                                            style="color:red;">Website is required</div>
+                                                    </div>
+                                                    <div class="button-change-pe">
+                                                        <button type="submit">Add</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 second-home-middle position-relative">
+                            <div class="wrapper-p-edit">
+                                <div class="d-flex align-items-baseline justify-content-between">
+                                    <div class="w-50">
+                                        <div class="p-e-input-div add-social-icon-in">
+                                            <div class="headding-input-pe position-relative">
+                                                <form [formGroup]="instagramForm" (ngSubmit)="submitInstagram()">
+                                                    <span class="font-16 color-blue font-bold">Social
+                                                        Media</span><br><br>
+                                                    <span class="font-16 color-68">Add social media
+                                                        newtork:</span><br><br>
+                                                    <input type="text" placeholder="Insert Link here..."
+                                                        class="w-100 extra-loc" formControlName="instagram"
+                                                        [ngClass]="{ 'is-invalid': submittedInstagramForm && instagramFormChecker.instagram.errors }">
+                                                    <div *ngIf="submittedInstagramForm && instagramFormChecker.instagram.errors"
+                                                        class="invalid-feedback">
+                                                        <div *ngIf="instagramFormChecker.instagram.errors.required"
+                                                            style="color:red;">Instagram is required</div>
+                                                    </div>
+                                                    <div class="position-icon-input">
+                                                        <div class="social-icons-for-footer">
+                                                            <a href="https://www.instagram.com/letschello/"><span
+                                                                    class="iconify"
+                                                                    data-icon="typcn:social-instagram"></span></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="button-change-pe">
+                                                        <button type="submit">Set</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="p-e-input-div add-social-icon-in">
+                                            <div class="headding-input-pe position-relative">
+                                                <form [formGroup]="tiktokForm" (ngSubmit)="submitTiktok()">
+                                                    <input type="text" placeholder="Insert Link here..."
+                                                        class="w-100 extra-loc" formControlName="tiktok"
+                                                        [ngClass]="{ 'is-invalid': submittedTiktokForm && tiktokFormChecker.tiktok.errors }">
+                                                    <div *ngIf="submittedTiktokForm && tiktokFormChecker.tiktok.errors"
+                                                        class="invalid-feedback">
+                                                        <div *ngIf="tiktokFormChecker.tiktok.errors.required"
+                                                            style="color:red;">Tiktok is required</div>
+                                                    </div>
+                                                    <div class="position-icon-input">
+                                                        <div class="social-icons-for-footer">
+                                                            <a href="https://tiktok.com/@chello.world"><span
+                                                                    class="iconify" data-icon="cib:tiktok"></span></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="button-change-pe">
+                                                        <button type="submit">Set</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="p-e-input-div add-social-icon-in">
+                                            <div class="headding-input-pe position-relative">
+                                                <form [formGroup]="twitterForm" (ngSubmit)="submitTwitter()">
+                                                    <input type="text" placeholder="Insert Link here..."
+                                                        class="w-100 extra-loc" formControlName="twitter"
+                                                        [ngClass]="{ 'is-invalid': submittedTwitterForm && twitterFormChecker.twitter.errors }">
+                                                    <div *ngIf="submittedTwitterForm && twitterFormChecker.twitter.errors"
+                                                        class="invalid-feedback">
+                                                        <div *ngIf="twitterFormChecker.twitter.errors.required"
+                                                            style="color:red;">Twitter is required</div>
+                                                    </div>
+                                                    <div class="position-icon-input">
+                                                        <div class="social-icons-for-footer">
+                                                            <a href="https://twitter.com/LetsChello"><span
+                                                                    class="iconify"
+                                                                    data-icon="ant-design:twitter-outlined"></span></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="button-change-pe">
+                                                        <button type="submit">Set</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="p-e-input-div add-social-icon-in">
+                                            <div class="headding-input-pe position-relative">
+                                                <form [formGroup]="facebookForm" (ngSubmit)="submitFacebook()">
+                                                    <input type="text" placeholder="Insert Link here..."
+                                                        class="w-100 extra-loc" formControlName="facebook"
+                                                        [ngClass]="{ 'is-invalid': submittedFacebookForm && facebookFormChecker.facebook.errors }">
+                                                    <div *ngIf="submittedFacebookForm && facebookFormChecker.facebook.errors"
+                                                        class="invalid-feedback">
+                                                        <div *ngIf="facebookFormChecker.facebook.errors.required"
+                                                            style="color:red;">Facebook is required</div>
+                                                    </div>
+                                                    <div class="position-icon-input">
+                                                        <div class="social-icons-for-footer">
+                                                            <a href="javascript:void(0)"><span class="iconify"
+                                                                    data-icon="eva:facebook-fill"></span></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="button-change-pe">
+                                                        <button type="submit">Set</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="p-e-input-div add-social-icon-in">
+                                            <div class="headding-input-pe position-relative">
+                                                <form [formGroup]="entForm" (ngSubmit)="submitEnt()">
+                                                    <input type="text" placeholder="Insert Link here..."
+                                                        class="w-100 extra-loc" formControlName="ent"
+                                                        [ngClass]="{ 'is-invalid': submittedEntForm && entFormChecker.ent.errors }">
+                                                    <div *ngIf="submittedEntForm && entFormChecker.ent.errors"
+                                                        class="invalid-feedback">
+                                                        <div *ngIf="entFormChecker.ent.errors.required"
+                                                            style="color:red;">24ent is required</div>
+                                                    </div>
+                                                    <div class="position-icon-input">
+                                                        <div class="social-icons-for-footer">
+                                                            <a href="javascript:void(0)"><img
+                                                                    src="assets/images/24ent new logo white 1.png"
+                                                                    alt="image"></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="button-change-pe">
+                                                        <button type="submit">Set</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="w-20"></div>
+                                    <div class="w-50">
+                                        <div class="div-f-fore-more-pe">
+                                            <div class="">
+                                                <div class="headding-more-m">
+                                                    <p class="font-16 font-bold color-blue">My Creator Unique URL
+                                                    </p>
+                                                </div>
+                                                <div class="input-more-m">
+                                                    <form [formGroup]="profileUrlForm">
+                                                        <input type="text" placeholder="" class="w-100"
+                                                            formControlName="profileUrl" [attr.disabled]="true">
+                                                    </form>
+                                                </div>
+                                                <div class="share-more-m d-flex align-items-baseline">
+                                                    <p class="font-14 font-bold color-black d-flex">Share
+                                                        &nbsp; &nbsp; </p>
+                                                    <div class="social-icons-for-footer">
+                                                        <a href="https://www.instagram.com/letschello/"><span
+                                                                class="iconify"
+                                                                data-icon="typcn:social-instagram"></span></a>
+                                                        <a href="https://tiktok.com/@chello.world"><span class="iconify"
+                                                                data-icon="cib:tiktok"></span></a>
+                                                        <a href="https://twitter.com/LetsChello"><span class="iconify"
+                                                                data-icon="ant-design:twitter-outlined"></span></a>
+                                                        <a href="javascript:void(0)"><span class="iconify"
+                                                                data-icon="eva:facebook-fill"></span></a>
+                                                        <a href="javascript:void(0)"><img
+                                                                src="assets/images/24ent new logo white 1.png"
+                                                                alt="image"></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 second-home-middle position-relative" style="background-color: #F1F1FF;">
+                            <div class="became-creator-pe">
+                                <p class="font-16 font-bold color-blue">Become Creator</p>
+                                <p class="font-16 color-blue">As a Creator, you will keep 94% of your earnings! Also
+                                    as a Creator, you will pay $25 per month or you can pay $240 per year.</p>
+                                <div class="right-side-button">
+                                    <button>Become a Creator</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 second-home-middle position-relative">
+                            <div class="welcome-message-div-wrapper">
+                                <div class="headding-welcome-m">
+                                    <p class="font-16 font-bold color-blue">Welcome Message</p>
+                                </div>
+                                <div class="profile-edit-div-for-we">
+                                    <div class="div-for-new-post-poll">
+                                        <div class="wrapper-new-post-poll">
+                                            <div class="text-area-for-poll">
+                                                <div class="form-group position-relative">
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="upper-welcome-pe">
+                                                            <a href="" class="font-16 color-68 font-medium"><span
+                                                                    class="iconify" data-icon="ion:pricetag"></span>Free
+                                                                Preview</a>
+                                                        </div>
+                                                        <div class="upper-welcome-pe upper-welcome-pe-2">
+                                                            <a href="" class="font-16 color-blue font-medium"><span
+                                                                    class="iconify" data-icon="ion:pricetag"></span>Pay
+                                                                to View</a>
+                                                            <a href=""
+                                                                class="font-16 color-blue font-medium dolor-div">$5.00</a>
+                                                        </div>
+                                                    </div>
+                                                    <textarea rows="4" class="w-100">Hey, Welcome to My Page!</textarea>
+                                                    <div class="option-selected-for-ta">
+                                                        <a href=""><span class="iconify"
+                                                                data-icon="icon-park-outline:picture-one"></span></a>
+                                                        <a href=""><span class="iconify"
+                                                                data-icon="ph:video-camera-bold"></span></a>
+                                                        <a href=""><span class="iconify"
+                                                                data-icon="bxs:microphone-alt"></span></a>
+                                                        <a href=""><span class="iconify"
+                                                                data-icon="ph:vault-bold"></span></a>
+                                                    </div>
+                                                </div>
+                                                <div class="right-side-button text-right">
+                                                    <button>Post</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 second-home-middle position-relative">
+                            <div class="add-bank-pe">
+                                <div class="wrapper-add-bank-pe">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <p class="font-16 font-bold color-blue">Add Bank (to earn)</p>
+                                        <div class="right-side-button">
+                                            <button>+ Add Bank</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="wrapper-add-bank-pe">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <p class="font-16 font-bold color-blue">Add Card (to subscribe)</p>
+                                        <div class="right-side-button">
+                                            <button>+ Add Card</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 second-home-middle position-relative">
+                            <div class="customize-subscription">
+                                <div class="customize-subscription-heading">
+                                    <p class="font-16 font-bold color-blue">Customize Subscriptions</p>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="row">
+                                        <div class="div-one-for-customize-subscription w-100">
+                                            <div class="d-flex align-items-center ">
+                                                <div class="upper-welcome-pe">
+                                                    <a href="" class="font-16 color-41 font-medium"><span
+                                                            class="iconify" data-icon="ion:pricetag"></span>Pay </a>
+                                                </div>
+                                                <div class="upper-welcome-pe upper-welcome-pe-3">
+                                                    <a href=""
+                                                        class="font-16 color-blue font-medium dolor-div">$5.00</a>
+                                                </div>
+                                                <div class="upper-welcome-pe upper-welcome-pe-3">
+                                                    <a href=""
+                                                        class="font-16 color-blue font-medium dolor-div w-100 dropdown-toggle"
+                                                        type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                                                        aria-haspopup="true" aria-expanded="false">1 month</a>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                        <a class="dropdown-item" href="#">2 month</a>
+                                                        <a class="dropdown-item" href="#">3 month</a>
+                                                    </div>
+                                                </div>
+                                                <div class="upper-welcome-pe upper-welcome-pe-2">
+                                                    <p class="font-16 color-41 font-medium">for Tier</p>
+                                                </div>
+                                                <div class="upper-welcome-pe upper-welcome-pe-3">
+                                                    <a href=""
+                                                        class="font-16 color-blue font-medium dolor-div w-100 dropdown-toggle"
+                                                        type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                                                        aria-haspopup="true" aria-expanded="false">1 &nbsp;</a>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                        <a class="dropdown-item" href="#">2</a>
+                                                        <a class="dropdown-item" href="#">3</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="text-area-for-poll">
+                                                <textarea rows="3"
+                                                    class="w-100">Pay Monthly $5.00 to view 50 photos</textarea>
+                                                <div class="right-side-button text-right">
+                                                    <button>Post</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="row">
+                                        <div class="div-one-for-customize-subscription w-100">
+                                            <div class="d-flex align-items-center ">
+                                                <div class="upper-welcome-pe">
+                                                    <a href="" class="font-16 color-41 font-medium"><span
+                                                            class="iconify" data-icon="ion:pricetag"></span>Pay </a>
+                                                </div>
+                                                <div class="upper-welcome-pe upper-welcome-pe-3">
+                                                    <a href=""
+                                                        class="font-16 color-blue font-medium dolor-div">$12.00</a>
+                                                </div>
+                                                <div class="upper-welcome-pe upper-welcome-pe-3">
+                                                    <a href=""
+                                                        class="font-16 color-blue font-medium dolor-div w-100 dropdown-toggle"
+                                                        type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                                                        aria-haspopup="true" aria-expanded="false">3 month</a>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                        <a class="dropdown-item" href="#">2 month</a>
+                                                        <a class="dropdown-item" href="#">1 month</a>
+                                                    </div>
+                                                </div>
+                                                <div class="upper-welcome-pe upper-welcome-pe-2">
+                                                    <p class="font-16 color-41 font-medium">for Tier</p>
+                                                </div>
+                                                <div class="upper-welcome-pe upper-welcome-pe-3">
+                                                    <a href=""
+                                                        class="font-16 color-blue font-medium dolor-div w-100 dropdown-toggle"
+                                                        type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                                                        aria-haspopup="true" aria-expanded="false">2 &nbsp;</a>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                        <a class="dropdown-item" href="#">1</a>
+                                                        <a class="dropdown-item" href="#">3</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="text-area-for-poll">
+                                                <textarea rows="3"
+                                                    class="w-100">Pay Monthly $5.00 to view 50 photos</textarea>
+                                                <div class="right-side-button text-right">
+                                                    <button>Post</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="add-another-button">
+                                            <div class="right-side-button">
+                                                <button>+ Add another Subscription</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-12 second-home-middle position-relative">
+                            <div class="connect-another-chello-pe">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <p class="font-16 font-bold color-blue">Connect Another Chello Account</p>
+                                    <div class="button-connect">
+                                        <a href="" class="color-blue">Connect</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="div-for-right-side-home">
+                        <div class="search-bar-home">
+                            <input type="text" placeholder="Search" class="w-100" />
+                            <span class="iconify" data-icon="akar-icons:search"></span>
+                        </div>
+                        <div class="spotify-connect border-bottom-pe">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <p class="font-32"><span class="iconify" data-icon="logos:spotify"></span></p>
+                                <div class="button-connect">
+                                    <a href="" class="color-blue">Connect</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="spotify-connect border-bottom-pe">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <p class="font-32"><span class="iconify" data-icon="logos:shopify"></span><span
+                                        class="font-14 color-black"> &nbsp; Shopify</span></p>
+                                <div class="button-connect">
+                                    <a href="" class="color-blue">Connect</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="spotify-connect border-bottom-pe">
+                            <div class="d-flex align-items-center justify-content-between amazone-pay">
+                                <p class=""><span class="iconify color-yellow font-32"
+                                        data-icon="ant-design:amazon-circle-filled"></span><span
+                                        class="font-14 color-black"> &nbsp; Amazon Wishlist</span></p>
+                                <div class="button-connect">
+                                    <a href="" class="color-blue">Connect</a>
+                                </div>
+                            </div>
+                            <div class="headding-input-pe position-relative">
+                                <input type="text" placeholder="Insert Link here..." class="w-100">
+                                <div class="button-change-pe">
+                                    <button>Add</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="spotify-connect-referal-cid">
+                            <div class="div-f-fore-more">
+                                <div class="headding-more-m">
+                                    <p class="font-16 font-bold color-blue">My Referral Code ID</p>
+                                </div>
+                                <div class="input-more-m">
+                                    <input type="text" placeholder="" class="w-100">
+                                    <a href=""><span class="iconify" data-icon="akar-icons:copy"></span></a>
+                                </div>
+                                <div class="share-more-m d-flex align-items-baseline">
+                                    <p class="font-14 font-bold color-black d-flex">Share in &nbsp;
+                                        &nbsp; &nbsp; &nbsp; </p>
+                                    <div class="social-icons-for-footer">
+                                        <a href="https://www.instagram.com/letschello/"><span class="iconify"
+                                                data-icon="typcn:social-instagram"></span></a>
+                                        <a href="https://tiktok.com/@chello.world"><span class="iconify"
+                                                data-icon="cib:tiktok"></span></a>
+                                        <a href="https://twitter.com/LetsChello"><span class="iconify"
+                                                data-icon="ant-design:twitter-outlined"></span></a>
+                                        <a href="javascript:void(0)"><span class="iconify"
+                                                data-icon="eva:facebook-fill"></span></a>
+                                        <a href="javascript:void(0)"><img src="assets/images/24ent new logo white 1.png"
+                                                alt="image"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="spotify-connect ">
+                            <div class="drop-down-new-pe">
+                                <p class="font-14 color-black">Language</p>
+                                <a href="" class="font-14 color-9a w-100 dropdown-toggle" type="button"
+                                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">English</a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#">Hindi</a>
+                                    <a class="dropdown-item" href="#">Gujarati</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

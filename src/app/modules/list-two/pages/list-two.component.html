@@ -1,0 +1,1240 @@
+<app-header-new></app-header-new>
+<div class="homepage margin-minus-header profile-edit-main">
+    <div class="homepage-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3">
+                    <app-sidebar></app-sidebar>
+                </div>
+                <div class="col-md-9">
+                    <div class="delete-account-div margin-top-mobile">
+                        <div class="wrapper-list-main">
+                            <div class="wrapper-delete-account-div list-heading-b">
+                                <div class="home-middle-div-one  position-relative">
+                                    <div class="headding-profile-middle-div d-flex">
+                                        <a href="" class="margin-pr-head"><span class="iconify color-grey font-20"
+                                                data-icon="akar-icons:arrow-left"></span></a>
+                                        <p class="font-20 font-bold color-blue">
+                                            Lists
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="list-create-head">
+                                    <a href="" class="color-black font-20" data-toggle="modal"
+                                        data-target="#exampleModalCenter"><span class="iconify"
+                                            data-icon="akar-icons:plus"></span></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="wrapper-veri-tab">
+                            <div class="width-list-vertitab">
+                                <div class="div-tab-p-verti">
+                                    <p class="color-blue font-16">Custom Order</p>
+                                </div>
+                                <div class="tab">
+                                    <button class="tablinks active" onclick="openCity(event, 'tab1') "
+                                        id="defaultOpen">Following <span>33</span></button>
+                                    <button class="tablinks"
+                                        onclick="openCity(event, 'tab2')">Followers<span>6</span></button>
+                                    <button class="tablinks"
+                                        onclick="openCity(event, 'tab3')">Fans<span>9</span></button>
+                                    <button class="tablinks"
+                                        onclick="openCity(event, 'tab4')">Likes<span>Epmty</span></button>
+                                    <button class="tablinks" onclick="openCity(event, 'tab5')">Close
+                                        Friends<span>3</span></button>
+                                    <button class="tablinks"
+                                        onclick="openCity(event, 'tab6')">Restricted<span>2</span></button>
+                                    <button class="tablinks"
+                                        onclick="openCity(event, 'tab7')">Blocked<span>1</span></button>
+
+                                </div>
+
+                            </div>
+                            <div class="width-list-vertitab-2">
+                                <div id="tab1" class="tabcontent d-block-active">
+                                    <div class="title-div-vtab">
+                                        <div class="list-div">
+                                            <div class="list-d-wrap">
+                                                <a href="">
+                                                    <p class="font-20 font-bold color-blue">Following</p>
+                                                </a>
+                                                <div class="vault-section-one">
+                                                    <div class="filter-vault position-relative">
+                                                        <a href="javascript:void(0)"
+                                                            class="font-20 color-black  dropdown-toggle"
+                                                            role="button" id="dropdownMenuLink"
+                                                            data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="iconify"
+                                                                data-icon="bi:filter-right"></span>
+                                                        </a>
+                                                        <div class="dropdown-menu"
+                                                            aria-labelledby="dropdownMenuLink">
+                                                            <div class="radio-button-vault">
+                                                                <div class="form-group">
+                                                                    <input type=radio id="rdo1" class="radio-input"
+                                                                        name="radio-group">
+                                                                    <label for="rdo1"
+                                                                        class="color-black font-16">Name
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <input type=radio id="rdo2" class="radio-input"
+                                                                        name="radio-group">
+                                                                    <label for="rdo2"
+                                                                        class="color-black font-16">Recent
+                                                                        Liked
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <input type=radio id="rdo3" class="radio-input"
+                                                                        name="radio-group">
+                                                                    <label for="rdo3"
+                                                                        class="color-black font-16">People
+                                                                        Views
+                                                                    </label>
+                                                                </div>
+                                                                <div class="border-e4"></div>
+                                                                <div class="form-group ">
+                                                                    <input type=radio id="rdo4" class="radio-input"
+                                                                        name="radio-group">
+                                                                    <label for="rdo4"
+                                                                        class="color-black font-16">Custom
+                                                                    </label>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <input type=radio id="rdo5" class="radio-input"
+                                                                        name="radio-group">
+                                                                    <label for="rdo5"
+                                                                        class="color-black font-16">Ascending
+                                                                    </label>
+                                                                </div>
+                                                                <div class="border-e4"></div>
+                                                                <div class="form-group ">
+                                                                    <input type=radio id="rdo6" class="radio-input"
+                                                                        name="radio-group">
+                                                                    <label for="rdo6"
+                                                                        class="color-black font-16">Descending
+                                                                    </label>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <p class="color-black font-16"> Customize Order
+                                                                    </p>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="detail-div-vtab">
+                                        <div class="wrapper-member-new-group">
+                                            <div class="row align-items-center">
+                                                <div class="col-md-5">
+                                                    <div class="wrapper-poll-asked-user">
+                                                        <img src="assets/images/Ellipse 10.png" alt="image" />
+                                                        <div class="user-info-p-a">
+                                                            <p class="font-14 font-bold color-49"> Jada Jackson
+                                                                &nbsp; <span
+                                                                    class="iconify font-20 color-light-blue"
+                                                                    data-icon="ic:sharp-verified"></span>
+                                                            </p>
+                                                            <p class="font-14 color-49">@Jadajackson</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="text-center text-member">
+                                                        <p class="font-12 color-7a">Followed 335 days ago</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="button-member-remo">
+                                                        <button>Unfollow</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="wrapper-member-new-group">
+                                            <div class="row align-items-center">
+                                                <div class="col-md-5">
+                                                    <div class="wrapper-poll-asked-user">
+                                                        <img src="assets/images/Ellipse 14 (1).png" alt="image" />
+                                                        <div class="user-info-p-a">
+                                                            <p class="font-14 font-bold color-49"> Craig Saris
+                                                                &nbsp; <span
+                                                                    class="iconify font-20 color-light-blue"
+                                                                    data-icon="ic:sharp-verified"></span>
+                                                            </p>
+                                                            <p class="font-14 color-49">@Jadajackson</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="text-center text-member">
+                                                        <p class="font-12 color-7a">Followed 335 days ago</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="button-member-remo">
+                                                        <button>Unfollow</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="wrapper-member-new-group">
+                                            <div class="row align-items-center">
+                                                <div class="col-md-5">
+                                                    <div class="wrapper-poll-asked-user">
+                                                        <img src="assets/images/Ellipse 14 (2).png" alt="image" />
+                                                        <div class="user-info-p-a">
+                                                            <p class="font-14 font-bold color-49"> Jaxson Lipshutz
+                                                                &nbsp; <span
+                                                                    class="iconify font-20 color-light-blue"
+                                                                    data-icon="ic:sharp-verified"></span>
+                                                            </p>
+                                                            <p class="font-14 color-49">@Jadajackson</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="text-center text-member">
+                                                        <p class="font-12 color-7a">Followed 335 days ago</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="button-member-remo">
+                                                        <button>Unfollow</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="wrapper-member-new-group">
+                                            <div class="row align-items-center">
+                                                <div class="col-md-5">
+                                                    <div class="wrapper-poll-asked-user">
+                                                        <img src="assets/images/Ellipse 14 (5).png" alt="image" />
+                                                        <div class="user-info-p-a">
+                                                            <p class="font-14 font-bold color-49"> Abram Donin
+                                                                &nbsp; <span
+                                                                    class="iconify font-20 color-light-blue"
+                                                                    data-icon="ic:sharp-verified"></span>
+                                                            </p>
+                                                            <p class="font-14 color-49">@Jadajackson</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="text-center text-member">
+                                                        <p class="font-12 color-7a">Followed 335 days ago</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="button-member-remo">
+                                                        <button>Unfollow</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="wrapper-member-new-group">
+                                            <div class="row align-items-center">
+                                                <div class="col-md-5">
+                                                    <div class="wrapper-poll-asked-user">
+                                                        <img src="assets/images/Ellipse 35 (1).png" alt="image" />
+                                                        <div class="user-info-p-a">
+                                                            <p class="font-14 font-bold color-49"> Cheyenne Botosh
+                                                                &nbsp; <span
+                                                                    class="iconify font-20 color-light-blue"
+                                                                    data-icon="ic:sharp-verified"></span>
+                                                            </p>
+                                                            <p class="font-14 color-49">@Jadajackson</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="text-center text-member">
+                                                        <p class="font-12 color-7a">Followed 335 days ago</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="button-member-remo">
+                                                        <button>Unfollow</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="tab2" class="tabcontent">
+                                    <div class="title-div-vtab">
+                                        <div class="list-div">
+                                            <div class="list-d-wrap">
+                                                <a href="">
+                                                    <p class="font-20 font-bold color-blue">Followers</p>
+                                                </a>
+                                                <div class="vault-section-one">
+                                                    <div class="filter-vault position-relative">
+                                                        <a href="javascript:void(0)"
+                                                            class="font-20 color-black  dropdown-toggle"
+                                                            role="button" id="dropdownMenuLink"
+                                                            data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="iconify"
+                                                                data-icon="bi:filter-right"></span>
+                                                        </a>
+                                                        <div class="dropdown-menu"
+                                                            aria-labelledby="dropdownMenuLink">
+                                                            <div class="radio-button-vault">
+                                                                <div class="form-group">
+                                                                    <input type=radio id="rdo1" class="radio-input"
+                                                                        name="radio-group">
+                                                                    <label for="rdo1"
+                                                                        class="color-black font-16">Name
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <input type=radio id="rdo2" class="radio-input"
+                                                                        name="radio-group">
+                                                                    <label for="rdo2"
+                                                                        class="color-black font-16">Recent
+                                                                        Liked
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <input type=radio id="rdo3" class="radio-input"
+                                                                        name="radio-group">
+                                                                    <label for="rdo3"
+                                                                        class="color-black font-16">People
+                                                                        Views
+                                                                    </label>
+                                                                </div>
+                                                                <div class="border-e4"></div>
+                                                                <div class="form-group ">
+                                                                    <input type=radio id="rdo4" class="radio-input"
+                                                                        name="radio-group">
+                                                                    <label for="rdo4"
+                                                                        class="color-black font-16">Custom
+                                                                    </label>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <input type=radio id="rdo5" class="radio-input"
+                                                                        name="radio-group">
+                                                                    <label for="rdo5"
+                                                                        class="color-black font-16">Ascending
+                                                                    </label>
+                                                                </div>
+                                                                <div class="border-e4"></div>
+                                                                <div class="form-group ">
+                                                                    <input type=radio id="rdo6" class="radio-input"
+                                                                        name="radio-group">
+                                                                    <label for="rdo6"
+                                                                        class="color-black font-16">Descending
+                                                                    </label>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <p class="color-black font-16"> Customize Order
+                                                                    </p>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="detail-div-vtab">
+                                        <div class="wrapper-member-new-group">
+                                            <div class="row align-items-center">
+                                                <div class="col-md-5">
+                                                    <div class="wrapper-poll-asked-user">
+                                                        <img src="assets/images/Ellipse 10 (1).png" alt="image" />
+                                                        <div class="user-info-p-a">
+                                                            <p class="font-14 font-bold color-49"> Anika Dorwart
+                                                                &nbsp; <span
+                                                                    class="iconify font-20 color-light-blue"
+                                                                    data-icon="ic:sharp-verified"></span>
+                                                            </p>
+                                                            <p class="font-14 color-49">@Jadajackson</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="text-center text-member">
+                                                        <p class="font-12 color-7a">Followed 335 days ago</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="button-member-remo">
+                                                        <button>Remove</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="wrapper-member-new-group">
+                                            <div class="row align-items-center">
+                                                <div class="col-md-5">
+                                                    <div class="wrapper-poll-asked-user">
+                                                        <img src="assets/images/Ellipse 10 (2).png" alt="image" />
+                                                        <div class="user-info-p-a">
+                                                            <p class="font-14 font-bold color-49"> Lincoln Geidt
+                                                                &nbsp; <span
+                                                                    class="iconify font-20 color-light-blue"
+                                                                    data-icon="ic:sharp-verified"></span>
+                                                            </p>
+                                                            <p class="font-14 color-49">@Jadajackson</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="text-center text-member">
+                                                        <p class="font-12 color-7a">Followed 335 days ago</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="button-member-remo">
+                                                        <button>Remove</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="wrapper-member-new-group">
+                                            <div class="row align-items-center">
+                                                <div class="col-md-5">
+                                                    <div class="wrapper-poll-asked-user">
+                                                        <img src="assets/images/Ellipse 14 (3).png" alt="image" />
+                                                        <div class="user-info-p-a">
+                                                            <p class="font-14 font-bold color-49"> Tiana Botosh
+                                                                &nbsp; <span
+                                                                    class="iconify font-20 color-light-blue"
+                                                                    data-icon="ic:sharp-verified"></span>
+                                                            </p>
+                                                            <p class="font-14 color-49">@Jadajackson</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="text-center text-member">
+                                                        <p class="font-12 color-7a">Followed 335 days ago</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="button-member-remo">
+                                                        <button>Remove</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div id="tab3" class="tabcontent">
+                                    <div class="title-div-vtab">
+                                        <div class="list-div">
+                                            <div class="list-d-wrap">
+                                                <a href="">
+                                                    <p class="font-20 font-bold color-blue">Fans</p>
+                                                </a>
+                                                <div class="vault-section-one">
+                                                    <div class="filter-vault position-relative">
+                                                        <a href="javascript:void(0)"
+                                                            class="font-20 color-black  dropdown-toggle"
+                                                            role="button" id="dropdownMenuLink"
+                                                            data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="iconify"
+                                                                data-icon="bi:filter-right"></span>
+                                                        </a>
+                                                        <div class="dropdown-menu"
+                                                            aria-labelledby="dropdownMenuLink">
+                                                            <div class="radio-button-vault">
+                                                                <div class="form-group">
+                                                                    <input type=radio id="rdo1" class="radio-input"
+                                                                        name="radio-group">
+                                                                    <label for="rdo1"
+                                                                        class="color-black font-16">Name
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <input type=radio id="rdo2" class="radio-input"
+                                                                        name="radio-group">
+                                                                    <label for="rdo2"
+                                                                        class="color-black font-16">Recent
+                                                                        Liked
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <input type=radio id="rdo3" class="radio-input"
+                                                                        name="radio-group">
+                                                                    <label for="rdo3"
+                                                                        class="color-black font-16">People
+                                                                        Views
+                                                                    </label>
+                                                                </div>
+                                                                <div class="border-e4"></div>
+                                                                <div class="form-group ">
+                                                                    <input type=radio id="rdo4" class="radio-input"
+                                                                        name="radio-group">
+                                                                    <label for="rdo4"
+                                                                        class="color-black font-16">Custom
+                                                                    </label>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <input type=radio id="rdo5" class="radio-input"
+                                                                        name="radio-group">
+                                                                    <label for="rdo5"
+                                                                        class="color-black font-16">Ascending
+                                                                    </label>
+                                                                </div>
+                                                                <div class="border-e4"></div>
+                                                                <div class="form-group ">
+                                                                    <input type=radio id="rdo6" class="radio-input"
+                                                                        name="radio-group">
+                                                                    <label for="rdo6"
+                                                                        class="color-black font-16">Descending
+                                                                    </label>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <p class="color-black font-16"> Customize Order
+                                                                    </p>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="detail-div-vtab">
+                                        <div class="wrapper-member-new-group">
+                                            <div class="row align-items-center">
+                                                <div class="col-md-5">
+                                                    <div class="wrapper-poll-asked-user">
+                                                        <img src="assets/images/Ellipse 14 (1).png" alt="image" />
+                                                        <div class="user-info-p-a">
+                                                            <p class="font-14 font-bold color-49"> Anika Dorwart
+                                                                &nbsp; <span
+                                                                    class="iconify font-20 color-light-blue"
+                                                                    data-icon="ic:sharp-verified"></span>
+                                                            </p>
+                                                            <p class="font-14 color-49">@Jadajackson</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="text-center text-member">
+                                                        <p class="font-12 color-7a">Followed 335 days ago</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="button-member-remo">
+                                                        <button>Remove</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="wrapper-member-new-group">
+                                            <div class="row align-items-center">
+                                                <div class="col-md-5">
+                                                    <div class="wrapper-poll-asked-user">
+                                                        <img src="assets/images/Ellipse 14 (2).png" alt="image" />
+                                                        <div class="user-info-p-a">
+                                                            <p class="font-14 font-bold color-49"> Lincoln Geidt
+                                                                &nbsp; <span
+                                                                    class="iconify font-20 color-light-blue"
+                                                                    data-icon="ic:sharp-verified"></span>
+                                                            </p>
+                                                            <p class="font-14 color-49">@Jadajackson</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="text-center text-member">
+                                                        <p class="font-12 color-7a">Followed 335 days ago</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="button-member-remo">
+                                                        <button>Remove</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="wrapper-member-new-group">
+                                            <div class="row align-items-center">
+                                                <div class="col-md-5">
+                                                    <div class="wrapper-poll-asked-user">
+                                                        <img src="assets/images/Ellipse 14 (3).png" alt="image" />
+                                                        <div class="user-info-p-a">
+                                                            <p class="font-14 font-bold color-49"> Tiana Botosh
+                                                                &nbsp; <span
+                                                                    class="iconify font-20 color-light-blue"
+                                                                    data-icon="ic:sharp-verified"></span>
+                                                            </p>
+                                                            <p class="font-14 color-49">@Jadajackson</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="text-center text-member">
+                                                        <p class="font-12 color-7a">Followed 335 days ago</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="button-member-remo">
+                                                        <button>Remove</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="wrapper-member-new-group">
+                                            <div class="row align-items-center">
+                                                <div class="col-md-5">
+                                                    <div class="wrapper-poll-asked-user">
+                                                        <img src="assets/images/Ellipse 14 (1).png" alt="image" />
+                                                        <div class="user-info-p-a">
+                                                            <p class="font-14 font-bold color-49"> Anika Dorwart
+                                                                &nbsp; <span
+                                                                    class="iconify font-20 color-light-blue"
+                                                                    data-icon="ic:sharp-verified"></span>
+                                                            </p>
+                                                            <p class="font-14 color-49">@Jadajackson</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="text-center text-member">
+                                                        <p class="font-12 color-7a">Followed 335 days ago</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="button-member-remo">
+                                                        <button>Remove</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="wrapper-member-new-group">
+                                            <div class="row align-items-center">
+                                                <div class="col-md-5">
+                                                    <div class="wrapper-poll-asked-user">
+                                                        <img src="assets/images/Ellipse 14 (2).png" alt="image" />
+                                                        <div class="user-info-p-a">
+                                                            <p class="font-14 font-bold color-49"> Lincoln Geidt
+                                                                &nbsp; <span
+                                                                    class="iconify font-20 color-light-blue"
+                                                                    data-icon="ic:sharp-verified"></span>
+                                                            </p>
+                                                            <p class="font-14 color-49">@Jadajackson</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="text-center text-member">
+                                                        <p class="font-12 color-7a">Followed 335 days ago</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="button-member-remo">
+                                                        <button>Remove</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div id="tab4" class="tabcontent like-img">
+                                    <div class="title-div-vtab">
+                                        <div class="list-div">
+                                            <div class="list-d-wrap">
+                                                <a href="">
+                                                    <p class="font-20 font-bold color-blue">Likes</p>
+                                                </a>
+                                                <div class="vault-section-one">
+                                                    <div class="filter-vault position-relative">
+                                                        <a href="javascript:void(0)"
+                                                            class="font-20 color-black  dropdown-toggle"
+                                                            role="button" id="dropdownMenuLink"
+                                                            data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="iconify"
+                                                                data-icon="bi:filter-right"></span>
+                                                        </a>
+                                                        <div class="dropdown-menu"
+                                                            aria-labelledby="dropdownMenuLink">
+                                                            <div class="radio-button-vault">
+                                                                <div class="form-group">
+                                                                    <input type=radio id="rdo1" class="radio-input"
+                                                                        name="radio-group">
+                                                                    <label for="rdo1"
+                                                                        class="color-black font-16">Name
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <input type=radio id="rdo2" class="radio-input"
+                                                                        name="radio-group">
+                                                                    <label for="rdo2"
+                                                                        class="color-black font-16">Recent
+                                                                        Liked
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <input type=radio id="rdo3" class="radio-input"
+                                                                        name="radio-group">
+                                                                    <label for="rdo3"
+                                                                        class="color-black font-16">People
+                                                                        Views
+                                                                    </label>
+                                                                </div>
+                                                                <div class="border-e4"></div>
+                                                                <div class="form-group ">
+                                                                    <input type=radio id="rdo4" class="radio-input"
+                                                                        name="radio-group">
+                                                                    <label for="rdo4"
+                                                                        class="color-black font-16">Custom
+                                                                    </label>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <input type=radio id="rdo5" class="radio-input"
+                                                                        name="radio-group">
+                                                                    <label for="rdo5"
+                                                                        class="color-black font-16">Ascending
+                                                                    </label>
+                                                                </div>
+                                                                <div class="border-e4"></div>
+                                                                <div class="form-group ">
+                                                                    <input type=radio id="rdo6" class="radio-input"
+                                                                        name="radio-group">
+                                                                    <label for="rdo6"
+                                                                        class="color-black font-16">Descending
+                                                                    </label>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <p class="color-black font-16"> Customize Order
+                                                                    </p>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="detail-div-vtab">
+                                        <div class="wrapper-member-new-group">
+                                            <div class="row align-items-center">
+                                                <div class="col-md-8">
+                                                    <div class="wrapper-poll-asked-user">
+                                                        <img src="assets/images/Ellipse 10 (2).png" alt="image" />
+                                                        <div class="user-info-p-a">
+                                                            <p class="font-14 font-bold color-49"> Davis Schleifer
+                                                            </p>
+                                                            <p class="font-14 color-49">You Liked <b>Davis
+                                                                    Schleifers</b> Post.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="text-member text-right">
+                                                        <p class="font-12 color-d3">1 min ago</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="wrapper-member-new-group">
+                                            <div class="row align-items-center">
+                                                <div class="col-md-8">
+                                                    <div class="wrapper-poll-asked-user">
+                                                        <img src="assets/images/Ellipse 10.png" alt="image" />
+                                                        <div class="user-info-p-a">
+                                                            <p class="font-14 font-bold color-49"> Davis Schleifer
+                                                            </p>
+                                                            <p class="font-14 color-49">You Liked <b>Davis
+                                                                    Schleifers</b> Post.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="text-member text-right">
+                                                        <p class="font-12 color-d3">1 min ago</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="wrapper-member-new-group">
+                                            <div class="row align-items-center">
+                                                <div class="col-md-8">
+                                                    <div class="wrapper-poll-asked-user">
+                                                        <img src="assets/images/Ellipse 14 (1).png" alt="image" />
+                                                        <div class="user-info-p-a">
+                                                            <p class="font-14 font-bold color-49"> Davis Schleifer
+                                                            </p>
+                                                            <p class="font-14 color-49">You Liked <b>Davis
+                                                                    Schleifers</b> Post.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="text-member text-right">
+                                                        <p class="font-12 color-d3">1 min ago</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="wrapper-member-new-group">
+                                            <div class="row align-items-center">
+                                                <div class="col-md-8">
+                                                    <div class="wrapper-poll-asked-user">
+                                                        <img src="assets/images/Ellipse 14 (2).png" alt="image" />
+                                                        <div class="user-info-p-a">
+                                                            <p class="font-14 font-bold color-49"> Davis Schleifer
+                                                            </p>
+                                                            <p class="font-14 color-49">You Liked <b>Davis
+                                                                    Schleifers</b> Post.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="text-member text-right">
+                                                        <p class="font-12 color-d3">1 min ago</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="wrapper-member-new-group">
+                                            <div class="row align-items-center">
+                                                <div class="col-md-8">
+                                                    <div class="wrapper-poll-asked-user">
+                                                        <img src="assets/images/Ellipse 9.png" alt="image" />
+                                                        <div class="user-info-p-a">
+                                                            <p class="font-14 font-bold color-49"> Davis Schleifer
+                                                            </p>
+                                                            <p class="font-14 color-49">You Liked <b>Davis
+                                                                    Schleifers</b> Post.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="text-member text-right">
+                                                        <p class="font-12 color-d3">1 min ago</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div id="tab5" class="tabcontent">
+                                    <div class="title-div-vtab">
+                                        <div class="list-div">
+                                            <div class="list-d-wrap">
+                                                <a href="">
+                                                    <p class="font-20 font-bold color-blue">Close Friends</p>
+                                                </a>
+                                                <div class="vault-section-one">
+                                                    <div class="filter-vault position-relative">
+                                                        <a href="javascript:void(0)"
+                                                            class="font-20 color-black  dropdown-toggle"
+                                                            role="button" id="dropdownMenuLink"
+                                                            data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="iconify"
+                                                                data-icon="bi:filter-right"></span>
+                                                        </a>
+                                                        <div class="dropdown-menu"
+                                                            aria-labelledby="dropdownMenuLink">
+                                                            <div class="radio-button-vault">
+                                                                <div class="form-group">
+                                                                    <input type=radio id="rdo1" class="radio-input"
+                                                                        name="radio-group">
+                                                                    <label for="rdo1"
+                                                                        class="color-black font-16">Name
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <input type=radio id="rdo2" class="radio-input"
+                                                                        name="radio-group">
+                                                                    <label for="rdo2"
+                                                                        class="color-black font-16">Recent
+                                                                        Liked
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <input type=radio id="rdo3" class="radio-input"
+                                                                        name="radio-group">
+                                                                    <label for="rdo3"
+                                                                        class="color-black font-16">People
+                                                                        Views
+                                                                    </label>
+                                                                </div>
+                                                                <div class="border-e4"></div>
+                                                                <div class="form-group ">
+                                                                    <input type=radio id="rdo4" class="radio-input"
+                                                                        name="radio-group">
+                                                                    <label for="rdo4"
+                                                                        class="color-black font-16">Custom
+                                                                    </label>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <input type=radio id="rdo5" class="radio-input"
+                                                                        name="radio-group">
+                                                                    <label for="rdo5"
+                                                                        class="color-black font-16">Ascending
+                                                                    </label>
+                                                                </div>
+                                                                <div class="border-e4"></div>
+                                                                <div class="form-group ">
+                                                                    <input type=radio id="rdo6" class="radio-input"
+                                                                        name="radio-group">
+                                                                    <label for="rdo6"
+                                                                        class="color-black font-16">Descending
+                                                                    </label>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <p class="color-black font-16"> Customize Order
+                                                                    </p>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="detail-div-vtab">
+
+                                        <div class="wrapper-member-new-group">
+                                            <div class="row align-items-center">
+                                                <div class="col-md-5">
+                                                    <div class="wrapper-poll-asked-user">
+                                                        <img src="assets/images/Ellipse 14 (2).png" alt="image" />
+                                                        <div class="user-info-p-a">
+                                                            <p class="font-14 font-bold color-49"> Lincoln Geidt
+                                                                &nbsp; <span
+                                                                    class="iconify font-20 color-light-blue"
+                                                                    data-icon="ic:sharp-verified"></span>
+                                                            </p>
+                                                            <p class="font-14 color-49">@Jadajackson</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="text-center text-member">
+                                                        <p class="font-12 color-7a">Followed 335 days ago</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="button-member-remo">
+                                                        <button>Remove</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="wrapper-member-new-group">
+                                            <div class="row align-items-center">
+                                                <div class="col-md-5">
+                                                    <div class="wrapper-poll-asked-user">
+                                                        <img src="assets/images/Ellipse 14 (3).png" alt="image" />
+                                                        <div class="user-info-p-a">
+                                                            <p class="font-14 font-bold color-49"> Tiana Botosh
+                                                                &nbsp; <span
+                                                                    class="iconify font-20 color-light-blue"
+                                                                    data-icon="ic:sharp-verified"></span>
+                                                            </p>
+                                                            <p class="font-14 color-49">@Jadajackson</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="text-center text-member">
+                                                        <p class="font-12 color-7a">Followed 335 days ago</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="button-member-remo">
+                                                        <button>Remove</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                                <div id="tab6" class="tabcontent">
+                                    <div class="title-div-vtab">
+                                        <div class="list-div">
+                                            <div class="list-d-wrap">
+                                                <a href="">
+                                                    <p class="font-20 font-bold color-blue">Restricted</p>
+                                                </a>
+                                                <div class="vault-section-one">
+                                                    <div class="filter-vault position-relative">
+                                                        <a href="javascript:void(0)"
+                                                            class="font-20 color-black  dropdown-toggle"
+                                                            role="button" id="dropdownMenuLink"
+                                                            data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="iconify"
+                                                                data-icon="bi:filter-right"></span>
+                                                        </a>
+                                                        <div class="dropdown-menu"
+                                                            aria-labelledby="dropdownMenuLink">
+                                                            <div class="radio-button-vault">
+                                                                <div class="form-group">
+                                                                    <input type=radio id="rdo1" class="radio-input"
+                                                                        name="radio-group">
+                                                                    <label for="rdo1"
+                                                                        class="color-black font-16">Name
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <input type=radio id="rdo2" class="radio-input"
+                                                                        name="radio-group">
+                                                                    <label for="rdo2"
+                                                                        class="color-black font-16">Recent
+                                                                        Liked
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <input type=radio id="rdo3" class="radio-input"
+                                                                        name="radio-group">
+                                                                    <label for="rdo3"
+                                                                        class="color-black font-16">People
+                                                                        Views
+                                                                    </label>
+                                                                </div>
+                                                                <div class="border-e4"></div>
+                                                                <div class="form-group ">
+                                                                    <input type=radio id="rdo4" class="radio-input"
+                                                                        name="radio-group">
+                                                                    <label for="rdo4"
+                                                                        class="color-black font-16">Custom
+                                                                    </label>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <input type=radio id="rdo5" class="radio-input"
+                                                                        name="radio-group">
+                                                                    <label for="rdo5"
+                                                                        class="color-black font-16">Ascending
+                                                                    </label>
+                                                                </div>
+                                                                <div class="border-e4"></div>
+                                                                <div class="form-group ">
+                                                                    <input type=radio id="rdo6" class="radio-input"
+                                                                        name="radio-group">
+                                                                    <label for="rdo6"
+                                                                        class="color-black font-16">Descending
+                                                                    </label>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <p class="color-black font-16"> Customize Order
+                                                                    </p>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="detail-div-vtab">
+
+                                        <div class="wrapper-member-new-group">
+                                            <div class="row align-items-center">
+                                                <div class="col-md-5">
+                                                    <div class="wrapper-poll-asked-user">
+                                                        <img src="assets/images/Ellipse 10.png" alt="image" />
+                                                        <div class="user-info-p-a">
+                                                            <p class="font-14 font-bold color-49"> Lincoln Geidt
+                                                                &nbsp; <span
+                                                                    class="iconify font-20 color-light-blue"
+                                                                    data-icon="ic:sharp-verified"></span>
+                                                            </p>
+                                                            <p class="font-14 color-49">@Jadajackson</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="text-center text-member">
+                                                        <p class="font-12 color-7a">Followed 335 days ago</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="button-member-remo">
+                                                        <button>Remove</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="wrapper-member-new-group">
+                                            <div class="row align-items-center">
+                                                <div class="col-md-5">
+                                                    <div class="wrapper-poll-asked-user">
+                                                        <img src="assets/images/Ellipse 14 (4).png" alt="image" />
+                                                        <div class="user-info-p-a">
+                                                            <p class="font-14 font-bold color-49"> Tiana Botosh
+                                                                &nbsp; <span
+                                                                    class="iconify font-20 color-light-blue"
+                                                                    data-icon="ic:sharp-verified"></span>
+                                                            </p>
+                                                            <p class="font-14 color-49">@Jadajackson</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="text-center text-member">
+                                                        <p class="font-12 color-7a">Followed 335 days ago</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="button-member-remo">
+                                                        <button>Remove</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                                <div id="tab7" class="tabcontent">
+                                    <div class="title-div-vtab">
+                                        <div class="list-div">
+                                            <div class="list-d-wrap">
+                                                <a href="">
+                                                    <p class="font-20 font-bold color-blue">Unblock</p>
+                                                </a>
+                                                <div class="vault-section-one">
+                                                    <div class="filter-vault position-relative">
+                                                        <a href="javascript:void(0)"
+                                                            class="font-20 color-black  dropdown-toggle"
+                                                            role="button" id="dropdownMenuLink"
+                                                            data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="iconify"
+                                                                data-icon="bi:filter-right"></span>
+                                                        </a>
+                                                        <div class="dropdown-menu"
+                                                            aria-labelledby="dropdownMenuLink">
+                                                            <div class="radio-button-vault">
+                                                                <div class="form-group">
+                                                                    <input type=radio id="rdo1" class="radio-input"
+                                                                        name="radio-group">
+                                                                    <label for="rdo1"
+                                                                        class="color-black font-16">Name
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <input type=radio id="rdo2" class="radio-input"
+                                                                        name="radio-group">
+                                                                    <label for="rdo2"
+                                                                        class="color-black font-16">Recent
+                                                                        Liked
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <input type=radio id="rdo3" class="radio-input"
+                                                                        name="radio-group">
+                                                                    <label for="rdo3"
+                                                                        class="color-black font-16">People
+                                                                        Views
+                                                                    </label>
+                                                                </div>
+                                                                <div class="border-e4"></div>
+                                                                <div class="form-group ">
+                                                                    <input type=radio id="rdo4" class="radio-input"
+                                                                        name="radio-group">
+                                                                    <label for="rdo4"
+                                                                        class="color-black font-16">Custom
+                                                                    </label>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <input type=radio id="rdo5" class="radio-input"
+                                                                        name="radio-group">
+                                                                    <label for="rdo5"
+                                                                        class="color-black font-16">Ascending
+                                                                    </label>
+                                                                </div>
+                                                                <div class="border-e4"></div>
+                                                                <div class="form-group ">
+                                                                    <input type=radio id="rdo6" class="radio-input"
+                                                                        name="radio-group">
+                                                                    <label for="rdo6"
+                                                                        class="color-black font-16">Descending
+                                                                    </label>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <p class="color-black font-16"> Customize Order
+                                                                    </p>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="detail-div-vtab">
+
+                                        <div class="wrapper-member-new-group">
+                                            <div class="row align-items-center">
+                                                <div class="col-md-5">
+                                                    <div class="wrapper-poll-asked-user">
+                                                        <img src="assets/images/Ellipse 10 (2).png" alt="image" />
+                                                        <div class="user-info-p-a">
+                                                            <p class="font-14 font-bold color-49"> Lincoln Geidt
+                                                                &nbsp; <span
+                                                                    class="iconify font-20 color-light-blue"
+                                                                    data-icon="ic:sharp-verified"></span>
+                                                            </p>
+                                                            <p class="font-14 color-49">@Jadajackson</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="text-center text-member">
+                                                        <p class="font-12 color-7a">Followed 335 days ago</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="button-member-remo">
+                                                        <button>Unblock</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

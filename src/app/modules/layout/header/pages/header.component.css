@@ -1,0 +1,13 @@
+.color-white {
+  color: #ffffff;
+}
+
+.back-arrow-header {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  z-index: 5;
+}
+/*# sourceMappingURL=header.component.css.map */

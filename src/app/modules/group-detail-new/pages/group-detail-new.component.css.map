@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,eAAe,CAAA;EACX,OAAO,EAAE,KAAK;CACf",
+    "sources": [
+        "group-detail-new.component.scss"
+    ],
+    "names": [],
+    "file": "group-detail-new.component.css"
+}

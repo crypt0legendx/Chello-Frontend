@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,eAAe,CAAA;EACX,OAAO,EAAE,KAAK;CACf",
+    "sources": [
+        "payment.component.scss"
+    ],
+    "names": [],
+    "file": "payment.component.css"
+}

@@ -1,0 +1,163 @@
+<!-- loding -->
+<ngx-spinner bdColor="rgba(238,238,238,.4)" size="medium" color="#486ffa" type="ball-clip-rotate"></ngx-spinner>
+
+<div class="first-div-chello">
+  <div class="container-fluid">
+    <div class="row align-items-start o-h">
+      <div class="col-md-6">
+        <div class="row">
+          <div class="first-div-login">
+            <div class="image-for-logo text-center">
+              <img src="assets/images/Chello.png" alt="image">
+            </div>
+            <div class=" text-under-logo text-center">
+              <p class="color-white font-medium font-32">Creators + Fans = Chello</p>
+              <p class="color-white font-18 font-medium">#LetsGO</p>
+            </div>
+            <div class="image-for-mask text-center">
+              <img src="assets/images/Mask group.png" alt="image">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-5">
+        <div class="text-for-login">
+          <div class="headding-login">
+            <p class="font-26 color-blue font-bold">Sign Up</p>
+          </div>
+          <div class="form-div-login">
+            <form [formGroup]="registerForm" (ngSubmit)="register()">
+              <div class="form-group">
+                <label class="font-14 color-grey">Full Name</label>
+
+                <input type="text" formControlName="fullName" class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && f.fullName.errors }">
+                <div *ngIf="submitted && f.fullName.errors" class="invalid-feedback">
+                  <div *ngIf="f.fullName.errors.required" style="color:red;">Full Name is required</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="font-14 color-grey">Username</label>
+
+                <input type="text" class="form-control" formControlName="userName"
+                  [ngClass]="{ 'is-invalid': submitted && f.userName.errors }">
+                <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
+                  <div *ngIf="f.userName.errors.required" style="color:red;">User Name is required</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="font-14 color-grey">Email</label>
+
+                <input type="email" class="form-control" formControlName="email"
+                  [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                  <div *ngIf="f.email.errors.required" style="color:red;">Email is required</div>
+                </div>
+              </div>
+              <div class="form-group password-icon position-relative">
+                <label class="font-14 color-grey">Password</label>
+
+                <input [type]="show ? 'text' : 'password'" class="form-control password-input" formControlName="password"
+                  [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                  <div *ngIf="f.password.errors.required" style="color:red;">Password is required</div>
+                </div>
+                <a (click)="showPassword()"><span class="iconify" [attr.data-icon]="show? 'akar-icons:eye-slashed' : 'akar-icons:eye'" style="cursor: pointer;"></span></a>
+              </div>
+              <div class="form-group password-icon position-relative">
+                <label class="font-14 color-grey">Confirm Password</label>
+
+                <input [type]="showRe ? 'text' : 'password'" class="form-control password-input" formControlName="cPassword"
+                  [ngClass]="{ 'is-invalid': submitted && f.cPassword.errors }">
+                <div *ngIf="submitted && f.cPassword.errors" class="invalid-feedback">
+                  <div *ngIf="f.cPassword.errors.required" style="color:red;">Confirm Password is required</div>
+                </div>
+                <a (click)="showRePassword()"><span class="iconify" [attr.data-icon]="showRe? 'akar-icons:eye-slashed' : 'akar-icons:eye'" style="cursor: pointer;"></span></a>
+              </div>
+              <div class="button-link">
+                <div class="d-flex justify-content-between">
+                  <button type="submit" class="btn">Sign Up</button>
+                </div>
+              </div>
+            </form>
+            <div class="text-for-privacy-signup">
+              <p class="color-black font-14">By signing up you agree to our <a routerLink="/terms"
+                  class="color-light-blue text-deco">Terms of Service</a> and <br><a routerLink="/privacy-policy"
+                  class="color-light-blue text-deco">Privacy Policy</a> and confirm that you are at least 18 years old.
+              </p>
+              <br>
+              <p class="color-black font-14">Already have an account? <a routerLink="/login"
+                  class="color-blue font-medium ">Log In</a></p>
+            </div>
+            <div class="text-signup">
+            </div>
+            <div class="social-login">
+              <div class="text-s-l">
+                <p class="color-grey font-14">or</p>
+                <p class="color-dark-grey font-16 font-medium">Sign Up with </p>
+              </div>
+              <div class="icon-login">
+                <a href="javascript:void(0)" class="d-flex align-items-center" (click)="GoogleAuth()">
+                  <img src="assets/images/google 1.png" alt="image">
+                  <p class="font-14 color-grey"> Log In with Google</p>
+                </a>
+              </div>
+              <div class="icon-login">
+                <a href="javascript:void(0)" class="d-flex align-items-center" (click)="TwitterAuth()">
+                  <img src="assets/images/twitter 1.png" alt="image">
+                  <p class="font-14 color-grey"> Log In with Twitter</p>
+                </a>
+              </div>
+              <div class="icon-login">
+                <a href="javascript:void(0)" class="d-flex align-items-center" (click)="FacebookAuth()">
+                  <img src="assets/images/facebook.png" alt="image">
+                  <p class="font-14 color-grey"> Log In with Facebook</p>
+                </a>
+              </div>
+            </div>
+            <div class="text-blue-under-login">
+              <p class="font-18 color-blue">Creators keeps 94% of their earnings!</p>
+              <p class="font-18 color-blue">Creators pay $25/mth or $240 yearly.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-1"></div>
+    </div>
+  </div>
+</div>
+<div class="clearfix"></div>
+<div class="second-div">
+  <div class="container">
+    <div class="wrapper-video-link text-center">
+      <a href="" type="button" data-toggle="modal" data-target="#exampleModal">
+        <div class="image-for-video position-relative">
+          <img src="assets/images/Group 36617 (1).png" alt="image">
+          <div class="image-video-icon">
+            <img src="assets/images/Group 36614.png" alt="image">
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</div>
+<div class="modal fade modal-for-video" id="exampleModal" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="model-dissmiss-div">
+          <a href="javascript:void(0)" type="button" class="close color-blue" data-dismiss="modal">
+            <span class="iconify" data-icon="eva:close-circle-outline"></span>
+          </a>
+        </div>
+        <div class="video-for-home-div">
+          <iframe width="100%" height="409" src="https://www.youtube.com/embed/QeDR7kyV4Sk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="clearfix"></div>
+<app-footer></app-footer>

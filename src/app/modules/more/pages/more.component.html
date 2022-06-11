@@ -1,0 +1,204 @@
+<app-header-new></app-header-new>
+<div class="homepage margin-minus-header">
+    <div class="homepage-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3">
+                    <app-sidebar></app-sidebar>
+                </div>
+                <div class="wid-2">
+                    <div class="more-side-bar mar-top-m">
+                        <div class="more-search-div-head">
+                            <div class="search-bar-home">
+                                <input type="text" placeholder="Search" class="w-100" />
+                                <span class="iconify" data-icon="akar-icons:search"></span>
+                            </div>
+                        </div>
+                        <div class="more-div-option">
+                            <div class="text-group-2-link">
+                                <a href="">
+                                    <p class="font-16 font-medium color-blue">Creator Unique URL</p>
+                                </a>
+                                <a href="">
+                                    <p class="font-16 font-medium color-a9">ChitChat</p>
+                                </a>
+                                <a href="">
+                                    <p class="font-16 font-medium color-a9">Pay Per View Message</p>
+                                </a>
+                                <a href="">
+                                    <p class="font-16 font-medium color-a9">Tips</p>
+                                </a>
+                                <a href="">
+                                    <p class="font-16 font-medium color-a9">Schedule Post</p>
+                                </a>
+                                <a href="">
+                                    <p class="font-16 font-medium color-a9">Elite Fans</p>
+                                </a>
+                                <a href="">
+                                    <p class="font-16 font-medium color-a9">#Hashtag Trending</p>
+                                </a>
+                                <a routerLink='/poll'>
+                                    <p class="font-16 font-medium color-a9">Polls</p>
+                                </a>
+                                <a routerLink='/geo-blocking'>
+                                    <p class="font-16 font-medium color-a9">Geo-Blocking</p>
+                                </a>
+                                <a routerLink='/page-state'>
+                                    <p class="font-16 font-medium color-a9">Page Stats</p>
+                                </a>
+                                <a href="">
+                                    <p class="font-16 font-medium color-a9">Customize Subscriptions</p>
+                                </a>
+                                <div class="more-radio-option">
+                                    <p class="font-16 font-medium color-blue">Theme</p>
+                                    <div class="radio-div-more">
+                                        <div class="first-radio-div">
+                                            <span class="iconify font-20 color-blue"
+                                                data-icon="bi:moon-fill"></span>
+                                            <input type="radio" id="test1" name="radio-group" (click)="toggleDarkTheme()" [checked]="isDarkMode">
+                                            <label for="test1">
+                                            </label>
+                                        </div>
+                                        <div class="first-radio-div">
+                                            <span class="iconify font-20" data-icon="emojione:sun"></span>
+                                            <input type="radio" id="test2" name="radio-group" (click)="toggleLightTheme()" [checked]="isLightMode">
+                                            <label for="test2">
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-7 ">
+                    <div class="row">
+                        <div class="home-middle-div w-100 ">
+                            <div class="main-more-div">
+                                <div class="wrapper-main-more-div ">
+                                    <div class="div-f-fore-more">
+                                        <div class="col-md-6">
+                                            <div class="headding-more-m">
+                                                <p class="font-16 font-bold color-blue">My Creator Unique URL</p>
+                                            </div>
+                                            <div class="input-more-m">
+                                                <input type="text" placeholder="https://www.chello.world/username"
+                                                    class="w-100">
+                                            </div>
+                                            <div class="share-more-m d-flex align-items-baseline">
+                                                <p class="font-14 font-bold color-black d-flex">Share in &nbsp;
+                                                    &nbsp; &nbsp; &nbsp; </p>
+                                                <div class="social-icons-for-footer">
+                                                    <a href="https://www.instagram.com/letschello/"><span
+                                                            class="iconify"
+                                                            data-icon="typcn:social-instagram"></span></a>
+                                                    <a href="https://tiktok.com/@chello.world"><span class="iconify"
+                                                            data-icon="cib:tiktok"></span></a>
+                                                    <a href="https://twitter.com/LetsChello"><span class="iconify"
+                                                            data-icon="ant-design:twitter-outlined"></span></a>
+                                                    <a href="javascript:void(0)"><span class="iconify"
+                                                            data-icon="eva:facebook-fill"></span></a>
+                                                    <a href="javascript:void(0)"><img
+                                                            src="assets/images/24ent new logo white 1.png"
+                                                            alt="image"></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="div-f-fore-more">
+                                        <div class="col-md-6">
+                                            <div class="headding-more-m">
+                                                <p class="font-16 font-bold color-blue">My Referral Code ID</p>
+                                            </div>
+                                            <div class="input-more-m">
+                                                <input type="text" placeholder="E345GZ" class="w-100">
+                                                <a href=""><span class="iconify"
+                                                        data-icon="akar-icons:copy"></span></a>
+                                            </div>
+                                            <div class="share-more-m d-flex align-items-baseline">
+                                                <p class="font-14 font-bold color-black d-flex">Share in &nbsp;
+                                                    &nbsp; &nbsp; &nbsp; </p>
+                                                <div class="social-icons-for-footer">
+                                                    <a href="https://www.instagram.com/letschello/"><span
+                                                            class="iconify"
+                                                            data-icon="typcn:social-instagram"></span></a>
+                                                    <a href="https://tiktok.com/@chello.world"><span class="iconify"
+                                                            data-icon="cib:tiktok"></span></a>
+                                                    <a href="https://twitter.com/LetsChello"><span class="iconify"
+                                                            data-icon="ant-design:twitter-outlined"></span></a>
+                                                    <a href="javascript:void(0)"><span class="iconify"
+                                                            data-icon="eva:facebook-fill"></span></a>
+                                                    <a href="javascript:void(0)"><img
+                                                            src="assets/images/24ent new logo white 1.png"
+                                                            alt="image"></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="div-f-fore-more">
+                                        <div class="col-md-6">
+                                            <div class="headding-more-m">
+                                                <p class="font-16 font-bold color-blue">My Username</p>
+                                            </div>
+                                            <div class="input-more-m">
+                                                <input type="text" placeholder="@cashflow" class="w-100">
+                                            </div>
+                                            <div class="inner-more-div">
+                                                <div class="headding-more-m">
+                                                    <p class="font-16 font-bold color-blue">My Display Name</p>
+                                                </div>
+                                                <div class="input-more-m">
+                                                    <input type="text" placeholder="Cash Flow" class="w-100">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="div-f-fore-more">
+                                        <div class="col-md-12">
+                                            <div class="headding-more-m">
+                                                <p class="font-16 font-bold color-blue">Promotional Video</p>
+                                            </div>
+                                            
+                                            <div class="inner-more-div-video">
+                                                <div class="video-for-more-option">
+                                                    <div class="profile-div-page-t-p  position-relative">
+                                                        <img src="assets/images/Rectangle 341.png" alt="image">
+                                                        <div class="video-icon-div-p">
+                                                            <a href=""><span class="iconify color-white font-32" data-icon="ant-design:play-circle-filled"></span></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="share-more-m d-flex align-items-baseline">
+                                                    <p class="font-14 font-bold color-black d-flex">Share in &nbsp;
+                                                        &nbsp; &nbsp; &nbsp; </p>
+                                                    <div class="social-icons-for-footer">
+                                                        <a href="https://www.instagram.com/letschello/"><span
+                                                                class="iconify"
+                                                                data-icon="typcn:social-instagram"></span></a>
+                                                        <a href="https://tiktok.com/@chello.world"><span class="iconify"
+                                                                data-icon="cib:tiktok"></span></a>
+                                                        <a href="https://twitter.com/LetsChello"><span class="iconify"
+                                                                data-icon="ant-design:twitter-outlined"></span></a>
+                                                        <a href="javascript:void(0)"><span class="iconify"
+                                                                data-icon="eva:facebook-fill"></span></a>
+                                                        <a href="javascript:void(0)"><img
+                                                                src="assets/images/24ent new logo white 1.png"
+                                                                alt="image"></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>
+

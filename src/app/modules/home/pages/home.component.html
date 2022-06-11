@@ -1,0 +1,159 @@
+<app-header-new></app-header-new>
+<div class="homepage margin-minus-header">
+    <div class="homepage-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3">
+                    <app-sidebar></app-sidebar>
+                </div>
+                <div class="col-md-6">
+                    <div class="home-middle-div">
+                        <div class="wrapper-home-middle-div story-div-middle-home">
+                            <div class="home-middle-div-one">
+                                <div class="headding-home-middle-div">
+                                    <p class="font-20 font-bold color-blue">Home</p>
+                                </div>
+                                <div class="first-home-middle-flex ">
+                                    <div class="story-m-h text-center">
+                                        <p class="color-white font-16 font-medium" (click)="openFileSelector('story')"
+                                            style="cursor: pointer;"> +<br>
+                                            Add<br>
+                                            Story<br></p>
+                                        <input id="addStory" type="file" class="form-control"
+                                            (change)="selectFile($event, 'story')" style="display:none" accept="image/*"
+                                            capture>
+                                    </div>
+                                    <app-story></app-story>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 second-home-middle">
+                            <app-post-feed></app-post-feed>
+                            <!-- <div class="poll-div-section">
+                                <div class="wrapper-poll-div-section">
+                                    <div class="">
+                                        <div class="div-for-new-post-poll">
+                                            <div class="wrapper-new-post-poll">
+                                                <div class="text-area-for-poll">
+                                                    <form [formGroup]="feedForm">
+                                                        <div class="form-group position-relative">
+                                                            <textarea rows="4" class="w-100" formControlName="postTxt"
+                                                                [ngClass]="{ 'is-invalid': submitted && f.postTxt.errors }"
+                                                                placeholder="Compose new post"></textarea>
+                                                            <div *ngIf="submitted && f.postTxt.errors"
+                                                                class="invalid-feedback">
+                                                                <div *ngIf="f.postTxt.errors.required"
+                                                                    style="color:red;">Post text is required</div>
+                                                            </div>
+
+                                                            <div class="option-selected-for-ta">
+                                                                <a (change)="selectFile($event, 'postImage')"
+                                                                    style="display:none"><span class="iconify"
+                                                                        data-icon="icon-park-outline:picture-one"></span></a>
+                                                                <a href=""><span class="iconify"
+                                                                        data-icon="ph:video-camera-bold"></span></a>
+                                                                <a href=""><span class="iconify"
+                                                                        data-icon="bxs:microphone-alt"></span></a>
+                                                                <a href=""><span class="iconify"
+                                                                        data-icon="fa6-solid:square-poll-vertical"></span></a>
+
+                                                                <a href=""><span class="iconify"
+                                                                        data-icon="fa:hourglass-3"></span></a>
+                                                                <a href=""><span class="iconify"
+                                                                        data-icon="fluent:live-20-filled"></span></a>
+                                                                <a href=""><img src="assets/images/Mask group (2).png"
+                                                                        alt="image" /></a>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="set-icons-image-l-n position-relative">
+                                                            <div class="set-icons-image-l-n-1 position-relative">
+                                                                <a href=""><span class="iconify"
+                                                                        data-icon="icon-park-outline:picture-one"></span></a>
+                                                                <p class="font-14 color-49">Image</p>
+                                                                <div class="cancel-btn-i">
+                                                                    <a href=""><span class="iconify"
+                                                                            data-icon="material-symbols:cancel"></span></a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="set-icons-image-l-n-1 position-relative">
+                                                                <a href=""><span class="iconify"
+                                                                        data-icon="ph:video-camera-bold"></span></a>
+                                                                <p class="font-14 color-49">Video</p>
+                                                                <div class="cancel-btn-i">
+                                                                    <a href=""><span class="iconify"
+                                                                            data-icon="material-symbols:cancel"></span></a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="set-icons-image-l-n-1 position-relative">
+                                                                <a href=""><span class="iconify"
+                                                                        data-icon="bxs:microphone-alt"></span></a>
+                                                                <p class="font-14 color-49">Audio</p>
+                                                                <div class="cancel-btn-i">
+                                                                    <a href=""><span class="iconify"
+                                                                            data-icon="material-symbols:cancel"></span></a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="right-side-button text-right">
+                                                            <a href=""
+                                                                class="font-14 font-medium color-blue margin-l-r-a">Post
+                                                                Later</a>
+                                                            <button type="button" (click)="postFeed()">Post</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+                            <div class="middle-home-div-flex d-flex justify-content-between">
+                                <a href="" class="font-16 color-78">All</a>
+                                <a href="" class="font-20 color-78"><span class="iconify"
+                                        data-icon="bi:filter-right"></span></a>
+                            </div>
+                        </div>
+                        <app-post-list></app-post-list>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <app-suggestions></app-suggestions>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>
+
+<div class="story-modal-home">
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content hello">
+
+                <a href="https://ramon.codes/projects/zuck.js" target="_blank" class="disclaimer">
+                    <img src="ICON.png" alt="zuck.js logo" />
+
+                    <p>This a demonstration of <strong>zuck.js</strong> javascript library.</p>
+                    <p>Not associated with Facebook, Instagram, WhatsApp or Snapchat.</p>
+                </a>
+                <div id="stories" class="storiesWrapper"></div>
+
+                <div class="skin">
+                    Choose your theme:
+
+                    <select id="skin" onchange="changeSkin(this.options[this.selectedIndex].value);">
+                        <option value="Snapgram">Snapgram (without fullscreen)</option>
+                        <option value="FaceSnap">FaceSnap (with fullscreen)</option>
+                        <option value="VemDeZAP">VemDeZAP (timeline + arrows)</option>
+                        <option value="Snapssenger">Snapssenger (with previews)</option>
+                    </select>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,eAAe,CAAA;EACX,OAAO,EAAE,KAAK;CACf",
+    "sources": [
+        "list-two.component.scss"
+    ],
+    "names": [],
+    "file": "list-two.component.css"
+}

@@ -1,0 +1,178 @@
+<app-header-new></app-header-new>
+<div class="homepage margin-minus-header">
+    <div class="homepage-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3">
+                    <app-sidebar></app-sidebar>
+                </div>
+                <div class="col-md-6">
+                    <div class="home-middle-div">
+                        <div class="wrapper-home-middle-div">
+                            <div class="home-middle-div-one">
+                                <div class="d-flex justify-content-between group-headding">
+                                    <div class="subscription-head d-flex">
+                                        <a routerLink='/home' class="margin-pr-head"><span class="iconify color-grey font-20"
+                                                data-icon="akar-icons:arrow-left"></span></a>
+                                        <p class="font-20 font-bold color-blue">
+                                            Groups
+                                        </p>
+                                    </div>
+                                    <div class="buttons-f-pr-e">
+                                        <a routerLink='/create-group' class="font-16 color-blue btn-sve-pe"><span class="iconify"
+                                                data-icon="ant-design:edit-filled"></span>Create Group</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="group-section notification-div-link">
+                            <!--Join Group-->
+                            <div class="block-group-n" *ngFor="let groupLists of joinGroups">
+                                <div class="new-group-div" *ngIf="groupLists['invitee_id'] != groupLists['member_id']">
+                                    <div class="row-gnew">
+                                        <div class="col-n-3">
+                                            <div class="new-group-image">
+                                                <img [src]="groupLists['groupData'][0]['profile_pic']" onError="this.src='assets/images/group.png'" alt="images">
+                                            </div>
+                                        </div>
+                                        <div class="col-n-9">
+                                            <div class="div-group-detail-new">
+                                                <div class="group-section-head-d-new">
+                                                    <p class="font-14 font-bold color-blue">{{groupLists['groupData'][0]['title']}}</p>
+                                                    <div class="icon-and-image-group d-flex align-items-flex-start">
+                                                        <span class="iconify color-blue font-20"
+                                                            data-icon="akar-icons:people-group"></span>
+                                                        <div class="images-for-group-is">
+                                                            <img src="assets/images/Ellipse 10 (1).png" alt="images">
+                                                            <img src="assets/images/Ellipse 10 (2).png" alt="images">
+                                                            <img src="assets/images/Ellipse 14 (1).png" alt="images">
+                                                            <img src="assets/images/Ellipse 14 (3).png" alt="images">
+                                                            <img src="assets/images/Ellipse 14 (4).png" alt="images">
+                                                            <div><a href="">+66</a></div>
+                                                        </div>
+                                                        <div class="p-new-group">
+                                                            <p class="font-14 color-2e">&nbsp; &nbsp; 10+ posts a
+                                                                day</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="button-join-group-new">
+                                                    <a (click)="joinGroup(groupLists, 'accepted')" style="cursor: pointer; color: #fff;">Join</a>
+                                                    <a (click)="joinGroup(groupLists, 'rejected')" style="cursor: pointer; margin-left: 10px; border-radius: 4px; border: 1px solid #150AA1; color: #150AA1 !important; background: transparent;">Cancel</a>
+                                                </div>
+                                            </div>
+                                            <div class="detail-d-text-gn">
+                                                <p class="font-14 color-68">{{groupLists['groupData'][0]['description']}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--My Group-->
+                            <div class="middle-headding-group paragraph-for-sub" style="padding-left: 10px;" *ngIf="myGroups.length != 0">
+                                <p class="color-blue font-20 font-bold">My Groups</p>
+                            </div>
+                            <div class="block-group-n" *ngFor="let groupLists of myGroups">
+                                <div class="new-group-div">
+                                    <div class="row-gnew">
+                                        <div class="col-n-3">
+                                            <div class="new-group-image">
+                                                <img [src]="groupLists.profile_pic" onError="this.src='assets/images/group.png'" alt="images">
+                                            </div>
+                                        </div>
+                                        <div class="col-n-9">
+                                            <div class="div-group-detail-new">
+                                                <div class="group-section-head-d-new">
+                                                    <p class="font-14 font-bold color-blue">{{groupLists.title}}</p>
+                                                    <div class="icon-and-image-group d-flex align-items-flex-start">
+                                                        <span class="iconify color-blue font-20"
+                                                            data-icon="akar-icons:people-group"></span>
+                                                        <div class="images-for-group-is">
+                                                            <img src="assets/images/Ellipse 10 (1).png" alt="images">
+                                                            <img src="assets/images/Ellipse 10 (2).png" alt="images">
+                                                            <img src="assets/images/Ellipse 14 (1).png" alt="images">
+                                                            <img src="assets/images/Ellipse 14 (3).png" alt="images">
+                                                            <img src="assets/images/Ellipse 14 (4).png" alt="images">
+                                                            <div><a href="">+66</a></div>
+                                                        </div>
+                                                        <div class="p-new-group">
+                                                            <p class="font-14 color-2e">&nbsp; &nbsp; 10+ posts a
+                                                                day</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- <div class="button-join-group-new">
+                                                    <a (click)="joinGroup(groupLists)" style="cursor: pointer; color: #fff;">Visit</a>
+                                                </div> -->
+                                                <div class="right-side-button right-visit-g">
+                                                    <button (click)="visitGroup(groupLists)">Visit</button>
+                                                </div>
+                                            </div>
+                                            <div class="detail-d-text-gn">
+                                                <p class="font-14 color-68">{{groupLists.description}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--Explore Group-->
+                            <div class="middle-headding-group paragraph-for-sub" style="padding-left: 10px;" *ngIf="globalGroups.length != 0">
+                                <p class="color-blue font-20 font-bold">Explore Groups</p>
+                            </div>
+                            <div class="block-group-n" *ngFor="let groupLists of globalGroups">
+                                <div class="new-group-div">
+                                    <div class="row-gnew">
+                                        <div class="col-n-3">
+                                            <div class="new-group-image">
+                                                <img [src]="groupLists.profile_pic" onError="this.src='assets/images/group.png'" alt="images">
+                                            </div>
+                                        </div>
+                                        <div class="col-n-9">
+                                            <div class="div-group-detail-new">
+                                                <div class="group-section-head-d-new">
+                                                    <p class="font-14 font-bold color-blue">{{groupLists.title}}</p>
+                                                    <div class="icon-and-image-group d-flex align-items-flex-start">
+                                                        <span class="iconify color-blue font-20"
+                                                            data-icon="akar-icons:people-group"></span>
+                                                        <div class="images-for-group-is">
+                                                            <img src="assets/images/Ellipse 10 (1).png" alt="images">
+                                                            <img src="assets/images/Ellipse 10 (2).png" alt="images">
+                                                            <img src="assets/images/Ellipse 14 (1).png" alt="images">
+                                                            <img src="assets/images/Ellipse 14 (3).png" alt="images">
+                                                            <img src="assets/images/Ellipse 14 (4).png" alt="images">
+                                                            <div><a href="">+66</a></div>
+                                                        </div>
+                                                        <div class="p-new-group">
+                                                            <p class="font-14 color-2e">&nbsp; &nbsp; 10+ posts a
+                                                                day</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="button-join-group-new">
+                                                    <a (click)="requestToJoinGroup(groupLists, 'invited')" style="cursor: pointer; color: #fff;">Request To Join</a>
+                                                </div>
+                                                <!-- <div class="right-side-button right-visit-g">
+                                                    <button (click)="requestToJoinGroup(groupLists, 'invited')">Join</button>
+                                                </div> -->
+                                            </div>
+                                            <div class="detail-d-text-gn">
+                                                <p class="font-14 color-68">{{groupLists.description}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <app-suggestions></app-suggestions>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

@@ -1,0 +1,164 @@
+<app-header-new></app-header-new>
+<div class="homepage margin-minus-header">
+    <div class="homepage-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3">
+                    <app-sidebar></app-sidebar>
+                </div>
+                <div class="col-md-6">
+                    <div class="home-middle-div">
+                        <div class="wrapper-home-middle-div">
+                            <div class="home-middle-div-one">
+                                <div class="d-flex justify-content-between group-headding">
+                                    <div class="subscription-head d-flex">
+                                        <a href="" class="margin-pr-head"><span class="iconify color-grey font-20"
+                                                data-icon="akar-icons:arrow-left"></span></a>
+                                        <p class="font-20 font-bold color-blue">
+                                            Create Group
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="group-section notification-div-link">
+                            <div class="create-group-div">
+                                <div class="create-group-wrapper">
+                                    <div class="first-div-create-group position-relative">
+                                        <div class="add-cover-photo-div text-center">
+                                            <p (click)="openFileSelector('cover')" style="cursor: pointer;"><span
+                                                    class="iconify color-blue font-26"
+                                                    data-icon="ic:baseline-add-a-photo"></span></p>
+                                            <p class="font-16 color-light-blue" (click)="openFileSelector('cover')"
+                                                style="cursor: pointer;">Add Cover Photo</p>
+                                            <input id="fileCover" type="file" class="form-control"
+                                                (change)="selectProfileFile($event, 'coverImage')" style="display:none"
+                                                accept="image/*" capture>
+                                        </div>
+                                    </div>
+                                    <div class="second-div-group-create">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="Add-profile-photo-div text-center">
+                                                    <p (click)="openFileSelector('profile')" style="cursor: pointer;">
+                                                        <span class="iconify color-blue font-26"
+                                                            data-icon="ic:baseline-add-a-photo"></span></p>
+                                                    <p class="font-14 color-light-blue"
+                                                        (click)="openFileSelector('profile')" style="cursor: pointer;">
+                                                        Add Profile
+                                                        Photo</p>
+                                                    <input id="file" type="file" class="form-control"
+                                                        (change)="selectProfileFile($event, 'profileImage')"
+                                                        style="display:none" accept="image/*" capture>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-9">
+                                                <form [formGroup]="groupForm" (ngSubmit)="createGroup()">
+                                                    <div class="group-create-detail-input">
+                                                        <div class="div-input-cg">
+                                                            <p class="font-16 font-bold color-blue"><span
+                                                                    class="iconify"
+                                                                    data-icon="akar-icons:people-group"></span> &nbsp;
+                                                                Add Group Name</p>
+                                                            <div class="headding-input-pe position-relative">
+                                                                <input type="text" placeholder="Write here.."
+                                                                    class="w-100" formControlName="groupName"
+                                                                    [ngClass]="{ 'is-invalid': submitted && f.groupName.errors }">
+                                                                <div *ngIf="submitted && f.groupName.errors"
+                                                                    class="invalid-feedback">
+                                                                    <div *ngIf="f.groupName.errors.required"
+                                                                        style="color:red;">Group name is required</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="div-input-cg">
+                                                            <p class="font-16 font-bold color-blue">Add Group Details
+                                                            </p>
+                                                            <div class="headding-input-pe position-relative">
+                                                                <textarea placeholder="Write here.." rows="4"
+                                                                    class="w-100" formControlName="groupDesc"
+                                                                    [ngClass]="{ 'is-invalid': submitted && f.groupDesc.errors }"></textarea>
+                                                                <div *ngIf="submitted && f.groupDesc.errors"
+                                                                    class="invalid-feedback">
+                                                                    <div *ngIf="f.groupDesc.errors.required"
+                                                                        style="color:red;">Group details is
+                                                                        required</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="div-input-cg" formArrayName="groupRules">
+                                                            <p class="font-16 font-bold color-blue">Add Group Rules</p>
+
+                                                            <div class="headding-input-pe position-relative"
+                                                                *ngFor="let quantity of groupRule().controls; let i=index">
+                                                                <div [formGroupName]="i">
+                                                                    <label class="font-12 font-medium color-4e">Rule
+                                                                        {{i+1}}</label>
+                                                                    <input type="text" placeholder="Write here.."
+                                                                        class="w-100" formControlName="rule">
+                                                                        <a (click)="removeRule(i)" style="cursor: pointer;"><span style="cursor: pointer; color: #AFAFAF; height: 24px; width: 24px; position: absolute; top: 45px; right: 10px; z-index: 5;" class="iconify" data-icon="ic:round-cancel" ></span></a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="right-side">
+                                                                <div class="widrow-earning-button">
+                                                                    <p class="color-black font-12"><a
+                                                                            (click)="addRule()" style="cursor: pointer;"
+                                                                            class="color-blue">+ Add Another Rule</a>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="div-input-cg-search">
+                                                            <p class="font-16 font-bold color-blue">Invite Members</p>
+
+                                                            <div class="search-bar-home">
+                                                                <input type="text" placeholder="Search" class="w-100" #searchUsers
+                                                                (input)="searchUser(searchUsers.value)" id="searchUsers" />
+                                                                <span class="iconify"
+                                                                    data-icon="akar-icons:search"></span>
+                                                            </div>
+                                                            <div class="div-input-cg-search-wrap" style="overflow-y: scroll; height:400px;">
+                                                                <p class="font-12 color-4e font-medium">Suggested</p>
+                                                                <div class="wrapper-poll-asked-user" *ngFor="let groupMembersLists of groupMembersList" [id]="groupMembersLists._id" (click)="inviteMember(groupMembersLists._id)" style="cursor: pointer;" [ngStyle]="styleObject(groupMembersLists._id)">
+                                                                    <img [src]="groupMembersLists.profileImage" onError="this.src='assets/images/user.png'"
+                                                                        alt="image" />
+                                                                    <div class="user-info-p-a">
+                                                                        <p class="font-14 font-bold color-49"> {{groupMembersLists.fullName}}
+                                                                            &nbsp; <span
+                                                                                class="iconify font-20 color-light-blue"
+                                                                                data-icon="ic:sharp-verified"></span>
+                                                                        </p>
+                                                                        <p class="font-14 color-49">@{{groupMembersLists.userName}}</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="button-cg">
+                                                                <div class="button-join-group-new">
+                                                                    <a style="cursor: pointer; color: #fff;"
+                                                                        (click)="createGroup()" *ngIf="isGroupMode === 'create'">Create Group</a>
+                                                                    <a style="cursor: pointer; color: #fff;"
+                                                                        (click)="editGroup()" *ngIf="isGroupMode === 'edit'">Edit Group</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <app-suggestions></app-suggestions>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>
