@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProfileService } from '../../../services/profile.service';
 import { PostService } from '../../../services/post.service';
@@ -11,6 +11,7 @@ import { first, map } from 'rxjs/operators';
 import * as auth from 'firebase/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
+import {PostListComponent} from '../../layout/post-list/components/post-list.component';
 
 declare var swal: any;
 declare var $: any;
@@ -21,6 +22,8 @@ declare var $: any;
   styleUrls: ['../pages/profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
+  @ViewChild(PostListComponent ) postListCamponent: PostListComponent | undefined ; 
+  @ViewChild(PostListComponent)  child: any = PostListComponent;
 
   feedForm!: FormGroup;
   submitted: any;
@@ -53,6 +56,8 @@ export class ProfileComponent implements OnInit {
     })
   );
 
+  postType: any;
+
   constructor(
     private formBuilder: FormBuilder,
     private profileService: ProfileService,
@@ -64,6 +69,7 @@ export class ProfileComponent implements OnInit {
     private route: ActivatedRoute,
     public afs: AngularFirestore, // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
+    private cdr: ChangeDetectorRef,
   ) { }
 
   ngOnInit(): void {
@@ -90,8 +96,6 @@ export class ProfileComponent implements OnInit {
     });
 
     console.log("Username: " + this.route.snapshot.paramMap.get('username'));
-
-    this.getUserFeeds();
   }
 
   get f() { return this.feedForm.controls; }
@@ -133,41 +137,9 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  getUserFeeds() {
-    this.spinner.show();
-    this.postService.getUserFeed({"pageNumber": this.pageNumber}).subscribe((data: any) => {
-      console.log(data);
-      if (data['statusCode'] === 200) {
-        this.totalPosts = data['postData'].length;
-        this.userPosts = data['postData'];
-
-        this.userPhotos = data['postData'].filter((res: { [x: string]: string; }) => {
-          return res['type'] == "image";
-        });
-        this.isPhotoPosts = this.userPhotos.length;
-
-        this.userVideos = data['postData'].filter((res: { [x: string]: string; }) => {
-          return res['type'] == "video";
-        });
-        this.isVideoPosts = this.userVideos.length;
-
-        this.userAudios = data['postData'].filter((res: { [x: string]: string; }) => {
-          return res['type'] == "audio";
-        });
-        this.isAudioPosts = this.userAudios.length;
-
-        console.log(this.isVideoPosts);
-
-        this.spinner.hide();
-      }
-      else {
-        this.spinner.hide();
-        this.toastr.error(data['message']);
-      }
-    }, (error) => {
-      this.spinner.hide();
-      this.toastr.error(error['message']);
-    });
+  getUserPost(type: any){
+    this.postListCamponent?.getUserFeeds(type);
+    this.cdr.detectChanges();
   }
 
 }

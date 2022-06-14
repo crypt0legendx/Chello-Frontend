@@ -22,8 +22,10 @@ declare var $: any;
 export class SignUpComponent implements OnInit {
 
   registerForm!: FormGroup;
+  registerForm2!: FormGroup;
   otpForm!: FormGroup;
   submitted: any;
+  submitted2: any;
   submittedOTP: any;
   countryCode: any;
   getCountryCode: any;
@@ -36,6 +38,9 @@ export class SignUpComponent implements OnInit {
   show: boolean = false;
   showRe: boolean = false;
   userJsonData: any;
+
+  signupStep: number = 1;
+  userRole: any = "creator";
   
   constructor(
     private formBuilder: FormBuilder,
@@ -67,9 +72,37 @@ export class SignUpComponent implements OnInit {
       password: ['', Validators.required],
       cPassword: ['', Validators.required]
     });
+
+    this.registerForm2 = this.formBuilder.group({
+      phoneNumber: ['', Validators.required],
+      month: ['', Validators.required],
+      day: ['', Validators.required],
+      year: ['', Validators.required]
+    });
   }
 
   get f() { return this.registerForm.controls; }
+  get rf2Validation() { return this.registerForm2.controls; }
+
+  async step1() {
+    this.signUpType = "email";
+
+    this.submitted = true;
+    if (this.registerForm.invalid) {
+      return;
+    }
+    else {
+      if (this.f.password.value === this.f.cPassword.value) {
+        this.signupStep = 2;
+      }
+      else {
+        this.spinner.hide();
+        this.submitted = false;
+        console.log("wrong");
+        this.toastr.error("Your passwords do not match. Please type carefully.");
+      }
+    }
+  }
 
   async register() {
     let token = localStorage.getItem('token');
@@ -199,5 +232,17 @@ export class SignUpComponent implements OnInit {
   showRePassword() {
     console.log("Re Pass");
     this.showRe = !this.showRe;
+  }
+
+  roleSection(type: any){
+    if(type === 'creator'){
+      this.userRole = "creator";
+      document.getElementById("roleCreator")!.classList.add('active');
+      document.getElementById("roleFan")!.classList.remove('active');
+    } else{
+      this.userRole = "fan";
+      document.getElementById("roleFan")!.classList.add('active');
+      document.getElementById("roleCreator")!.classList.remove('active');
+    }
   }
 }

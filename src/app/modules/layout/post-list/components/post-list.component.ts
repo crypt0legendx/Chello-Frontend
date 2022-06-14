@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostListener, Input, IterableDiffers, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProfileService } from '../../../../services/profile.service';
 import { PostService } from '../../../../services/post.service';
@@ -19,13 +19,15 @@ declare var $: any;
 @Component({
   selector: 'app-post-list',
   templateUrl: '../pages/post-list.component.html',
-  styleUrls: ['../pages/post-list.component.scss']
+  styleUrls: ['../pages/post-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PostListComponent implements OnInit {
 
   isShown: boolean = false; // hidden by default
   totalPosts: any;
-  userPosts: any;
+  @Input() userPosts: any;
+  @Input() changeVal: any;
 
   userName: any;
   profilePicture: any;
@@ -51,6 +53,8 @@ export class PostListComponent implements OnInit {
   bookmarkList: any;
   totalBookmark: any;
 
+  postType: any
+
   constructor(
     private formBuilder: FormBuilder,
     private profileService: ProfileService,
@@ -65,6 +69,7 @@ export class PostListComponent implements OnInit {
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     private sanitized: DomSanitizer,
     private cdr: ChangeDetectorRef,
+    private iterableDiffers: IterableDiffers
   ) { }
 
   ngOnInit(): void {
@@ -88,7 +93,7 @@ export class PostListComponent implements OnInit {
     console.log(this.router.url);
     if (this.router.url === "/profile") {
       this.isMyProfilePage = true;
-      this.getUserFeeds();
+      this.getUserFeeds("all");
     } else if (this.router.url === "/bookmark") {
       this.isMyProfilePage = false;
       this.isBookmarkPage = true;
@@ -136,17 +141,17 @@ export class PostListComponent implements OnInit {
     });
   }
 
-  getUserFeeds() {
-    this.spinner.show();
 
-    this.postService.getUserFeed({ "pageNumber": this.pageNumber }).subscribe((data: any) => {
+  getUserFeeds(type: any) {
+    this.spinner.show();
+    this.postType = type;
+    this.postService.getUserFeed({ "pageNumber": this.pageNumber, "type": type }).subscribe((data: any) => {
       console.log(data);
       if (data['statusCode'] === 200) {
         this.totalPosts = data['postData'].length;
-        this.userPosts = data['postData'];
+        this.userPosts = [...data['postData']];
         this.cdr.detectChanges();
-        console.log(this.userPosts);
-
+        this.cdr.markForCheck();
         this.spinner.hide();
       }
       else {
@@ -441,7 +446,7 @@ export class PostListComponent implements OnInit {
         this.toastr.success(data['message']);
         if (this.router.url === "/profile") {
           this.isMyProfilePage = true;
-          this.getUserFeeds();
+          this.getUserFeeds(this.postType);
         } else {
           this.isMyProfilePage = false;
           this.getAllFeeds();
@@ -533,10 +538,10 @@ export class PostListComponent implements OnInit {
       if (totalVotes === 0) {
         paid.style.width! = '0%';
       } else {
-        if(pollOptionAnswerId === pollOptionData[i]._id){
+        if (pollOptionAnswerId === pollOptionData[i]._id) {
           paid.style.width! = (Number(pollOptionData[i].choose + 1) / totalVotes * 100).toFixed(2) + '%';
           console.log((Number(pollOptionData[i].choose + 1) / totalVotes * 100));
-        } else{
+        } else {
           paid.style.width! = (Number(pollOptionData[i].choose) / totalVotes * 100).toFixed(2) + '%';
           console.log((Number(pollOptionData[i].choose) / totalVotes * 100));
         }
@@ -547,17 +552,17 @@ export class PostListComponent implements OnInit {
     divPollAnswerId.style.display! = '';
   }
 
-  pollDuration(duration: any, createdAt: any){
+  pollDuration(duration: any, createdAt: any) {
     let date1: any = new Date(createdAt);
     let date2: any = new Date();
     const diffTime = Math.abs(date2 - date1);
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     //console.log(diffTime + " milliseconds");
     //console.log(diffDays + " days");
 
-    if(duration > diffDays){
+    if (duration > diffDays) {
       return ''
-    } 
+    }
 
     return 'none'
   }

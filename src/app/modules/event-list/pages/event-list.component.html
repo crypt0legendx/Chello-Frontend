@@ -1,0 +1,145 @@
+<app-header-new></app-header-new>
+<div class="homepage margin-minus-header">
+    <div class="homepage-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3">
+                    <app-sidebar></app-sidebar>
+                </div>
+                <div class="col-md-6">
+                    <div class="home-middle-div">
+                        <div class="wrapper-home-middle-div">
+                            <div class="home-middle-div-one">
+                                <div class="d-flex justify-content-between group-headding">
+                                    <div class="subscription-head d-flex">
+                                        <a routerLink="/event" class="margin-pr-head"><span class="iconify color-grey font-20"
+                                                data-icon="akar-icons:arrow-left"></span></a>
+                                        <p class="font-20 font-bold color-blue">
+                                            Private Event Listings
+                                        </p>
+                                    </div>                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="event-list p-3">
+                            <div>
+                                <a (click)="setTabIndex(0)" class="font-16 font-medium color-blue mr-4" role="button"
+                                [class.color-blue]="tabIndex == 0" [class.color-a9]="tabIndex == 1">Private Event Listings</a>
+                                <a (click)="setTabIndex(1)" class="font-16 font-medium color-a9 " role="button"
+                                [class.color-blue]="tabIndex == 1" [class.color-a9]="tabIndex == 0">My Private Event</a>
+                            </div>
+                            <div *ngIf="tabIndex == 0" class="private-event-list">
+                                <div *ngIf="!advancedSearch" class="row">
+                                    <div class="col-md-5">
+                                        <div class="search-bar-home">
+                                            <input type="text" placeholder="Search" class="w-100" #searchInput
+                                            (input)="searchEvents(searchInput.value)" id="searchInput" 
+                                            [(ngModel)] = "searchText"                                    
+                                            autocomplete="off"
+                                            />
+                                            <span class="iconify"
+                                                data-icon="akar-icons:search"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 pt-4">
+                                        <a (click)="setAdvancedSearch(true)" class="font-14 font-medium color-blue" role="button">Advanced Search</a>
+                                    </div>
+                                </div>    
+                                <div *ngIf="advancedSearch" class="search-form p-3 mt-4 mb-4">
+                                    <div class="d-flex justify-content-between">
+                                        <div class="font-16 font-medium color-blue">Advanced Search</div>
+                                        <a (click)="setAdvancedSearch(false)" class="font-15color-a9 " role="button">close</a>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-md-5 d-flex flex-column mt-3">
+                                            <div class="font-16 font-medium">Search By Name</div>
+                                            <div>
+                                                <input class="search-field" placeholder="Enter Event Name" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 d-flex flex-column mt-3">
+                                            <div class="font-16 font-medium">Search By Type</div>
+                                            <div>
+                                                <input class="search-field" placeholder="Enter Event Type" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 d-flex flex-column mt-3">
+                                            <div class="font-16 font-medium">Search By Username</div>
+                                            <div>
+                                                <input class="search-field" placeholder="Enter Username" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5 d-flex flex-column mt-3">
+                                            <div class="font-16 font-medium">Search By Misc Info</div>
+                                            <div>
+                                                <input class="search-field" placeholder="Enter Misc Info" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 d-flex flex-column mt-3">
+                                            <div class="font-16 font-medium">Search By URL</div>
+                                            <div>
+                                                <input class="search-field" placeholder="Enter URL" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 d-flex flex-column mt-3">
+                                            <div class="font-16 font-medium">Search By Date</div>
+                                            <div>
+                                                <input type="date" class="search-field" placeholder="Enter Date" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="right-side-button mt-4">
+                                        <button>Search Private Event</button>
+                                    </div>
+
+                                </div>    
+                                <div class="private-events">
+                                    <div *ngFor="let item of events" class="event-card mt-1 p-3">
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <img src="assets/images/Group 36667 (1).png" />
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="color-blue font-16 font-medium">{{item.title}}</div>
+                                                <div class="color-a9 font-14">Event Type: <span class="color-blue">{{item.type}}</span></div>
+                                                <div class="color-a9 font-14">Date of Private Event: <span class="color-blue">{{item.eventDate}}</span></div>
+                                                <div class="color-a9 font-14">Private Event Starts: <span class="color-blue">{{item.eventStartTime}}</span></div>
+                                                <div class="color-a9 font-14">Private Event Ends: <span class="color-blue">{{item.eventEndTime}}</span></div>                                            
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="color-blue font-16 font-medium">${{item.eventJoinPrice}}</div>
+                                            </div>
+                                        </div>
+                                    </div>                                    
+                                </div>                            
+                            </div>
+                            <div *ngIf="tabIndex == 1" class="my-private-event mt-2">                                
+                                <div class="event-card mt-3 p-3">
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <img src="assets/images/Group 37126 (1).png" />
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="color-blue font-16 font-medium">Developer Paid Workshop</div>
+                                            <div class="color-a9 font-14">Event Type: <span class="color-blue">Workshop</span></div>
+                                            <div class="color-a9 font-14">Date of Private Event: <span class="color-blue">March 26, 2022</span></div>
+                                            <div class="color-a9 font-14">Private Event Starts: <span class="color-blue">5:30 pm</span></div>
+                                            <div class="color-a9 font-14">Private Event Ends: <span class="color-blue">7:30pm</span></div>                                            
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="color-blue font-16 font-medium">$5.00</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <app-suggestions></app-suggestions>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

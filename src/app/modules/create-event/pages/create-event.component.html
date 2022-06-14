@@ -12,7 +12,7 @@
                             <div class="home-middle-div-one">
                                 <div class="d-flex justify-content-between group-headding">
                                     <div class="subscription-head d-flex">
-                                        <a href="" class="margin-pr-head"><span class="iconify color-grey font-20"
+                                        <a routerLink='/event' class="margin-pr-head"><span class="iconify color-grey font-20"
                                                 data-icon="akar-icons:arrow-left"></span></a>
                                         <p class="font-20 font-bold color-blue">
                                             Create Private Event
@@ -25,110 +25,110 @@
                             <div class="create-event-div">
                                 <div class="create-group-wrapper">
                                     <div class="second-div-event-create">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="div-input-event">
-                                                    <div class="headding-input-pe">
-                                                        <p class="font-16 font-bold color-blue">Name of the Private Event</p>
-                                                    </div>
-                                                    <div class="headding-input-pe position-relative">
-                                                        <input type="text" placeholder="Save The World Concert"
-                                                            class="w-100">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="div-input-event">
-                                                    <div class="headding-input-pe">
-                                                        <p class="font-16 font-bold color-blue">Type of Private Event</p>
-                                                    </div>
-                                                    <div class="headding-input-pe position-relative">
-                                                        <input type="text" placeholder="Music"
-                                                            class="w-100">
+                                        <form #form = "ngForm">
+                                            <div class="row">                                    
+                                                <div class="col-md-6">
+                                                    <div class="div-input-event">
+                                                        <div class="headding-input-pe">
+                                                            <p class="font-16 font-bold color-blue">Name of the Private Event</p>
+                                                        </div>
+                                                        <div class="headding-input-pe position-relative">
+                                                            <input type="text" placeholder="Save The World Concert"
+                                                                class="w-100" [(ngModel)] = "eventName" name ="eventName" required>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="div-input-event">
-                                                    <div class="headding-input-pe">
-                                                        <p class="font-16 font-bold color-blue">Date of Private Event</p>
-                                                    </div>
-                                                    <div class="headding-input-pe position-relative">
-                                                            <input type="date" placeholder="Select date time"
-                                                                class="w-100">                                                       
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6"></div>
-                                            <div class="col-md-6">
-                                                <div class="div-input-event">
-                                                    <div class="headding-input-pe">
-                                                        <p class="font-16 font-bold color-blue">Private Event Starts</p>
-                                                    </div>
-                                                    <div class="headding-input-pe position-relative">
-                                                        <input type="text" placeholder="5:30 pm"
-                                                            class="w-100">
+                                                <div class="col-md-6">
+                                                    <div class="div-input-event">
+                                                        <div class="headding-input-pe">
+                                                            <p class="font-16 font-bold color-blue">Type of Private Event</p>
+                                                        </div>
+                                                        <div class="headding-input-pe position-relative">
+                                                            <input type="text" placeholder="Music"
+                                                                class="w-100" [(ngModel)] = "eventType" name="eventType" required>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="div-input-event">
-                                                    <div class="headding-input-pe">
-                                                        <p class="font-16 font-bold color-blue">Private Event Ends</p>
-                                                    </div>
-                                                    <div class="headding-input-pe position-relative">
-                                                        <input type="text" placeholder="5:30 pm"
-                                                            class="w-100">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="div-input-event">
-                                                    <div class="headding-input-pe">
-                                                        <p class="font-16 font-bold color-blue">Private Event Price</p>
-                                                    </div>
-                                                    <div class="headding-input-pe position-relative">
-                                                        <input type="text" placeholder="$5.00"
-                                                            class="w-100">
+                                                <div class="col-md-6">
+                                                    <div class="div-input-event">
+                                                        <div class="headding-input-pe">
+                                                            <p class="font-16 font-bold color-blue">Date of Private Event</p>
+                                                        </div>
+                                                        <div class="headding-input-pe position-relative">
+                                                                <input type="date" placeholder="Select date time"
+                                                                    class="w-100" [(ngModel)] = "eventDate" name="eventDate">                                                       
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="div-input-event">
-                                                    <div class="headding-input-pe">
-                                                        <p class="font-16 font-bold color-blue">Misc. Info</p>
-                                                    </div>
-                                                    <div class="headding-input-pe position-relative">
-                                                        <input type="text" placeholder=""
-                                                            class="w-100">
+                                                <div class="col-md-6"></div>
+                                                <div class="col-md-6">
+                                                    <div class="div-input-event">
+                                                        <div class="headding-input-pe">
+                                                            <p class="font-16 font-bold color-blue">Private Event Starts</p>
+                                                        </div>
+                                                        <div class="headding-input-pe position-relative">
+                                                            <input type="time" placeholder="5:30 pm"
+                                                                class="w-100"  [(ngModel)] = "startTime" name="startTime">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="div-input-event">
-                                                    <div class="headding-input-pe">
-                                                        <p class="font-16 font-bold color-blue">Upload Photo/Flyer of Event</p>
+                                                <div class="col-md-6">
+                                                    <div class="div-input-event">
+                                                        <div class="headding-input-pe">
+                                                            <p class="font-16 font-bold color-blue">Private Event Ends</p>
+                                                        </div>
+                                                        <div class="headding-input-pe position-relative">
+                                                            <input type="time" placeholder="5:30 pm"
+                                                                class="w-100" [(ngModel)] = "endTime" name="endTime">
+                                                        </div>
                                                     </div>
-                                                    <div class="headding-input-event position-relative">
-                                                        <div class="upload-button-file">
-                                                            <div class="file-input ">
-                                                              <input type="file" name="file-input" id="file-input" class="file-input__input" />
-                                                              <label class="file-input__label password-icon position-relative" for="file-input">
-                                                                <span class="iconify" data-icon="gg:attachment"></span>
-                                                              </label>
-                                            
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="div-input-event">
+                                                        <div class="headding-input-pe">
+                                                            <p class="font-16 font-bold color-blue">Private Event Price</p>
+                                                        </div>
+                                                        <div class="headding-input-pe position-relative">
+                                                            <input type="number" placeholder="$5.00"
+                                                                class="w-100" [(ngModel)] = "eventPrice" name="eventPrice">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="div-input-event">
+                                                        <div class="headding-input-pe">
+                                                            <p class="font-16 font-bold color-blue">Misc. Info</p>
+                                                        </div>
+                                                        <div class="headding-input-pe position-relative">
+                                                            <input type="text" placeholder=""
+                                                                class="w-100"[(ngModel)] = "miscInfo" name="miscInfo">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="div-input-event">
+                                                        <div class="headding-input-pe">
+                                                            <p class="font-16 font-bold color-blue">Upload Photo/Flyer of Event</p>
+                                                        </div>
+                                                        <div class="headding-input-event position-relative">
+                                                            <div class="upload-button-file">
+                                                                <div class="file-input ">
+                                                                <input type="file" name="file-input" id="file-input" class="file-input__input" (change)="selectFile($event)" />
+                                                                <label class="file-input__label password-icon position-relative" for="file-input">
+                                                                    <span class="iconify" data-icon="gg:attachment"></span>
+                                                                </label>                                            
+                                                                </div>
                                                             </div>
-                                                          </div>
-                                                    </div>
-                                                    <p class="font-14 color-blue color-light-blue">Adult Content is NOT allowed HERE on a Private Event!</p>
-                                                    <div class="buttons-f-pr-e button-verified-lat button-create-event">
-                                                        <a routerLink='/create-event' class="font-16 color-blue btn-sve-pe"><span
-                                                                class="iconify" data-icon="ant-design:edit-filled"></span>Create Private
-                                                            Event</a>
+                                                        </div>
+                                                        <p class="font-14 color-blue color-light-blue">Adult Content is NOT allowed HERE on a Private Event!</p>
+                                                        <div class="buttons-f-pr-e button-verified-lat button-create-event">
+                                                            <a class="font-16 color-blue btn-sve-pe" role="button" (click)="submitForm(form)"><span class="iconify" data-icon="ant-design:edit-filled"></span>
+                                                                Create Private Event</a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>

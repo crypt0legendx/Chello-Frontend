@@ -1,5 +1,5 @@
 <div *ngIf="isBookmarkPage === false">
-    <div *ngFor="let userPost of userPosts">
+    <div *ngFor="let userPost of userPosts; let i=index">
         <div class="second-home-middle third-home-middle" *ngIf="userPost.type === 'poll'" [ngStyle]="{display: pollDuration(userPost.duration, userPost.postedAt)}">
             <div class="poll-page r">
                 <div class="">

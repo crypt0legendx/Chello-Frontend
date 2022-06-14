@@ -1,4 +1,6 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { EventService } from 'src/app/services/event.service';
 
 @Component({
   selector: 'app-private-event-final',
@@ -7,9 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PrivateEventFinalComponent implements OnInit {
 
-  constructor() { }
+  event:any = null;
+  constructor(
+    private eventService: EventService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
+    if(this.getCurrentEvent() == null){
+      this.router.navigate(['/event']);
+    }else{
+      this.event=this.getCurrentEvent();
+    }
+     
+  }
+
+  getCurrentEvent(){
+    return this.eventService.getCurrentEvent();
   }
 
 }

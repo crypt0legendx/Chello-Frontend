@@ -1,3 +1,5 @@
+import { EventListModule } from './modules/event-list/event-list.module';
+import { TipsModule } from './modules/tips/tips.module';
 import { NgModule } from '@angular/core';
 import { Router, RouterModule, Routes, UrlSegment } from '@angular/router';
 import { LoginModule } from './modules/login/login.module'
@@ -326,9 +328,13 @@ const routes: Routes = [
 		loadChildren: () => PrivateEventFinalModule
 	},
 	{
+		path: 'event-list',
+		loadChildren: () => EventListModule
+	},
+	{
 		path: 'join-event',
 		loadChildren: () => JoinEventModule
-	},
+	},	
 	{
 		path: 'event-play',
 		loadChildren: () => EventPlayModule
@@ -341,6 +347,11 @@ const routes: Routes = [
 		path: 'payment',
 		loadChildren: () => PaymentModule
 	},
+	{ // added by sagadev
+		path: 'tips',
+		loadChildren: () => TipsModule
+	}
+
 
 ];
 

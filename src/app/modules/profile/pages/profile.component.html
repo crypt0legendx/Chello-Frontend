@@ -162,10 +162,10 @@
                                                 id="defaultOpen">Followers</button>
                                             <button class="tablinks" onclick="openCity(event, 'tab2')">Fans</button>
                                             <button class="tablinks" onclick="openCity(event, 'tab3')">Likes</button>
-                                            <button class="tablinks" onclick="openCity(event, 'tab4')">Posts</button>
-                                            <button class="tablinks" onclick="openCity(event, 'tab5')">Photos</button>
-                                            <button class="tablinks" onclick="openCity(event, 'tab6')">Video</button>
-                                            <button class="tablinks" onclick="openCity(event, 'tab7')">Audio</button>
+                                            <button class="tablinks" onclick="openCity(event, 'tab4')" (click)="getUserPost('all')">Posts</button>
+                                            <button class="tablinks" onclick="openCity(event, 'tab5')" (click)="getUserPost('image')">Photos</button>
+                                            <button class="tablinks" onclick="openCity(event, 'tab6')" (click)="getUserPost('video')">Video</button>
+                                            <button class="tablinks" onclick="openCity(event, 'tab7')" (click)="getUserPost('audio')">Audio</button>
                                             <button class="tablinks" onclick="openCity(event, 'tab8')">Vault</button>
                                         </div>
 
@@ -521,185 +521,22 @@
 
                                         <!-- Photos Posts -->
                                         <div id="tab5" class="tabcontent">
-                                            <div *ngIf="isPhotoPosts != 0">
-                                                <div class=" second-home-middle forth-home-middle"
-                                                    *ngFor="let userPhoto of userPhotos">
-                                                    <div class="headding-poll">
-                                                        <div class="poll-asked-user d-flex justify-content-between">
-                                                            <div class="wrapper-poll-asked-user">
-                                                                <img [src]="profilePicture"
-                                                                    onError="this.src='assets/images/user.png'"
-                                                                    alt="image" />
-                                                                <div class="user-info-p-a">
-                                                                    <p class="font-14 font-bold color-49">
-                                                                        {{userFullName}}
-                                                                        &nbsp; <span
-                                                                            class="iconify font-20 color-light-blue"
-                                                                            data-icon="ic:sharp-verified"></span>
-                                                                    </p>
-                                                                    <p class="font-14 color-49">@{{userName}}</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="a-for-h-3">
-                                                                <a href="javascript:void(0)">{{userPhoto.postedAt |
-                                                                    date:'MMM dd'}} </a>
-                                                                <a href="javascript:void(0)"><span
-                                                                        class="iconify font-20"
-                                                                        data-icon="fluent:more-circle-32-regular"></span></a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mi-home-w-d">
-                                                        <div class="w-100">
-                                                            <div class="profile-div-page-t-p" *ngIf="userPhoto.type === 'image'">
-                                                                <p>{{userPhoto.title}}</p>
-                                                                <img [src]="userPhoto.fileName" alt="image" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="middle-up-i">
-                                                        <div class="d-flex justify-content-between">
-                                                            <div class="first-h-c-t">
-                                                                <a href=""><span class="iconify"
-                                                                        data-icon="clarity:heart-line"></span></a>
-                                                                <a href=""><span class="iconify"
-                                                                        data-icon="uil:comment-alt-message"></span></a>
-                                                                <a href=""><img src="assets/images/mask-4.png"
-                                                                        alt="image" />
-                                                                    &nbsp; Send
-                                                                    Tip</a>
-                                                                <p class="font-14 color-a8">122 likes this</p>
-                                                            </div>
-                                                            <div class="first-h-c-t">
-                                                                <a href=""><span class="iconify"
-                                                                        data-icon="bi:bookmark"></span></a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                            <div>
+                                                <app-post-list></app-post-list>
                                             </div>
                                         </div>
 
                                         <!-- Videos Posts -->
                                         <div id="tab6" class="tabcontent">
-                                            <div *ngIf="isVideoPosts != 0">
-                                                <div class=" second-home-middle forth-home-middle"
-                                                    *ngFor="let userVideo of userVideos">
-                                                    <div class="headding-poll">
-                                                        <div class="poll-asked-user d-flex justify-content-between">
-                                                            <div class="wrapper-poll-asked-user">
-                                                                <img [src]="profilePicture"
-                                                                    onError="this.src='assets/images/user.png'"
-                                                                    alt="image" />
-                                                                <div class="user-info-p-a">
-                                                                    <p class="font-14 font-bold color-49">
-                                                                        {{userFullName}}
-                                                                        &nbsp; <span
-                                                                            class="iconify font-20 color-light-blue"
-                                                                            data-icon="ic:sharp-verified"></span>
-                                                                    </p>
-                                                                    <p class="font-14 color-49">@{{userName}}</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="a-for-h-3">
-                                                                <a href="javascript:void(0)">{{userVideo.postedAt |
-                                                                    date:'MMM dd'}} </a>
-                                                                <a href="javascript:void(0)"><span
-                                                                        class="iconify font-20"
-                                                                        data-icon="fluent:more-circle-32-regular"></span></a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mi-home-w-d">
-                                                        <div class="w-100">
-                                                            <div class="profile-div-page-t-p" *ngIf="userVideo.type === 'video'">
-                                                                <p>{{userVideo.title}}</p>
-                                                                <video controls style="width: 100%; height: auto;">
-                                                                    <source [src]="userVideo.fileName" type="video/mp4">
-                                                                </video>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="middle-up-i">
-                                                        <div class="d-flex justify-content-between">
-                                                            <div class="first-h-c-t">
-                                                                <a href=""><span class="iconify"
-                                                                        data-icon="clarity:heart-line"></span></a>
-                                                                <a href=""><span class="iconify"
-                                                                        data-icon="uil:comment-alt-message"></span></a>
-                                                                <a href=""><img src="assets/images/mask-4.png"
-                                                                        alt="image" />
-                                                                    &nbsp; Send
-                                                                    Tip</a>
-                                                                <p class="font-14 color-a8">122 likes this</p>
-                                                            </div>
-                                                            <div class="first-h-c-t">
-                                                                <a href=""><span class="iconify"
-                                                                        data-icon="bi:bookmark"></span></a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                            <div>
+                                                <app-post-list></app-post-list>
                                             </div>
                                         </div>
 
                                         <!-- Audios Posts -->
                                         <div id="tab7" class="tabcontent">
-                                            <div *ngIf="isAudioPosts != 0">
-                                                <div class=" second-home-middle forth-home-middle" *ngFor="let userAudio of userAudios">
-                                                    <div class="headding-poll">
-                                                        <div class="poll-asked-user d-flex justify-content-between">
-                                                            <div class="wrapper-poll-asked-user">
-                                                                <img src="assets/images/Ellipse 14 (4).png"
-                                                                    alt="image" />
-                                                                <div class="user-info-p-a">
-                                                                    <p class="font-14 font-bold color-49"> {{userFullName}}
-                                                                        &nbsp; <span
-                                                                            class="iconify font-20 color-light-blue"
-                                                                            data-icon="ic:sharp-verified"></span>
-                                                                    </p>
-                                                                    <p class="font-14 color-49">@{{userName}}</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="a-for-h-3">
-                                                                <a href="javascript:void(0)">{{userAudio.postedAt |
-                                                                    date:'MMM dd'}}</a>
-                                                                <a href="javascript:void(0)"><span class="iconify font-20"
-                                                                        data-icon="fluent:more-circle-32-regular"></span></a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mi-home-w-d">
-                                                        <div class="audio-image">
-                                                            <p>{{userAudio.title}}</p>
-                                                            <a href=""> <span class="iconify"
-                                                                    data-icon="bi:play-circle-fill"></span></a>
-                                                            <div class="audio-pattern w-100"></div>
-                                                        </div>
-                                                        <div class="duriation-audio">
-                                                            <p class="font-14 color-a8 text-right">{{userAudio.duration}} min</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="middle-up-i">
-                                                        <div class="d-flex justify-content-between">
-                                                            <div class="first-h-c-t">
-                                                                <a href=""><span class="iconify"
-                                                                        data-icon="clarity:heart-line"></span></a>
-                                                                <a href=""><span class="iconify"
-                                                                        data-icon="uil:comment-alt-message"></span></a>
-                                                                <a href=""><img src="assets/images/mask-4.png"
-                                                                        alt="image" />
-                                                                    &nbsp; Send
-                                                                    Tip</a>
-                                                                <p class="font-14 color-a8">122 likes this</p>
-                                                            </div>
-                                                            <div class="first-h-c-t">
-                                                                <a href=""><span class="iconify"
-                                                                        data-icon="bi:bookmark"></span></a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                            <div>
+                                                <app-post-list></app-post-list>
                                             </div>
                                         </div>
 

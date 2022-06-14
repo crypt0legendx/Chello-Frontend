@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
+import { UserService } from '../../../services/user.service';
 import { NgxSpinnerService } from "ngx-spinner";
 import { ToastrService } from 'ngx-toastr';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -41,13 +42,14 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
+    private userService: UserService,
     private spinner: NgxSpinnerService,
     private toastr: ToastrService,
     public routernavigate: routers,
     private router: Router,
     private route: ActivatedRoute,
     public afs: AngularFirestore, // Inject Firestore service
-    public afAuth: AngularFireAuth, // Inject Firebase auth service
+    public afAuth: AngularFireAuth, // Inject Firebase auth service,
   ) {
     this.show = false;
     this.showRe = false;
@@ -95,11 +97,9 @@ export class LoginComponent implements OnInit {
       this.authService.loginUser(loginValue).subscribe((data: any) => {
         console.log(data);
         if (data['statusCode'] === 200) {
-          console.log(data);
-          localStorage.setItem('accessToken', data['data'].accessToken);
-          localStorage.setItem('userData', JSON.stringify(data['data'].user));
+          localStorage.setItem('accessToken', data['accessToken']);
 
-          this.router.navigate([this.routernavigate.home]);
+          this.getUser();
         }
         else {
           this.spinner.hide();
@@ -174,6 +174,83 @@ export class LoginComponent implements OnInit {
       .catch((error) => {
         window.alert(error);
       });
+  }
+
+  getUser(){
+    this.userService.currentUser().subscribe((data: any) => {
+      console.log(data);
+      if (data['statusCode'] === 200) {
+        console.log(data);
+        localStorage.setItem('userData', JSON.stringify(data['data'].user));
+
+        this.checkOnFirebase(
+          data['data']['user']['email'],
+          data['data']['user']['_id'],
+          data['data']['user']['userName'],
+          data['data']['user']['fullName'],
+          data['data']['user']['profileImage']
+        );
+
+        this.router.navigate([this.routernavigate.home]);
+      }
+      else {
+        this.spinner.hide();
+        this.submitted = false;
+        this.toastr.error(data['message']);
+      }
+    }, (error) => {
+      this.spinner.hide();
+      this.submitted = false;
+      this.toastr.error(error['error']['message']);
+    });
+  }
+
+  async checkOnFirebase(emailId: any, userId: any, username: any, fullName: any, profileImage: any) {
+
+    let token = localStorage.getItem('token');
+    if (token) {
+    } else {
+      token = "";
+    }
+    // this.afs.collection('users', ref => ref.where('email', '==', emailId)).snapshotChanges().subscribe(data=> {
+    let sub = this.afs.collection('users', ref => ref.where('user_id', '==', userId)).valueChanges().subscribe(data => {
+      if (data.length > 0) {
+        console.log(data);
+        console.log("Match found.");
+        this.afs
+          .collection("users")
+          .doc("" + userId + "").update({
+            "device_token": token,
+            "email": emailId,
+            "user_id": userId,
+            "username": username,
+            "fullName": fullName,
+            "profileImage": profileImage
+          })
+          .then(res => {
+            return true;
+          });
+      }
+      else {
+        console.log("Does not exist.");
+        //this.afs.collection("messages").doc(userId).valueChanges();
+        this.afs
+          .collection("users")
+          .doc("" + userId + "").set({
+            "device_token": token,
+            "email": emailId,
+            "user_id": userId,
+            "username": username,
+            "fullName": fullName,
+            "profileImage": profileImage
+          })
+          .then(res => {
+            return true;
+          });
+      }
+
+      sub.unsubscribe();
+    });
   }
 
   showPassword() {

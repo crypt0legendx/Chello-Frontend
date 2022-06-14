@@ -34,38 +34,39 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <p class="font-16 color-bank font-medium">Event Name
-                                                <br><span class="font-bold color-blue">Save The World Concert</span>
+                                                <br><span class="font-bold color-blue">{{this.event.title}}</span>
                                             </p>
                                         </div>
                                         <div class="col-md-6">
                                             <p class="font-16 color-bank font-medium">Event Type
-                                                <br><span class="font-bold color-blue">Music</span>
+                                                <br><span class="font-bold color-blue">{{this.event.type}}</span>
                                             </p>
                                         </div>
                                         <div class="col-md-6">
                                             <p class="font-16 color-bank font-medium">Date of Private Event
-                                                <br><span class="font-bold color-blue">March 26, 2022</span>
+                                                <br><span class="font-bold color-blue">{{this.event.eventDate}}</span>
                                             </p>
                                         </div>
                                         <div class="col-md-6">
                                         </div>
                                         <div class="col-md-6">
                                             <p class="font-16 color-bank font-medium">Private Event Starts
-                                                <br><span class="font-bold color-blue">5:30 pm</span>
+                                                <br><span class="font-bold color-blue">{{this.event.eventStartTime}}</span>
                                             </p>
                                         </div>
                                         <div class="col-md-6">
                                             <p class="font-16 color-bank font-medium">Private Event Ends
-                                                <br><span class="font-bold color-blue">7:30 pm</span>
+                                                <br><span class="font-bold color-blue">{{this.event.eventEndTime}}</span>
                                             </p>
                                         </div>
                                         <div class="col-md-6">
                                             <p class="font-16 color-bank font-medium">Private Event Price
-                                                <br><span class="font-bold color-blue">$5.00</span>
+                                                <br><span class="font-bold color-blue">${{this.event.eventJoinPrice}}</span>
                                             </p>
                                         </div>
                                         <div class="col-md-6">
                                             <p class="font-16 color-bank font-medium">Misc. Info
+                                                <br><span class="font-bold color-blue">${{this.event.miscInfo}}</span>
                                             </p>
                                         </div>
                                     </div>
@@ -78,7 +79,9 @@
                                                     <p class="font-16 font-bold color-blue">Share Your Private Event</p>
                                                 </div>
                                                 <div class="input-more-m">
-                                                    <input type="text" placeholder="https://www.chello.world/Savetheworld" class="w-100">
+                                                    <input type="text" placeholder="https://www.chello.world/Savetheworld" class="w-100"
+                                                    value="{{'https://www.chello.world/'+event.title}}"
+                                                    >
                                                     <a href=""><span class="iconify color-blue" data-icon="akar-icons:copy"></span></a>
                                                 </div>
                                                 <div class="share-more-m d-flex align-items-baseline">

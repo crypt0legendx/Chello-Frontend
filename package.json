@@ -28,6 +28,7 @@
     "ngx-spinner": "^7.2.0",
     "ngx-toastr": "^14.3.0",
     "rxjs": "~6.6.0",
+    "rxjs-compat": "^6.6.7",
     "swiper": "^8.1.4",
     "tslib": "^2.3.0",
     "util": "^0.12.4",

@@ -46,4 +46,12 @@ export class UserService {
     
 	  return this.http.post(this.base_url + 'findUserById', data, requestOptions)
   }
+
+  public currentUser(){
+    let token: any = localStorage.getItem('accessToken');
+    let header = new HttpHeaders({ "Authorization": "Bearer " + token });
+    const requestOptions = {  headers: header};  
+    
+	  return this.http.get(this.base_url + 'user', requestOptions)
+  }
 }
