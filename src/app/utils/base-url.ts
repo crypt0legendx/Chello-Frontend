@@ -5,7 +5,7 @@ export class baseurl{
  
     //url: string = 'http://localhost:8080/api/v1/'; //Local Server
     
-    url: string = 'http://31.220.60.19:8081/api/v1/'; //'http://3.17.3.103:3030/api/v1/'; //Devlopment Server
+    url: string = 'https://staging.chello.world/api/v1/'; //'http://3.17.3.103:3030/api/v1/'; //Devlopment Server
     S3Url: string = "https://chello-data.s3.amazonaws.com/";
 
     giphyUrl: string = "https://api.giphy.com/v1/";

@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,SAAS,AAAA,OAAO,CAAC,GAAG,CAAC,cAAc,CAAC;EAChC,IAAI,EAAE,kBAAkB;EACxB,OAAO,EAAE,CAAC;CACb;;AAED,AAAA,SAAS,AAAA,OAAO,CAAC,GAAG,CAAC,IAAI,CAAC;EACtB,IAAI,EAAE,kBAAkB;EACxB,OAAO,EAAE,CAAC;CACb;;AAED,AAAA,KAAK,AAAA,OAAO,CAAC,GAAG,CAAC,IAAI,CAAA;EAChB,IAAI,EAAE,kBAAkB;EACxB,OAAO,EAAE,CAAC;CACd",
+    "sources": [
+        "group-post-list.component.scss"
+    ],
+    "names": [],
+    "file": "group-post-list.component.css"
+}

@@ -1,0 +1,34 @@
+<div class="div-for-right-side-home">
+    <div class="search-bar-home">
+        <input type="text" placeholder="Search" class="w-100" #searchInput (change)="changedSearchBox(searchInput)" />
+        <span class="iconify" data-icon="akar-icons:search"></span>
+    </div>
+    <div class="user-right-home">
+        <div class="user-wrapper-right-home">
+            <div class="headding-u-r-h">
+                <div class="d-flex justify-content-between">
+                    <p class="font-16 font-medium color-68">Suggestions</p>
+                    <p><a href="" class="color-9a font-14">See All</a></p>
+                </div>
+            </div>
+
+            <div class="image-up-r-u" *ngFor="let event of events">
+                <img [src]="event.coverImage" onError="this.src='assets/images/Frame 2.png'" alt="image" />
+                <div class="poll-asked-user">
+                    <div class="wrapper-poll-asked">
+                        <img [src]="event.profileImage" onError="this.src='assets/images/user.png'" class="round-image2"
+                            alt="image" style="cursor: pointer;"/>
+                        <div class="user-info-p-a">
+                            <p class="font-14 font-bold color-white" style="cursor: pointer;"> {{event.title}} &nbsp; <span
+                                    class="iconify font-20 color-light-blue"
+                                    data-icon="ic:sharp-verified"></span>
+                            </p>
+                            <p class="font-14 color-white" style="cursor: pointer;">On {{event.eventDate}}&nbsp;{{event.eventStartTime}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
-import { WebsocketService } from "./socket/websocket.service";
-import { CommentService } from "./socket/comment.service";
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  providers: [WebsocketService, CommentService]
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   title = 'chello';

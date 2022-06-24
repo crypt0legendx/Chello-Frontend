@@ -35,7 +35,7 @@ export class PostService {
     let header = new HttpHeaders({ "Authorization": "Bearer " + token});
     const requestOptions = {headers: header};
 
-    return this.http.post<any[]>(this.base_url + 'posts', data, requestOptions);
+    return this.http.post<any[]>(this.base_url + 'posts/create', data, requestOptions);
   }
 
   public getGlobalFeed(data: any){

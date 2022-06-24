@@ -1,0 +1,35 @@
+
+.time-post-title {
+    width: 100%;    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: transparent;    
+    
+    margin-block-end: 10px;
+    color: #150AA1;
+}
+
+.text-grey {
+    color: #9A9A9A;
+}
+
+.select-photo {
+    width: 120px;
+    height: 120px;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: linear-gradient(0deg, #F2F2F2, #F2F2F2), #FFFFFF;
+    border: 1px solid #E4E4E4;
+    border-radius: 4px;
+}
+
+.cancel-btn-i {
+    position: absolute !important;
+    margin-left: 119px !important;
+    margin-top: -118px !important;
+    color: #150AA1;
+}

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostListener, Input, IterableDiffers, OnInit, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProfileService } from '../../../../services/profile.service';
 import { PostService } from '../../../../services/post.service';
@@ -19,15 +19,13 @@ declare var $: any;
 @Component({
   selector: 'app-post-list',
   templateUrl: '../pages/post-list.component.html',
-  styleUrls: ['../pages/post-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['../pages/post-list.component.scss']
 })
 export class PostListComponent implements OnInit {
 
   isShown: boolean = false; // hidden by default
   totalPosts: any;
-  @Input() userPosts: any;
-  @Input() changeVal: any;
+  userPosts: any;
 
   userName: any;
   profilePicture: any;
@@ -53,7 +51,7 @@ export class PostListComponent implements OnInit {
   bookmarkList: any;
   totalBookmark: any;
 
-  postType: any
+  postType: any = "all";
 
   constructor(
     private formBuilder: FormBuilder,
@@ -69,7 +67,6 @@ export class PostListComponent implements OnInit {
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     private sanitized: DomSanitizer,
     private cdr: ChangeDetectorRef,
-    private iterableDiffers: IterableDiffers
   ) { }
 
   ngOnInit(): void {
@@ -93,11 +90,11 @@ export class PostListComponent implements OnInit {
     console.log(this.router.url);
     if (this.router.url === "/profile") {
       this.isMyProfilePage = true;
-      this.getUserFeeds("all");
+      this.getUserFeeds();
     } else if (this.router.url === "/bookmark") {
       this.isMyProfilePage = false;
       this.isBookmarkPage = true;
-      this.getBookmark();
+      this.getBookmark("all");
     } else {
       this.isMyProfilePage = false;
       this.getAllFeeds();
@@ -141,17 +138,17 @@ export class PostListComponent implements OnInit {
     });
   }
 
-
-  getUserFeeds(type: any) {
+  getUserFeeds() {
     this.spinner.show();
-    this.postType = type;
-    this.postService.getUserFeed({ "pageNumber": this.pageNumber, "type": type }).subscribe((data: any) => {
+
+    this.postService.getUserFeed({ "pageNumber": this.pageNumber }).subscribe((data: any) => {
       console.log(data);
       if (data['statusCode'] === 200) {
         this.totalPosts = data['postData'].length;
-        this.userPosts = [...data['postData']];
+        this.userPosts = data['postData'];
         this.cdr.detectChanges();
-        this.cdr.markForCheck();
+        console.log(this.userPosts);
+
         this.spinner.hide();
       }
       else {
@@ -165,13 +162,14 @@ export class PostListComponent implements OnInit {
     });
   }
 
-  getBookmark() {
+  getBookmark(type: any) {
     if (this.pageNumber === 0) {
       this.spinner.show();
     }
 
     let page = {
-      "pageNumber": this.pageNumber
+      "pageNumber": this.pageNumber,
+      "type": type
     }
 
     this.bookmarkService.getBookmark(page).subscribe((data: any) => {
@@ -446,7 +444,7 @@ export class PostListComponent implements OnInit {
         this.toastr.success(data['message']);
         if (this.router.url === "/profile") {
           this.isMyProfilePage = true;
-          this.getUserFeeds(this.postType);
+          this.getUserFeeds();
         } else {
           this.isMyProfilePage = false;
           this.getAllFeeds();
@@ -578,7 +576,7 @@ export class PostListComponent implements OnInit {
       if (data['statusCode'] === 200) {
         this.spinner.hide();
         this.toastr.success(data['message']);
-        this.getBookmark();
+        this.getBookmark(this.postType);
       }
       else {
         this.spinner.hide();
@@ -598,7 +596,7 @@ export class PostListComponent implements OnInit {
         if (this.isBookmarkPage === true) {
           if (this.totalPosts != 0) {
             this.pageNumber += 1;
-            this.getBookmark();
+            this.getBookmark(this.postType);
           }
         } else {
           if (this.totalPosts != 0) {
@@ -627,5 +625,28 @@ export class PostListComponent implements OnInit {
     } else if (num < 900) {
       return num; // if value < 1000, nothing to do
     }
+  }
+
+  openSendTipModal(postId: any) {
+    $("#sendTipModal").modal('show');
+  }
+
+  tipPayment() {
+    $("#sendTipModal").modal('hide');
+    // $("#tipPaymentModal").modal('show');
+  }
+
+  makePayment() {
+    $("#tipPaymentModal").modal('hide');
+  }
+
+  checkFavoritePost(favoriteData: any) {
+    var isPresent = favoriteData.some((el: any) => { return el.user === this.userId });
+    return isPresent;
+  }
+
+  checkBookmarkPost(bookmarkData: any) {
+    var isPresent = bookmarkData.some((el: any) => { return el.user === this.userId });
+    return isPresent;
   }
 }

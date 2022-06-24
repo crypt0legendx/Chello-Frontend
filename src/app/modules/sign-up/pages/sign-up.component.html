@@ -1,7 +1,7 @@
 <!-- loding -->
 <ngx-spinner bdColor="rgba(238,238,238,.4)" size="medium" color="#486ffa" type="ball-clip-rotate"></ngx-spinner>
 
-<div *ngIf="signupStep === 1">
+<div>
   <div class="first-div-chello">
     <div class="container-fluid">
       <div class="row align-items-start o-h">
@@ -105,25 +105,25 @@
                 <div class="icon-login">
                   <a href="javascript:void(0)" class="d-flex align-items-center" (click)="GoogleAuth()">
                     <img src="assets/images/google 1.png" alt="image">
-                    <p class="font-14 color-grey"> Log In with Google</p>
+                    <p class="font-14 color-grey"> Sign Up with Google</p>
                   </a>
                 </div>
                 <div class="icon-login">
                   <a href="javascript:void(0)" class="d-flex align-items-center" (click)="TwitterAuth()">
                     <img src="assets/images/twitter 1.png" alt="image">
-                    <p class="font-14 color-grey"> Log In with Twitter</p>
+                    <p class="font-14 color-grey"> Sign Up with Twitter</p>
                   </a>
                 </div>
                 <div class="icon-login">
                   <a href="javascript:void(0)" class="d-flex align-items-center" (click)="FacebookAuth()">
                     <img src="assets/images/facebook.png" alt="image">
-                    <p class="font-14 color-grey"> Log In with Facebook</p>
+                    <p class="font-14 color-grey"> Sign Up with Facebook</p>
                   </a>
                 </div>
               </div>
               <div class="text-blue-under-login">
                 <p class="font-18 color-blue">Creators keeps 94% of their earnings!</p>
-                <p class="font-18 color-blue">Creators pay $25/mth or $240 yearly.</p>
+                <p class="font-18 color-blue">Creators pay $25/mth or $250 yearly.</p>
               </div>
             </div>
           </div>
@@ -150,235 +150,6 @@
   </div>
 </div>
 
-<div class="first-div-chello" *ngIf="signupStep === 2">
-  <div class="container-fluid">
-    <div class="row align-items-start o-h">
-      <div class="col-md-6">
-        <div class="row">
-          <div class="first-div-login">
-            <div class="image-for-logo text-center">
-              <img src="assets/images/Chello.png" alt="image">
-            </div>
-            <div class=" text-under-logo text-center">
-              <p class="color-white font-medium font-32">Creators + Fans = Chello</p>
-              <p class="color-white font-18 font-medium">#LetsGO</p>
-            </div>
-            <div class="image-for-mask text-center">
-              <img src="assets/images/Mask group.png" alt="image">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-5">
-        <div class="text-for-login">
-          <div class="headding-login">
-            <p class="font-26 color-blue font-bold">Get Ready……Get Set…..<br>
-              One Page Away to Use Chello</p>
-          </div>
-          <div class="form-div-login">
-            <form [formGroup]="registerForm2" (ngSubmit)="step1()">
-              <div class="form-group">
-                <label class="font-14 color-grey">Enter your Phone Number</label>
-                <input id="phone" type="tel" class="w-100 " formControlName="phoneNumber"
-                  [ngClass]="{ 'is-invalid': submitted2 && rf2Validation.phoneNumber.errors }">
-                <div *ngIf="submitted2 && rf2Validation.phoneNumber.errors" class="invalid-feedback">
-                  <div *ngIf="rf2Validation.phoneNumber.errors.required" style="color:red;">Phone number is required
-                  </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="font-14 color-grey">Enter Your Birthday</label>
-                <div class="birth-day-date-entry">
-                  <div class="wrapper-birth-day-entry">
-                    <div class="first-birthday-entry">
-                      <label class="font-12 color-grey">Month</label>
-                      <input type="text" name="dob" placeholder="Jan" class="w-100 side-tab" formControlName="month"
-                        [ngClass]="{ 'is-invalid': submitted2 && rf2Validation.month.errors }">
-                      <div *ngIf="submitted2 && rf2Validation.month.errors" class="invalid-feedback">
-                        <div *ngIf="rf2Validation.month.errors.required" style="color:red;">Month is required</div>
-                      </div>
-                    </div>
-                    <div class="first-birthday-entry">
-                      <label class="font-12 color-grey">Day</label>
-                      <input type="text" name="dob" placeholder="01" class="w-100 side-tab" formControlName="day"
-                         [ngClass]="{ 'is-invalid': submitted2 && rf2Validation.day.errors }">
-                      <div *ngIf="submitted2 && rf2Validation.day.errors" class="invalid-feedback">
-                        <div *ngIf="rf2Validation.day.errors.required" style="color:red;">Day is required</div>
-                      </div>
-                    </div>
-                    <div class="first-birthday-entry">
-                      <label class="font-12 color-grey">Year</label>
-                      <input type="text" name="dob" placeholder="1993" class="w-100" formControlName="year"
-                         [ngClass]="{ 'is-invalid': submitted2 && rf2Validation.year.errors }">
-                      <div *ngIf="submitted2 && rf2Validation.year.errors" class="invalid-feedback">
-                        <div *ngIf="rf2Validation.year.errors.required" style="color:red;">Year is required</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="font-14 color-grey">I Want to Become a</label>
-                <div class="for-toggle-div-user">
-                  <div class="btn-group" role="group" aria-label="...">
-                    <button type="button" class="btn-default active" id="roleCreator" (click)="roleSection('creator')">Creator</button>
-                    <button type="button" class="btn-default" id="roleFan" (click)="roleSection('fan')">Fan</button>
-                  </div>
-
-                </div>
-              </div>
-              <div class="button-link">
-                <div class="d-flex justify-content-between">
-                  <button type="submit" class="btn">Let’s GO</button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-1"></div>
-    </div>
-    <div class="padding-for-footer"></div>
-  </div>
-</div>
-
-<div class="first-div-chello" *ngIf="signupStep === 3">
-  <div class="container-fluid">
-    <div class="row align-items-start o-h">
-      <div class="col-md-6">
-        <div class="row">
-          <div class="first-div-login">
-            <div class="image-for-logo text-center">
-              <img src="assets/images/Chello.png" alt="image">
-            </div>
-            <div class=" text-under-logo text-center">
-              <p class="color-white font-medium font-32">Creators + Fans = Chello</p>
-              <p class="color-white font-18 font-medium">#LetsGO</p>
-            </div>
-            <div class="image-for-mask text-center">
-              <img src="assets/images/Mask group.png" alt="image">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-5">
-        <div class="text-for-login">
-          <div class="headding-login">
-            <p class="font-26 color-blue font-bold">Verify Your Identity</p>
-            <p class="color-black">For content Creators, let’s get you verified.
-            </p>
-            <br>
-          </div>
-          <div class="form-div-login">
-            <form>
-              <div class="new-verified-id-ui">
-                <div class="form-group">
-                  <label class="font-14 color-grey">Your Country of Legal Residence</label>
-                  <select class="form-select w-100" aria-label="Default select example">
-                    <option selected>USA</option>
-                    <option value="1">INDIA</option>
-                    <option value="2">CHINA</option>
-                    <option value="3">RUSSIA</option>
-                  </select>
-                  <p class="font-10 color-grey">*You cannot change this later</p>
-                </div>
-                <div class="form-group">
-                  <label class="font-14 color-grey">Your Legal Full Name</label>
-                  <input type="text" name="name" value="Kate Winslet" class="w-100">
-                </div>
-                <div class="form-group">
-                  <label class="font-14 color-grey">Address Line 1</label>
-                  <input type="text" name="address1" class="w-100">
-                </div>
-                <div class="form-group">
-                  <label class="font-14 color-grey">Address Line 2</label>
-                  <input type="text" name="address1" class="w-100">
-                </div>
-                <div class="form-group">
-                  <label class="font-14 color-grey">Enter Your Birthday</label>
-                  <div class="birth-day-date-entry">
-                    <div class="wrapper-birth-day-entry">
-                      <div class="first-birthday-entry">
-                        <label class="font-12 color-grey">Month</label>
-                        <input type="text" name="dob" placeholder="Jan" class="w-100 side-tab">
-                      </div>
-                      <div class="first-birthday-entry">
-                        <label class="font-12 color-grey">Day</label>
-                        <input type="text" name="dob" placeholder="01" class="w-100 side-tab">
-                      </div>
-                      <div class="first-birthday-entry">
-                        <label class="font-12 color-grey">Year</label>
-                        <input type="text" name="dob" placeholder="1993" class="w-100">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="check-for-age">
-                    <input type="checkbox" id="agree" name="agree" value="agree">
-                    <label for="agree" class="font-14 color-black"> &nbsp; I agree that I am over 18 years
-                      old.</label><br>
-                  </div>
-                </div>
-
-                <div class="">
-                  <label class="font-14 color-grey">Upload ID &nbsp;<span class="font-10">(Drivers License, Passport, or
-                      Government Issued ID)</span></label>
-                  <div class="upload-button-file">
-                    <div class="file-input ">
-                      <input type="file" name="file-input" id="file-input" class="file-input__input" />
-                      <label class="file-input__label password-icon position-relative" for="file-input">
-                        <span class="iconify" data-icon="gg:attachment"></span>
-                      </label>
-
-                    </div>
-                  </div>
-                </div>
-                <div class="">
-                  <label class="font-14 color-grey">Upload ID 2 &nbsp;<span class="font-10">(Please take a Selfie
-                      holding your ID Card)</span></label>
-                  <div class="upload-button-file">
-                    <div class="file-input ">
-                      <input type="file" name="file-input" id="file-input" class="file-input__input" />
-                      <label class="file-input__label password-icon position-relative" for="file-input">
-                        <span class="iconify" data-icon="gg:attachment"></span>
-                      </label>
-
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="label-insta-new">
-                    <label>Add your
-                      <a href=""><img src="assets/images/ant-design_instagram-filled.png" /></a>
-                      <a href=""><img src="assets/images/twitter 1.png" /></a> or
-                      <a href=""><img src="assets/images/Vector.png" /></a></label>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="font-14 color-grey">to assist with account verification.</label>
-                  <input type="text" name="name" class="w-100">
-                </div>
-
-                <div class="button-link button-verified-lat">
-                  <div class="d-flex justify-content-between">
-                    <a href="javascript:void(0)" class="btn">Submit</a>
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-1"></div>
-    </div>
-    <div class="padding-for-footer"></div>
-  </div>
-</div>
-
-
 <div class="clearfix"></div>
 
 <!--Footer-->
@@ -396,12 +167,11 @@
           </a>
         </div>
         <div class="video-for-home-div">
-          <iframe width="100%" height="409" src="https://www.youtube.com/embed/QeDR7kyV4Sk" title="YouTube video player"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen></iframe>
+          <iframe _ngcontent-qva-c42="" width="100%" height="409" src="https://www.youtube.com/embed/QeDR7kyV4Sk??enablejsapi=1&amp;autoplay=0&amp;rel=0&amp;controls=1&amp;loop=0&amp;showinfo=0;" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
         </div>
       </div>
     </div>
   </div>
 </div>
+<div class="clearfix"></div>
+<app-footer></app-footer>

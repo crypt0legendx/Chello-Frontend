@@ -1,0 +1,133 @@
+<div class="timed-post">    
+    <div class="poll-div-section">
+        <div class="wrapper-poll-div-section">
+            <div class="">
+                <div class="div-for-new-post-poll">
+                    <div class="wrapper-new-post-poll">
+                        <div class="text-area-for-poll" >
+                            <div class="row"  *ngIf="!timeOptionSelected">                                
+                                <div class="col-md-6">
+                                    <button class="timedBtn" (click)="setTimedPost(true)">
+                                        <img src="assets/images/hourglass-end.png">
+                                        24 Hour Dissapearing Post
+                                    </button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button class="timedBtn"  (click)="setTimedPost(false)">
+                                        <img src="assets/images/hourglass-end.png">
+                                        24 Hour Coming Soon Post
+                                    </button>
+                                </div>
+                                <div class="right-side-button text-left" *ngIf="!timeOptionSelected">
+                                    <a href="javascript:void(0)" class="font-14 font-medium color-blue margin-l-r-a">Back
+                                        </a>                                    
+                                </div>
+                            </div>
+                            <form [formGroup]="feedForm" *ngIf="timeOptionSelected">
+                                <div class="time-post-title">
+                                    <img src="assets/images/hourglass-end.png">
+                                        <div *ngIf="selectedTimeOption=='disappearing'">
+                                            24 Hour Dissapearing Post
+                                            <span class="text-grey pl-3">(Post will dissapear in 24 hour)</span> 
+                                        </div>                                        
+                                        <div *ngIf="selectedTimeOption=='Coming'">
+                                            24 Hour Coming Soon Post
+                                            <span class="text-grey pl-3">(Post will come in 24 hour)</span> 
+                                        </div>                                        
+                                </div>
+                                <div class="form-group position-relative">
+                                    <textarea rows="4" class="w-100" formControlName="postTxt"
+                                        [ngClass]="{ 'is-invalid': submitted && f.postTxt.errors }"
+                                        placeholder="Compose new post"></textarea>
+                                    <div *ngIf="submitted && f.postTxt.errors" class="invalid-feedback">
+                                        <div *ngIf="f.postTxt.errors.required" style="color:red;">Post text is required
+                                        </div>
+                                    </div>
+    
+                                    <div class="option-selected-for-ta">
+    
+                                        <!-- Add Image -->
+                                        <a (click)="openFileSelector('addImage')" style="cursor: pointer;" class="iconToolTip"><span
+                                                class="iconify" data-icon="icon-park-outline:picture-one"></span></a>
+                                        <input id="addImage" type="file" class="form-control"
+                                            (change)="selectFile($event, 'addImage')" style="display:none" accept="image/*"
+                                            capture multiple>
+                                        
+                                        <!-- Add Video -->
+                                        <a (click)="openFileSelector('addVideo')" style="cursor: pointer;" class="iconToolTip"><span
+                                                class="iconify" data-icon="ph:video-camera-bold"></span></a>
+                                        <input id="addVideo" type="file" class="form-control"
+                                            (change)="selectFile($event, 'addVideo')" style="display:none" accept="video/*"
+                                            capture multiple>
+    
+                                        <!-- Add Audio -->
+                                        <a (click)="openFileSelector('addAudio')" style="cursor: pointer;" class="iconToolTip"><span
+                                                class="iconify" data-icon="bxs:microphone-alt"></span></a>
+                                        <input id="addAudio" type="file" class="form-control"
+                                            (change)="selectFile($event, 'addAudio')" style="display:none" accept="audio/*"
+                                            capture multiple>
+    
+                                        <!-- Add Poll -->
+                                        <a (click)="createPoll()" style="cursor: pointer;" class="iconToolTip"><span class="iconify"
+                                                data-icon="fa6-solid:square-poll-vertical"></span></a>
+    
+                                        <a class="iconToolTip" (click)="selectPostOption(1)" ><span class="iconify"
+                                                data-icon="fa:hourglass-3"></span></a>
+                                        <a href="javascript:void(0)" class="iconToolTip"><span class="iconify"
+                                                data-icon="fluent:live-20-filled"></span></a>
+                                        <a  (click)="selectPostOption(2)"  class="iconToolTip"><img src="assets/images/Mask group (2).png"
+                                                alt="image" style="margin: 0 7px;" /></a>
+                                        <a href="javascript:void(0)" class="iconToolTip"><span class="iconify" data-icon="ph:vault-bold"></span></a>
+                                        <a href="javascript:void(0)" class="iconToolTip"><span class="iconify" data-icon="bxs:dollar-circle"></span></a>
+                                    </div>
+    
+                                </div>
+                                <div class="set-icons-image-l-n position-relative">
+                                    <div *ngFor="let img of imageSrc; let index = index">
+                                        <div class="set-icons-image-l-n-1 position-relative" *ngIf="isAddImage === true&&img.type === 'addImage'">                                    
+                                                <a href="javascript:void(0)"><span class="iconify"
+                                                    data-icon="icon-park-outline:picture-one"></span></a>
+                                                <p class="font-14 color-49">Image</p>
+                                                <div class="cancel-btn-i">
+                                                    <a (click)="removeAttachment(index)" style="cursor: pointer;"><span
+                                                            class="iconify" data-icon="material-symbols:cancel"></span></a>
+                                                </div>                                    
+                                        </div>
+                                        <div class="set-icons-image-l-n-1 position-relative" *ngIf="isAddVideo === true&&img.type === 'addVideo'">
+                                            <a href="javascript:void(0)" routerLink="/video-post"><span class="iconify"
+                                                    data-icon="ph:video-camera-bold"></span></a>
+                                            <p class="font-14 color-49">Video</p>
+                                            <div class="cancel-btn-i">
+                                                <a (click)="removeAttachment(index)" style="cursor: pointer;"><span class="iconify"
+                                                        data-icon="material-symbols:cancel"></span></a>
+                                            </div>
+                                        </div>
+                                        <div class="set-icons-image-l-n-1 position-relative" *ngIf="isAddAudio === true&&img.type === 'addAudio'">
+                                            <a href="javascript:void(0)" routerLink="/audio-post"><span class="iconify"
+                                                    data-icon="bxs:microphone-alt"></span></a>
+                                            <p class="font-14 color-49">Audio</p>
+                                            <div class="cancel-btn-i">
+                                                <a (click)="removeAttachment(index)" style="cursor: pointer;"><span class="iconify"
+                                                        data-icon="material-symbols:cancel"></span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                                
+                                    <div class="right-side-button text-right" *ngIf="!retrievedGroupDetails">
+                                        <a href="javascript:void(0)" class="font-14 font-medium color-blue margin-l-r-a">Post
+                                            Later</a>
+                                        <button type="button" (click)="postFeed()">Post</button>
+                                    </div>
+                                    <div class="right-side-button text-right" *ngIf="retrievedGroupDetails">
+                                        <a href="javascript:void(0)" class="font-14 font-medium color-blue margin-l-r-a">Post
+                                            Later</a>
+                                        <button type="button" (click)="postGroupFeed()">Post</button>
+                                    </div>                                                                
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

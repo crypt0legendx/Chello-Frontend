@@ -1,0 +1,40 @@
+.time-post-title {
+    width: 100%;    
+    display: flex;
+    background: transparent;    
+    
+    margin-block-end: 10px;  
+    color: #150AA1;
+}
+
+.text-grey {
+    color: #9A9A9A;
+}
+
+.audio-content {
+    margin-top: 80px;
+}
+
+.select-audio {
+    width: 178px;
+    height: 60px;
+
+    background: linear-gradient(0deg, #F2F2F2, #F2F2F2), #FFFFFF;
+    border: 1px solid #E4E4E4;
+    border-radius: 4px;
+}
+
+.cancel-btn-i {
+    position: absolute !important;
+    margin-left: 119px !important;
+    margin-top: -118px !important;
+    color: #150AA1;
+}
+
+.attach-audio {
+    display: flex;
+    align-items: center;
+    padding-inline: 3.5px;
+    justify-content: space-around;
+    cursor: pointer;
+}

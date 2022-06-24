@@ -22,10 +22,8 @@ declare var $: any;
 export class SignUpComponent implements OnInit {
 
   registerForm!: FormGroup;
-  registerForm2!: FormGroup;
   otpForm!: FormGroup;
   submitted: any;
-  submitted2: any;
   submittedOTP: any;
   countryCode: any;
   getCountryCode: any;
@@ -38,10 +36,8 @@ export class SignUpComponent implements OnInit {
   show: boolean = false;
   showRe: boolean = false;
   userJsonData: any;
-
-  signupStep: number = 1;
   userRole: any = "creator";
-  
+
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
@@ -59,7 +55,7 @@ export class SignUpComponent implements OnInit {
 
   ngOnInit(): void {
     let retrievedObject: any = localStorage.getItem('userData');
-    if(retrievedObject){
+    if (retrievedObject) {
       this.userJsonData = JSON.parse(retrievedObject);
       console.log(this.userJsonData);
       this.router.navigate([this.routernavigate.home]);
@@ -72,37 +68,9 @@ export class SignUpComponent implements OnInit {
       password: ['', Validators.required],
       cPassword: ['', Validators.required]
     });
-
-    this.registerForm2 = this.formBuilder.group({
-      phoneNumber: ['', Validators.required],
-      month: ['', Validators.required],
-      day: ['', Validators.required],
-      year: ['', Validators.required]
-    });
   }
 
   get f() { return this.registerForm.controls; }
-  get rf2Validation() { return this.registerForm2.controls; }
-
-  async step1() {
-    this.signUpType = "email";
-
-    this.submitted = true;
-    if (this.registerForm.invalid) {
-      return;
-    }
-    else {
-      if (this.f.password.value === this.f.cPassword.value) {
-        this.signupStep = 2;
-      }
-      else {
-        this.spinner.hide();
-        this.submitted = false;
-        console.log("wrong");
-        this.toastr.error("Your passwords do not match. Please type carefully.");
-      }
-    }
-  }
 
   async register() {
     let token = localStorage.getItem('token');
@@ -118,7 +86,7 @@ export class SignUpComponent implements OnInit {
       "email": this.f.email.value,
       "userName": this.f.userName.value,
       "password": this.f.password.value,
-      "role": "normal",
+      "role": this.userRole,
       "socialId": this.socialId,
       "signUpType": this.signUpType,
     }
@@ -139,7 +107,7 @@ export class SignUpComponent implements OnInit {
             localStorage.setItem('accessToken', data['data'].accessToken);
             localStorage.setItem('userData', JSON.stringify(data['data'].user));
 
-            this.router.navigate([this.routernavigate.home]);
+            this.router.navigate([this.routernavigate.userSelection]);
           }
           else {
             this.spinner.hide();
@@ -164,23 +132,24 @@ export class SignUpComponent implements OnInit {
   // Sign in with Google
   GoogleAuth() {
     this.signUpType = "google";
-    this.AuthLogin(new auth.GoogleAuthProvider())
+    return this.AuthLogin(new auth.GoogleAuthProvider())
   }
 
   // Sign in with Facebook
   FacebookAuth() {
     this.signUpType = "facebook";
-    this.AuthLogin(new auth.FacebookAuthProvider())
+    return this.AuthLogin(new auth.FacebookAuthProvider())
   }
 
   // Sign in with Twitter
   TwitterAuth() {
     this.signUpType = "twitter";
-    this.AuthLogin(new auth.TwitterAuthProvider())
+    return this.AuthLogin(new auth.TwitterAuthProvider())
   }
 
   // Auth logic to run auth providers
   AuthLogin(provider: any) {
+    let password = this.generatePassword();
     this.afAuth
       .signInWithPopup(provider)
       .then((result) => {
@@ -190,7 +159,7 @@ export class SignUpComponent implements OnInit {
           "fullName": result.user?.providerData[0]?.displayName,
           "email": result.user?.providerData[0]?.email,
           "username": "",
-          "password": "",
+          "password": password,
           "role": "normal",
           "social_id": result.user?.providerData[0]?.uid,
           "signUpType": this.signUpType,
@@ -219,7 +188,7 @@ export class SignUpComponent implements OnInit {
         });
       })
       .catch((error) => {
-        window.alert(error);
+        //console.log(error);
       });
   }
 
@@ -234,15 +203,25 @@ export class SignUpComponent implements OnInit {
     this.showRe = !this.showRe;
   }
 
-  roleSection(type: any){
-    if(type === 'creator'){
+  roleSection(type: any) {
+    if (type === 'creator') {
       this.userRole = "creator";
       document.getElementById("roleCreator")!.classList.add('active');
       document.getElementById("roleFan")!.classList.remove('active');
-    } else{
+    } else {
       this.userRole = "fan";
       document.getElementById("roleFan")!.classList.add('active');
       document.getElementById("roleCreator")!.classList.remove('active');
     }
+  }
+
+  generatePassword() {
+    var length = 8,
+      charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+      retVal = "";
+    for (var i = 0, n = charset.length; i < length; ++i) {
+      retVal += charset.charAt(Math.floor(Math.random() * n));
+    }
+    return retVal;
   }
 }

@@ -1,3 +1,4 @@
+import { EventSuggestionModule } from './../event-suggestion/event-suggestion.module';
 import { SuggestionsModule } from './../layout/suggestions/suggestions.module';
 import { SidebarModule } from './../layout/sidebar/sidebar.module';
 import { HeaderNewModule } from './../layout/header-new/header-new.module';
@@ -20,7 +21,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HeaderNewModule,
     FooterModule,
     SidebarModule,
-    SuggestionsModule,
+    EventSuggestionModule,
     FormsModule,
     ReactiveFormsModule
   ]

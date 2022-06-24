@@ -56,4 +56,25 @@ export class UploadService {
     });
   }
 
+  deleteFile(filePath:any){
+    return new Promise((resolve, reject) => {
+      const bucket = new S3({
+        accessKeyId: 'AKIA2YQHZPOYGCRTTEH7',
+        secretAccessKey: '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',
+        region: 'us-east-1'
+      });
+      const params = {
+        Bucket: 'chello-data',
+        Key: filePath,      
+      };    
+
+      bucket.deleteObject(params, function(err:any, data:any) {
+        if (err) {
+          reject(err);
+        }
+        resolve(data);
+      });
+    });
+  }
+
 }

@@ -1,5 +1,17 @@
 [
     {
+        "name": "United States",
+        "dialCode": "+1",
+        "isoCode": "US",
+        "flag": "https://cdn.kcak11.com/CountryFlags/countries/us.svg"
+    },
+    {
+        "name": "United Kingdom",
+        "dialCode": "+44",
+        "isoCode": "GB",
+        "flag": "https://cdn.kcak11.com/CountryFlags/countries/gb.svg"
+    },
+    {
         "name": "Afghanistan",
         "dialCode": "+93",
         "isoCode": "AF",
@@ -1390,18 +1402,6 @@
         "dialCode": "+971",
         "isoCode": "AE",
         "flag": "https://cdn.kcak11.com/CountryFlags/countries/ae.svg"
-    },
-    {
-        "name": "United Kingdom",
-        "dialCode": "+44",
-        "isoCode": "GB",
-        "flag": "https://cdn.kcak11.com/CountryFlags/countries/gb.svg"
-    },
-    {
-        "name": "United States",
-        "dialCode": "+1",
-        "isoCode": "US",
-        "flag": "https://cdn.kcak11.com/CountryFlags/countries/us.svg"
     },
     {
         "name": "United States Minor Outlying Islands",

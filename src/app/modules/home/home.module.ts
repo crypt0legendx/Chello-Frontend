@@ -13,6 +13,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { SwiperModule } from 'swiper/angular';
 import {StoryModule} from '../layout/story/story.module'
 import {PostListModule} from '../layout/post-list/post-list.module'
+import { PostOptionsModule } from '../layout/post-options/post-options.module';
 @NgModule({
   declarations: [
     HomeComponent
@@ -25,6 +26,7 @@ import {PostListModule} from '../layout/post-list/post-list.module'
     SidebarModule,
     SuggestionsModule,
     PostFeedModule,
+    PostOptionsModule,
     FormsModule,
     ReactiveFormsModule,
     NgxSpinnerModule,

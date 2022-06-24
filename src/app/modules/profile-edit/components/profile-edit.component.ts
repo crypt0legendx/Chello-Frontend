@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ProfileService } from '../../../services/profile.service';
 import { UploadService } from '../../../services/upload.service';
+import { UserService } from '../../../services/user.service';
 import { NgxSpinnerService } from "ngx-spinner";
 import { ToastrService } from 'ngx-toastr';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -87,6 +88,7 @@ export class ProfileEditComponent implements OnInit {
     private profileService: ProfileService,
     private uploadService: UploadService,
     private postService: PostService,
+    private userService: UserService,
     public baseurl: baseurl,
     private spinner: NgxSpinnerService,
     private toastr: ToastrService,
@@ -141,7 +143,7 @@ export class ProfileEditComponent implements OnInit {
       this.router.navigate([this.routernavigate.login]);
     }
 
-    this.getUserFeeds();
+    this.getUser();
 
     console.log(localStorage.getItem('accessToken'));
     this.displayName = this.userJsonData['fullName'];
@@ -204,20 +206,19 @@ export class ProfileEditComponent implements OnInit {
     this.setEditVales();
   }
 
-  getUserFeeds() {
-    this.spinner.show();
-    this.postService.getUserFeed({"pageNumber": this.pageNumber}).subscribe((data: any) => {
+  getUser(){
+    this.userService.currentUser().subscribe((data: any) => {
       console.log(data);
       if (data['statusCode'] === 200) {
-        this.totalPosts = data['data']['posts'].length;
-
-        this.spinner.hide();
+        this.totalPosts = data['data']['user']['posts'].length;
       }
       else {
         this.spinner.hide();
+        this.toastr.error(data['message']);
       }
     }, (error) => {
       this.spinner.hide();
+      this.toastr.error(error['error']['message']);
     });
   }
 

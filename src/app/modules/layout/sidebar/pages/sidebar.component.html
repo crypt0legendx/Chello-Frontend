@@ -32,15 +32,59 @@
                                 data-icon="bx:user"></span>My Profile</a></li>
                     <li><a routerLink="/more" [routerLinkActive]="['active']"><span class="iconify"
                                 data-icon="fluent:more-circle-32-regular"></span>More</a></li>
-                    <li><a style="cursor: pointer;" (click)="logout()"><span class="iconify"
-                                data-icon="ant-design:logout-outlined"></span>Logout</a></li>
+                    <li><a style="cursor: pointer;" data-toggle="modal" data-target="#logoutConfirmModel"><span
+                                class="iconify" data-icon="ant-design:logout-outlined"></span>Logout</a></li>
+                    <!-- <a href="" (click)="logout()">logout</a> -->
                     <div class="right-side-button ">
                         <a routerLink="/poll" [routerLinkActive]="['active']"> <button>+ New Post</button></a>
                     </div>
-                    <li style="margin-top: 100px;"><a routerLink="/event" [routerLinkActive]="['active']"><span class="iconify"
-                        data-icon="ic:twotone-event-busy"></span>Private Event</a></li>
+                    <li style="margin-top: 100px;"><a routerLink="/event"
+                            [routerLinkActive]="['active']"><span class="iconify"
+                                data-icon="ic:twotone-event-busy"></span>Private Event</a></li>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
+
+<!-- modal for logout  -->
+<div class="modal fade modal-logout" id="logoutConfirmModel" tabindex="-1" role="dialog" aria-labelledby="logoutConfirmModelTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p class="font-18 color-blue font-bold"><b>Are you sure you want to Logout?</b> </p>
+                <div class="buttons-for-logout-model">
+                    <div class="button-join-group-new-2-l">
+                        <button class="btn-l-y" (click)="logout()">Yes</button>
+                    </div>
+                    <div class="button-join-group-new-2-l">
+                        <button  class="btn-l-n" data-dismiss="modal"> Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- modal for logout  -->
+<div class="modal fade modal-logout" id="authExpiredModel" tabindex="-1" role="dialog" aria-labelledby="authExpiredModelTitle"
+    aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p class="font-18 color-blue font-bold"><b>Your session is expired, please login again</b> </p>
+                <div class="buttons-for-logout-model">
+                    <div class="button-join-group-new-2-l">
+                        <button class="btn-l-y" (click)="authExpired()">Okay</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+         

@@ -9,6 +9,7 @@ import {SidebarModule} from '../layout/sidebar/sidebar.module'
 import {SuggestionsModule} from '../layout/suggestions/suggestions.module'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [
     SubscriptionsComponent
@@ -22,7 +23,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
     SuggestionsModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    ToastrModule,
   ]
 })
 export class SubscriptionsModule { }

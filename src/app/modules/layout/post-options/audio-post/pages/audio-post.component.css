@@ -1,0 +1,48 @@
+.time-post-title {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background: transparent;
+  -webkit-margin-after: 10px;
+          margin-block-end: 10px;
+  color: #150AA1;
+}
+
+.text-grey {
+  color: #9A9A9A;
+}
+
+.audio-content {
+  margin-top: 80px;
+}
+
+.select-audio {
+  width: 178px;
+  height: 60px;
+  background: -webkit-gradient(linear, left bottom, left top, from(#F2F2F2), to(#F2F2F2)), #FFFFFF;
+  background: linear-gradient(0deg, #F2F2F2, #F2F2F2), #FFFFFF;
+  border: 1px solid #E4E4E4;
+  border-radius: 4px;
+}
+
+.cancel-btn-i {
+  position: absolute !important;
+  margin-left: 119px !important;
+  margin-top: -118px !important;
+  color: #150AA1;
+}
+
+.attach-audio {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-inline: 3.5px;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  cursor: pointer;
+}
+/*# sourceMappingURL=audio-post.component.css.map */

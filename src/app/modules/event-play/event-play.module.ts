@@ -7,8 +7,7 @@ import { FooterModule } from '../layout/footer/footer.module'
 import { HeaderNewModule } from '../layout/header-new/header-new.module'
 import { SidebarModule } from '../layout/sidebar/sidebar.module'
 import { SuggestionsModule } from '../layout/suggestions/suggestions.module'
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgxSpinnerModule } from "ngx-spinner";
+
 @NgModule({
   declarations: [
     EventPlayComponent
@@ -19,10 +18,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
     FooterModule,
     HeaderNewModule,
     SidebarModule,
-    SuggestionsModule,
-    FormsModule,
-    ReactiveFormsModule,
-    NgxSpinnerModule
+    SuggestionsModule
   ]
 })
 export class EventPlayModule { }

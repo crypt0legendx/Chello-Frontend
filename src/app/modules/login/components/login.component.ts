@@ -8,9 +8,11 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { routers } from '../../../utils/router-navigate';
 import { Observable } from 'rxjs';
 import { first, map } from 'rxjs/operators';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
+import firebase from 'firebase/compat/app';
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import * as auth from 'firebase/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 
 declare var swal: any;
 declare var $: any;
@@ -117,23 +119,24 @@ export class LoginComponent implements OnInit {
   // Sign in with Google
   GoogleAuth() {
     this.signUpType = "google";
-    this.AuthLogin(new auth.GoogleAuthProvider())
+    return this.AuthLogin(new auth.GoogleAuthProvider())
   }
 
   // Sign in with Facebook
   FacebookAuth() {
     this.signUpType = "facebook";
-    this.AuthLogin(new auth.FacebookAuthProvider())
+    return this.AuthLogin(new auth.FacebookAuthProvider())
   }
 
   // Sign in with Twitter
   TwitterAuth() {
     this.signUpType = "twitter";
-    this.AuthLogin(new auth.TwitterAuthProvider())
+    return this.AuthLogin(new auth.TwitterAuthProvider())
   }
 
   // Auth logic to run auth providers
   AuthLogin(provider: any) {
+    console.log(provider);
     this.afAuth
       .signInWithPopup(provider)
       .then((result) => {
@@ -150,20 +153,18 @@ export class LoginComponent implements OnInit {
         }
 
         this.spinner.show();
-        this.authService.registerUser(loginValue).subscribe((data: any) => {
+        this.userService.findUserByEmailId({"email": result.user?.providerData[0]?.email}).subscribe((data: any) => {
           console.log(data);
           if (data['status'] === 201) {
 
-            // localStorage.setItem('accessToken', data['data'].access_token);
-            // console.log(localStorage.getItem('accessToken'));
-            // localStorage.setItem('userData', JSON.stringify(data['data']['user']));
-            // var retrievedObject = localStorage.getItem('userData');
+            localStorage.setItem('accessToken', data['data'].access_token);
+            this.getUser();
 
           }
           else {
             this.spinner.hide();
             this.submitted = false;
-            this.toastr.error(data['message']);
+            this.toastr.error("Please sign up");
           }
         }, (error) => {
           this.spinner.hide();
@@ -172,7 +173,7 @@ export class LoginComponent implements OnInit {
         });
       })
       .catch((error) => {
-        window.alert(error);
+        //console.log(error);
       });
   }
 
@@ -181,17 +182,23 @@ export class LoginComponent implements OnInit {
       console.log(data);
       if (data['statusCode'] === 200) {
         console.log(data);
-        localStorage.setItem('userData', JSON.stringify(data['data'].user));
+        if(data['data']['user']['isPhoneNumberVerified'] === 0 || data['data']['user']['isPhoneNumberVerified'] === '0'){
+          this.router.navigate([this.routernavigate.userSelection]);
+        } else if(!data['data']['user']['country']){
+          this.router.navigate([this.routernavigate.verifyId]);
+        } else{
+          localStorage.setItem('userData', JSON.stringify(data['data'].user));
 
-        this.checkOnFirebase(
-          data['data']['user']['email'],
-          data['data']['user']['_id'],
-          data['data']['user']['userName'],
-          data['data']['user']['fullName'],
-          data['data']['user']['profileImage']
-        );
+          this.checkOnFirebase(
+            data['data']['user']['email'],
+            data['data']['user']['_id'],
+            data['data']['user']['userName'],
+            data['data']['user']['fullName'],
+            data['data']['user']['profileImage']
+          );
 
-        this.router.navigate([this.routernavigate.home]);
+          this.router.navigate([this.routernavigate.home]);
+        }
       }
       else {
         this.spinner.hide();

@@ -7,14 +7,18 @@
                 <p class="color-blue font-26 font-bold">About </p>
             </div>
             <div class="about-heading-under">
-                <p class="font-16 color-black"><b class="color-blue">Chello</b> is a social media platform, enhancing the <b class="color-blue">Creator</b> and the <b class="color-blue">Fan</b>
-                    connection! <b class="color-blue">Chello</b> saw that the <b class="color-blue">Creator</b> was giving away 15-20% of their earnings to companies
-                    like OnlyFans, Fansly, Fanvue, Fancentro, and others. With <b class="color-blue">Chello</b>, <b class="color-blue">Creators</b> keep 94% of their
-                    earnings!
-                    <br><br>
-                    To use the <b class="color-blue">Chello</b> platform, <b class="color-blue">Creator</b> will pay $25 per month or can pay $240 per year. We look at
+                <p>
+                    <b class="color-blue">Chello</b> is a social media platform, enhancing the <b
+                        class="color-blue">Creator</b> and the <b class="color-blue">Fan</b> connection! <b
+                        class="color-blue">Chello</b> saw that the Creator was giving away 15-20% of their earnings to
+                    companies. With <b class="color-blue">Chello</b>, <b class="color-blue">Creator</b> keep 94% of
+                    their earnings!
+                </p>
+                <p class="font-16 color-black">To use the <b class="color-blue">Chello</b> platform, <b
+                        class="color-blue">Creator</b> will pay $25 per month or can pay $250 per year. We look at
                     this as the cost of doing business, while you are able to take home more 10-14% MORE of YOUR
-                    EARNINGS! This per month charge only occurs when you are ready to start connecting with <b class="color-blue">Fans</b> on
+                    EARNINGS! This per month charge only occurs when you are ready to start connecting with <b
+                        class="color-blue">Fans</b> on
                     <b class="color-blue">Chello</b>.
                 </p>
             </div>
@@ -204,23 +208,32 @@
                 </div>
             </div>
             <div class="about-under-div-text-table">
-                <p class="font-16 color-black">As you can see from the examples, we want the <b class="color-blue">Creator</b> to take more
+                <p class="font-16 color-black">As you can see from the examples, we want the <b
+                        class="color-blue">Creator</b> to take more
                     $$$ home! Hopefully you can also see, the $25 per month x 12 months= $300 per year, does not
-                    equate to the savings you will have by becoming a <b class="color-blue">Chello</b> <b class="color-blue">Creator</b>!</p>
+                    equate to the savings you will have by becoming a <b class="color-blue">Chello</b> <b
+                        class="color-blue">Creator</b>!</p>
                 <br>
                 <p class="font-16 color-black">By the way, WE wanted to make the About, all about what matters to
                     you the most……$$$$! </p>
                 <br>
                 <p class="font-16 color-black">
-                    Only other fees <b class="color-blue">Creator</b> pays is transaction fee of $1.50 when <b class="color-blue">Creator</b> is getting paid. Chello pays the <b class="color-blue">Creator</b> on the 3rd, 10th, 20th, and 28th of each month. However, <b class="color-blue">Creator</b> can request to get paid on any other day if needed, then the transaction fee will be $10. NO OTHER HIDDEN FEES.
+                    Only other fees <b class="color-blue">Creator</b> pays is transaction fee of $1.50 when <b
+                        class="color-blue">Creator</b> is getting paid. Chello pays the <b
+                        class="color-blue">Creator</b> on the 3rd, 10th, 20th, and 28th of each month. However, <b
+                        class="color-blue">Creator</b> can request to get paid on any other day if needed, then the
+                    transaction fee will be $10. NO OTHER HIDDEN FEES.
                 </p>
                 <br>
                 <p class="font-16 color-black">
-                    The website of <b class="color-blue">Chello</b> is <a href="www.chello.world" target="_blank" class="color-blue">www.chello.world</a> </p>
+                    The website of <b class="color-blue">Chello</b> is <a href="www.chello.world" target="_blank"
+                        class="color-blue">www.chello.world</a> </p>
                 <br>
-                <p class="font-16 color-black">WWW Tacete, LLC is the owner and operator of <b class="color-blue">Chello</b>.</p>
+                <p class="font-16 color-black">WWW Tacete, LLC is the owner and operator of <b
+                        class="color-blue">Chello</b>.</p>
                 <br>
-                <p class="font-16 color-black"><b class="color-blue">Creators</b> + <b class="color-blue">Fans</b> = <b class="color-blue">Chello</b> #LetsGO</p>
+                <p class="font-16 color-black"><b class="color-blue">Creators</b> + <b class="color-blue">Fans</b> = <b
+                        class="color-blue">Chello</b> #LetsGO</p>
                 <br>
                 <a routerLink="/features" class="color-blue text-deco">See <b class="color-blue">Chello</b> Features</a>
             </div>
@@ -239,12 +252,13 @@
                         <div class="col-md-6">
                             <div class="poll-inputs">
                                 <div class="form-group position-relative">
-                                    <input type="text" value="$ 10,000.00" class="w-100">
+                                    <input type="text" value="$100,000.00" class="w-100" id="earningAmount"
+                                        onChange="value='$'+formatNumber(value,2,0);dscl()">
                                 </div>
                             </div>
                             <div class="button-in-calculate form-group">
                                 <div class="right-side-button ">
-                                    <button>CALCULATE</button>
+                                    <button onclick="dscl()">CALCULATE</button>
                                 </div>
                             </div>
                         </div>
@@ -252,11 +266,11 @@
                     <div class="blue-div-calculator">
                         <div class="row">
                             <div class="col-md-6 text-center">
-                                <p class="font-32 color-white font-bold">$94,000.00</p>
+                                <p class="font-32 color-white font-bold" id="creatorNetPay">$94,000.00</p>
                                 <p class="font-26 color-white font-bold">Creator's NET Pay<br>94%</p>
                             </div>
                             <div class="col-md-6 text-center">
-                                <p class="font-32 color-white font-bold">$6000.00</p>
+                                <p class="font-32 color-white font-bold" id="chelloAmount">$6,000.00</p>
                                 <p class="font-26 color-white font-bold">Chello's Amount<br>6%</p>
                             </div>
                         </div>
@@ -277,7 +291,7 @@
                     </div>
                 </div>
             </div>
-             <!--/ calculator  -->
+            <!--/ calculator  -->
         </div>
     </div>
 </div>

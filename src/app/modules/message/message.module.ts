@@ -6,8 +6,6 @@ import { MessageComponent } from './components/message.component';
 import { FooterModule} from '../layout/footer/footer.module'
 import {HeaderNewModule} from '../layout/header-new/header-new.module'
 import {SidebarModule} from '../layout/sidebar/sidebar.module'
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgxSpinnerModule } from "ngx-spinner";
 @NgModule({
   declarations: [
     MessageComponent
@@ -17,10 +15,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
     MessageRoutingModule,
     FooterModule,
     HeaderNewModule,
-    SidebarModule,
-    FormsModule,
-    ReactiveFormsModule,
-    NgxSpinnerModule
+    SidebarModule
   ]
 })
 export class MessageModule { }

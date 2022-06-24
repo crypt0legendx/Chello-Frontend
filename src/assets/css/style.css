@@ -251,7 +251,7 @@ input {
 }
 
 .icon-login a {
-  min-width: 224px;
+  min-width: 250px;
   border: 1px solid var(--line-color);
   background-color: #F1F1F1;
   border-radius: 4px;
@@ -1431,6 +1431,9 @@ input {
 }
 
 @media only screen and (max-width: 767px) {
+  .message-wrapper-chello .comment-section-wrapper {
+    padding: 0px !important;
+  }
   .message-wrapper-chello .back-btn {
     display: block;
   }
@@ -3323,7 +3326,7 @@ input {
 }
 
 #phone {
-  padding-left: 80px;
+  padding-left: 100px;
 }
 
 .button-data-not-found {
@@ -3993,9 +3996,15 @@ input {
             flex: 0 0 100% !important;
     max-width: 100% !important;
   }
+  .add-bank-listing-wrapper {
+    display: block;
+  }
 }
 
 @media only screen and (max-width: 767px) {
+  .back-btn {
+    display: block;
+  }
   .chat-for-chello {
     -webkit-box-flex: 0 !important;
         -ms-flex: 0 0 100% !important;
@@ -4243,5 +4252,130 @@ input {
   .profile-first-s {
     margin-top: 30px;
   }
+}
+
+.col-n-9 {
+  width: -webkit-fill-available;
+}
+
+.user-info-p-a p {
+  margin-top: 0 !important;
+  line-break: anywhere;
+}
+
+.div-for-delete-edit-comment a {
+  margin: 0 5px !important;
+}
+
+.a-for-h-3 .dropdown-menu {
+  border: 1px solid #DFDFDF;
+  border-radius: 8px;
+  -webkit-box-shadow: 5px 10px 30px 0px #00000040;
+  box-shadow: 5px 10px 30px 0px #00000040;
+}
+
+.comment-section-div-forimage-and-text img {
+  width: 40px;
+  height: 40px;
+}
+
+.buttons-for-logout-model {
+  padding: 20px 0 20px 0;
+  text-align: right;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.btn-l-y {
+  cursor: pointer;
+  color: #fff !important;
+  background: #150AA1 !important;
+  height: 50px;
+  border-radius: 4px;
+  border: 1px solid #150AA1;
+  width: 100%;
+}
+
+.btn-l-n {
+  cursor: pointer;
+  margin-left: 10px;
+  border-radius: 4px;
+  border: 1px solid #150AA1;
+  color: #150AA1 !important;
+  background: transparent !important;
+  color: #150AA1 !important;
+  height: 50px;
+  width: 96%;
+}
+
+.button-join-group-new-2-l {
+  width: 100%;
+}
+
+.card-images-small-pf .img {
+  width: 30px;
+  height: 30px;
+}
+
+.card-images-small-pf img {
+  margin: 0 2px;
+}
+
+.payments-icons-footer-wrapper {
+  padding-bottom: 15px;
+}
+
+.dropdown-item:focus, .dropdown-item:hover {
+  background-color: transparent !important;
+}
+
+.button-add-bank-listing .right-visit-g button {
+  font-size: 12px;
+  margin: 0 10px;
+}
+
+.add-bank-listing-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+  padding-top: 15px;
+  margin-bottom: 10px;
+}
+
+.bank-name-e-op a svg {
+  width: 20px;
+  height: 20px;
+}
+
+.add-card-list {
+  border: 1px solid #E4E4E4;
+  border-radius: 4px;
+  margin: 15px 0 0 0;
+  padding: 15px 15px 5px 15px;
+}
+
+.card-listing-wrapper {
+  padding-top: 15px;
+}
+
+.card-images-small-pf .img {
+  width: 30px;
+  height: 30px;
+}
+
+.card-images-small-pf img {
+  margin: 0 2px;
+}
+
+.payments-icons-footer-wrapper {
+  padding-bottom: 15px;
+}
+
+.home-main-drop .vault-section-one {
+  border-bottom: 0px solid var(--line-color-2) !important;
 }
 /*# sourceMappingURL=style.css.map */

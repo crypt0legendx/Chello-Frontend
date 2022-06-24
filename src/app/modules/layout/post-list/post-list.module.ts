@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import { PostListRoutingModule } from './post-list-routing.module';
 import { PostListComponent } from './components/post-list.component';
-import { PostService } from '../../../services/post.service';
+import { PaymentModule } from '../../payment/payment.module';
+
 
 @NgModule({
   declarations: [
@@ -10,11 +12,11 @@ import { PostService } from '../../../services/post.service';
   ],
   imports: [
     CommonModule,
-    PostListRoutingModule
+    PostListRoutingModule,
+    PaymentModule    
   ],
   exports: [
     PostListComponent
-  ],
-  providers: [PostService],
+  ]
 })
 export class PostListModule { }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-more',
@@ -9,8 +10,11 @@ export class MoreComponent implements OnInit {
 
   isDarkMode: any;
   isLightMode: any;
+  myInfo: any;
 
-  constructor() { }
+  constructor(
+    private userService: UserService
+  ) { }
 
   ngOnInit(): void {
     var darkMode = localStorage.getItem('darkMode');
@@ -30,6 +34,15 @@ export class MoreComponent implements OnInit {
       this.isLightMode = true;
       document.body.classList.remove('dark-theme');
     }
+
+    this.userService.currentUser().subscribe(
+      (success:any)=>{
+        console.log(success.data.user);
+        this.myInfo = success.data.user;
+      }
+    );
+    
+
   }
 
   toggleDarkTheme(): void {

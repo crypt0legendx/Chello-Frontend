@@ -34,7 +34,7 @@ export class ProfileService {
     let token: any = localStorage.getItem('accessToken');
     let header = new HttpHeaders({ "Authorization": "Bearer " + token});
     const requestOptions = {headers: header};
-
-    return this.http.patch<any[]>(this.base_url + 'profiles', registerData, requestOptions);
+    console.log(token);
+    return this.http.post<any[]>(this.base_url + 'profiles', registerData, requestOptions);
   }
 }

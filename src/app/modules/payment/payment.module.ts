@@ -12,6 +12,9 @@ import { PaymentComponent } from './components/payment.component';
   imports: [
     CommonModule,
     PaymentRoutingModule
+  ],
+  exports:[
+    PaymentComponent
   ]
 })
 export class PaymentModule { }

@@ -33,8 +33,8 @@
                                     <div class="col-md-5">
                                         <div class="search-bar-home">
                                             <input type="text" placeholder="Search" class="w-100" #searchInput
-                                            (input)="searchEvents(searchInput.value)" id="searchInput" 
-                                            [(ngModel)] = "searchText"                                    
+                                            (input)="changedSearchBox()" id="searchInput" 
+                                            [(ngModel)] = "searchTitle"                                    
                                             autocomplete="off"
                                             />
                                             <span class="iconify"
@@ -54,42 +54,42 @@
                                         <div class="col-md-5 d-flex flex-column mt-3">
                                             <div class="font-16 font-medium">Search By Name</div>
                                             <div>
-                                                <input class="search-field" placeholder="Enter Event Name" />
+                                                <input class="search-field" [(ngModel)] = "searchTitle"  placeholder="Enter Event Name" />
                                             </div>
                                         </div>
                                         <div class="col-md-3 d-flex flex-column mt-3">
                                             <div class="font-16 font-medium">Search By Type</div>
                                             <div>
-                                                <input class="search-field" placeholder="Enter Event Type" />
+                                                <input class="search-field" [(ngModel)] = "searchType"  placeholder="Enter Event Type" />
                                             </div>
                                         </div>
                                         <div class="col-md-4 d-flex flex-column mt-3">
                                             <div class="font-16 font-medium">Search By Username</div>
                                             <div>
-                                                <input class="search-field" placeholder="Enter Username" />
+                                                <input class="search-field" [(ngModel)] = "searchUsername"  placeholder="Enter Username" />
                                             </div>
                                         </div>
                                         <div class="col-md-5 d-flex flex-column mt-3">
                                             <div class="font-16 font-medium">Search By Misc Info</div>
                                             <div>
-                                                <input class="search-field" placeholder="Enter Misc Info" />
+                                                <input class="search-field" [(ngModel)] = "searchMiscInfo"  placeholder="Enter Misc Info" />
                                             </div>
                                         </div>
                                         <div class="col-md-3 d-flex flex-column mt-3">
                                             <div class="font-16 font-medium">Search By URL</div>
                                             <div>
-                                                <input class="search-field" placeholder="Enter URL" />
+                                                <input class="search-field" [(ngModel)] = "searchURL"  placeholder="Enter URL" />
                                             </div>
                                         </div>
                                         <div class="col-md-4 d-flex flex-column mt-3">
                                             <div class="font-16 font-medium">Search By Date</div>
                                             <div>
-                                                <input type="date" class="search-field" placeholder="Enter Date" />
+                                                <input type="date" class="search-field" [(ngModel)] = "searchDate"  placeholder="Enter Date" />
                                             </div>
                                         </div>
                                     </div>
                                     <div class="right-side-button mt-4">
-                                        <button>Search Private Event</button>
+                                        <button (click)="changedSearchForm()">Search Private Event</button>
                                     </div>
 
                                 </div>    
@@ -101,42 +101,74 @@
                                             </div>
                                             <div class="col-md-5">
                                                 <div class="color-blue font-16 font-medium">{{item.title}}</div>
-                                                <div class="color-a9 font-14">Event Type: <span class="color-blue">{{item.type}}</span></div>
-                                                <div class="color-a9 font-14">Date of Private Event: <span class="color-blue">{{item.eventDate}}</span></div>
-                                                <div class="color-a9 font-14">Private Event Starts: <span class="color-blue">{{item.eventStartTime}}</span></div>
-                                                <div class="color-a9 font-14">Private Event Ends: <span class="color-blue">{{item.eventEndTime}}</span></div>                                            
+                                                <div class="color-lblue font-14">Event Type: <span class="color-blue">{{item.type}}</span></div>
+                                                <div class="color-lblue font-14">Date of Private Event: <span class="color-blue">{{item.eventDate}}</span></div>
+                                                <div class="color-lblue font-14">Private Event Starts: <span class="color-blue">{{getValidateTime(item.eventStartTime)}}</span></div>
+                                                <div class="color-lblue font-14">Private Event Ends: <span class="color-blue">{{getValidateTime(item.eventEndTime)}}</span></div>                                            
                                             </div>
                                             <div class="col-md-2">
-                                                <div class="color-blue font-16 font-medium">${{item.eventJoinPrice}}</div>
+                                                <div class="color-blue font-16 font-medium">$100</div>
                                             </div>
                                         </div>
                                     </div>                                    
                                 </div>                            
                             </div>
-                            <div *ngIf="tabIndex == 1" class="my-private-event mt-2">                                
-                                <div class="event-card mt-3 p-3">
+                            <div *ngIf="tabIndex == 1" class="my-private-event mt-2">            
+                                <div *ngFor="let item of myEvents" class="event-card mt-1 p-3">
                                     <div class="row">
                                         <div class="col-md-5">
                                             <img src="assets/images/Group 37126 (1).png" />
                                         </div>
                                         <div class="col-md-5">
-                                            <div class="color-blue font-16 font-medium">Developer Paid Workshop</div>
-                                            <div class="color-a9 font-14">Event Type: <span class="color-blue">Workshop</span></div>
-                                            <div class="color-a9 font-14">Date of Private Event: <span class="color-blue">March 26, 2022</span></div>
-                                            <div class="color-a9 font-14">Private Event Starts: <span class="color-blue">5:30 pm</span></div>
-                                            <div class="color-a9 font-14">Private Event Ends: <span class="color-blue">7:30pm</span></div>                                            
+                                            <div class="color-blue font-16 font-medium">{{item.title}}</div>
+                                            <div class="color-lblue font-14">Event Type: <span class="color-blue">{{item.type}}</span></div>
+                                            <div class="color-lblue font-14">Date of Private Event: <span class="color-blue">{{item.eventDate}}</span></div>
+                                            <div class="color-lblue font-14">Private Event Starts: <span class="color-blue">{{getValidateTime(item.eventStartTime)}}</span></div>
+                                            <div class="color-lblue font-14">Private Event Ends: <span class="color-blue">{{getValidateTime(item.eventEndTime)}}</span></div>                                            
                                         </div>
-                                        <div class="col-md-2">
-                                            <div class="color-blue font-16 font-medium">$5.00</div>
+                                        <div class="col-md-2 d-flex">
+                                            <div class="color-blue font-16 font-medium">$100</div>
+                                            <div class="a-for-h-3 ml-3">                                            
+                                                <a href="javascript:void(0)"
+                                                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false"><span class="iconify font-20"
+                                                        data-icon="fluent:more-circle-32-regular"></span></a>
+            
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                    <a class="dropdown-item" role="button" data-toggle="modal"
+                                                        style="color: #212529;" (click)="updateEvent(item)">
+                                                        <svg width="11" height="11" viewBox="0 0 11 11" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                d="M8.5146 0.169614C8.62749 0.0564292 8.77579 0 8.92393 0C9.07207 0 9.22008 0.0564292 9.33327 0.169614L10.8304 1.66674C11.0568 1.89252 11.0568 2.25903 10.8304 2.4854L9.8421 3.47368L7.52632 1.15789L8.5146 0.169614ZM0 8.68421L6.65789 2.02632L8.97368 4.3421L2.31579 11H0V8.68421Z"
+                                                                fill="#150AA1" />
+                                                        </svg>
+                                                        Edit Event
+                                                    </a>
+            
+                                                    <a class="dropdown-item" data-toggle="modal"
+                                                        style="color: #212529; cursor: pointer;" (click)="deleteEvent(item)" >
+                                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                d="M5.20216 0.399219C5.45836 0.143019 5.80412 0 6.16602 0H7.83673C8.19863 0 8.54509 0.143019 8.80059 0.399219L9.10138 0.7H12.6014C12.8538 0.69643 13.0886 0.829063 13.2159 1.04711C13.3432 1.26516 13.3432 1.53484 13.2159 1.75289C13.0886 1.97094 12.8538 2.10357 12.6014 2.1H1.40138C1.14893 2.10357 0.914119 1.97094 0.786855 1.75289C0.65959 1.53484 0.65959 1.26516 0.786855 1.04711C0.914119 0.829063 1.14893 0.69643 1.40138 0.7H4.90138L5.20216 0.399219ZM2.72618 12.7846L1.65704 3.5H12.3457L11.2766 12.7791C11.1835 13.4784 10.5861 14 9.88751 14H4.11388C3.41528 14 2.81858 13.4776 2.72618 12.7846Z"
+                                                                fill="#FF6B6B" />
+                                                        </svg>
+                                                        Delete
+                                                    </a>
+                                                </div>
+                                            </div>
                                         </div>
+                                        
                                     </div>
-                                </div>
+                                </div>                        
+                           
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <app-suggestions></app-suggestions>
+                    <app-event-suggestion></app-event-suggestion>
                 </div>
             </div>
         </div>

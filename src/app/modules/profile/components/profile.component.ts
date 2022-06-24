@@ -11,7 +11,7 @@ import { first, map } from 'rxjs/operators';
 import * as auth from 'firebase/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
-import {PostListComponent} from '../../layout/post-list/components/post-list.component';
+import { PostListComponent } from '../../layout/post-list/components/post-list.component';
 
 declare var swal: any;
 declare var $: any;
@@ -22,8 +22,8 @@ declare var $: any;
   styleUrls: ['../pages/profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  @ViewChild(PostListComponent ) postListCamponent: PostListComponent | undefined ; 
-  @ViewChild(PostListComponent)  child: any = PostListComponent;
+  @ViewChild(PostListComponent) postListCamponent: PostListComponent | undefined;
+  @ViewChild(PostListComponent) child: any = PostListComponent;
 
   feedForm!: FormGroup;
   submitted: any;
@@ -56,7 +56,10 @@ export class ProfileComponent implements OnInit {
     })
   );
 
-  postType: any;
+  postType: any = "all";
+
+  isMyProfile: boolean = false;
+  isLoggedUser: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -77,18 +80,25 @@ export class ProfileComponent implements OnInit {
     if (retrievedObject) {
       this.userJsonData = JSON.parse(retrievedObject);
       console.log(this.userJsonData);
-      this.userName = this.userJsonData['userName'];
-      this.profilePicture = this.userJsonData['profileImage'];
-      this.isUserVerify = this.userJsonData['profileStatus'];
-      this.userFullName = this.userJsonData['fullName'];
-      this.userCoverPicture = this.userJsonData['coverImage'];
-      if(this.userJsonData['coverImage']){
-        this.isUserCoverPicture = true;
+      if (this.route.snapshot.paramMap.get('username') != this.userJsonData['userName']) {
+        this.isLoggedUser = true;
+        this.isMyProfile = true;
+        this.userName = this.userJsonData['userName'];
+        this.profilePicture = this.userJsonData['profileImage'];
+        this.isUserVerify = this.userJsonData['profileStatus'];
+        this.userFullName = this.userJsonData['fullName'];
+        this.userCoverPicture = this.userJsonData['coverImage'];
+        if (this.userJsonData['coverImage']) {
+          this.isUserCoverPicture = true;
+        } else {
+          this.isUserCoverPicture = false;
+        }
       } else {
-        this.isUserCoverPicture = false;
+        this.isMyProfile = false;
       }
     } else {
-      //this.router.navigate([this.routernavigate.login]);
+      this.isLoggedUser = false;
+      this.isMyProfile = false;
     }
 
     this.feedForm = this.formBuilder.group({
@@ -137,9 +147,13 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  getUserPost(type: any){
-    this.postListCamponent?.getUserFeeds(type);
+  getUserPost(type: any) {
+    this.postType = type;
+    this.postListCamponent?.getUserFeeds();
+    this.child.show = (-1);
     this.cdr.detectChanges();
   }
+
+
 
 }

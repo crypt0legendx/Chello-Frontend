@@ -1,0 +1,15 @@
+.favorite.active svg .clr-i-outline {
+  fill: #150AA1 !important;
+  opacity: 1;
+}
+
+.bookmark.active svg path {
+  fill: #150AA1 !important;
+  opacity: 1;
+}
+
+.like.active svg path {
+  fill: #150AA1 !important;
+  opacity: 1;
+}
+/*# sourceMappingURL=group-post-list.component.css.map */

@@ -84,11 +84,12 @@ export class BookmarkComponent implements OnInit {
   }
 
   postFilter(type: any){
-    if(type === "all"){
-      this.postListCmp?.getBookmark();
-    } else{
-      this.postListCmp?.bookmarkFilter(type);
-    }
+    this.postListCmp?.getBookmark(type);
+    // if(type === "all"){
+    //   this.postListCmp?.getBookmark(type);
+    // } else{
+    //   this.postListCmp?.bookmarkFilter(type);
+    // }
   }
 
 }

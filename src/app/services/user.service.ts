@@ -54,4 +54,12 @@ export class UserService {
     
 	  return this.http.get(this.base_url + 'user', requestOptions)
   }
+
+  public findUserByEmailId(data: any){
+    let token: any = localStorage.getItem('accessToken');
+    let header = new HttpHeaders({ "Authorization": "Bearer " + token,  'Content-Type': 'application/json' });
+    const requestOptions = {  headers: header};  
+    
+	  return this.http.post(this.base_url + 'findUserByEmail', data, requestOptions)
+  }
 }

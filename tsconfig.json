@@ -12,6 +12,7 @@
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,
+    "allowJs": true,
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "es2017",
@@ -19,12 +20,16 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+  
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
-  }
+  },
+  "include": [
+    "src/**/*.ts"
+  ]
 }

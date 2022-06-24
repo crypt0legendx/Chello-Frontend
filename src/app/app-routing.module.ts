@@ -1,4 +1,3 @@
-import { EventListModule } from './modules/event-list/event-list.module';
 import { TipsModule } from './modules/tips/tips.module';
 import { NgModule } from '@angular/core';
 import { Router, RouterModule, Routes, UrlSegment } from '@angular/router';
@@ -65,7 +64,7 @@ import {JoinEventModule} from './modules/join-event/join-event.module'
 import {EventPlayModule} from './modules/event-play/event-play.module'
 import {PaymentConfirmationModule} from './modules/payment-confirmation/payment-confirmation.module'
 import {PaymentModule} from './modules/payment/payment.module'
-
+import {AddCardModule} from './modules/add-card/add-card.module'
 
 const routes: Routes = [
 	{
@@ -172,21 +171,21 @@ const routes: Routes = [
 		path: 'profile',
 		loadChildren: () => ProfileModule
 	},
-	{
-		matcher: (url) => {
-			if (url.length === 1 && url[0].path.match(/^@[\w]+$/gm)) {
-				return {
-					consumed: url,
-					posParams: {
-						username: new UrlSegment(url[0].path.substr(1), {})
-					}
-				};
-			}
+	// {
+	// 	matcher: (url) => {
+	// 		if (url.length === 1 && url[0].path.match(/^@[\w]+$/gm)) {
+	// 			return {
+	// 				consumed: url,
+	// 				posParams: {
+	// 					username: new UrlSegment(url[0].path.substr(1), {})
+	// 				}
+	// 			};
+	// 		}
 
-			return null;
-		},
-		loadChildren: () => ProfileModule
-	},
+	// 		return null;
+	// 	},
+	// 	loadChildren: () => ProfileModule
+	// },
 	{
 		path: 'profile-2',
 		loadChildren: () => ProfilePhotoModule
@@ -328,13 +327,9 @@ const routes: Routes = [
 		loadChildren: () => PrivateEventFinalModule
 	},
 	{
-		path: 'event-list',
-		loadChildren: () => EventListModule
-	},
-	{
 		path: 'join-event',
 		loadChildren: () => JoinEventModule
-	},	
+	},
 	{
 		path: 'event-play',
 		loadChildren: () => EventPlayModule
@@ -350,9 +345,26 @@ const routes: Routes = [
 	{ // added by sagadev
 		path: 'tips',
 		loadChildren: () => TipsModule
-	}
+	},
+	{ 
+		path: 'add-card',
+		loadChildren: () => AddCardModule
+	},
+	// {
+	// 	matcher: (url) => {
+	// 		if (url.length === 1 && url[0].path.match(/^[\w]+$/gm)) {
+	// 			return {
+	// 				consumed: url,
+	// 				posParams: {
+	// 					username: new UrlSegment(url[0].path.substr(0), {})
+	// 				}
+	// 			};
+	// 		}
 
-
+	// 		return null;
+	// 	},
+	// 	loadChildren: () => ProfileModule
+	// },
 ];
 
 @NgModule({
@@ -366,7 +378,7 @@ const routes: Routes = [
 export class AppRoutingModule {
 	constructor(private router: Router) {
 		this.router.errorHandler = (error: any) => {
-			this.router.navigate(['home']); // or redirect to default route
+			this.router.navigate(['private']); // or redirect to default route
 		}
 	}
 }

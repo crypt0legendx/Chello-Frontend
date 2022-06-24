@@ -10,7 +10,7 @@ import {PostFeedModule} from '../layout/post-feed/post-feed.module';
 import {PostListModule} from '../layout/post-list/post-list.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from "ngx-spinner";
-
+import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [
     ProfileComponent
@@ -26,7 +26,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
     PostListModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    ToastrModule
   ]
 })
 export class ProfileModule { }

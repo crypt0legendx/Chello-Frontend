@@ -40,6 +40,7 @@ export class HomeComponent implements OnInit {
   filePath: any = '';
   duration: any = 0;
   pageNumber: number = 0;
+  public postOption: number = 0;
   
   constructor(
     private formBuilder: FormBuilder,

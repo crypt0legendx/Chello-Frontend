@@ -27,8 +27,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12 second-home-middle">
-                            <app-post-feed></app-post-feed>
+                        <div class="col-md-12 second-home-middle">                            
+                            <!-- <app-post-photo></app-post-photo>      -->
+                            <app-post-feed *ngIf="postOption == 0"></app-post-feed>     
+                            <app-timed-post *ngIf="postOption == 1"></app-timed-post>       
+                            <app-post-photo  *ngIf="postOption == 2"></app-post-photo>                     
+                            <app-video-post *ngIf="postOption == 3"></app-video-post>
+                            <app-audio-post *ngIf="postOption == 4"></app-audio-post>
+                            <app-fancam-post *ngIf="postOption == 5"></app-fancam-post>
                             <!-- <div class="poll-div-section">
                                 <div class="wrapper-poll-div-section">
                                     <div class="">

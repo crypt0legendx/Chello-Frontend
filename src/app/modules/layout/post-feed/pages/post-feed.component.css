@@ -1,1 +1,24 @@
-/* No CSS *//*# sourceMappingURL=post-feed.component.css.map */
+.iconToolTip {
+  position: relative;
+}
+
+.iconToolTip > span {
+  display: none;
+}
+
+.iconToolTip:hover > span {
+  display: block;
+  position: absolute;
+  left: 20px;
+  bottom: 100%;
+  border: 1px solid #5858FA;
+  border-radius: 3px;
+  padding: 5px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+}
+
+a, button {
+  cursor: pointer;
+}
+/*# sourceMappingURL=post-feed.component.css.map */

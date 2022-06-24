@@ -25,43 +25,64 @@
               One Page Away to Use Chello</p>
           </div>
           <div class="form-div-login">
-            <form>
-              <div class="form-group">
+            <form [formGroup]="registerForm2" (ngSubmit)="register()">
+              <div class="form-group position-relative">
                 <label class="font-14 color-grey">Enter your Phone Number</label>
-                <input id="phone" type="tel" class="w-100 ">
+                <input id="phone" type="number" minlength=10 maxlength=10 class="w-100 " formControlName="phoneNumber"
+                  [ngClass]="{ 'is-invalid': submitted2 && rf2Validation.phoneNumber.errors }">
+                <div *ngIf="submitted2 && rf2Validation.phoneNumber.errors" class="invalid-feedback">
+                  <div *ngIf="rf2Validation.phoneNumber.errors.required" style="color:red;">Phone number is required
+                  </div>
+                </div>
+                <select class="form-select-for-pass" aria-label="Default select example" (change)="selectCountryCode($event.target)">
+                  <option *ngFor="let code of countryCodeList" [value]="code.dialCode">{{code.dialCode}}</option>
+                </select>
               </div>
-              <div class="form-group">
+              <!-- <div class="form-group">
                 <label class="font-14 color-grey">Enter Your Birthday</label>
                 <div class="birth-day-date-entry">
                   <div class="wrapper-birth-day-entry">
                     <div class="first-birthday-entry">
                       <label class="font-12 color-grey">Month</label>
-                      <input type="text" name="dob" placeholder="Jan" class="w-100 side-tab">
+                      <input type="text" name="dob" placeholder="Jan" class="w-100 side-tab" formControlName="month"
+                        [ngClass]="{ 'is-invalid': submitted2 && rf2Validation.month.errors }">
+                      <div *ngIf="submitted2 && rf2Validation.month.errors" class="invalid-feedback">
+                        <div *ngIf="rf2Validation.month.errors.required" style="color:red;">Month is required</div>
+                      </div>
                     </div>
                     <div class="first-birthday-entry">
                       <label class="font-12 color-grey">Day</label>
-                      <input type="text" name="dob" placeholder="01" class="w-100 side-tab">
+                      <input type="text" name="dob" placeholder="01" class="w-100 side-tab" formControlName="day"
+                        [ngClass]="{ 'is-invalid': submitted2 && rf2Validation.day.errors }">
+                      <div *ngIf="submitted2 && rf2Validation.day.errors" class="invalid-feedback">
+                        <div *ngIf="rf2Validation.day.errors.required" style="color:red;">Day is required</div>
+                      </div>
                     </div>
                     <div class="first-birthday-entry">
                       <label class="font-12 color-grey">Year</label>
-                      <input type="text" name="dob" placeholder="1993" class="w-100">
+                      <input type="text" name="dob" placeholder="1993" class="w-100" formControlName="year"
+                        [ngClass]="{ 'is-invalid': submitted2 && rf2Validation.year.errors }">
+                      <div *ngIf="submitted2 && rf2Validation.year.errors" class="invalid-feedback">
+                        <div *ngIf="rf2Validation.year.errors.required" style="color:red;">Year is required</div>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
               <div class="form-group">
                 <label class="font-14 color-grey">I Want to Become a</label>
                 <div class="for-toggle-div-user">
                   <div class="btn-group" role="group" aria-label="...">
-                    <button type="button" class="active btn-default" id="b1">Creator</button>
-                    <button type="button" class=" btn-default" id="b2">Fan</button>
-                </div>
-            
+                    <button type="button" class="btn-default active" id="roleCreator"
+                      (click)="roleSection('creator')">Creator</button>
+                    <button type="button" class="btn-default" id="roleFan" (click)="roleSection('fan')">Fan</button>
+                  </div>
+
                 </div>
               </div>
               <div class="button-link">
                 <div class="d-flex justify-content-between">
-                  <a href="javascript:void(0)" class="btn">Let’s GO</a>
+                  <button type="submit" class="btn">Let’s GO</button>
                 </div>
               </div>
             </form>

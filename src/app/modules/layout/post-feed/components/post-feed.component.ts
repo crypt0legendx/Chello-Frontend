@@ -16,6 +16,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { PostListComponent } from '../../post-list/components/post-list.component';
 import { GroupPostListComponent } from '../../group-post-list/components/group-post-list.component';
+import { HomeComponent } from 'src/app/modules/home/components/home.component';
 
 declare var swal: any;
 declare var $: any;
@@ -37,9 +38,9 @@ export class PostFeedComponent implements OnInit {
   isAddVideo: boolean = false;
   isAddAudio: boolean = false;
 
-  selectedFiles: any = '';
-  imageSrc: string = '';
-  filePath: any = '';
+  selectedFiles: any[] = [];
+  imageSrc: any[] = [];
+  filePath: any[] = [];
   duration: any = 0;
 
   totalPosts: any;
@@ -62,7 +63,8 @@ export class PostFeedComponent implements OnInit {
     public afs: AngularFirestore, // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     private postListComponent: PostListComponent,
-    private groupPostListComponent: GroupPostListComponent
+    private groupPostListComponent: GroupPostListComponent,
+    private homeComponent: HomeComponent
   ) { }
 
   ngOnInit(): void {
@@ -70,13 +72,18 @@ export class PostFeedComponent implements OnInit {
       postTxt: ['', Validators.required]
     });
 
-    this.retrievedGroupDetails = localStorage.getItem('groupDetails');
-    this.retrievedGroupDetails = JSON.parse(this.retrievedGroupDetails);
+    if (this.router.url === "/group-detail-new") {
+      this.retrievedGroupDetails = localStorage.getItem('groupDetails');
+      this.retrievedGroupDetails = JSON.parse(this.retrievedGroupDetails);
+    } else {
+      this.retrievedGroupDetails = "";
+    }
   }
 
   get f() { return this.feedForm.controls; }
 
   async postFeed() {
+    let today = new Date()
     if (this.isAddImage === true) {
       this.uploadImage(this.filePath, "addImage");
     } else if (this.isAddVideo === true) {
@@ -88,7 +95,9 @@ export class PostFeedComponent implements OnInit {
         "title": this.f.postTxt.value,
         "type": "text",
         "fileName": "",
-        "thumbnail": ""
+        "thumbnail": "",
+        "scheduled": false,
+        "scheduledDateTime": today.toISOString()
       }
 
       console.log(postData);
@@ -132,8 +141,8 @@ export class PostFeedComponent implements OnInit {
         this.isAddVideo = false;
         this.isAddAudio = false;
         this.feedForm.reset();
-        this.selectedFiles = "";
-        this.filePath = "";
+        this.selectedFiles = [];
+        this.filePath = [];
         this.spinner.hide();
         this.submitted = false;
         this.toastr.success("Post added successfully");
@@ -151,6 +160,7 @@ export class PostFeedComponent implements OnInit {
   }
 
   async postGroupFeed() {
+    let today = new Date();
     if (this.isAddImage === true) {
       this.uploadImage(this.filePath, "addImage");
     } else if (this.isAddVideo === true) {
@@ -207,8 +217,8 @@ export class PostFeedComponent implements OnInit {
         this.isAddVideo = false;
         this.isAddAudio = false;
         this.feedForm.reset();
-        this.selectedFiles = "";
-        this.filePath = "";
+        this.selectedFiles = [];
+        this.filePath = [];
         this.spinner.hide();
         this.submitted = false;
         this.toastr.success("Post added successfully");
@@ -239,17 +249,21 @@ export class PostFeedComponent implements OnInit {
   }
 
   selectFile(event: any, fileType: any) {
-    const reader = new FileReader();
-    if (event.target.files && event.target.files.length) {
-      const [file] = event.target.files;
-      console.log(file.name);
-      this.filePath = Math.random() * 10000000000000000 + '_' + file.name;
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        this.imageSrc = reader.result as string;
+    if (event.target.files && event.target.files[0]) {
+      const filesAmount = event.target.files.length;
+      for (let i = 0; i < filesAmount; i++) {
+        const reader = new FileReader();
+        const file = event.target.files[i];
+        this.selectedFiles.push(file);
+        console.log('selected file name', file.name);
+        this.filePath.push(Math.random() * 10000000000000000 + '_' + file.name);
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+          console.log("imgSrc", reader.result as string);
+          this.imageSrc.push({ type: fileType, value: reader.result as string });
+        }
       }
 
-      this.selectedFiles = file;
       if (fileType === "story") {
         this.uploadImage(this.filePath, "story");
       } else if (fileType === "addImage") {
@@ -266,10 +280,11 @@ export class PostFeedComponent implements OnInit {
 
   async uploadImage(filePath: any, jsonKey: any) {
     this.spinner.show();
+    let today = new Date();
     const file = this.selectedFiles;
     let res: any = await this.uploadService.uploadFile(file, filePath);
     console.log(res);
-    if(!this.retrievedGroupDetails){
+    if (!this.retrievedGroupDetails) {
       if (jsonKey === "story") {
         this.uploadStory({
           "name": res['Location'],
@@ -280,9 +295,11 @@ export class PostFeedComponent implements OnInit {
           "title": this.f.postTxt.value,
           "type": "image",
           "fileName": res['Location'],
-          "thumbnail": res['Location']
+          "thumbnail": res['Location'],
+          "scheduled": false,
+          "scheduledDateTime": today.toISOString()
         }
-  
+
         this.postFiles(sendData);
       } else if (jsonKey === "addVideo") {
         let sendData = {
@@ -290,9 +307,11 @@ export class PostFeedComponent implements OnInit {
           "type": "video",
           "fileName": res['Location'],
           "thumbnail": res['Location'],
-          "duration": this.duration
+          "duration": this.duration,
+          "scheduled": false,
+          "scheduledDateTime": today.toISOString()
         }
-  
+
         this.postFiles(sendData);
       } else if (jsonKey === "addAudio") {
         let sendData = {
@@ -300,12 +319,14 @@ export class PostFeedComponent implements OnInit {
           "type": "audio",
           "fileName": res['Location'],
           "thumbnail": res['Location'],
-          "duration": this.duration
+          "duration": this.duration,
+          "scheduled": false,
+          "scheduledDateTime": today.toISOString()
         }
-  
+
         this.postFiles(sendData);
       }
-    } else{
+    } else {
       if (jsonKey === "addImage") {
         let sendData = {
           "group_id": this.retrievedGroupDetails['_id'],
@@ -314,7 +335,7 @@ export class PostFeedComponent implements OnInit {
           "fileName": res['Location'],
           "thumbnail": res['Location']
         }
-  
+
         this.postGroupFiles(sendData);
       } else if (jsonKey === "addVideo") {
         let sendData = {
@@ -325,7 +346,7 @@ export class PostFeedComponent implements OnInit {
           "thumbnail": res['Location'],
           "duration": this.duration
         }
-  
+
         this.postGroupFiles(sendData);
       } else if (jsonKey === "addAudio") {
         let sendData = {
@@ -336,7 +357,7 @@ export class PostFeedComponent implements OnInit {
           "thumbnail": res['Location'],
           "duration": this.duration
         }
-  
+
         this.postGroupFiles(sendData);
       }
     }
@@ -362,20 +383,30 @@ export class PostFeedComponent implements OnInit {
     });
   }
 
-  removeAttachment(attachmentType: any) {
-    if (attachmentType === "image") {
-      this.selectedFiles = "";
-      this.filePath = "";
-      this.isAddImage = false;
-    }
+  removeAttachment(imgIndex: number) {
+    // const selectedIndex = this.selectedFiles.indexOf(imgIndex); 
+    console.log('removeAttachment - imgIndex', imgIndex);
+    this.imageSrc.splice(imgIndex, 1);
+    console.log("removeAttachment, selected files", this.selectedFiles);
+    // this.selectedFiles.splice(imgIndex, 1);
+    this.filePath.splice(imgIndex, 1);
+    // this.isAddImage = false;    
   }
 
   createPoll() {
-    if(this.router.url === "/group-detail-new"){
-      this.router.navigate([this.routernavigate.poll], { queryParams: { type: 'group'}});
-    } else{
+    if (this.router.url === "/group-detail-new") {
+      this.router.navigate([this.routernavigate.poll], { queryParams: { type: 'group' } });
+    } else {
       this.router.navigate([this.routernavigate.poll]);
     }
+  }
+
+  /**
+   * araki dev function
+   * @param opt_num 
+   */
+  selectPostOption(opt_num: number) {
+    this.homeComponent.postOption = opt_num;
   }
 
 }

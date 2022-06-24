@@ -1,0 +1,22 @@
+.timedBtn {
+  width: 100%;
+  height: 147px;
+  background: #FFFFFF;
+  border: 1px solid #E4E4E4;
+  border-radius: 4px;
+}
+
+.time-post-title {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background: transparent;
+  padding: 15px;
+  color: #150AA1;
+}
+
+.text-grey {
+  color: #9A9A9A;
+}
+/*# sourceMappingURL=timed-post.component.css.map */

@@ -84,6 +84,7 @@
                                             </div>
                                             <div class="input-more-m">
                                                 <input type="text" placeholder="https://www.chello.world/username"
+                                                    [value] = "'https://www.chello.world/'+myInfo.userName"
                                                     class="w-100">
                                             </div>
                                             <div class="share-more-m d-flex align-items-baseline">
@@ -142,14 +143,14 @@
                                                 <p class="font-16 font-bold color-blue">My Username</p>
                                             </div>
                                             <div class="input-more-m">
-                                                <input type="text" placeholder="@cashflow" class="w-100">
+                                                <input type="text" placeholder="@cashflow" [value] = "'@'+myInfo.userName" class="w-100">
                                             </div>
                                             <div class="inner-more-div">
                                                 <div class="headding-more-m">
                                                     <p class="font-16 font-bold color-blue">My Display Name</p>
                                                 </div>
                                                 <div class="input-more-m">
-                                                    <input type="text" placeholder="Cash Flow" class="w-100">
+                                                    <input type="text" placeholder="Cash Flow" [value] = "myInfo.fullName" class="w-100">
                                                 </div>
                                             </div>
                                         </div>
@@ -201,4 +202,3 @@
     </div>
 </div>
 <app-footer></app-footer>
-

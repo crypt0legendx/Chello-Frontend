@@ -17,6 +17,7 @@ import { APP_BASE_HREF, LocationStrategy, PathLocationStrategy } from '@angular/
 import { baseurl } from './utils/base-url';
 import { routers } from './utils/router-navigate';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { browserPopupRedirectResolver, browserSessionPersistence } from 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDN4tj9GQmKLEMoy34HpxqoW98FO9AcKDs",

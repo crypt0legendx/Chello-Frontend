@@ -77,167 +77,136 @@
                         <div class="home-middle-div w-100 ">
                             <div class="main-tips-div p-4">
                                 <div class="wrapper-main-tips-div p-4">
-                                    <form formGroup = "groupForm">
-                                        <div class="tips-header d-flex justify-content-between">
-                                            <div class="font-20 font-bold color-blue">TIPS</div>
-                                            <div class="date color-a9 font-14">
-                                                May 30, 2022
-                                            </div>
+                                    <form #f="ngForm">
+                                    <div class="tips-header d-flex justify-content-between">
+                                        <div class="font-20 font-bold color-blue">TIPS</div>
+                                        <div class="date color-a9 font-14">
+                                            May 30, 2022
                                         </div>
-                                        <div class="amount-form d-flex flex-column p-2 mt-3">
+                                    </div>
+                                    <div class="amount-form d-flex flex-column p-2 mt-3">
+                                        <div class="row">
+                                            <div class="font-16 font-medium col-md-5">I want to send a Tip to</div>
+                                            <div class="col-md-7"><input type="text" class="tip-input" /> </div>
+                                        </div>
+                                        <div class="d-flex justify-content-between font-16 font-medium color-blue mt-1 p-2 bg-amount">
+                                            <div>
+                                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M1.58186 1.58907C1.72761 1.44163 1.90124 1.32468 2.09263 1.24501C2.28402 1.16533 2.48935 1.12454 2.69667 1.125H7.01842C7.30192 1.12553 7.57377 1.23784 7.77499 1.43754L16.4146 10.0754C16.7094 10.3708 16.875 10.7711 16.875 11.1885C16.875 11.6058 16.7094 12.0061 16.4146 12.3015L12.3014 16.4148C12.0059 16.7098 11.6054 16.8754 11.188 16.8754C10.7705 16.8754 10.37 16.7098 10.0746 16.4148L1.43843 7.78044C1.23832 7.57955 1.12562 7.30778 1.12483 7.02423V2.70001C1.12355 2.49378 1.1633 2.28935 1.24176 2.09863C1.32022 1.90791 1.43583 1.73469 1.58186 1.58907ZM4.49983 5.62501C4.72233 5.62501 4.93984 5.55903 5.12485 5.43541C5.30985 5.31179 5.45405 5.13609 5.53919 4.93053C5.62434 4.72496 5.64662 4.49876 5.60321 4.28053C5.5598 4.0623 5.45266 3.86184 5.29533 3.70451C5.13799 3.54718 4.93754 3.44003 4.71931 3.39662C4.50108 3.35321 4.27488 3.37549 4.06931 3.46064C3.86374 3.54579 3.68804 3.68998 3.56443 3.87499C3.44081 4.05999 3.37483 4.2775 3.37483 4.50001C3.37483 4.79838 3.49336 5.08452 3.70434 5.2955C3.91531 5.50648 4.20146 5.62501 4.49983 5.62501Z" fill="#150AA1"/>
+                                                </svg>
+                                                Please Enter Tip Amount</div>
+                                            <div><input type="text" class="amount-input color-blue" /> </div>
+                                        </div>                                  
+                                        <div class="text-right mt-2 font-14 color-a9">
+                                            TIP amount from $5.00 to $300
+                                        </div>
+                                    </div>
+                                    <div class="radio-button-div-payments mt-3">
+                                        <div class="heading-payment">
+                                            <p class="font-20 color-blue font-bold">Payment Details</p>
+                                        </div>
+                                        <div class="radio-payment-wrap">
+                                            <p>
+                                                <input type="radio" id="test1" name="radio-group" checked>
+                                                <label for="test1">New Card</label>
+                                            </p>
+                                            <p>
+                                                <input type="radio" id="test2" name="radio-group">
+                                                <label for="test2"> <img src="assets/images/bi_credit-card-2-front-fill.png" alt="image">Credit/Debit Card</label>
+                                            </p>
+                                            <p>
+                                                <input type="radio" id="test3" name="radio-group">
+                                                <label for="test3"><img src="assets/images/image 16.png" alt="image">Cosmo Payment</label>
+                                            </p>
+                                            <p>
+                                                <input type="radio" id="test4" name="radio-group">
+                                                <label for="test4"><img src="assets/images/image 17.png" alt="image">Paxum</label>
+                                            </p>
+                                            <p>
+                                                <input type="radio" id="test5" name="radio-group">
+                                                <label for="test5"><img src="assets/images/image 18.png" alt="image">Skrill</label>
+                                            </p>
+                                            <p>
+                                                <input type="radio" id="test6" name="radio-group">
+                                                <label for="test6"><img src="assets/images/image 20.png" alt="image">BitPay</label>
+                                            </p>
+                                        </div>
+                                        <div class="input-in-payments">
                                             <div class="row">
-                                                <div class="font-16 font-medium col-md-5 mt-4">I want to send a Tip to</div>
-                                                <div class="col-md-7">
-                                                    <div class="search-bar-home">
-                                                        <input type="text" placeholder="Search" class="w-100" #searchUsers
-                                                        (input)="searchUser(searchUsers.value)" id="searchUsers" 
-                                                        [(ngModel)] = "receptionist"
-                                                        (focus)="setFocus(true)"
-                                                        (blur)="setFocus(false)"
-                                                        autocomplete="off"
-                                                        />
-                                                        <span class="iconify"
-                                                            data-icon="akar-icons:search"></span>
-                                                    </div>
-                                                    <div *ngIf = "onFocus" class="div-input-cg-search-wrap" style="overflow-y: scroll; position:absolute;z-index:2; width:calc(100% - 25px); max-height:400px;">
-                                                        <p class="font-12 color-4e font-medium">Suggested</p>
-                                                        <div class="wrapper-poll-asked-user" 
-                                                        *ngFor="let groupMembersLists of groupMembersList" [id]="groupMembersLists._id"  
-                                                        style="cursor: pointer;" 
-                                                        (click) = "setReceptionist(groupMembersLists.userName)"
-                                                        >
-                                                            <img [src]="groupMembersLists.profileImage" onError="this.src='assets/images/user.png'"
-                                                                alt="image" />
-                                                            <div class="user-info-p-a">
-                                                                <p class="font-14 font-bold color-49"> {{groupMembersLists.fullName}}
-                                                                    &nbsp; <span
-                                                                        class="iconify font-20 color-light-blue"
-                                                                        data-icon="ic:sharp-verified"></span>
-                                                                </p>
-                                                                <p class="font-14 color-49">@{{groupMembersLists.userName}}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="font-14 color-grey">Email</label>
+                                                        <input type="email" name="address1" value="John@email.com" class="w-100">
+                                                      </div>
                                                 </div>
-                                            </div>
-                                            <div class="d-flex justify-content-between font-16 font-medium color-blue mt-1 p-2 bg-amount">
-                                                <div>
-                                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M1.58186 1.58907C1.72761 1.44163 1.90124 1.32468 2.09263 1.24501C2.28402 1.16533 2.48935 1.12454 2.69667 1.125H7.01842C7.30192 1.12553 7.57377 1.23784 7.77499 1.43754L16.4146 10.0754C16.7094 10.3708 16.875 10.7711 16.875 11.1885C16.875 11.6058 16.7094 12.0061 16.4146 12.3015L12.3014 16.4148C12.0059 16.7098 11.6054 16.8754 11.188 16.8754C10.7705 16.8754 10.37 16.7098 10.0746 16.4148L1.43843 7.78044C1.23832 7.57955 1.12562 7.30778 1.12483 7.02423V2.70001C1.12355 2.49378 1.1633 2.28935 1.24176 2.09863C1.32022 1.90791 1.43583 1.73469 1.58186 1.58907ZM4.49983 5.62501C4.72233 5.62501 4.93984 5.55903 5.12485 5.43541C5.30985 5.31179 5.45405 5.13609 5.53919 4.93053C5.62434 4.72496 5.64662 4.49876 5.60321 4.28053C5.5598 4.0623 5.45266 3.86184 5.29533 3.70451C5.13799 3.54718 4.93754 3.44003 4.71931 3.39662C4.50108 3.35321 4.27488 3.37549 4.06931 3.46064C3.86374 3.54579 3.68804 3.68998 3.56443 3.87499C3.44081 4.05999 3.37483 4.2775 3.37483 4.50001C3.37483 4.79838 3.49336 5.08452 3.70434 5.2955C3.91531 5.50648 4.20146 5.62501 4.49983 5.62501Z" fill="#150AA1"/>
-                                                    </svg>
-                                                    Please Enter Tip Amount</div>
-                                                <div><input type="text" class="amount-input color-blue" /> </div>
-                                            </div>                                  
-                                            <div class="text-right mt-2 font-14 color-a9">
-                                                TIP amount from $5.00 to $300
-                                            </div>
-                                        </div>
-                                        <div class="radio-button-div-payments mt-3">
-                                            <div class="heading-payment">
-                                                <p class="font-20 color-blue font-bold">Payment Details</p>
-                                            </div>
-                                            <div class="radio-payment-wrap">
-                                                <p>
-                                                    <input type="radio" id="test1" name="radio-group" checked>
-                                                    <label for="test1">New Card</label>
-                                                </p>
-                                                <p>
-                                                    <input type="radio" id="test2" name="radio-group">
-                                                    <label for="test2"> <img src="assets/images/bi_credit-card-2-front-fill.png" alt="image">Credit/Debit Card</label>
-                                                </p>
-                                                <p>
-                                                    <input type="radio" id="test3" name="radio-group">
-                                                    <label for="test3"><img src="assets/images/image 16.png" alt="image">Cosmo Payment</label>
-                                                </p>
-                                                <p>
-                                                    <input type="radio" id="test4" name="radio-group">
-                                                    <label for="test4"><img src="assets/images/image 17.png" alt="image">Paxum</label>
-                                                </p>
-                                                <p>
-                                                    <input type="radio" id="test5" name="radio-group">
-                                                    <label for="test5"><img src="assets/images/image 18.png" alt="image">Skrill</label>
-                                                </p>
-                                                <p>
-                                                    <input type="radio" id="test6" name="radio-group">
-                                                    <label for="test6"><img src="assets/images/image 20.png" alt="image">BitPay</label>
-                                                </p>
-                                            </div>
-                                            <div class="input-in-payments">
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label class="font-14 color-grey">Email</label>
-                                                            <input type="email" name="address1" value="John@email.com" class="w-100">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6"></div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label class="font-14 color-grey">Card Number</label>
-                                                            <input type="text" name="card" value="4000 2222 3333 8888" class="w-100">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label class="font-14 color-grey">Postal Code</label>
-                                                            <input type="text" name="cvv" value="1970" class="w-100">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label class="font-14 color-grey">Expiration Date</label>
-                                                            <input type="text" name="cvv" value="MM/YYYY" class="w-100">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label class="font-14 color-grey">CCV</label>
-                                                            <input type="text" name="cvv" class="w-100">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <div class="form-group border-bottom-pe">
-                                                            <div class="check-for-payments">
-                                                            <input type="checkbox" id="agree-save" name="agree-save" value="agree-save">
-                                                            <label for="agree-save" class="font-14 color-black">Save Payment Card</label><br>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                <div class="col-md-6"></div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="font-14 color-grey">Card Number</label>
+                                                        <input type="text" name="card" value="4000 2222 3333 8888" class="w-100">
+                                                      </div>
                                                 </div>
-                                            </div>
-                                            <div class="sub-total-payment">
-                                                <div class="d-flex align-items-center justify-content-between">
-                                                    <p class="font-14 color-black">Subtotal</p>
-                                                    <p class="font-14 color-black">$100</p>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="font-14 color-grey">Postal Code</label>
+                                                        <input type="text" name="cvv" value="1970" class="w-100">
+                                                      </div>
                                                 </div>
-                                            </div>
-                                            <div class="total-payment">
-                                                <div class="d-flex align-items-center justify-content-between">
-                                                    <p class="font-14 color-black">Total Billed</p>
-                                                    <p class="font-14 font-bold color-black">$100</p>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="font-14 color-grey">Expiration Date</label>
+                                                        <input type="text" name="cvv" value="MM/YYYY" class="w-100">
+                                                      </div>
                                                 </div>
-                                            </div>
-                                            <div class="payment-desc">
-                                                <p class="color-grey font-14">
-                                                    All payments are charged in US$ and all payments are final. You will be charged the amount of the TIP in US$ immediately. You will receive an email receipt. Chello, LLC is the charge that will appear on your account.    
-                                                </p>
-                                            </div>
-                                            <div class="payment-aggree">
-                                                <div class="form-group ">
-                                                    <div class="check-for-payments">
-                                                    <input type="checkbox" id="agree" name="agree" value="agree">
-                                                    <label for="agree" class="font-14 color-black">I agree to the above, this payment, and the <a href="">Terms.</a></label><br>
-                                                    </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="font-14 color-grey">CCV</label>
+                                                        <input type="text" name="cvv" class="w-100">
+                                                      </div>
                                                 </div>
-                                                <div class="button-link button-verified-lat">
-                                                    <div class="d-flex justify-content-between">
-                                                    <a href="javascript:void(0)" class="btn">Make Payment</a>
-                                                    </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group border-bottom-pe">
+                                                        <div class="check-for-payments">
+                                                          <input type="checkbox" id="agree-save" name="agree-save" value="agree-save">
+                                                          <label for="agree-save" class="font-14 color-black">Save Payment Card</label><br>
+                                                        </div>
+                                                      </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="sub-total-payment">
+                                            <div class="d-flex align-items-center justify-content-between">
+                                                <p class="font-14 color-black">Subtotal</p>
+                                                <p class="font-14 color-black">$100</p>
+                                            </div>
+                                        </div>
+                                        <div class="total-payment">
+                                            <div class="d-flex align-items-center justify-content-between">
+                                                <p class="font-14 color-black">Total Billed</p>
+                                                <p class="font-14 font-bold color-black">$100</p>
+                                            </div>
+                                        </div>
+                                        <div class="payment-desc">
+                                            <p class="color-grey font-14">
+                                                All payments are charged in US$ and all payments are final. You will be charged the amount of the TIP in US$ immediately. You will receive an email receipt. Chello, LLC is the charge that will appear on your account.    
+                                            </p>
+                                        </div>
+                                        <div class="payment-aggree">
+                                            <div class="form-group ">
+                                                <div class="check-for-payments">
+                                                  <input type="checkbox" id="agree" name="agree" value="agree">
+                                                  <label for="agree" class="font-14 color-black">I agree to the above, this payment, and the <a href="">Terms.</a></label><br>
+                                                </div>
+                                              </div>
+                                              <div class="button-link button-verified-lat">
+                                                <div class="d-flex justify-content-between">
+                                                  <a href="javascript:void(0)" class="btn">Make Payment</a>
+                                                </div>
+                                              </div>
+                                        </div>
+                                    </div>
                                     
-                                    </form>
+                                </form>
                                 </div>
                             
                             </div>

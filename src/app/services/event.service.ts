@@ -35,6 +35,30 @@ export class EventService {
 	  return this.http.post(this.base_url + 'privateEvent/events' , data, requestOptions)
   }
 
+  public getSearchEventFeed(data: any){
+    let token: any = localStorage.getItem('accessToken');
+    let header = new HttpHeaders({ "Authorization": "Bearer " + token});
+    const requestOptions = {  headers: header, body: data};  
+
+	  return this.http.post(this.base_url + 'privateEvent/searchby' , data, requestOptions)
+  }
+
+  public getMyEventFeed(data: any){
+    let token: any = localStorage.getItem('accessToken');
+    let header = new HttpHeaders({ "Authorization": "Bearer " + token});
+    const requestOptions = {  headers: header, body: data};  
+
+	  return this.http.post(this.base_url + 'privateEvent/myevents' , data, requestOptions)
+  }
+
+  public getEventSuggestion(data: any){
+    let token: any = localStorage.getItem('accessToken');
+    let header = new HttpHeaders({ "Authorization": "Bearer " + token});
+    const requestOptions = {  headers: header, body: data};  
+
+	  return this.http.post(this.base_url + 'privateEvent/suggestsevents' , data, requestOptions)
+  }
+
   public createEvent(data: any): Observable<any[]> {
     let token: any = localStorage.getItem('accessToken');
     let header = new HttpHeaders({ "Authorization": "Bearer " + token});
@@ -43,8 +67,23 @@ export class EventService {
     return this.http.post<any[]>(this.base_url + 'privateEvent/create', data, requestOptions);
   }
 
+  public editEvent(data: any): Observable<any[]> {
+    let token: any = localStorage.getItem('accessToken');
+    let header = new HttpHeaders({ "Authorization": "Bearer " + token});
+    const requestOptions = {headers: header};
+    return this.http.post<any[]>(this.base_url + 'privateEvent/editPrivateEvent', data, requestOptions);
+  }
+
+  public deleteEvent(data: any): Observable<any[]> {
+    let token: any = localStorage.getItem('accessToken');
+    let header = new HttpHeaders({ "Authorization": "Bearer " + token});
+    const requestOptions = {headers: header, body: data};
+    return this.http.delete<any[]>(this.base_url + 'privateEvent/delete', requestOptions);
+  }
+
   public setCurrentEvent(data:any){
     this.event = data;
+    console.log(this.event);
   }
 
   public getCurrentEvent(){

@@ -1,0 +1,50 @@
+.selected-video {
+  width: 672px;
+  height: 460px;
+  border: 1px solid #E4E4E4;
+  border-radius: 4px;
+}
+
+.time-post-title {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background: transparent;
+  -webkit-margin-after: 10px;
+          margin-block-end: 10px;
+  color: #150AA1;
+}
+
+.text-grey {
+  color: #9A9A9A;
+}
+
+.select-video {
+  width: 120px;
+  height: 120px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background: -webkit-gradient(linear, left bottom, left top, from(#F2F2F2), to(#F2F2F2)), #FFFFFF;
+  background: linear-gradient(0deg, #F2F2F2, #F2F2F2), #FFFFFF;
+  border: 1px solid #E4E4E4;
+  border-radius: 4px;
+}
+
+.cancel-btn-i {
+  position: absolute !important;
+  top: 36px;
+  right: 17px;
+  color: #150AA1;
+}
+/*# sourceMappingURL=video-post.component.css.map */
