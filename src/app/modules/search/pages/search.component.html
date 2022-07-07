@@ -1,0 +1,55 @@
+<app-header-new></app-header-new>
+<div class="homepage margin-minus-header">
+    <div class="homepage-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3">
+                    <app-sidebar></app-sidebar>
+                </div>
+                <div class="col-md-6">
+                    <div class="home-middle-div">
+                        <div class="wrapper-home-middle-div">
+                            <div class="home-middle-div-one">
+                                <div class=" group-headding-sear">
+                                    <p class="font-20 font-bold color-blue">
+                                        Search Results
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="search-middle">
+                                <div class="search-bar-for-main-page">
+                                    <div class="search-bar-home">
+                                        <form [formGroup]="searchForm" (ngSubmit)="search()">
+                                            <input type="text" placeholder="Search" class="w-100" formControlName="search" />
+                                            <span class="iconify" data-icon="akar-icons:search"></span>
+                                            <div class="right-side-button">
+                                                <button type="submit">Search</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="search-listing-user">
+                                    <div class="search-list-wrap" *ngFor="let groupMembersLists of groupMembersList" [id]="groupMembersLists._id">
+                                        <div class="wrapper-poll-asked-user">
+                                            <img [src]="groupMembersLists.profileImage" onError="this.src='assets/images/user.png'" alt="image" (click)="viewProfile(groupMembersLists.userName)" style="cursor: pointer;" />
+                                            <div class="user-info-p-a">
+                                                <p class="font-14 font-bold color-49" (click)="viewProfile(groupMembersLists.userName)" style="cursor: pointer;"> @{{groupMembersLists.userName}}
+                                                </p>
+                                                <!-- <p class="font-14 color-49">@lebronjames</p> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-3 search-page-s">
+                    <app-suggestions></app-suggestions>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

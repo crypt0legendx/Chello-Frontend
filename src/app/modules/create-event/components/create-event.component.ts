@@ -21,9 +21,7 @@ export class CreateEventComponent implements OnInit {
   eventPrice: Number = 0;
   miscInfo: string = "";
   fileUrl:string ="";
-
   selectedFiles: any;
-
   constructor(
     private uploadService: UploadService,
     private toastrService: ToastrService,
@@ -33,7 +31,6 @@ export class CreateEventComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
   submitForm(form: NgForm){
     if(form.valid){
       this.uploadFile().then((res:any)=>{
@@ -55,7 +52,7 @@ export class CreateEventComponent implements OnInit {
             this.router.navigate(['/private-event-final']);
             this.toastrService.success("Successfully created the event", "Create Event");
           },
-          (error) => {
+          (error: any) => {
             this.toastrService.error("Oops, failed to create event", "Create Event");    
           }
         )
@@ -67,15 +64,12 @@ export class CreateEventComponent implements OnInit {
       this.toastrService.error("Oops, failed to validate form","Form validation");
     }
   }
-
   uploadFile = async()=>{
     const file = this.selectedFiles.item(0);
     const res = await this.uploadService.uploadFile(file, file.name);
     return res;
   }
-
   selectFile(event:any) {
     this.selectedFiles = event.target.files;
   }
-
 }

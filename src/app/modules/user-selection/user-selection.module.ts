@@ -6,6 +6,7 @@ import { UserSelectionComponent } from './components/user-selection.component';
 import { FooterModule } from '../layout/footer/footer.module'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
     FooterModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    NgxIntlTelInputModule
   ]
 })
 export class UserSelectionModule { }

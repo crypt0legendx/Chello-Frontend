@@ -506,13 +506,13 @@ input {
   display: none !important;
 }
 
-.password-icon svg {
+.password-icon svg, .password-icon i {
   color: #A8A4A4;
   width: 16px;
   height: 16px;
   position: absolute;
   right: 15px;
-  bottom: 15px;
+  bottom: 11px;
   z-index: 5;
 }
 
@@ -560,7 +560,7 @@ input {
 }
 
 .first-birthday-entry {
-  width: 80px;
+  width: 95px;
 }
 
 .for-toggle-div-user button.active {
@@ -1106,6 +1106,9 @@ input {
 
 .image-up-r-u img {
   width: 100%;
+  height: 140px;
+  -o-object-fit: fill;
+     object-fit: fill;
 }
 
 .image-up-r-u .poll-asked-user {
@@ -3413,15 +3416,6 @@ input {
   display: flex;
 }
 
-.story-div-middle-home .home-middle-div-one {
-  overflow-x: hidden;
-  overflow-x: scroll;
-}
-
-.story-div-middle-home ::-webkit-scrollbar {
-  width: 0px;
-}
-
 .flex-w {
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
@@ -3777,9 +3771,9 @@ input {
     padding: 20px;
   }
   .first-home-middle-flex {
-    width: -webkit-fit-content;
-    width: -moz-fit-content;
-    width: fit-content;
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content;
   }
   .image-up-r-u img {
     width: 100%;
@@ -4002,6 +3996,9 @@ input {
 }
 
 @media only screen and (max-width: 767px) {
+  .sidebar-div-home {
+    margin-top: 25px;
+  }
   .back-btn {
     display: block;
   }
@@ -4377,5 +4374,127 @@ input {
 
 .home-main-drop .vault-section-one {
   border-bottom: 0px solid var(--line-color-2) !important;
+}
+
+.first-birthday-entry select {
+  border: 0px solid var(--line-color);
+  border-radius: 0px;
+}
+
+.first-birthday-entry select option {
+  color: #000 !important;
+}
+
+.intrested-field {
+  padding: 30px 0 30px 0;
+}
+
+.intrested-field .control {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  position: relative;
+  margin: 5px;
+  cursor: pointer;
+  border-radius: 99em;
+}
+
+.intrested-field .control input {
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+}
+
+.intrested-field .control__content {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 3px 13px;
+  font-size: 16px;
+  line-height: 32px;
+  color: #000000;
+  background-color: #F1F1F1;
+  border-radius: 99em;
+}
+
+.control:hover .intrested-field .control__content {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.intrested-field .control input:checked ~ .control__content {
+  background-color: #C7C7F9;
+}
+
+a {
+  cursor: pointer;
+}
+
+.search-page-s .search-bar-home input, .search-page-s .search-bar-home svg {
+  display: none;
+}
+
+.search-bar-for-main-page .right-side-button {
+  position: absolute;
+  right: 8px;
+  top: 26px;
+}
+
+.group-headding-sear p {
+  margin-bottom: 0px !important;
+}
+
+.story-div-middle-home .first-home-middle-flex {
+  -ms-flex-wrap: inherit;
+      flex-wrap: inherit;
+}
+
+.story-div-middle-home .home-middle-div-one {
+  overflow-x: scroll !important;
+  cursor: -webkit-grab;
+  cursor: grab;
+}
+
+.story-div-middle-home ::-webkit-scrollbar {
+  display: none;
+}
+
+.story-div-middle-home ::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 5px grey;
+          box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+.story-div-middle-home ::-webkit-scrollbar-thumb {
+  background: #150AA1;
+  border-radius: 10px;
+}
+
+.story-div-middle-home ::-webkit-scrollbar-thumb:hover {
+  background: #4c68fa;
+}
+
+.arrow-in-stories svg {
+  width: 20px;
+  height: 20px;
+  color: #150aa1;
+  background: #fff;
+  border-radius: 100%;
+}
+
+.arrow-in-stories .s-ar-1 {
+  position: absolute;
+  top: 60%;
+  left: 0;
+  z-index: 99;
+}
+
+.arrow-in-stories .s-ar-2 {
+  position: absolute;
+  top: 60%;
+  right: 0;
+  z-index: 99;
 }
 /*# sourceMappingURL=style.css.map */

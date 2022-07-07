@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class routers{
 
-	deafult : string = '/';
+	default : string = '/';
 	login : string = '/login';
 	forgetPassword : string = '/forget-password';
 	privacyPolicy : string = '/privacy-policy';
@@ -35,7 +35,7 @@ export class routers{
 	notificationSetting : string = '/notification-setting';
 	groups : string = '/groups';
 	groups2 : string = '/groups-2';
-	groupsDetail : string = '/groups-detail';
+	// groupsDetail : string = '/groups-detail';
 	profileVault : string = '/profile-vault';
 	more : string = '/more';
 	profileEdit : string = '/profile-edit';
@@ -59,4 +59,5 @@ export class routers{
 	geoBlocking : string = '/geo-blocking';
 	geoBlocking2 : string = '/geo-blocking-2';
 	pageState : string = '/page-state';
+	search: string = '/search';
 }

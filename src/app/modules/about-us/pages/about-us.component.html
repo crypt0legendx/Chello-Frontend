@@ -11,16 +11,13 @@
                     <b class="color-blue">Chello</b> is a social media platform, enhancing the <b
                         class="color-blue">Creator</b> and the <b class="color-blue">Fan</b> connection! <b
                         class="color-blue">Chello</b> saw that the Creator was giving away 15-20% of their earnings to
-                    companies. With <b class="color-blue">Chello</b>, <b class="color-blue">Creator</b> keep 94% of
+                    companies. With <b class="color-blue">Chello</b>, <b class="color-blue">Creator</b> keep {{veriable.creatorKeeps}}% of
                     their earnings!
                 </p>
-                <p class="font-16 color-black">To use the <b class="color-blue">Chello</b> platform, <b
-                        class="color-blue">Creator</b> will pay $25 per month or can pay $250 per year. We look at
-                    this as the cost of doing business, while you are able to take home more 10-14% MORE of YOUR
-                    EARNINGS! This per month charge only occurs when you are ready to start connecting with <b
-                        class="color-blue">Fans</b> on
-                    <b class="color-blue">Chello</b>.
-                </p>
+                <p class="font-16 color-black"><b class="color-blue">Chello</b> is a free platform for all <b
+                    class="color-blue">Users</b>. However, when a <b
+                    class="color-blue">Creator</b> is ready to start earning money, an admin fee of ${{veriable.adminMonthlyFee}} per month or ${{veriable.adminYearlyFee}} per year is required. We look at this as the cost of doing business, while you are able to take home  10-14% MORE of YOUR EARNINGS! This per month charge ONLY occurs when you are ready to start connecting with <b
+                    class="color-blue">Fans</b> on <b class="color-blue">Chello</b>.</p>
             </div>
             <div class="main-table-wrapper-ab">
                 <div class="about-table-div">
@@ -55,7 +52,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="first-row-tab text-right">
-                                <p class="font-18 color-39 font-medium">94%</p>
+                                <p class="font-18 color-39 font-medium">{{veriable.creatorKeeps}}%</p>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -72,7 +69,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="first-row-tab text-right">
-                                <p class="font-18 color-39 font-medium">6%</p>
+                                <p class="font-18 color-39 font-medium">{{veriable.chelloCommission}}%</p>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -145,7 +142,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="first-row-tab text-right">
-                                <p class="font-18 color-39 font-medium">94%</p>
+                                <p class="font-18 color-39 font-medium">{{veriable.creatorKeeps}}%</p>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -162,7 +159,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="first-row-tab text-right">
-                                <p class="font-18 color-39 font-medium">6%</p>
+                                <p class="font-18 color-39 font-medium">{{veriable.chelloCommission}}%</p>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -209,10 +206,9 @@
             </div>
             <div class="about-under-div-text-table">
                 <p class="font-16 color-black">As you can see from the examples, we want the <b
-                        class="color-blue">Creator</b> to take more
-                    $$$ home! Hopefully you can also see, the $25 per month x 12 months= $300 per year, does not
-                    equate to the savings you will have by becoming a <b class="color-blue">Chello</b> <b
-                        class="color-blue">Creator</b>!</p>
+                    class="color-blue">Creator</b> to take more
+                $$$ home! Hopefully you can also see, the ${{veriable.adminMonthlyFee}} per month x 12 months= $300 per year, does not
+                equate to the savings you will have by becoming a <b class="color-blue">Chello Creator!</b></p>
                 <br>
                 <p class="font-16 color-black">By the way, WE wanted to make the About, all about what matters to
                     you the most……$$$$! </p>
@@ -267,7 +263,7 @@
                         <div class="row">
                             <div class="col-md-6 text-center">
                                 <p class="font-32 color-white font-bold" id="creatorNetPay">$94,000.00</p>
-                                <p class="font-26 color-white font-bold">Creator's NET Pay<br>94%</p>
+                                <p class="font-26 color-white font-bold">Creator's NET Pay<br>{{veriable.creatorKeeps}}%</p>
                             </div>
                             <div class="col-md-6 text-center">
                                 <p class="font-32 color-white font-bold" id="chelloAmount">$6,000.00</p>
@@ -280,12 +276,12 @@
                     <div class="row align-items-center">
                         <div class="col-md-9">
                             <div class="form-group">
-                                <p><span>*</span> Creator pays an admin fee of $25/month.</p>
+                                <p><span>*</span> Creator pays an admin fee of ${{veriable.adminMonthlyFee}}/month.</p>
                             </div>
                         </div>
                         <div class="col-md-3 text-right">
                             <div class="calculator-image">
-                                <img src="assets/images/Chello Logo_Final-01 3.png" alt="image">
+                                <img src="assets/images/content-creator-chello-white.jpg" alt="image">
                             </div>
                         </div>
                     </div>

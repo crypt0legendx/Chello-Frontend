@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { veriables } from '../../../utils/variables';
 @Component({
   selector: 'app-complaints-policy',
   templateUrl: '../pages/complaints-policy.component.html',
@@ -7,7 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ComplaintsPolicyComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public veriable: veriables
+  ) { }
 
   ngOnInit(): void {
   }

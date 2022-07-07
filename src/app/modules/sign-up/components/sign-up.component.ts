@@ -10,6 +10,7 @@ import { first, map } from 'rxjs/operators';
 import * as auth from 'firebase/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
+import { NameValidator } from 'src/app/validators/name.validator';
 
 declare var swal: any;
 declare var $: any;
@@ -37,7 +38,7 @@ export class SignUpComponent implements OnInit {
   showRe: boolean = false;
   userJsonData: any;
   userRole: any = "creator";
-
+  
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
@@ -55,16 +56,16 @@ export class SignUpComponent implements OnInit {
 
   ngOnInit(): void {
     let retrievedObject: any = localStorage.getItem('userData');
-    if (retrievedObject) {
+    if(retrievedObject){
       this.userJsonData = JSON.parse(retrievedObject);
       console.log(this.userJsonData);
       this.router.navigate([this.routernavigate.home]);
     }
 
     this.registerForm = this.formBuilder.group({
-      fullName: ['', Validators.required],
-      userName: ['', Validators.required],
-      email: ['', Validators.required],
+      fullName: ['', [Validators.required, NameValidator.cannotContainOnlySpace]],
+      userName: ['', [Validators.required, NameValidator.cannotContainOnlySpace]],
+      email: ['', [Validators.required, Validators.pattern(/^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$/)]],
       password: ['', Validators.required],
       cPassword: ['', Validators.required]
     });
@@ -203,12 +204,12 @@ export class SignUpComponent implements OnInit {
     this.showRe = !this.showRe;
   }
 
-  roleSection(type: any) {
-    if (type === 'creator') {
+  roleSection(type: any){
+    if(type === 'creator'){
       this.userRole = "creator";
       document.getElementById("roleCreator")!.classList.add('active');
       document.getElementById("roleFan")!.classList.remove('active');
-    } else {
+    } else{
       this.userRole = "fan";
       document.getElementById("roleFan")!.classList.add('active');
       document.getElementById("roleCreator")!.classList.remove('active');

@@ -11,6 +11,8 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import * as AWS from 'aws-sdk/global';
 import * as S3 from 'aws-sdk/clients/s3';
+import { rejects } from 'assert';
+import { resolve } from 'dns';
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +36,8 @@ export class UploadService {
 
   uploadFile(file: any, filePath: any) {
     return new Promise((resolve, reject) => {
-      const contentType = file.type;
+      const contentType = typeof file;
+      console.log('content type', typeof file);
       const bucket = new S3({
         accessKeyId: 'AKIA2YQHZPOYGCRTTEH7',
         secretAccessKey: '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',
@@ -76,5 +79,4 @@ export class UploadService {
       });
     });
   }
-
 }

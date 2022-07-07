@@ -1,1 +1,5 @@
-/* No CSS *//*# sourceMappingURL=user-selection.component.css.map */
+:host ::ng-deep .iti {
+  width: 100%;
+  display: block;
+}
+/*# sourceMappingURL=user-selection.component.css.map */

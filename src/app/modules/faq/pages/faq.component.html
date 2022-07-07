@@ -21,7 +21,7 @@
                             <p><b>Chello</b> is a social media platform, enhancing the Creator and the Fan
                                 connection! <b>Chello</b> saw that the Creator was giving away 15-20% of their
                                 earnings to companies like OnlyFans, Fansly, Fanvue, Fancentro, and others. With
-                                <b>Chello</b>, Creators keep 94% of their earnings!
+                                <b>Chello</b>, Creators keep {{veriable.creatorKeeps}}% of their earnings!
                             </p>
 
                         </div>
@@ -53,7 +53,7 @@
                             </h2>
                         </div>
                         <div class="accordion-content collapse" id="aitem4">
-                            <p><b>Chello</b> keeps only 6% of the Creator earnings.</p>
+                            <p><b>Chello</b> keeps only {{veriable.chelloCommission}}% of the Creator earnings.</p>
                         </div>
                     </div>
                     <div class="accordion-item">
@@ -64,8 +64,8 @@
                         </div>
                         <div class="accordion-content collapse" id="aitem5">
                             <p>With making sure the <b>Creator</b> takes home 94% of their earnings, <b>Chello</b>
-                                has a monthly admin fee of $25 per month that the <b>Creator</b> pays, once they are
-                                ready to create/produce on the <b>Chello</b> platform, or they can pay $250 annually
+                                has a monthly admin fee of ${{veriable.adminMonthlyFee}} per month that the <b>Creator</b> pays, once they are
+                                ready to create/produce on the <b>Chello</b> platform, or they can pay ${{veriable.adminYearlyFee}} annually
                                 upfront. This is a $300 per year expense (if paid monthly), a cost of doing
                                 business, that the <b>Creator</b> pays <b>Chello</b>. The cost saved by taking home
                                 94%, does not even measure up to this expense!</p>
@@ -129,7 +129,7 @@
                             </h2>
                         </div>
                         <div class="accordion-content collapse" id="aitem9">
-                            <p><a href="features.html">See Chello Features</a></p>
+                            <p><a routerLink="/features">See Chello Features</a></p>
                         </div>
                     </div>
                     <div class="accordion-item">
@@ -280,7 +280,7 @@
                         <div class="accordion-content collapse" id="aitem13">
                             <p>When a <b>Creator</b> is ready to start creating/producing to <b>Fans</b>, they will
                                 be given a <b>Creator Unique URL</b>. The <b>Creator Unique URL</b> will be as
-                                follows: <a href="">www.chello.world/Creator/UserName.</a></p>
+                                follows: <a href="javascript:void(0)">www.chello.world/Creator/UserName.</a></p>
                         </div>
                     </div>
 
@@ -468,7 +468,7 @@
                                 given a
                                 referral code. In order to qualify for the referral program, the <b>Creator</b> has
                                 to
-                                pay the admin fee of $25 per month or $250 annual. The <b>Creator</b> will be paid a
+                                pay the admin fee of ${{veriable.adminMonthlyFee}} per month or ${{veriable.adminYearlyFee}} annual. The <b>Creator</b> will be paid a
                                 4%
                                 referral revenue every month on the 3rd, for the <b>Creators</b> they referred to
                                 <b>Chello</b>. The 4% is from the referred <b>Creator</b> business for the previous
@@ -710,7 +710,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="first-row-tab text-right">
-                            <p class="font-18 color-39 font-medium">94%</p>
+                            <p class="font-18 color-39 font-medium">{{veriable.creatorKeeps}}%</p>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -727,7 +727,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="first-row-tab text-right">
-                            <p class="font-18 color-39 font-medium">6%</p>
+                            <p class="font-18 color-39 font-medium">{{veriable.chelloCommission}}%</p>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -800,7 +800,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="first-row-tab text-right">
-                            <p class="font-18 color-39 font-medium">94%</p>
+                            <p class="font-18 color-39 font-medium">{{veriable.creatorKeeps}}%</p>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -817,7 +817,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="first-row-tab text-right">
-                            <p class="font-18 color-39 font-medium">6%</p>
+                            <p class="font-18 color-39 font-medium">{{veriable.chelloCommission}}%</p>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -892,11 +892,11 @@
                     <div class="row">
                         <div class="col-md-6 text-center">
                             <p class="font-32 color-white font-bold" id="creatorNetPay">$94,000.00</p>
-                            <p class="font-26 color-white font-bold">Creator's NET Pay<br>94%</p>
+                            <p class="font-26 color-white font-bold">Creator's NET Pay<br>{{veriable.creatorKeeps}}%</p>
                         </div>
                         <div class="col-md-6 text-center">
                             <p class="font-32 color-white font-bold" id="chelloAmount">$6,000.00</p>
-                            <p class="font-26 color-white font-bold">Chello's Amount<br>6%</p>
+                            <p class="font-26 color-white font-bold">Chello's Amount<br>{{veriable.chelloCommission}}%</p>
                         </div>
                     </div>
                 </div>
@@ -905,12 +905,12 @@
                 <div class="row align-items-center">
                     <div class="col-md-9">
                         <div class="form-group">
-                            <p><span>*</span> Creator pays an admin fee of $25/month.</p>
+                            <p><span>*</span> Creator pays an admin fee of ${{veriable.adminMonthlyFee}}/month.</p>
                         </div>
                     </div>
                     <div class="col-md-3 text-right">
                         <div class="calculator-image">
-                            <img src="assets/images/Chello Logo_Final-01 3.png" alt="image">
+                            <img src="assets/images/content-creator-chello-white.jpg" alt="image">
                         </div>
                     </div>
                 </div>

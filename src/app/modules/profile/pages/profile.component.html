@@ -13,10 +13,11 @@
                             <div class="home-middle-div-one position-relative">
                                 <div class="profile-page-container">
                                     <div class="headding-profile-middle-div d-flex">
-                                        <a routerLink="/home" class="margin-pr-head"><span class="iconify color-grey font-20"
+                                        <a routerLink="/home" class="margin-pr-head"><span
+                                                class="iconify color-grey font-20"
                                                 data-icon="akar-icons:arrow-left"></span></a>
                                         <p class="font-20 font-bold color-blue">
-                                            {{userFullName}}
+                                            @{{userName}}
                                             <br>
                                             <span class="font-16 font-reg color-grey">{{totalPosts}} posts</span>
                                         </p>
@@ -28,15 +29,19 @@
                                             <div
                                                 class="poll-asked-user d-flex justify-content-between abso-profile-btn">
                                                 <div class="wrapper-poll-asked-user">
-                                                    <img [src]="profilePicture" alt="image" onError="this.src='assets/images/user.png'" />
+                                                    <img [src]="profilePicture" alt="image"
+                                                        onError="this.src='assets/images/user.png'" />
                                                     <div class="user-info-p-a">
-                                                        <p class="font-20 font-bold color-blue"> {{userFullName}} &nbsp;
-                                                        </p>
+                                                        <!-- <p class="font-20 font-bold color-blue"> {{userFullName}} &nbsp;
+                                                        </p> -->
                                                         <p class="font-16 color-49">@{{userName}}</p>
                                                     </div>
                                                 </div>
-                                                <div class="buttons-f-pr-e">
-                                                    <a routerLink='/profile-edit' class="font-16 color-blue"><span
+                                                <div class="buttons-f-pr-e d-flex">
+                                                    <div class="favorite-star" (click)="openListsModal()">
+                                                        <span class="iconify favorite" data-icon="uit:favorite"></span>
+                                                    </div>
+                                                    <a *ngIf="isMyProfile === true" routerLink='/profile-edit' class="font-16 color-blue"><span
                                                             class="iconify"
                                                             data-icon="ant-design:edit-filled"></span>Edit
                                                         Profile</a>
@@ -50,16 +55,136 @@
 
                             </div>
                         </div>
+                        <!-- ------------- Lists Modal --------------- -->
+                        <div class="modal fade" id="listsModal" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <!-- <app-payment></app-payment> -->
+                                    <!-- <div id="tab2" class="tabcontent"> -->
+                                    <div class="modal-header">
+                                        <p class="font-20 font-bold">SAVE TO LIST</p>
+                                        <div class="vault-section-one">
+                                            <div class="filter-vault position-relative">
+                                                <a href="javascript:void(0)" class="font-20 color-black dropdown-toggle"
+                                                    role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                                                    aria-haspopup="true" aria-expanded="false">
+                                                    <span class="iconify" data-icon="bi:filter-right"></span>
+                                                </a>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                    <div class="radio-button-vault">
+                                                        <div class="form-group">
+                                                            <input type="radio" id="rdo1" class="radio-input"
+                                                                name="radio-group" />
+                                                            <label for="rdo1" class="color-black font-16">Name
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <input type="radio" id="rdo2" class="radio-input"
+                                                                name="radio-group" />
+                                                            <label for="rdo2" class="color-black font-16">Recent Liked
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <input type="radio" id="rdo3" class="radio-input"
+                                                                name="radio-group" />
+                                                            <label for="rdo3" class="color-black font-16">People Views
+                                                            </label>
+                                                        </div>
+                                                        <div class="border-e4"></div>
+                                                        <div class="form-group">
+                                                            <input type="radio" id="rdo4" class="radio-input"
+                                                                name="radio-group" />
+                                                            <label for="rdo4" class="color-black font-16">Custom
+                                                            </label>
+                                                        </div>
 
+                                                        <div class="form-group">
+                                                            <input type="radio" id="rdo5" class="radio-input"
+                                                                name="radio-group" />
+                                                            <label for="rdo5" class="color-black font-16">Ascending
+                                                            </label>
+                                                        </div>
+                                                        <div class="border-e4"></div>
+                                                        <div class="form-group">
+                                                            <input type="radio" id="rdo6" class="radio-input"
+                                                                name="radio-group" />
+                                                            <label for="rdo6" class="color-black font-16">Descending
+                                                            </label>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <p class="color-black font-16">
+                                                                Customize Order
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-main">
+                                        <div class="radio-button-vault" *ngFor="let list of getCurrentList(); let i=index">
+                                            <div class="form-group d-flex align-items-center py-2 mb-0">
+                                                <input type="checkbox" id="{{'check_'+(i)}}" class="radio-input" name="check_status" value="{{list._id}}" style="border-radius: 50%;" (change)="check_status(i, list.user)" [checked]="list.checkState" />
+                                                <!-- [checked]="isChecked(list, userJsonData._id)" -->
+                                                <div class="user-info d-block">
+                                                    <p class="font-20 color-black"
+                                                        style="margin-bottom: 5px !important;">{{list.title}}</p>
+                                                    <p class="color-grey">{{ list.memberDetails.length==0 ? "Empty" : list.memberDetails.length }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="border-e4"></div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer justify-content-between mb-2">
+                                        <!-- <input type="hidden" value="{{list_id}}" id="list_id"> -->
+                                        <button class="cancel-btn" (click)="openCreateListModal()">
+                                            + NEW LIST
+                                        </button>
+                                        <button class="confirm-btn" (click)="closeListsModal()">
+                                            CLOSE
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal fade create-list" id="CreateNewList" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <!-- <app-payment></app-payment> -->
+                                    <!-- <div id="tab2" class="tabcontent"> -->
+                                    <div class="modal-header">
+                                        <p class="font-20 font-bold">
+                                            CREATE NEW LIST
+                                        </p>
+                                    </div>
+                                    <div class="modal-main position-relative">
+                                        <p class="font-16 color-black list-label">Enter List Name</p>
+                                        <input id="input-name" class="input-name" [(ngModel)]="added_user" placeholder="" reqired />
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="cancel-btn" (click)="closeCreateListModal()">
+                                            CANCEL
+                                        </button>
+                                        <button [disabled]="!added_user" (click)="addList(added_user)">
+                                            SAVE
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- ------------- /Lists Modal --------------- -->
                         <div class="wrapper-home-middle-div profile-first-s middle-div-cg-b"
-                        *ngIf="isUserCoverPicture === true" [style.backgroundImage]="'url('+ userCoverPicture +')'">
+                            *ngIf="isUserCoverPicture === true" [style.backgroundImage]="'url('+ userCoverPicture +')'">
                             <div class="home-middle-div-one position-relative">
                                 <div class="profile-page-container">
                                     <div class="headding-profile-middle-div d-flex">
                                         <a href="" class="margin-pr-head"><span class="iconify color-black font-20"
                                                 data-icon="akar-icons:arrow-left"></span></a>
                                         <p class="font-20 font-bold color-blue">
-                                            {{userFullName}}
+                                            @{{userName}}
                                             <br>
                                             <span class="font-16 font-reg color-grey">{{totalPosts}} posts</span>
                                         </p>
@@ -71,15 +196,16 @@
                                             <div
                                                 class="poll-asked-user d-flex justify-content-between abso-profile-btn">
                                                 <div class="wrapper-poll-asked-user">
-                                                    <img [src]="profilePicture" alt="image" onError="this.src='assets/images/user.png'" />
+                                                    <img [src]="profilePicture" alt="image"
+                                                        onError="this.src='assets/images/user.png'" />
                                                     <div class="user-info-p-a">
-                                                        <p class="font-20 font-bold color-blue"> {{userFullName}} &nbsp;
-                                                        </p>
+                                                        <!-- <p class="font-20 font-bold color-blue"> {{userFullName}} &nbsp;
+                                                        </p> -->
                                                         <p class="font-16 color-49">@{{userName}}</p>
                                                     </div>
                                                 </div>
                                                 <div class="buttons-f-pr-e">
-                                                    <a routerLink='/profile-edit' class="font-16 color-blue"><span
+                                                    <a *ngIf="isMyProfile === true" routerLink='/profile-edit' class="font-16 color-blue"><span
                                                             class="iconify"
                                                             data-icon="ant-design:edit-filled"></span>Edit
                                                         Profile</a>
@@ -101,7 +227,7 @@
                                 </a>
                             </div>
                             <div class="profile-page-wrapper-d">
-                                <app-post-feed></app-post-feed>
+                                <!-- <app-post-feed></app-post-feed> -->
                                 <!-- <div class="poll-div-section">
                                     <div class="wrapper-poll-div-section">
                                         <div class="">
@@ -162,10 +288,14 @@
                                                 id="defaultOpen">Followers</button>
                                             <button class="tablinks" onclick="openCity(event, 'tab2')">Fans</button>
                                             <button class="tablinks" onclick="openCity(event, 'tab3')">Likes</button>
-                                            <button class="tablinks" onclick="openCity(event, 'tab4')" (click)="getUserPost('all')">Posts</button>
-                                            <button class="tablinks" onclick="openCity(event, 'tab5')" (click)="getUserPost('image')">Photos</button>
-                                            <button class="tablinks" onclick="openCity(event, 'tab6')" (click)="getUserPost('video')">Video</button>
-                                            <button class="tablinks" onclick="openCity(event, 'tab7')" (click)="getUserPost('audio')">Audio</button>
+                                            <button class="tablinks" onclick="openCity(event, 'tab4')"
+                                                (click)="getUserPost('all')">Posts</button>
+                                            <button class="tablinks" onclick="openCity(event, 'tab5')"
+                                                (click)="getUserPost('image')">Photos</button>
+                                            <button class="tablinks" onclick="openCity(event, 'tab6')"
+                                                (click)="getUserPost('video')">Video</button>
+                                            <button class="tablinks" onclick="openCity(event, 'tab7')"
+                                                (click)="getUserPost('audio')">Audio</button>
                                             <button class="tablinks" onclick="openCity(event, 'tab8')">Vault</button>
                                         </div>
 
@@ -546,13 +676,17 @@
                                                 <div class="main-valt-section">
                                                     <div class="vault-section-one">
                                                         <div class="search-vault">
-                                                            <div class="input-show-search-m"  id="Div2" >
-                                                                <input type="text" name="search" placeholder="search heare.." />
-                                                            </div>
-                                                            <a href="javascript:void(0)" id="Div1" type="button" value="Click" onclick="switchVisible();" >
-                                                                <span class="iconify"
-                                                                    data-icon="akar-icons:search"></span>
-                                                            </a>
+                                                            <div class="flex align-items-center right-side-button text-right">
+                                                                <button type="button" class="addBtn" data-toggle="modal" data-target="#exampleModalCenter">+ Add To</button>
+                                                                <div class="input-show-search-m"  id="Div2" >
+                                                                    <input type="text" name="search" placeholder="search heare.." />
+                                                                </div>
+                                                                <!-- <a href="javascript:void(0)" id="Div1" type="button" value="Click" onclick="switchVisible();" ></a> -->
+                                                                <a href="javascript:void(0)">
+                                                                    <span class="iconify"
+                                                                        data-icon="akar-icons:search"></span>
+                                                                </a>
+                                                            </div>                                                            
                                                         </div>
                                                         <div class="filter-vault position-relative">
                                                             <a href="javascript:void(0)" class="dropdown-toggle"
@@ -753,5 +887,4 @@
             </div>
         </div>
     </div>
-</div>
 <app-footer></app-footer>

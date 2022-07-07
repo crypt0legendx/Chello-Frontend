@@ -14,17 +14,16 @@
                                 <div class="form-group position-relative">                                    
                                     <div rows="4" class="w-100 bg-white p-3" formControlName="postTxt"
                                         [ngClass]="{ 'is-invalid': submitted && f.postTxt.errors }"
-                                        placeholder="Compose new post" contenteditable="true">
-                                        <span class="text-grey">Check out my new Audio Message!</span> 
-                                        <div style="display: flex; align-items: center; flex-wrap: wrap">
-                                            <div class="select-audio m-2" *ngIf="selectedFiles.length==1">                                                                                 
-                                                <img  src="{{selectedFiles[0]}}" style="cursor: pointer;">
-                                                <div class="cancel-btn-i">
-                                                    <a (click)="removeAttachment()" style="cursor: pointer;"><span
-                                                            class="iconify" data-icon="material-symbols:cancel"></span></a>
-                                                </div> 
-                                            </div>
-                                            <div  class="audio-content" style="display: flex; align-items: center;">
+                                        placeholder="Compose new post" contenteditable="true" ngDefaultControl>
+                                        <textarea class="text-grey post-text-content" formControlName="postTxt" placeholder="Check out my new Audio!"></textarea>                                        
+                                        <div class="post-text-content w-100 h-50">
+                                            <audio *ngIf="audioSrc.length==1" controls >
+                                                <source src="{{audioSrc[0].value}}">                                        
+                                              Your browser does not support the audio element.
+                                            </audio>                                        
+                                        </div>    
+                                        <div style="display: flex; align-items: center; flex-wrap: wrap">                                                                                        
+                                            <div  class="audio-content" style="display: flex; align-items: center;">                                                                                  
                                                 <div>                                                                                                                                 
                                                     <button *ngIf="!isRecording" class="select-audio mr-2 attach-audio" (click)="startRecording()">
                                                         <img src="assets/images/mic.png"> Record Audio
@@ -33,8 +32,8 @@
                                                         <img src="assets/images/mic.png"> Stop Record
                                                     </button>                                  
                                                 </div> 
-                                                <div class="select-audio attach-audio" (click)="openFileSelector('addVideo')">                                                              
-                                                    <img src="assets/images/attach.png">Attach Audio                                                    
+                                                <div class="select-audio attach-audio" (click)="openFileSelector('addAudio')">                                                              
+                                                    <img src="assets/images/attach.png">{{attachText}}
                                                     <input id="addAudio" type="file" class="form-control"
                                                         (change)="selectFile($event, 'addAudio')" style="display:none" accept="audio/*"
                                                         capture>                                    
@@ -49,10 +48,15 @@
                                     </div>
     
                                 </div>   
-                                <div class="right-side-button text-right" *ngIf="!retrievedGroupDetails">
-                                    <a href="javascript:void(0)" class="font-14 font-medium color-blue margin-l-r-a">Post
-                                        Later</a>
-                                    <button type="button" (click)="postFeed()">Post</button>
+                                <div class="under-btn-group">
+                                    <div class="left-side-button">
+                                        <a href="javascript:void(0)" (click)="cancelPost()" class="font-14 font-medium color-blue margin-l-r-a">Cancel</a>                                    
+                                    </div>
+                                    <div class="right-side-button">
+                                        <a href="javascript:void(0)" class="font-14 font-medium color-blue margin-l-r-a">Post
+                                            Later</a>
+                                        <button type="button" (click)="postFeed()">Post</button>
+                                    </div>                                    
                                 </div>
                                 <div class="right-side-button text-right" *ngIf="retrievedGroupDetails">
                                     <a href="javascript:void(0)" class="font-14 font-medium color-blue margin-l-r-a">Post

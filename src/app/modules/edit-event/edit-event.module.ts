@@ -8,10 +8,6 @@ import { EditEventComponent } from './components/edit-event.component';
 import { NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { HeaderNewModule } from '../layout/header-new/header-new.module';
-
-
-
-
 @NgModule({
   declarations: [
     EditEventComponent

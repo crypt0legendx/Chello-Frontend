@@ -1,34 +1,36 @@
-.d-block-active {
-  display: block;
-}
+d-block-active {
+    display: block;
+  }
+  
+  .tip-input {
+    height: 36px;
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #E4E4E4;
+  }
+  
+  .wrapper-main-tips-div {
+    background: #F1F1F1;
+    border: 1px solid #E4E4E4;
+    border-radius: 4px;
+  }
+  
+  .amount-form {
+    background: #FFFFFF;
+    border: 1px solid #E4E4E4;
+    border-radius: 4px;
+  }
+  
+  .bg-amount {
+    background-color: #F1F1FF;
+  }
+  
+  .amount-input {
+    height: 30px;
+    width: 100px;
+    background-color: #fff;  
+    border: 1px solid #E4E4E4;
 
-.tip-input {
-  height: 36px;
-  width: 100%;
-  background-color: #fff;
-  border: 1px solid #E4E4E4;
-}
-
-.wrapper-main-tips-div {
-  background: #F1F1F1;
-  border: 1px solid #E4E4E4;
-  border-radius: 4px;
-}
-
-.amount-form {
-  background: #FFFFFF;
-  border: 1px solid #E4E4E4;
-  border-radius: 4px;
-}
-
-.bg-amount {
-  background-color: #F1F1FF;
-}
-
-.amount-input {
-  height: 30px;
-  width: 100px;
-  background-color: #fff;
-  border: 1px solid #E4E4E4;
-}
-/*# sourceMappingURL=tips.component.css.map */
+  }
+  
+  /*# sourceMappingURL=tips.component.css.map */

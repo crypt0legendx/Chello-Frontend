@@ -12,7 +12,7 @@ export class loadScript{
 		  $("#file1").trigger("click");
 		});
 
-		$(document).ready(function (e) {
+		$(document).ready(function (e: any) {
 			$(".showonhover").click(function () {
 		    	$("#selectfile").trigger("click");
 		  	});
@@ -24,7 +24,7 @@ export class loadScript{
 	        autoPlaceholder: false,
 	        dropdownContainer: "body",
 	        excludeCountries: [""],
-	        geoIpLookup: function(callback) {
+	        geoIpLookup: function(callback: any) {
 	          this.countryCode = "us";
 	          console.log(this.countryCode);
 	          callback(this.countryCode);
@@ -37,17 +37,17 @@ export class loadScript{
 	        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.9/js/utils.js"
 	    });
 
-  		document.getElementById("defaultOpen").click();
+  		// document.getElementById("defaultOpen").click();
 
-   		var img1 = document.getElementById("img1"),
-       	img2 = document.getElementById("img2");
+   		// var img1 = document.getElementById("img1"),
+       	// img2 = document.getElementById("img2");
 
-      	img1.onmouseover = function(){
-        	img2.style.display = "block";
-      	}
-      	img1.onmouseout = function(){
-        	img2.style.display = "none";
-      	}
+      	// img1.onmouseover = function(){
+        // 	img2.style.display = "block";
+      	// }
+      	// img1.onmouseout = function(){
+        // 	img2.style.display = "none";
+      	// }
 		
   	}
 

@@ -13,7 +13,7 @@ export class AppComponent {
   //  }
   ngOnInit(): void {
     var darkMode = localStorage.getItem('darkMode');
-    console.log(darkMode);
+    // console.log(darkMode);
     if (darkMode) {
       if (darkMode === "yes") {
         document.body.classList.add('dark-theme');

@@ -12,7 +12,6 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['../pages/edit-event.component.scss']
 })
 export class EditEventComponent implements OnInit {
-
   //event info, which be stored in database.
   eventName: string ="";
   eventType: string ="";
@@ -23,9 +22,7 @@ export class EditEventComponent implements OnInit {
   miscInfo: string = "";
   fileUrl:string ="";
   eventId:string = "";
-
   selectedFiles: any;
-
   constructor(
     private uploadService: UploadService,
     private router:Router,
@@ -33,7 +30,6 @@ export class EditEventComponent implements OnInit {
     private toastrService: ToastrService,
     private datePipe: DatePipe
   ) { }
-
   ngOnInit(): void {
     if(this.getCurrentEvent() == null){
       this.router.navigate(['/event']);
@@ -54,7 +50,6 @@ export class EditEventComponent implements OnInit {
   getCurrentEvent(){
     return this.eventService.getCurrentEvent();
   }
-
   submitForm(form: NgForm){
     if(form.valid){
       const data = {
@@ -82,13 +77,11 @@ export class EditEventComponent implements OnInit {
       this.toastrService.error("Oops, failed to validate form","Form validation");
     }
   }
-
   uploadFile = async()=>{
     const file = this.selectedFiles.item(0);
     const res = await this.uploadService.uploadFile(file, file.name);
     return res;
   }
-
   selectFile(event:any) {
     this.selectedFiles = event.target.files;
   }

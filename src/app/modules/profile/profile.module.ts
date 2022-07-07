@@ -8,9 +8,14 @@ import {SidebarModule} from '../layout/sidebar/sidebar.module';
 import {SuggestionsModule} from '../layout/suggestions/suggestions.module';
 import {PostFeedModule} from '../layout/post-feed/post-feed.module';
 import {PostListModule} from '../layout/post-list/post-list.module';
+import { PostOptionsModule } from '../layout/post-options/post-options.module';
+import {StoryModule} from '../layout/story/story.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { ListTwoModule } from '../list-two/list-two.module';
 import { ToastrModule } from 'ngx-toastr';
+import { SwiperModule } from 'swiper/angular';
+
 @NgModule({
   declarations: [
     ProfileComponent
@@ -23,11 +28,14 @@ import { ToastrModule } from 'ngx-toastr';
     SidebarModule,
     SuggestionsModule,
     PostFeedModule,
-    PostListModule,
+    PostOptionsModule,
+    SwiperModule,
     FormsModule,
+    ListTwoModule,
     ReactiveFormsModule,
     NgxSpinnerModule,
-    ToastrModule
+    StoryModule,
+    PostListModule
   ]
 })
 export class ProfileModule { }

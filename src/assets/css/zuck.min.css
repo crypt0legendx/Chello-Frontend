@@ -18,7 +18,9 @@
 body.modal-open {
     overflow: hidden;
 }
-
+.stories.snapssenger.carousel .story > .item-link > .info {
+    opacity: 1 !important;
+}
 #zuck-modal{
     outline:0!important;
     overflow:hidden;
@@ -122,7 +124,7 @@ body.modal-open {
     transform-origin:top right
 }
 #zuck-modal-content .story-viewer.paused.longPress .head,#zuck-modal-content .story-viewer.paused.longPress .slides-pointers,#zuck-modal-content .story-viewer.paused.longPress .tip{
-    opacity:0
+    opacity:1
 }
 #zuck-modal-content .story-viewer.viewing:not(.paused):not(.stopped) .slides-pointers>*>.active>b{
     -webkit-animation-play-state:running;

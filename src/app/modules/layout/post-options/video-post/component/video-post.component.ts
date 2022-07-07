@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgxSpinnerService } from "ngx-spinner";
 import { ToastrService } from "ngx-toastr";
+import { HomeComponent } from "src/app/modules/home/components/home.component";
 import { GroupService } from "src/app/services/group.service";
 import { PostService } from "src/app/services/post.service";
 import { UploadService } from "src/app/services/upload.service";
@@ -25,7 +26,7 @@ export class VidoPostComponent {
     selectedFiles: any[] = [];
     videoSrc: any[] = [];
     filePath: any[] = [];
-    previewFilePath: any[] = [];
+    // previewFilePath: any[] = [];
 
     constructor(
         private formBuilder: FormBuilder,
@@ -34,6 +35,7 @@ export class VidoPostComponent {
         private postService: PostService,
         private groupService: GroupService,
         private toastr: ToastrService,        
+        private homeComponent: HomeComponent
     ) {}    
 
     
@@ -76,8 +78,8 @@ selectFile(event: any, fileType: any) {
   if (event.target.files && event.target.files[0]) {              
       const reader = new FileReader();
       const file = event.target.files[0];
-      const prePath = window.URL.createObjectURL(file);
-      this.previewFilePath.push(prePath);
+      // const prePath = window.URL.createObjectURL(file);
+      // this.previewFilePath.push(prePath);
       this.selectedFiles.push(file);
       console.log('selected file name', this.selectedFiles);
       this.filePath.push(Math.random() * 10000000000000000 + '_' + file.name);
@@ -98,30 +100,33 @@ selectFile(event: any, fileType: any) {
     this.spinner.show();
     let today = new Date();
     const file = this.selectedFiles;
-    let res: any = await this.uploadService.uploadFile(file, filePath);
-    console.log(res);
-    if(!this.retrievedGroupDetails){        
-            let sendData = {
+    for(let postIndex=0; postIndex<this.selectedFiles.length; postIndex++) {
+      let res: any = await this.uploadService.uploadFile(this.selectedFiles[postIndex], filePath[postIndex]);
+      console.log(res);
+      if(!this.retrievedGroupDetails){        
+              let sendData = {
+              "title": this.f.postTxt.value,
+              "type": "video",
+              "fileName": res['Location'],
+              "thumbnail": res['Location'],
+              "scheduled": false,
+              "scheduledDateTime": today.toISOString()
+              }
+      
+              this.postFiles(sendData);    
+          }
+      else{      
+          let sendData = {
+            "group_id": this.retrievedGroupDetails['_id'],
             "title": this.f.postTxt.value,
-            "type": "image",
+            "type": "video",
             "fileName": res['Location'],
-            "thumbnail": res['Location'],
-            "scheduled": false,
-            "scheduledDateTime": today.toISOString()
-            }
+            "thumbnail": res['Location']
+          }
+          this.postGroupFiles(sendData);
+        }    
+    }
     
-            this.postFiles(sendData);    
-        }
-     else{      
-        let sendData = {
-          "group_id": this.retrievedGroupDetails['_id'],
-          "title": this.f.postTxt.value,
-          "type": "image",
-          "fileName": res['Location'],
-          "thumbnail": res['Location']
-        }
-        this.postGroupFiles(sendData);
-      }    
   } 
 
   
@@ -138,6 +143,11 @@ selectFile(event: any, fileType: any) {
         this.spinner.hide();
         this.submitted = false;
         this.toastr.success("Post added successfully");
+
+        this.videoSrc = [];        
+        this.selectedFiles = [];
+        this.filePath = [];
+        this.isAddVideo = false; 
       }
       else {
         this.spinner.hide();
@@ -178,5 +188,7 @@ selectFile(event: any, fileType: any) {
     });
   }
 
-
+  cancelPost() {
+    this.homeComponent.postOption = 0;
+  }
 }

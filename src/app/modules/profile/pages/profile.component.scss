@@ -1,3 +1,102 @@
 .d-block-active{
     display: block;
   }
+
+.favorite-star {
+  padding: 10px;
+  border: 1px solid #C1BEEC;
+  border-radius: 50%;
+  background-color: #f1f1f1;
+  margin: 0 5px;
+}
+
+.favorite {
+  color: blue;
+  margin: 0 !important;
+  height: 24px;
+  width: 24px;
+}
+
+.favorite:hover {
+  cursor: pointer;
+}
+
+.modal-content {
+  border-radius: 8px;
+}
+
+.modal-content button {
+  border: none;
+  background-color: transparent;
+  color: #0EACEA;
+}
+
+.modal-content button:disabled {
+  color: grey;
+}
+
+.modal-main {
+  padding: 0 16px;
+}
+
+.vault-section-one {
+  justify-content: end;
+  border-bottom: none;
+  padding: 0;
+}
+
+.user-info {
+  display: flex;
+  margin: 5px 10px;
+}
+
+.user-info p {
+  margin: 0 !important;
+  padding: 0;
+  line-height: 100% !important;
+}
+
+.create-list .modal-header, .create-list .modal-main, .create-list .modal-footer {
+  border: none !important;
+}
+
+.list-label {
+  position: absolute;
+  top: -12px;
+  left: 30px;
+  background: white;
+  color: #0EACEA;
+}
+
+.input-name {
+  background-color: white !important;
+  border: 1px solid #0EACEA;
+  border-radius: 8px;
+  width: 100%;
+}
+
+.input-name:focus + #disabled {
+  color: #0EACEA;
+  cursor: pointer;
+}
+
+.confirm-btn {
+  color: #0EACEA !important;
+  cursor: pointer;
+  margin: 0 10px;
+}
+
+.cancel-btn {
+  color: #0EACEA;
+  cursor: pointer;
+  margin: 0 10px;
+}
+
+.flex {
+  display:  flex;
+}
+
+.addBtn {
+  padding-block: 8px !important;
+  margin-right: 10px;
+}

@@ -19,45 +19,37 @@
                                         </p>
                                     </div>
                                 </div>
-                                <div class="list-create-head">
-                                    <a href="" class="color-black font-20" data-toggle="modal"
-                                        data-target="#exampleModalCenter"><span class="iconify"
-                                            data-icon="akar-icons:plus"></span></a>
-                                </div>
+                               
                             </div>
                         </div>
                         <div class="wrapper-veri-tab">
                             <div class="width-list-vertitab">
                                 <div class="tab">
-                                    <button class="tablinks active" onclick="openCity(event, 'tab0') "
-                                        id="defaultOpen">
+                                    <button class="tablinks active" id="defaultOpen" (click)="setCategory('All Bookmarks')"
+                                        onclick="openCity(event, 'tab1')">
                                         <p class="color-blue font-16">All Bookmarks</p>
                                     </button>
-
-                                    <button class="tablinks" onclick="openCity(event, 'tab1')" (click)="postFilter('image')">Photos
+                                    <button  class="tablinks" onclick="openCity(event, 'tab1')" (click)="setCategory('image')">Photos
                                         <span>33</span></button>
                                     <button class="tablinks"
-                                        onclick="openCity(event, 'tab2')" (click)="postFilter('video')">Videos<span>6</span></button>
+                                        onclick="openCity(event, 'tab2')" (click)="setCategory('video')">Videos<span>6</span></button>
                                     <button class="tablinks"
-                                        onclick="openCity(event, 'tab3')" (click)="postFilter('audio')">Audio<span>9</span></button>
+                                        onclick="openCity(event, 'tab3')" (click)="setCategory('audio')">Audio<span>9</span></button>
                                     <button class="tablinks"
-                                        onclick="openCity(event, 'tab4')" (click)="postFilter('all')">Posts<span>99</span></button>
+                                        onclick="openCity(event, 'tab4')" (click)="setCategory('all')">Posts<span>99</span></button>
 
                                     <button class="tablinks"
-                                        onclick="openCity(event, 'tab5')">Messages<span>2</span></button>
+                                        onclick="openCity(event, 'tab5')"  (click)="setCategory('message')">Messages<span>2</span></button>
                                     <button class="tablinks"
-                                        onclick="openCity(event, 'tab6')">Locked<span>1</span></button>
-
+                                        onclick="openCity(event, 'tab6')"  (click)="setCategory('locked')">Locked<span>1</span></button>
                                 </div>
-
                             </div>
                             <div class="width-list-vertitab-2">
-                                <div id="tab0" class="tabcontent d-block-active">
                                     <div class="title-div-vtab">
                                         <div class="list-div">
                                             <div class="list-d-wrap">
                                                 <a href="">
-                                                    <p class="font-20 font-bold color-blue">All Bookmarks</p>
+                                                    <p class="font-20 font-bold color-blue">{{category}}</p>
                                                 </a>
                                                 <div class="vault-section-one">
                                                     <div class="filter-vault position-relative">
@@ -71,14 +63,14 @@
                                                             <div class="radio-button-vault">
                                                                 <div class="form-group">
                                                                     <input type=radio id="rdo1" class="radio-input"
-                                                                        name="radio-group">
+                                                                        name="interval-group" [checked]="interval == 'alltime'" (click)="setFilterOptions('interval', 'alltime')">
                                                                     <label for="rdo1" class="color-black font-16">All
                                                                         Time
                                                                     </label>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <input type=radio id="rdo2" class="radio-input"
-                                                                        name="radio-group">
+                                                                        name="interval-group" [checked]="interval == 'lastthreemonths'" (click)="setFilterOptions('interval', 'lastthreemonths')">
                                                                     <label for="rdo2" class="color-black font-16">Last
                                                                         Three
                                                                         Months
@@ -86,14 +78,14 @@
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <input type=radio id="rdo3" class="radio-input"
-                                                                        name="radio-group">
+                                                                        name="interval-group" [checked]="interval == 'lastmonth'" (click)="setFilterOptions('interval', 'lastmonth')">
                                                                     <label for="rdo3" class="color-black font-16">Last
                                                                         Month
                                                                     </label>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <input type=radio id="rdo3b" class="radio-input"
-                                                                        name="radio-group">
+                                                                        name="interval-group" [checked]="interval == 'lastweek'" (click)="setFilterOptions('interval', 'lastweek')">
                                                                     <label for="rdo3b" class="color-black font-16">Last
                                                                         Week
                                                                     </label>
@@ -101,14 +93,14 @@
                                                                 <div class="border-e4"></div>
                                                                 <div class="form-group ">
                                                                     <input type=radio id="rdo4" class="radio-input"
-                                                                        name="radio-group">
+                                                                        name="filtermethod-group" [checked]="filterMethod == 'latest'" (click)="setFilterOptions('filterMethod', 'latest')">
                                                                     <label for="rdo4" class="color-black font-16">Latest
                                                                         Posts
                                                                     </label>
                                                                 </div>
                                                                 <div class="form-group ">
                                                                     <input type=radio id="rdo4b" class="radio-input"
-                                                                        name="radio-group">
+                                                                        name="filtermethod-group" [checked]="filterMethod == 'mostliked'" (click)="setFilterOptions('filterMethod', 'mostliked')">
                                                                     <label for="rdo4b" class="color-black font-16">Most
                                                                         Liked
                                                                     </label>
@@ -116,14 +108,14 @@
                                                                 <div class="border-e4"></div>
                                                                 <div class="form-group">
                                                                     <input type=radio id="rdo5" class="radio-input"
-                                                                        name="radio-group">
+                                                                        name="sort-group" [checked]="sort == 'asc'" (click)="setFilterOptions('sort', 'asc')">
                                                                     <label for="rdo5"
                                                                         class="color-black font-16">Ascending
                                                                     </label>
                                                                 </div>
                                                                 <div class="form-group ">
                                                                     <input type=radio id="rdo6" class="radio-input"
-                                                                        name="radio-group">
+                                                                        name="sort-group"  [checked]="sort == 'desc'" (click)="setFilterOptions('sort', 'desc')">
                                                                     <label for="rdo6"
                                                                         class="color-black font-16">Descending
                                                                     </label>
@@ -135,714 +127,602 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div id="tab0" class="tabcontent">
 
-                                    <app-post-list></app-post-list>
+                                        
 
-                                </div>
-                                <div id="tab1" class="tabcontent">
-                                    <div class="title-div-vtab">
-                                        <div class="list-div">
-                                            <div class="list-d-wrap">
-                                                <a href="">
-                                                    <p class="font-20 font-bold color-blue">Photos</p>
-                                                </a>
-                                                <div class="vault-section-one">
-                                                    <div class="filter-vault position-relative">
-                                                        <a href="javascript:void(0)"
-                                                            class="font-20 color-black  dropdown-toggle" role="button"
-                                                            id="dropdownMenuLink" data-toggle="dropdown"
-                                                            aria-haspopup="true" aria-expanded="false">
-                                                            <span class="iconify" data-icon="bi:filter-right"></span>
-                                                        </a>
-                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                            <div class="radio-button-vault">
-                                                                <div class="form-group">
-                                                                    <input type=radio id="rdo1" class="radio-input"
-                                                                        name="radio-group">
-                                                                    <label for="rdo1" class="color-black font-16">All
-                                                                        Time
-                                                                    </label>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <input type=radio id="rdo2" class="radio-input"
-                                                                        name="radio-group">
-                                                                    <label for="rdo2" class="color-black font-16">Last
-                                                                        Three
-                                                                        Months
-                                                                    </label>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <input type=radio id="rdo3" class="radio-input"
-                                                                        name="radio-group">
-                                                                    <label for="rdo3" class="color-black font-16">Last
-                                                                        Month
-                                                                    </label>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <input type=radio id="rdo3b" class="radio-input"
-                                                                        name="radio-group">
-                                                                    <label for="rdo3b" class="color-black font-16">Last
-                                                                        Week
-                                                                    </label>
-                                                                </div>
-                                                                <div class="border-e4"></div>
-                                                                <div class="form-group ">
-                                                                    <input type=radio id="rdo4" class="radio-input"
-                                                                        name="radio-group">
-                                                                    <label for="rdo4" class="color-black font-16">Latest
-                                                                        Posts
-                                                                    </label>
-                                                                </div>
-                                                                <div class="form-group ">
-                                                                    <input type=radio id="rdo4b" class="radio-input"
-                                                                        name="radio-group">
-                                                                    <label for="rdo4b" class="color-black font-16">Most
-                                                                        Liked
-                                                                    </label>
-                                                                </div>
-                                                                <div class="border-e4"></div>
-                                                                <div class="form-group">
-                                                                    <input type=radio id="rdo5" class="radio-input"
-                                                                        name="radio-group">
-                                                                    <label for="rdo5"
-                                                                        class="color-black font-16">Ascending
-                                                                    </label>
-                                                                </div>
-                                                                <div class="form-group ">
-                                                                    <input type=radio id="rdo6" class="radio-input"
-                                                                        name="radio-group">
-                                                                    <label for="rdo6"
-                                                                        class="color-black font-16">Descending
-                                                                    </label>
-                                                                </div>
-                                                            </div>
+                                    </div>
+                                    <div id="tab1" class="tabcontent d-block-active">
+                                        <div *ngIf="category == 'image'"  class="photo-list">
+                                            <div class="photo-item p-4 d-flex flex-column" *ngFor="let item of getBookmarkList()">
+                                                <div class="item-header d-flex justify-content-between align-items-center">
+                                                    <div class="creator-section d-flex align-items-center">
+                                                        <img class="profile-img" src={{item.userDetail[0]?.profileImage}} width="70px" onError="this.src='assets/images/user.png'" />
+                                                        <div class="d-flex flex-column ml-3">
+                                                            <div class="font-medium font-16">{{item.userDetail[0]?.fullName}}</div>
+                                                            <div>@{{item.userDetail[0]?.userName}}</div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                                    <div class="action-section">
+                                                        <a href="javascript:void(0)">{{item.createdAt |
+                                                            date:'MMM dd'}} </a>
+                                                        <a *ngIf="item.userDetail[0]?._id === userId"  href="javascript:void(0)" id="dropdownMenuButton"
+                                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="iconify font-20"
+                                                                data-icon="fluent:more-circle-32-regular"></span></a>
                                     
-                                    <app-post-list></app-post-list>
-                                </div>
-                                <div id="tab2" class="tabcontent">
-                                    <div class="title-div-vtab">
-                                        <div class="list-div">
-                                            <div class="list-d-wrap">
-                                                <a href="">
-                                                    <p class="font-20 font-bold color-blue">Videos</p>
-                                                </a>
-                                                <div class="vault-section-one">
-                                                    <div class="filter-vault position-relative">
-                                                        <a href="javascript:void(0)"
-                                                            class="font-20 color-black  dropdown-toggle" role="button"
-                                                            id="dropdownMenuLink" data-toggle="dropdown"
-                                                            aria-haspopup="true" aria-expanded="false">
-                                                            <span class="iconify" data-icon="bi:filter-right"></span>
-                                                        </a>
-                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                            <div class="radio-button-vault">
-                                                                <div class="form-group">
-                                                                    <input type=radio id="rdo1" class="radio-input"
-                                                                        name="radio-group">
-                                                                    <label for="rdo1" class="color-black font-16">All
-                                                                        Time
-                                                                    </label>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <input type=radio id="rdo2" class="radio-input"
-                                                                        name="radio-group">
-                                                                    <label for="rdo2" class="color-black font-16">Last
-                                                                        Three
-                                                                        Months
-                                                                    </label>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <input type=radio id="rdo3" class="radio-input"
-                                                                        name="radio-group">
-                                                                    <label for="rdo3" class="color-black font-16">Last
-                                                                        Month
-                                                                    </label>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <input type=radio id="rdo3b" class="radio-input"
-                                                                        name="radio-group">
-                                                                    <label for="rdo3b" class="color-black font-16">Last
-                                                                        Week
-                                                                    </label>
-                                                                </div>
-                                                                <div class="border-e4"></div>
-                                                                <div class="form-group ">
-                                                                    <input type=radio id="rdo4" class="radio-input"
-                                                                        name="radio-group">
-                                                                    <label for="rdo4" class="color-black font-16">Latest
-                                                                        Posts
-                                                                    </label>
-                                                                </div>
-                                                                <div class="form-group ">
-                                                                    <input type=radio id="rdo4b" class="radio-input"
-                                                                        name="radio-group">
-                                                                    <label for="rdo4b" class="color-black font-16">Most
-                                                                        Liked
-                                                                    </label>
-                                                                </div>
-                                                                <div class="border-e4"></div>
-                                                                <div class="form-group">
-                                                                    <input type=radio id="rdo5" class="radio-input"
-                                                                        name="radio-group">
-                                                                    <label for="rdo5"
-                                                                        class="color-black font-16">Ascending
-                                                                    </label>
-                                                                </div>
-                                                                <div class="form-group ">
-                                                                    <input type=radio id="rdo6" class="radio-input"
-                                                                        name="radio-group">
-                                                                    <label for="rdo6"
-                                                                        class="color-black font-16">Descending
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <app-post-list></app-post-list>
-                                </div>
-                                <div id="tab3" class="tabcontent">
-                                    <div class="title-div-vtab">
-                                        <div class="list-div">
-                                            <div class="list-d-wrap">
-                                                <a href="">
-                                                    <p class="font-20 font-bold color-blue">Audio</p>
-                                                </a>
-                                                <div class="vault-section-one">
-                                                    <div class="filter-vault position-relative">
-                                                        <a href="javascript:void(0)"
-                                                            class="font-20 color-black  dropdown-toggle" role="button"
-                                                            id="dropdownMenuLink" data-toggle="dropdown"
-                                                            aria-haspopup="true" aria-expanded="false">
-                                                            <span class="iconify" data-icon="bi:filter-right"></span>
-                                                        </a>
-                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                            <div class="radio-button-vault">
-                                                                <div class="form-group">
-                                                                    <input type=radio id="rdo1" class="radio-input"
-                                                                        name="radio-group">
-                                                                    <label for="rdo1" class="color-black font-16">All
-                                                                        Time
-                                                                    </label>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <input type=radio id="rdo2" class="radio-input"
-                                                                        name="radio-group">
-                                                                    <label for="rdo2" class="color-black font-16">Last
-                                                                        Three
-                                                                        Months
-                                                                    </label>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <input type=radio id="rdo3" class="radio-input"
-                                                                        name="radio-group">
-                                                                    <label for="rdo3" class="color-black font-16">Last
-                                                                        Month
-                                                                    </label>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <input type=radio id="rdo3b" class="radio-input"
-                                                                        name="radio-group">
-                                                                    <label for="rdo3b" class="color-black font-16">Last
-                                                                        Week
-                                                                    </label>
-                                                                </div>
-                                                                <div class="border-e4"></div>
-                                                                <div class="form-group ">
-                                                                    <input type=radio id="rdo4" class="radio-input"
-                                                                        name="radio-group">
-                                                                    <label for="rdo4" class="color-black font-16">Latest
-                                                                        Posts
-                                                                    </label>
-                                                                </div>
-                                                                <div class="form-group ">
-                                                                    <input type=radio id="rdo4b" class="radio-input"
-                                                                        name="radio-group">
-                                                                    <label for="rdo4b" class="color-black font-16">Most
-                                                                        Liked
-                                                                    </label>
-                                                                </div>
-                                                                <div class="border-e4"></div>
-                                                                <div class="form-group">
-                                                                    <input type=radio id="rdo5" class="radio-input"
-                                                                        name="radio-group">
-                                                                    <label for="rdo5"
-                                                                        class="color-black font-16">Ascending
-                                                                    </label>
-                                                                </div>
-                                                                <div class="form-group ">
-                                                                    <input type=radio id="rdo6" class="radio-input"
-                                                                        name="radio-group">
-                                                                    <label for="rdo6"
-                                                                        class="color-black font-16">Descending
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                            <a class="dropdown-item" href="#edit-job" data-toggle="modal" style="color: #212529;">
+                                                                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"
+                                                                    xmlns="http://www.w3.org/2000/svg">
+                                                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                        d="M8.5146 0.169614C8.62749 0.0564292 8.77579 0 8.92393 0C9.07207 0 9.22008 0.0564292 9.33327 0.169614L10.8304 1.66674C11.0568 1.89252 11.0568 2.25903 10.8304 2.4854L9.8421 3.47368L7.52632 1.15789L8.5146 0.169614ZM0 8.68421L6.65789 2.02632L8.97368 4.3421L2.31579 11H0V8.68421Z"
+                                                                        fill="#150AA1" />
+                                                                </svg>
+                                                                Edit Post
+                                                            </a>
                                     
-                                    <app-post-list></app-post-list>
-                                </div>
-                                <div id="tab4" class="tabcontent">
-                                    <div class="title-div-vtab">
-                                        <div class="list-div">
-                                            <div class="list-d-wrap">
-                                                <a href="">
-                                                    <p class="font-20 font-bold color-blue">Posts</p>
-                                                </a>
-                                                <div class="vault-section-one">
-                                                    <div class="filter-vault position-relative">
-                                                        <a href="javascript:void(0)"
-                                                            class="font-20 color-black  dropdown-toggle" role="button"
-                                                            id="dropdownMenuLink" data-toggle="dropdown"
-                                                            aria-haspopup="true" aria-expanded="false">
-                                                            <span class="iconify" data-icon="bi:filter-right"></span>
-                                                        </a>
-                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                            <div class="radio-button-vault">
-                                                                <div class="form-group">
-                                                                    <input type=radio id="rdo1" class="radio-input"
-                                                                        name="radio-group">
-                                                                    <label for="rdo1" class="color-black font-16">All
-                                                                        Time
-                                                                    </label>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <input type=radio id="rdo2" class="radio-input"
-                                                                        name="radio-group">
-                                                                    <label for="rdo2" class="color-black font-16">Last
-                                                                        Three
-                                                                        Months
-                                                                    </label>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <input type=radio id="rdo3" class="radio-input"
-                                                                        name="radio-group">
-                                                                    <label for="rdo3" class="color-black font-16">Last
-                                                                        Month
-                                                                    </label>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <input type=radio id="rdo3b" class="radio-input"
-                                                                        name="radio-group">
-                                                                    <label for="rdo3b" class="color-black font-16">Last
-                                                                        Week
-                                                                    </label>
-                                                                </div>
-                                                                <div class="border-e4"></div>
-                                                                <div class="form-group ">
-                                                                    <input type=radio id="rdo4" class="radio-input"
-                                                                        name="radio-group">
-                                                                    <label for="rdo4" class="color-black font-16">Latest
-                                                                        Posts
-                                                                    </label>
-                                                                </div>
-                                                                <div class="form-group ">
-                                                                    <input type=radio id="rdo4b" class="radio-input"
-                                                                        name="radio-group">
-                                                                    <label for="rdo4b" class="color-black font-16">Most
-                                                                        Liked
-                                                                    </label>
-                                                                </div>
-                                                                <div class="border-e4"></div>
-                                                                <div class="form-group">
-                                                                    <input type=radio id="rdo5" class="radio-input"
-                                                                        name="radio-group">
-                                                                    <label for="rdo5"
-                                                                        class="color-black font-16">Ascending
-                                                                    </label>
-                                                                </div>
-                                                                <div class="form-group ">
-                                                                    <input type=radio id="rdo6" class="radio-input"
-                                                                        name="radio-group">
-                                                                    <label for="rdo6"
-                                                                        class="color-black font-16">Descending
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                            <a class="dropdown-item" data-toggle="modal" style="color: #212529; cursor: pointer;"
+                                                                >
+                                                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+                                                                    xmlns="http://www.w3.org/2000/svg">
+                                                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                        d="M5.20216 0.399219C5.45836 0.143019 5.80412 0 6.16602 0H7.83673C8.19863 0 8.54509 0.143019 8.80059 0.399219L9.10138 0.7H12.6014C12.8538 0.69643 13.0886 0.829063 13.2159 1.04711C13.3432 1.26516 13.3432 1.53484 13.2159 1.75289C13.0886 1.97094 12.8538 2.10357 12.6014 2.1H1.40138C1.14893 2.10357 0.914119 1.97094 0.786855 1.75289C0.65959 1.53484 0.65959 1.26516 0.786855 1.04711C0.914119 0.829063 1.14893 0.69643 1.40138 0.7H4.90138L5.20216 0.399219ZM2.72618 12.7846L1.65704 3.5H12.3457L11.2766 12.7791C11.1835 13.4784 10.5861 14 9.88751 14H4.11388C3.41528 14 2.81858 13.4776 2.72618 12.7846Z"
+                                                                        fill="#FF6B6B" />
+                                                                </svg>
+                                                                Delete
+                                                            </a>
+                                                    </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <app-post-list></app-post-list>
-                                </div>
-                                <div id="tab5" class="tabcontent like-img">
-                                    <div class="title-div-vtab">
-                                        <div class="list-div">
-                                            <div class="list-d-wrap">
-                                                <a href="">
-                                                    <p class="font-20 font-bold color-blue">Messages</p>
-                                                </a>
-                                                <div class="vault-section-one">
-                                                    <div class="filter-vault position-relative">
-                                                        <a href="javascript:void(0)"
-                                                            class="font-20 color-black  dropdown-toggle" role="button"
-                                                            id="dropdownMenuLink" data-toggle="dropdown"
-                                                            aria-haspopup="true" aria-expanded="false">
-                                                            <span class="iconify" data-icon="bi:filter-right"></span>
-                                                        </a>
-                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                            <div class="radio-button-vault">
-                                                                <div class="form-group">
-                                                                    <input type=radio id="rdo1" class="radio-input"
-                                                                        name="radio-group">
-                                                                    <label for="rdo1" class="color-black font-16">All
-                                                                        Time
-                                                                    </label>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <input type=radio id="rdo2" class="radio-input"
-                                                                        name="radio-group">
-                                                                    <label for="rdo2" class="color-black font-16">Last
-                                                                        Three
-                                                                        Months
-                                                                    </label>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <input type=radio id="rdo3" class="radio-input"
-                                                                        name="radio-group">
-                                                                    <label for="rdo3" class="color-black font-16">Last
-                                                                        Month
-                                                                    </label>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <input type=radio id="rdo3b" class="radio-input"
-                                                                        name="radio-group">
-                                                                    <label for="rdo3b" class="color-black font-16">Last
-                                                                        Week
-                                                                    </label>
-                                                                </div>
-                                                                <div class="border-e4"></div>
-                                                                <div class="form-group ">
-                                                                    <input type=radio id="rdo4" class="radio-input"
-                                                                        name="radio-group">
-                                                                    <label for="rdo4" class="color-black font-16">Latest
-                                                                        Posts
-                                                                    </label>
-                                                                </div>
-                                                                <div class="form-group ">
-                                                                    <input type=radio id="rdo4b" class="radio-input"
-                                                                        name="radio-group">
-                                                                    <label for="rdo4b" class="color-black font-16">Most
-                                                                        Liked
-                                                                    </label>
-                                                                </div>
-                                                                <div class="border-e4"></div>
-                                                                <div class="form-group">
-                                                                    <input type=radio id="rdo5" class="radio-input"
-                                                                        name="radio-group">
-                                                                    <label for="rdo5"
-                                                                        class="color-black font-16">Ascending
-                                                                    </label>
-                                                                </div>
-                                                                <div class="form-group ">
-                                                                    <input type=radio id="rdo6" class="radio-input"
-                                                                        name="radio-group">
-                                                                    <label for="rdo6"
-                                                                        class="color-black font-16">Descending
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                <div class="item-body profile-div-page-t-p mt-3"       >
+                                                    <img src="{{item.postDetail.fileName}}"  onError="this.src='assets/images/8.png'"  alt="No file exist" />
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="detail-div-vtab-message">
-                                        <div class="verti-book-mark-like photoes-sec-verti">
-                                            <div class="wrapper-member-new-group active-message">
-                                                <div class="row align-items-center">
-                                                    <div class="col-md-10">
-                                                        <div class="wrapper-poll-asked-user">
-                                                            <img src="assets/images/Ellipse 10 (2).png" alt="image" />
-                                                            <div class="user-info-p-a">
-                                                                <p class="font-14 font-bold color-49">Zaire Philips
-                                                                </p>
-                                                                <p class="font-14 color-49">I just subscribed your
-                                                                    profile. Do you wanna do a collab?</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <div class="text-member text-right">
-                                                            <p class="font-14 color-68">March 24</p>
-                                                            <div class="first-h-c-t">
-                                                                <a href=""><span class="iconify color-blue"
-                                                                        data-icon="bi:bookmark"></span></a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="wrapper-member-new-group">
-                                                <div class="row align-items-center">
-                                                    <div class="col-md-10">
-                                                        <div class="wrapper-poll-asked-user">
-                                                            <img src="assets/images/Ellipse 10.png" alt="image" />
-                                                            <div class="user-info-p-a">
-                                                                <p class="font-14 font-bold color-49">Zaire Philips
-                                                                </p>
-                                                                <p class="font-14 color-49">I just subscribed your
-                                                                    profile. Do you wanna do a collab?</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <div class="text-member text-right">
-                                                            <p class="font-14 color-d3">March 24</p>
-                                                            <div class="first-h-c-t">
-                                                                <a href=""><span class="iconify color-blue"
-                                                                        data-icon="bi:bookmark"></span></a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="wrapper-member-new-group">
-                                                <div class="row align-items-center">
-                                                    <div class="col-md-10">
-                                                        <div class="wrapper-poll-asked-user">
-                                                            <img src="assets/images/Ellipse 14 (2).png" alt="image" />
-                                                            <div class="user-info-p-a">
-                                                                <p class="font-14 font-bold color-49">Zaire Philips
-                                                                </p>
-                                                                <p class="font-14 color-49">I just subscribed your
-                                                                    profile. Do you wanna do a collab?</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <div class="text-member text-right">
-                                                            <p class="font-14 color-d3">March 24</p>
-                                                            <div class="first-h-c-t">
-                                                                <a href=""><span class="iconify color-blue"
-                                                                        data-icon="bi:bookmark"></span></a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="tab6" class="tabcontent">
-                                    <div class="title-div-vtab">
-                                        <div class="list-div">
-                                            <div class="list-d-wrap">
-                                                <a href="">
-                                                    <p class="font-20 font-bold color-blue">Locked</p>
-                                                </a>
-                                                <div class="vault-section-one">
-                                                    <div class="filter-vault position-relative">
-                                                        <a href="javascript:void(0)"
-                                                            class="font-20 color-black  dropdown-toggle" role="button"
-                                                            id="dropdownMenuLink" data-toggle="dropdown"
-                                                            aria-haspopup="true" aria-expanded="false">
-                                                            <span class="iconify" data-icon="bi:filter-right"></span>
-                                                        </a>
-                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                            <div class="radio-button-vault">
-                                                                <div class="form-group">
-                                                                    <input type=radio id="rdo1" class="radio-input"
-                                                                        name="radio-group">
-                                                                    <label for="rdo1" class="color-black font-16">All
-                                                                        Time
-                                                                    </label>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <input type=radio id="rdo2" class="radio-input"
-                                                                        name="radio-group">
-                                                                    <label for="rdo2" class="color-black font-16">Last
-                                                                        Three
-                                                                        Months
-                                                                    </label>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <input type=radio id="rdo3" class="radio-input"
-                                                                        name="radio-group">
-                                                                    <label for="rdo3" class="color-black font-16">Last
-                                                                        Month
-                                                                    </label>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <input type=radio id="rdo3b" class="radio-input"
-                                                                        name="radio-group">
-                                                                    <label for="rdo3b" class="color-black font-16">Last
-                                                                        Week
-                                                                    </label>
-                                                                </div>
-                                                                <div class="border-e4"></div>
-                                                                <div class="form-group ">
-                                                                    <input type=radio id="rdo4" class="radio-input"
-                                                                        name="radio-group">
-                                                                    <label for="rdo4" class="color-black font-16">Latest
-                                                                        Posts
-                                                                    </label>
-                                                                </div>
-                                                                <div class="form-group ">
-                                                                    <input type=radio id="rdo4b" class="radio-input"
-                                                                        name="radio-group">
-                                                                    <label for="rdo4b" class="color-black font-16">Most
-                                                                        Liked
-                                                                    </label>
-                                                                </div>
-                                                                <div class="border-e4"></div>
-                                                                <div class="form-group">
-                                                                    <input type=radio id="rdo5" class="radio-input"
-                                                                        name="radio-group">
-                                                                    <label for="rdo5"
-                                                                        class="color-black font-16">Ascending
-                                                                    </label>
-                                                                </div>
-                                                                <div class="form-group ">
-                                                                    <input type=radio id="rdo6" class="radio-input"
-                                                                        name="radio-group">
-                                                                    <label for="rdo6"
-                                                                        class="color-black font-16">Descending
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="detail-div-vtab">
-                                        <div class="verti-book-mark photoes-sec-verti">
-                                            <div class="second-home-middle forth-home-middle">
-                                                <div class="headding-poll">
-                                                    <div class="poll-asked-user d-flex justify-content-between">
-                                                        <div class="wrapper-poll-asked-user">
-                                                            <img src="assets/images/Ellipse 14 (4).png" alt="image" />
-                                                            <div class="user-info-p-a">
-                                                                <p class="font-14 font-bold color-49"> Amy &nbsp; <span
-                                                                        class="iconify font-20 color-light-blue"
-                                                                        data-icon="ic:sharp-verified"></span>
-                                                                </p>
-                                                                <p class="font-14 color-49">@amyjunior</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="a-for-h-3">
-                                                            <a href="">March 24</a>
-                                                            <a href=""><span class="iconify font-20"
-                                                                    data-icon="fluent:more-circle-32-regular"></span></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="mi-home-w-d">
-                                                    <div class="user-sub-mid position-relative">
-                                                        <img src="assets/images/8.png" class="w-100" alt="image" />
-                                                        <div class="image-ov-subscription">
-                                                            <div class="right-side-button text-center">
-                                                                <a href=""><span class="iconify color-white font-26"
-                                                                        data-icon="bxs:lock"></span></a>
-                                                                <br><br>
-                                                                <button>Subscribe to see User’s Photos</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                <div class="item-footer">
                                                     <div class="middle-up-i">
                                                         <div class="d-flex justify-content-between">
                                                             <div class="first-h-c-t">
-                                                                <a href=""><span class="iconify"
-                                                                        data-icon="clarity:heart-line"></span></a>
-                                                                <a href=""><span class="iconify"
+                                                                <a (click)="favoritePost('fav'+item._id,item.postid,1)" class="favorite" style="cursor: pointer; " 
+                                                                    >
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
+                                                                        preserveAspectRatio="xMidYMid meet" viewBox="0 0 36 36">
+                                                                        <path fill="#A8A8A8"
+                                                                            d="M18 32.43a1 1 0 0 1-.61-.21C11.83 27.9 8 24.18 5.32 20.51C1.9 15.82 1.12 11.49 3 7.64c1.34-2.75 5.19-5 9.69-3.69A9.87 9.87 0 0 1 18 7.72a9.87 9.87 0 0 1 5.31-3.77c4.49-1.29 8.35.94 9.69 3.69c1.88 3.85 1.1 8.18-2.32 12.87c-2.68 3.67-6.51 7.39-12.07 11.71a1 1 0 0 1-.61.21ZM10.13 5.58A5.9 5.9 0 0 0 4.8 8.51c-1.55 3.18-.85 6.72 2.14 10.81A57.13 57.13 0 0 0 18 30.16a57.13 57.13 0 0 0 11.06-10.83c3-4.1 3.69-7.64 2.14-10.81c-1-2-4-3.59-7.34-2.65a8 8 0 0 0-4.94 4.2a1 1 0 0 1-1.85 0a7.93 7.93 0 0 0-4.94-4.2a7.31 7.31 0 0 0-2-.29Z"
+                                                                            class="clr-i-outline clr-i-outline-path-1" />
+                                                                        <path fill="none" d="M0 0h36v36H0z" />
+                                                                    </svg>
+                                                                </a>
+                                            
+                                                                <a (click)="getComment(item.postid, 'cm'+item._id)"
+                                                                    style="cursor: pointer; color: #A8A8A8;"><span class="iconify"
                                                                         data-icon="uil:comment-alt-message"></span></a>
-                                                                <a href=""><span class="iconify"
-                                                                        data-icon="ant-design:dollar-circle-outlined"></span>
-                                                                    &nbsp;
-                                                                    Send Tip</a>
+                                            
+                                                                <a (click)="openSendTipModal(item.postid)"  data-toggle="modal" data-target="#sendTipModal"><img src="assets/images/mask-4.png" alt="image" /> &nbsp; Send
+                                                                    Tip</a>
                                                                 <p class="font-14 color-a8">122 likes this</p>
                                                             </div>
                                                             <div class="first-h-c-t">
-                                                                <a href=""><span class="iconify color-blue"
-                                                                        data-icon="bi:bookmark"></span></a>
+                                                                <a class="bookmark active" style="cursor: pointer; color: #A8A8A8;"  [id]="'bm'+item._id"
+                                                                (click)="bookmartPost('bm'+item._id,item.postid,1)">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
+                                                                        preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16">
+                                                                        <path fill="currentColor"
+                                                                            d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
+                                                                    </svg>
+                                                                </a>
                                                             </div>
-                                                        </div>
+                                                        </div>   
+                                                        <div [id]="'cm'+item._id" style="display:none;">
+                                                            <div class="comment-section">
+                                                                <div class="comment-section-wrapper">
+                                                                    <div class="input-in-comment-section">
+                                                                        <input type="text" class="w-100" placeholder="Write Comment" name=""
+                                                                            [id]="'cmtxt'+item._id"
+                                                                            (keydown.enter)="addComment($event.target, item.postid, 'cmtxt'+item._id)" />
+                                                                    </div>
+                                                                    <div class="comment-section-div-forimage-and-text" *ngIf="isPostComment === true">
+                                                                        <div class="wrapper-poll-asked-user" *ngFor="let postComments of postComment"
+                                                                            [id]="postComments._id">
+                                                                            <img src="{{postComments.userDetail[0].profileImage}}"
+                                                                                onError="this.src='assets/images/user.png'" alt="image">
+                                                                            <div class="user-info-p-a">
+                                                                                <p class="font-14 font-bold color-49"> {{postComments.userDetail[0].fullName}}
+                                                                                </p>
+                                                                                <p class="font-16 color-68">{{postComments.comment}}</p>
+                                                                            </div>
+                                                                            <div class="div-for-delete-edit-comment" *ngIf="userId === postComments.user"
+                                                                                style="margin-left: auto; margin-right: 0;">
+                                                                                <div class="d-flex">
+                                                                                    <a (click)="editCommentTxt(postComments._id, postComments.comment, item.postid, 'cmtxt'+item._id)"
+                                                                                        style="cursor: pointer;"><span class="iconify color-blue"
+                                                                                            data-icon="dashicons:edit"></span></a>
+                                                                                    <a (click)="deleteComment(postComments._id, item.postid)"
+                                                                                        style="cursor: pointer;"><span class="iconify color-blue"
+                                                                                            data-icon="ep:delete-filled"></span></a>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>                                                 
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="second-home-middle forth-home-middle">
-                                                <div class="headding-poll">
-                                                    <div class="poll-asked-user d-flex justify-content-between">
-                                                        <div class="wrapper-poll-asked-user">
-                                                            <img src="assets/images/Ellipse 14 (5).png" alt="image" />
-                                                            <div class="user-info-p-a">
-                                                                <p class="font-14 font-bold color-49"> Amy &nbsp; <span
-                                                                        class="iconify font-20 color-light-blue"
-                                                                        data-icon="ic:sharp-verified"></span>
-                                                                </p>
-                                                                <p class="font-14 color-49">@amyjunior</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="a-for-h-3">
-                                                            <a href="">March 24</a>
-                                                            <a href=""><span class="iconify font-20"
-                                                                    data-icon="fluent:more-circle-32-regular"></span></a>
-                                                        </div>
+                                            <div class="data-not-found-page" *ngIf="getBookmarkList().length === 0">
+                                                <div class="wrapper-data-not-found text-center">
+                                                    <img src="assets/images/no-data.png" alt="image" />
+                                                    <p class="font-26 color-blue font-bold">Data not found!</p>
+                                                    <div class="button-data-not-found">
+                                                        <!-- <a href="javascript:void(0)" class="btn">Go Back</a> -->
                                                     </div>
                                                 </div>
-                                                <div class="mi-home-w-d">
-                                                    <div class="user-sub-mid position-relative">
-                                                        <img src="assets/images/8.png" class="w-100" alt="image" />
-                                                        <div class="image-ov-subscription">
-                                                            <div class="right-side-button text-center">
-                                                                <a href=""><span class="iconify color-white font-26"
-                                                                        data-icon="bxs:lock"></span></a>
-                                                                <br><br>
-                                                                <button>Subscribe to see User’s Photos</button>
-                                                            </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    <div id="tab2" class="tabcontent">
+                                        <div *ngIf="category == 'video'"  class="photo-list">
+                                            <div class="photo-item p-4 d-flex flex-column" *ngFor="let item of getBookmarkList()">
+                                                <div class="item-header d-flex justify-content-between align-items-center">
+                                                    <div class="creator-section d-flex align-items-center">
+                                                        <img class="profile-img" src={{item.userDetail[0]?.profileImage}} width="70px" onError="this.src='assets/images/user.png'" />
+                                                        <div class="d-flex flex-column ml-3">
+                                                            <div class="font-medium font-16">{{item.userDetail[0]?.fullName}}</div>
+                                                            <div>@{{item.userDetail[0]?.userName}}</div>
                                                         </div>
                                                     </div>
+                                                    <div class="action-section">
+                                                        <a href="javascript:void(0)">{{item.createdAt |
+                                                            date:'MMM dd'}} </a>
+                                                        <a *ngIf="item.userDetail[0]?._id === userId"  href="javascript:void(0)" id="dropdownMenuButton"
+                                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="iconify font-20"
+                                                                data-icon="fluent:more-circle-32-regular"></span></a>
+                                    
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                            <a class="dropdown-item" href="#edit-job" data-toggle="modal" style="color: #212529;">
+                                                                <svg width="11" height="11" viewBox="0 0 11 11" fill="none"
+                                                                    xmlns="http://www.w3.org/2000/svg">
+                                                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                        d="M8.5146 0.169614C8.62749 0.0564292 8.77579 0 8.92393 0C9.07207 0 9.22008 0.0564292 9.33327 0.169614L10.8304 1.66674C11.0568 1.89252 11.0568 2.25903 10.8304 2.4854L9.8421 3.47368L7.52632 1.15789L8.5146 0.169614ZM0 8.68421L6.65789 2.02632L8.97368 4.3421L2.31579 11H0V8.68421Z"
+                                                                        fill="#150AA1" />
+                                                                </svg>
+                                                                Edit Post
+                                                            </a>
+                                    
+                                                            <a class="dropdown-item" data-toggle="modal" style="color: #212529; cursor: pointer;"
+                                                                >
+                                                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+                                                                    xmlns="http://www.w3.org/2000/svg">
+                                                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                        d="M5.20216 0.399219C5.45836 0.143019 5.80412 0 6.16602 0H7.83673C8.19863 0 8.54509 0.143019 8.80059 0.399219L9.10138 0.7H12.6014C12.8538 0.69643 13.0886 0.829063 13.2159 1.04711C13.3432 1.26516 13.3432 1.53484 13.2159 1.75289C13.0886 1.97094 12.8538 2.10357 12.6014 2.1H1.40138C1.14893 2.10357 0.914119 1.97094 0.786855 1.75289C0.65959 1.53484 0.65959 1.26516 0.786855 1.04711C0.914119 0.829063 1.14893 0.69643 1.40138 0.7H4.90138L5.20216 0.399219ZM2.72618 12.7846L1.65704 3.5H12.3457L11.2766 12.7791C11.1835 13.4784 10.5861 14 9.88751 14H4.11388C3.41528 14 2.81858 13.4776 2.72618 12.7846Z"
+                                                                        fill="#FF6B6B" />
+                                                                </svg>
+                                                                Delete
+                                                            </a>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                <div class="item-body profile-div-page-t-p mt-3">
+                                                    <video controls style="width: 100%; height: auto;">
+                                                        <source [src]="item.postDetail.fileName" type="video/mp4">
+                                                    </video>
+                                                    <!-- <img src="{{item.postDetail.thumbnail}}"  onError="this.src='assets/images/8.png'"  alt="No file exist" /> -->
+                                                </div>
+                                                <div class="item-footer">
                                                     <div class="middle-up-i">
                                                         <div class="d-flex justify-content-between">
                                                             <div class="first-h-c-t">
-                                                                <a href=""><span class="iconify"
-                                                                        data-icon="clarity:heart-line"></span></a>
-                                                                <a href=""><span class="iconify"
+                                                                <a (click)="favoritePost('fav'+item._id,item.postid,1)" class="favorite" style="cursor: pointer; " 
+                                                                    >
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
+                                                                        preserveAspectRatio="xMidYMid meet" viewBox="0 0 36 36">
+                                                                        <path fill="#A8A8A8"
+                                                                            d="M18 32.43a1 1 0 0 1-.61-.21C11.83 27.9 8 24.18 5.32 20.51C1.9 15.82 1.12 11.49 3 7.64c1.34-2.75 5.19-5 9.69-3.69A9.87 9.87 0 0 1 18 7.72a9.87 9.87 0 0 1 5.31-3.77c4.49-1.29 8.35.94 9.69 3.69c1.88 3.85 1.1 8.18-2.32 12.87c-2.68 3.67-6.51 7.39-12.07 11.71a1 1 0 0 1-.61.21ZM10.13 5.58A5.9 5.9 0 0 0 4.8 8.51c-1.55 3.18-.85 6.72 2.14 10.81A57.13 57.13 0 0 0 18 30.16a57.13 57.13 0 0 0 11.06-10.83c3-4.1 3.69-7.64 2.14-10.81c-1-2-4-3.59-7.34-2.65a8 8 0 0 0-4.94 4.2a1 1 0 0 1-1.85 0a7.93 7.93 0 0 0-4.94-4.2a7.31 7.31 0 0 0-2-.29Z"
+                                                                            class="clr-i-outline clr-i-outline-path-1" />
+                                                                        <path fill="none" d="M0 0h36v36H0z" />
+                                                                    </svg>
+                                                                </a>
+                                            
+                                                                <a (click)="getComment(item.postid, 'cm'+item._id)"
+                                                                    style="cursor: pointer; color: #A8A8A8;"><span class="iconify"
                                                                         data-icon="uil:comment-alt-message"></span></a>
-                                                                <a href=""><span class="iconify"
-                                                                        data-icon="ant-design:dollar-circle-outlined"></span>
-                                                                    &nbsp;
-                                                                    Send Tip</a>
+                                            
+                                                                <a (click)="openSendTipModal(item.postid)"  data-toggle="modal" data-target="#sendTipModal"><img src="assets/images/mask-4.png" alt="image" /> &nbsp; Send
+                                                                    Tip</a>
                                                                 <p class="font-14 color-a8">122 likes this</p>
                                                             </div>
                                                             <div class="first-h-c-t">
-                                                                <a href=""><span class="iconify color-blue"
-                                                                        data-icon="bi:bookmark"></span></a>
+                                                                <a class="bookmark active" style="cursor: pointer; color: #A8A8A8;"  [id]="'bm'+item._id"
+                                                                (click)="bookmartPost('bm'+item._id,item.postid,1)">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
+                                                                        preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16">
+                                                                        <path fill="currentColor"
+                                                                            d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
+                                                                    </svg>
+                                                                </a>
                                                             </div>
-                                                        </div>
+                                                        </div>   
+                                                        <div [id]="'cm'+item._id" style="display:none;">
+                                                            <div class="comment-section">
+                                                                <div class="comment-section-wrapper">
+                                                                    <div class="input-in-comment-section">
+                                                                        <input type="text" class="w-100" placeholder="Write Comment" name=""
+                                                                            [id]="'cmtxt'+item._id"
+                                                                            (keydown.enter)="addComment($event.target, item.postid, 'cmtxt'+item._id)" />
+                                                                    </div>
+                                                                    <div class="comment-section-div-forimage-and-text" *ngIf="isPostComment === true">
+                                                                        <div class="wrapper-poll-asked-user" *ngFor="let postComments of postComment"
+                                                                            [id]="postComments._id">
+                                                                            <img src="{{postComments.userDetail[0].profileImage}}"
+                                                                                onError="this.src='assets/images/user.png'" alt="image">
+                                                                            <div class="user-info-p-a">
+                                                                                <p class="font-14 font-bold color-49"> {{postComments.userDetail[0].fullName}}
+                                                                                </p>
+                                                                                <p class="font-16 color-68">{{postComments.comment}}</p>
+                                                                            </div>
+                                                                            <div class="div-for-delete-edit-comment" *ngIf="userId === postComments.user"
+                                                                                style="margin-left: auto; margin-right: 0;">
+                                                                                <div class="d-flex">
+                                                                                    <a (click)="editCommentTxt(postComments._id, postComments.comment, item.postid, 'cmtxt'+item._id)"
+                                                                                        style="cursor: pointer;"><span class="iconify color-blue"
+                                                                                            data-icon="dashicons:edit"></span></a>
+                                                                                    <a (click)="deleteComment(postComments._id, item.postid)"
+                                                                                        style="cursor: pointer;"><span class="iconify color-blue"
+                                                                                            data-icon="ep:delete-filled"></span></a>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>                                                 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="data-not-found-page" *ngIf="getBookmarkList().length === 0">
+                                                <div class="wrapper-data-not-found text-center">
+                                                    <img src="assets/images/no-data.png" alt="image" />
+                                                    <p class="font-26 color-blue font-bold">Data not found!</p>
+                                                    <div class="button-data-not-found">
+                                                        <!-- <a href="javascript:void(0)" class="btn">Go Back</a> -->
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                    <div id="tab3" class="tabcontent">
+                                        <div class="photo-item p-4 d-flex flex-column" *ngFor="let item of getBookmarkList()">
+                                            <div class="item-header d-flex justify-content-between align-items-center">
+                                                <div class="creator-section d-flex align-items-center">
+                                                    <img class="profile-img" src={{item.userDetail[0]?.profileImage}} width="70px" onError="this.src='assets/images/user.png'" />
+                                                    <div class="d-flex flex-column ml-3">
+                                                        <div class="font-medium font-16">{{item.userDetail[0]?.fullName}}</div>
+                                                        <div>@{{item.userDetail[0]?.userName}}</div>
+                                                    </div>
+                                                </div>
+                                                <div class="action-section">
+                                                    <a href="javascript:void(0)">{{item.createdAt |
+                                                        date:'MMM dd'}} </a>
+                                                    <a *ngIf="item.userDetail[0]?._id === userId"  href="javascript:void(0)" id="dropdownMenuButton"
+                                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="iconify font-20"
+                                                            data-icon="fluent:more-circle-32-regular"></span></a>
+                                
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                        <a class="dropdown-item" href="#edit-job" data-toggle="modal" style="color: #212529;">
+                                                            <svg width="11" height="11" viewBox="0 0 11 11" fill="none"
+                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                    d="M8.5146 0.169614C8.62749 0.0564292 8.77579 0 8.92393 0C9.07207 0 9.22008 0.0564292 9.33327 0.169614L10.8304 1.66674C11.0568 1.89252 11.0568 2.25903 10.8304 2.4854L9.8421 3.47368L7.52632 1.15789L8.5146 0.169614ZM0 8.68421L6.65789 2.02632L8.97368 4.3421L2.31579 11H0V8.68421Z"
+                                                                    fill="#150AA1" />
+                                                            </svg>
+                                                            Edit Post
+                                                        </a>
+                                
+                                                        <a class="dropdown-item" data-toggle="modal" style="color: #212529; cursor: pointer;"
+                                                            >
+                                                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                    d="M5.20216 0.399219C5.45836 0.143019 5.80412 0 6.16602 0H7.83673C8.19863 0 8.54509 0.143019 8.80059 0.399219L9.10138 0.7H12.6014C12.8538 0.69643 13.0886 0.829063 13.2159 1.04711C13.3432 1.26516 13.3432 1.53484 13.2159 1.75289C13.0886 1.97094 12.8538 2.10357 12.6014 2.1H1.40138C1.14893 2.10357 0.914119 1.97094 0.786855 1.75289C0.65959 1.53484 0.65959 1.26516 0.786855 1.04711C0.914119 0.829063 1.14893 0.69643 1.40138 0.7H4.90138L5.20216 0.399219ZM2.72618 12.7846L1.65704 3.5H12.3457L11.2766 12.7791C11.1835 13.4784 10.5861 14 9.88751 14H4.11388C3.41528 14 2.81858 13.4776 2.72618 12.7846Z"
+                                                                    fill="#FF6B6B" />
+                                                            </svg>
+                                                            Delete
+                                                        </a>
+                                                </div>
+                                                </div>
+                                            </div>
+                                            <div class="item-body profile-div-page-t-p mt-3">
+                                                <audio controls style="width: 100%">
+                                                    <source [src]="item.postDetail.fileName" type="audio/mp3">
+                                                </audio>                                              
+                                                <!-- <img src="{{item.postDetail.thumbnail}}"  onError="this.src='assets/images/8.png'"  alt="No file exist" /> -->
+                                            </div>
+                                            <div class="item-footer">
+                                                <div class="middle-up-i">
+                                                    <div class="d-flex justify-content-between">
+                                                        <div class="first-h-c-t">
+                                                            <a (click)="favoritePost('fav'+item._id,item.postid,1)" class="favorite" style="cursor: pointer; " 
+                                                                >
+                                                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
+                                                                    preserveAspectRatio="xMidYMid meet" viewBox="0 0 36 36">
+                                                                    <path fill="#A8A8A8"
+                                                                        d="M18 32.43a1 1 0 0 1-.61-.21C11.83 27.9 8 24.18 5.32 20.51C1.9 15.82 1.12 11.49 3 7.64c1.34-2.75 5.19-5 9.69-3.69A9.87 9.87 0 0 1 18 7.72a9.87 9.87 0 0 1 5.31-3.77c4.49-1.29 8.35.94 9.69 3.69c1.88 3.85 1.1 8.18-2.32 12.87c-2.68 3.67-6.51 7.39-12.07 11.71a1 1 0 0 1-.61.21ZM10.13 5.58A5.9 5.9 0 0 0 4.8 8.51c-1.55 3.18-.85 6.72 2.14 10.81A57.13 57.13 0 0 0 18 30.16a57.13 57.13 0 0 0 11.06-10.83c3-4.1 3.69-7.64 2.14-10.81c-1-2-4-3.59-7.34-2.65a8 8 0 0 0-4.94 4.2a1 1 0 0 1-1.85 0a7.93 7.93 0 0 0-4.94-4.2a7.31 7.31 0 0 0-2-.29Z"
+                                                                        class="clr-i-outline clr-i-outline-path-1" />
+                                                                    <path fill="none" d="M0 0h36v36H0z" />
+                                                                </svg>
+                                                            </a>
+                                        
+                                                            <a (click)="getComment(item.postid, 'cm'+item._id)"
+                                                                style="cursor: pointer; color: #A8A8A8;"><span class="iconify"
+                                                                    data-icon="uil:comment-alt-message"></span></a>
+                                        
+                                                            <a (click)="openSendTipModal(item.postid)"  data-toggle="modal" data-target="#sendTipModal"><img src="assets/images/mask-4.png" alt="image" /> &nbsp; Send
+                                                                Tip</a>
+                                                            <p class="font-14 color-a8">122 likes this</p>
+                                                        </div>
+                                                        <div class="first-h-c-t">
+                                                            <a class="bookmark active" style="cursor: pointer; color: #A8A8A8;"  [id]="'bm'+item._id"
+                                                            (click)="bookmartPost('bm'+item._id,item.postid,1)">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
+                                                                    preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16">
+                                                                    <path fill="currentColor"
+                                                                        d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
+                                                                </svg>
+                                                            </a>
+                                                        </div>
+                                                    </div>   
+                                                    <div [id]="'cm'+item._id" style="display:none;">
+                                                        <div class="comment-section">
+                                                            <div class="comment-section-wrapper">
+                                                                <div class="input-in-comment-section">
+                                                                    <input type="text" class="w-100" placeholder="Write Comment" name=""
+                                                                        [id]="'cmtxt'+item._id"
+                                                                        (keydown.enter)="addComment($event.target, item.postid, 'cmtxt'+item._id)" />
+                                                                </div>
+                                                                <div class="comment-section-div-forimage-and-text" *ngIf="isPostComment === true">
+                                                                    <div class="wrapper-poll-asked-user" *ngFor="let postComments of postComment"
+                                                                        [id]="postComments._id">
+                                                                        <img src="{{postComments.userDetail[0].profileImage}}"
+                                                                            onError="this.src='assets/images/user.png'" alt="image">
+                                                                        <div class="user-info-p-a">
+                                                                            <p class="font-14 font-bold color-49"> {{postComments.userDetail[0].fullName}}
+                                                                            </p>
+                                                                            <p class="font-16 color-68">{{postComments.comment}}</p>
+                                                                        </div>
+                                                                        <div class="div-for-delete-edit-comment" *ngIf="userId === postComments.user"
+                                                                            style="margin-left: auto; margin-right: 0;">
+                                                                            <div class="d-flex">
+                                                                                <a (click)="editCommentTxt(postComments._id, postComments.comment, item.postid, 'cmtxt'+item._id)"
+                                                                                    style="cursor: pointer;"><span class="iconify color-blue"
+                                                                                        data-icon="dashicons:edit"></span></a>
+                                                                                <a (click)="deleteComment(postComments._id, item.postid)"
+                                                                                    style="cursor: pointer;"><span class="iconify color-blue"
+                                                                                        data-icon="ep:delete-filled"></span></a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>                                                 
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="data-not-found-page" *ngIf="getBookmarkList().length === 0">
+                                            <div class="wrapper-data-not-found text-center">
+                                                <img src="assets/images/no-data.png" alt="image" />
+                                                <p class="font-26 color-blue font-bold">Data not found!</p>
+                                                <div class="button-data-not-found">
+                                                    <!-- <a href="javascript:void(0)" class="btn">Go Back</a> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="tab4" class="tabcontent">
+                                        <div class="data-not-found-page" *ngIf="getBookmarkList().length === 0">
+                                            <div class="wrapper-data-not-found text-center">
+                                                <img src="assets/images/no-data.png" alt="image" />
+                                                <p class="font-26 color-blue font-bold">Data not found!</p>
+                                                <div class="button-data-not-found">
+                                                    <!-- <a href="javascript:void(0)" class="btn">Go Back</a> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>                                                       
+                                    <div id="tab5" class="tabcontent">
+                                        <div class="data-not-found-page" *ngIf="getBookmarkList().length === 0">
+                                            <div class="wrapper-data-not-found text-center">
+                                                <img src="assets/images/no-data.png" alt="image" />
+                                                <p class="font-26 color-blue font-bold">Data not found!</p>
+                                                <div class="button-data-not-found">
+                                                    <!-- <a href="javascript:void(0)" class="btn">Go Back</a> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>   
+                                    <div id="tab6" class="tabcontent">
+                                        <div class="data-not-found-page" *ngIf="getBookmarkList().length === 0">
+                                            <div class="wrapper-data-not-found text-center">
+                                                <img src="assets/images/no-data.png" alt="image" />
+                                                <p class="font-26 color-blue font-bold">Data not found!</p>
+                                                <div class="button-data-not-found">
+                                                    <!-- <a href="javascript:void(0)" class="btn">Go Back</a> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>                                                       
                             </div>
                         </div>
 
                     </div>
                 </div>
             </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="sendTipModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content tip-modal-content">
+                <div class="modal-header">
+                    <div class="modal-title tip_title" id="tip_title">
+                        <img class="mr-1" src="assets/images/tip.png">
+                        Tips
+                    </div>
+                    <p class="tip_date">May 30, 2022</p>
+                </div>
+                <div class="modal-body">
+                    <div class="thanks-tipping row">
+                        <div class="mr-3">Thank you for Tipping</div>
+                        <img src="assets/images/avatar.png" />
+                        <div class="user_name ml-1">@Jessicaalba</div>
+                    </div>
+                    <div class="tip_amount">
+                        <div class="enter_tip">
+                            <img class="mr-1" src="assets/images/tippen.png" alt="">
+                            Please Enter Tip Amount
+                        </div>
+                        <div class="flex align-center">
+                            <div class="usd">$</div>
+                            <input type="text" class="tip_input" required>
+                        </div>
+                    </div>
+                    <div class="tip_detail">
+                        TIP amount from $5.00 to $300.00
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="sendTipBtn" data-toggle="modal" data-target="#tipPaymentModal"
+                        (click)="tipPayment()">Send Tip</button>
+                </div>
+            </div>
+        </div>
+        </div>
+
+
+        <div class="modal payment-modal fade" id="tipPaymentModal" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <!-- <app-payment></app-payment> -->
+                <!-- <div id="tab2" class="tabcontent"> -->
+                <div class="payment-content-tab">
+                    <div class="radio-button-div-payments">
+                        <div class="heading-payment">
+                            <p class="font-20 color-blue font-bold">Payment Details</p>
+                        </div>
+                        <div class="radio-payment-wrap">
+                            <p>
+                                <input type="radio" id="test11" name="radio-group" checked>
+                                <label for="test11">New Card</label>
+                            </p>
+                            <p>
+                                <input type="radio" id="test22" name="radio-group">
+                                <label for="test22"> <img src="assets/images/bi_credit-card-2-front-fill.png"
+                                        alt="image">Credit/Debit Card</label>
+                            </p>
+                            <p>
+                                <input type="radio" id="test33" name="radio-group">
+                                <label for="test33"><img src="assets/images/image 16.png" alt="image">Cosmo Payment</label>
+                            </p>
+                            <p>
+                                <input type="radio" id="test44" name="radio-group">
+                                <label for="test44"><img src="assets/images/image 17.png" alt="image">Paxum</label>
+                            </p>
+                            <p>
+                                <input type="radio" id="test55" name="radio-group">
+                                <label for="test55"><img src="assets/images/image 18.png" alt="image">Skrill</label>
+                            </p>
+                            <p>
+                                <input type="radio" id="test66" name="radio-group">
+                                <label for="test66"><img src="assets/images/image 19.png" alt="image">Metamask</label>
+                            </p>
+                        </div>
+                        <div class="input-in-payments">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="font-14 color-grey">Email</label>
+                                        <input type="email" name="address1" value="John@email.com" class="w-100">
+                                    </div>
+                                </div>
+                                <div class="col-md-6"></div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="font-14 color-grey">Card Number</label>
+                                        <input type="text" name="card" value="4000 2222 3333 8888" class="w-100">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="font-14 color-grey">Postal Code</label>
+                                        <input type="text" name="cvv" value="1970" class="w-100">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="font-14 color-grey">Expiration Date</label>
+                                        <input type="text" name="cvv" value="MM/YYYY" class="w-100">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="font-14 color-grey">CCV</label>
+                                        <input type="text" name="cvv" class="w-100">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group border-bottom-pe">
+                                        <div class="check-for-payments">
+                                            <input type="checkbox" id="agree-save" name="agree-save" value="agree-save">
+                                            <label for="agree-save" class="font-14 color-black">Save Payment
+                                                Card</label><br>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sub-total-payment">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <p class="font-14 color-black">Subtotal</p>
+                                <p class="font-14 color-black">$12.50 (prorated charge)</p>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <p class="font-14 color-pink">Yearly Plan Discount</p>
+                                <p class="font-14 font-bold color-pink">-$50.00</p>
+                            </div>
+                        </div>
+                        <div class="total-payment">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <p class="font-14 color-black">Total Billed</p>
+                                <p class="font-14 font-bold color-black">$12.50 (prorated charge)</p>
+                            </div>
+                        </div>
+                        <div class="payment-desc">
+                            <p class="color-grey font-14">All payments are charged in USD and all payments are final. You
+                                will be charged the prorated amount in USD immediately. You will be charged $25.00 USD every
+                                1st of the month while you are an active Creator on Chello. Monthly payments are prorated at
+                                the start of your relationship with Chello,however, can be canceled any time.</p>
+                        </div>
+                        <div class="payment-aggree">
+                            <div class="form-group ">
+                                <div class="check-for-payments">
+                                    <input type="checkbox" id="agree" name="agree" value="agree">
+                                    <label for="agree" class="font-14 color-black">I agree to the above, this payment, and
+                                        the <a href="">Terms.</a></label><br>
+                                </div>
+                            </div>
+                            <div class="button-link button-verified-lat">
+                                <div class="d-flex justify-content-between">
+                                    <a href="javascript:void(0)" (click)="makePayment()" class="btn">Make Payment</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- </div>  -->
+            </div>
+        </div>
         </div>
     </div>
 </div>

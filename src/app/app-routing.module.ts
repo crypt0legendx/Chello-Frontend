@@ -1,3 +1,5 @@
+import { EditEventModule } from './modules/edit-event/edit-event.module';
+import { EventListModule } from './modules/event-list/event-list.module';
 import { TipsModule } from './modules/tips/tips.module';
 import { NgModule } from '@angular/core';
 import { Router, RouterModule, Routes, UrlSegment } from '@angular/router';
@@ -65,6 +67,9 @@ import {EventPlayModule} from './modules/event-play/event-play.module'
 import {PaymentConfirmationModule} from './modules/payment-confirmation/payment-confirmation.module'
 import {PaymentModule} from './modules/payment/payment.module'
 import {AddCardModule} from './modules/add-card/add-card.module'
+import {CustomizeSubscriptionModule} from './modules/customize-subscription/customize-subscription.module'
+import {VerifyIdTwoModule} from './modules/verify-id-two/verify-id-two.module'
+import {SearchModule} from './modules/search/search.module'
 
 const routes: Routes = [
 	{
@@ -319,14 +324,26 @@ const routes: Routes = [
 		loadChildren: () => EventModule
 	},
 	{
+		path: 'event-list',
+		loadChildren: () => EventListModule
+	},
+	{
 		path: 'create-event',
 		loadChildren: () => CreateEventModule
 	},
 	{
+		path: 'edit-event',
+		loadChildren: () => EditEventModule
+	},
+	{	
 		path: 'private-event-final',
 		loadChildren: () => PrivateEventFinalModule
 	},
 	{
+		path: 'event-list',
+		loadChildren: () => EventListModule
+	},
+	{	
 		path: 'join-event',
 		loadChildren: () => JoinEventModule
 	},
@@ -360,11 +377,39 @@ const routes: Routes = [
 	// 				}
 	// 			};
 	// 		}
+	{
+		path: 'add-card',
+		loadChildren: () => AddCardModule
+	},
+	{
+		path: 'customize-subscription',
+		loadChildren: () => CustomizeSubscriptionModule
+	},
+	{
+		path: 'verify-id-2',
+		loadChildren: () => VerifyIdTwoModule
+	},
+	{
+		path: 'search',
+		loadChildren: () => SearchModule
+	},
+	{
+		matcher: (url) => {
+			if (url.length === 1 && url[0].path.match(/^[\w]+$/gm)) {
+				return {
+					consumed: url,
+					posParams: {
+						username: new UrlSegment(url[0].path.substr(0), {})
+					}
+				};
+			}
+			return null;
+		},
+		loadChildren: () => ProfileModule
+	}
+	
 
-	// 		return null;
-	// 	},
-	// 	loadChildren: () => ProfileModule
-	// },
+
 ];
 
 @NgModule({

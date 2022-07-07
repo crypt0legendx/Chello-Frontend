@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { veriables } from '../../../utils/variables';
 @Component({
   selector: 'app-cookies-policy',
   templateUrl: '../pages/cookies-policy.component.html',
@@ -7,7 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CookiesPolicyComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public veriable: veriables
+  ) { }
 
   ngOnInit(): void {
   }

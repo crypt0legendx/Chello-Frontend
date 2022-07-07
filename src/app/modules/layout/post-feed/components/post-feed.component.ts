@@ -46,6 +46,8 @@ export class PostFeedComponent implements OnInit {
   totalPosts: any;
   userPosts: any;
   retrievedGroupDetails: any;
+  paidPost:boolean = false;
+  public postOption: number = 0;
 
   restrictWords: any = ["abduct", "abducted", "abducting", "abduction", "asphyxia", "asphyxiate", "asphyxiation", "asphyxicate", "asphyxication", "beastiality", "bestiality", "blackmail", "cannibal", "child", "coma", "comatose", "Flogging", "jailbait", "kidnap", "kidnapped", "kidnapping", "molest", "molested", "molesting", "mutilate", "mutilation", "necrophilia", "nigger", "pedo", "pedophile", "pedophilia", "preteen", "prostituted", "prostituting", "prostitution", "rape", "raping", "rapist", "strangled", "strangling", "strangulation", "suffocate", "suffocation", "teen", "torture", "tortured", "unconscious", "unconsciousness", "underage", "unwilling", "vomit", "vomitted", "vomiting", "young", "zoophilia"];
 
@@ -69,7 +71,8 @@ export class PostFeedComponent implements OnInit {
 
   ngOnInit(): void {
     this.feedForm = this.formBuilder.group({
-      postTxt: ['', Validators.required]
+      postTxt: ['', Validators.compose(
+        [Validators.minLength(5), Validators.required])]
     });
 
     if (this.router.url === "/group-detail-new") {
@@ -112,7 +115,7 @@ export class PostFeedComponent implements OnInit {
           console.log(data);
           if (data['statusCode'] === 200) {
             this.feedForm.controls.postTxt.setValue("");
-            this.postListComponent.getAllFeeds();
+            this.postListComponent.getPostsFromAnother();
             this.spinner.hide();
             this.submitted = false;
             this.toastr.success("Post added successfully");
@@ -282,85 +285,87 @@ export class PostFeedComponent implements OnInit {
     this.spinner.show();
     let today = new Date();
     const file = this.selectedFiles;
-    let res: any = await this.uploadService.uploadFile(file, filePath);
-    console.log(res);
-    if (!this.retrievedGroupDetails) {
-      if (jsonKey === "story") {
-        this.uploadStory({
-          "name": res['Location'],
-          "fileType": "image"
-        })
-      } else if (jsonKey === "addImage") {
-        let sendData = {
-          "title": this.f.postTxt.value,
-          "type": "image",
-          "fileName": res['Location'],
-          "thumbnail": res['Location'],
-          "scheduled": false,
-          "scheduledDateTime": today.toISOString()
-        }
+    for(let postIndex=0; postIndex<this.selectedFiles.length;postIndex++) {
+      let res: any = await this.uploadService.uploadFile(file, filePath);
+      console.log(res);
+      if (!this.retrievedGroupDetails) {
+        if (jsonKey === "story") {
+          this.uploadStory({
+            "name": res['Location'],
+            "fileType": "image"
+          })
+        } else if (jsonKey === "addImage") {
+          let sendData = {
+            "title": this.f.postTxt.value,
+            "type": "image",
+            "fileName": res['Location'],
+            "thumbnail": res['Location'],
+            "scheduled": false,
+            "scheduledDateTime": today.toISOString()
+          }
 
-        this.postFiles(sendData);
-      } else if (jsonKey === "addVideo") {
-        let sendData = {
-          "title": this.f.postTxt.value,
-          "type": "video",
-          "fileName": res['Location'],
-          "thumbnail": res['Location'],
-          "duration": this.duration,
-          "scheduled": false,
-          "scheduledDateTime": today.toISOString()
-        }
+          this.postFiles(sendData);
+        } else if (jsonKey === "addVideo") {
+          let sendData = {
+            "title": this.f.postTxt.value,
+            "type": "video",
+            "fileName": res['Location'],
+            "thumbnail": res['Location'],
+            "duration": this.duration,
+            "scheduled": false,
+            "scheduledDateTime": today.toISOString()
+          }
 
-        this.postFiles(sendData);
-      } else if (jsonKey === "addAudio") {
-        let sendData = {
-          "title": this.f.postTxt.value,
-          "type": "audio",
-          "fileName": res['Location'],
-          "thumbnail": res['Location'],
-          "duration": this.duration,
-          "scheduled": false,
-          "scheduledDateTime": today.toISOString()
-        }
+          this.postFiles(sendData);
+        } else if (jsonKey === "addAudio") {
+          let sendData = {
+            "title": this.f.postTxt.value,
+            "type": "audio",
+            "fileName": res['Location'],
+            "thumbnail": res['Location'],
+            "duration": this.duration,
+            "scheduled": false,
+            "scheduledDateTime": today.toISOString()
+          }
 
-        this.postFiles(sendData);
+          this.postFiles(sendData);
+        }
+      } else {
+        if (jsonKey === "addImage") {
+          let sendData = {
+            "group_id": this.retrievedGroupDetails['_id'],
+            "title": this.f.postTxt.value,
+            "type": "image",
+            "fileName": res['Location'],
+            "thumbnail": res['Location']
+          }
+
+          this.postGroupFiles(sendData);
+        } else if (jsonKey === "addVideo") {
+          let sendData = {
+            "group_id": this.retrievedGroupDetails['_id'],
+            "title": this.f.postTxt.value,
+            "type": "video",
+            "fileName": res['Location'],
+            "thumbnail": res['Location'],
+            "duration": this.duration
+          }
+
+          this.postGroupFiles(sendData);
+        } else if (jsonKey === "addAudio") {
+          let sendData = {
+            "group_id": this.retrievedGroupDetails['_id'],
+            "title": this.f.postTxt.value,
+            "type": "audio",
+            "fileName": res['Location'],
+            "thumbnail": res['Location'],
+            "duration": this.duration
+          }
+
+          this.postGroupFiles(sendData);
+        }
       }
-    } else {
-      if (jsonKey === "addImage") {
-        let sendData = {
-          "group_id": this.retrievedGroupDetails['_id'],
-          "title": this.f.postTxt.value,
-          "type": "image",
-          "fileName": res['Location'],
-          "thumbnail": res['Location']
-        }
-
-        this.postGroupFiles(sendData);
-      } else if (jsonKey === "addVideo") {
-        let sendData = {
-          "group_id": this.retrievedGroupDetails['_id'],
-          "title": this.f.postTxt.value,
-          "type": "video",
-          "fileName": res['Location'],
-          "thumbnail": res['Location'],
-          "duration": this.duration
-        }
-
-        this.postGroupFiles(sendData);
-      } else if (jsonKey === "addAudio") {
-        let sendData = {
-          "group_id": this.retrievedGroupDetails['_id'],
-          "title": this.f.postTxt.value,
-          "type": "audio",
-          "fileName": res['Location'],
-          "thumbnail": res['Location'],
-          "duration": this.duration
-        }
-
-        this.postGroupFiles(sendData);
-      }
-    }
+    }    
   }
 
   uploadStory(postData: any) {
@@ -407,6 +412,10 @@ export class PostFeedComponent implements OnInit {
    */
   selectPostOption(opt_num: number) {
     this.homeComponent.postOption = opt_num;
+  }
+
+  changePaidState() {
+    this.paidPost = !this.paidPost;
   }
 
 }

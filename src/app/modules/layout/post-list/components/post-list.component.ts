@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostListener, Input, IterableDiffers, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProfileService } from '../../../../services/profile.service';
 import { PostService } from '../../../../services/post.service';
@@ -13,19 +13,21 @@ import * as auth from 'firebase/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { DomSanitizer } from '@angular/platform-browser';
+import { SharedState } from 'src/app/sharedState/sharedState';
 
 declare var swal: any;
 declare var $: any;
 @Component({
   selector: 'app-post-list',
   templateUrl: '../pages/post-list.component.html',
-  styleUrls: ['../pages/post-list.component.scss']
+  styleUrls: ['../pages/post-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PostListComponent implements OnInit {
 
   isShown: boolean = false; // hidden by default
   totalPosts: any;
-  userPosts: any;
+  userPosts: any = [];
 
   userName: any;
   profilePicture: any;
@@ -52,6 +54,11 @@ export class PostListComponent implements OnInit {
   totalBookmark: any;
 
   postType: any = "all";
+  filterType: string = "";
+
+  filterPostDateWise: any = "all";
+  filterPost: any = "latest";
+  orderBy: any = "desc";
 
   constructor(
     private formBuilder: FormBuilder,
@@ -67,14 +74,18 @@ export class PostListComponent implements OnInit {
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     private sanitized: DomSanitizer,
     private cdr: ChangeDetectorRef,
+    private iterableDiffers: IterableDiffers,
+    private filterState: SharedState,    
   ) { }
 
   ngOnInit(): void {
+    this.filterType  = this.filterState.typeOfPost;
+    console.log('pipe value', this.filterType);
     let retrievedObject: any = localStorage.getItem('userData');
     if (retrievedObject) {
       this.userJsonData = JSON.parse(retrievedObject);
-      console.log(this.userJsonData);
-      console.log(localStorage.getItem('accessToken'));
+      // console.log(this.userJsonData);
+      // console.log(localStorage.getItem('accessToken'));
       this.userName = this.userJsonData['userName'];
       this.userId = this.userJsonData['_id'];
       this.profilePicture = this.userJsonData['profileImage'];
@@ -87,37 +98,49 @@ export class PostListComponent implements OnInit {
         this.isUserCoverPicture = false;
       }
     }
-    console.log(this.router.url);
+    // console.log(this.router.url);
     if (this.router.url === "/profile") {
       this.isMyProfilePage = true;
-      this.getUserFeeds();
+      this.getUserFeeds(this.postType);
     } else if (this.router.url === "/bookmark") {
       this.isMyProfilePage = false;
       this.isBookmarkPage = true;
       this.getBookmark("all");
     } else {
       this.isMyProfilePage = false;
-      this.getAllFeeds();
+      this.getAllFeeds(this.filterPostDateWise, this.filterPost, this.orderBy);
     }
   }
 
-  getAllFeeds() {
+  getPostsFromAnother(){
+    this.getAllFeeds(this.filterPostDateWise, this.filterPost, this.orderBy);
+  }
+
+  getAllFeeds(filterPostDateWise: any, filterPost: any, orderBy: any) {
     this.spinner.show();
+    this.filterPostDateWise = filterPostDateWise;
+    this.filterPost = filterPost;
+    this.orderBy = orderBy;
+
     var pagination = {
-      "pageNumber": this.page
+      "pageNumber": this.page,
+      "type": "all",
+      "filter": filterPostDateWise,
+      "sort": orderBy,
+      "filterposts": filterPost
     }
 
-    console.log(pagination);
+    // console.log(pagination);
 
     this.postService.getGlobalFeed(pagination).subscribe((data: any) => {
-      console.log(data);
+      // console.log(data);
       if (data['statusCode'] === 200) {
         if (data['postData'].length) {
           if (this.page === 0) {
             this.totalPosts = data['postData'].length;
             this.userPosts = data['postData'];
             this.cdr.detectChanges();
-            console.log(this.userPosts);
+            console.log('getGlobalFeed',this.userPosts);
           } else {
             this.userPosts = [...this.userPosts, ...data['postData']];
             this.totalPosts = data['postData'].length;
@@ -133,22 +156,33 @@ export class PostListComponent implements OnInit {
       }
     }, (error) => {
       this.spinner.hide();
-      console.log(error['error']['message']);
+      // console.log(error['error']['message']);
       this.toastr.error(error['error']['message']);
     });
   }
 
-  getUserFeeds() {
-    this.spinner.show();
 
-    this.postService.getUserFeed({ "pageNumber": this.pageNumber }).subscribe((data: any) => {
+  getUserFeeds(type: any) {
+    var pagination = {
+      "pageNumber":this.page,
+      "type": type,
+      "filter":"",
+      "sort":"",
+      "filterposts":"mostliked"   
+    }
+    
+    this.spinner.show();
+    this.postType = type;
+    this.filterType = this.filterState.typeOfPost; 
+    console.log('getUserFeeds', this.filterType)   ;
+    this.postService.getUserFeed(pagination).subscribe((data: any) => {
       console.log(data);
-      if (data['statusCode'] === 200) {
-        this.totalPosts = data['postData'].length;
+        if (data['statusCode'] === 200) {
+        this.totalPosts = data['postData'].length;        
+        // this.userPosts = [...data['postData']];
         this.userPosts = data['postData'];
         this.cdr.detectChanges();
-        console.log(this.userPosts);
-
+        this.cdr.markForCheck();
         this.spinner.hide();
       }
       else {
@@ -215,7 +249,7 @@ export class PostListComponent implements OnInit {
     console.log(this.userPosts);
   }
 
-  favoritePost(Id: any, postId: any, status: any) {
+  favoritePost(Id: any, postId: any, status: any, totalLikes: any) {
     console.log(Id);
     console.log(status);
     const myElement = document.getElementById(Id)!;
@@ -244,9 +278,15 @@ export class PostListComponent implements OnInit {
 
         if (className === "favorite") {
           document.getElementById(Id)!.classList.add('active');
+          let likesCount = document.getElementById('likecounter'+postId)!.textContent;
+          let likes: any = likesCount!.replace(/ .*/,'');
+          document.getElementById('likecounter'+postId)!.innerHTML = (Number(likes) + 1) + " likes this";
         }
         else {
           document.getElementById(Id)!.classList.remove('active');
+          let likesCount = document.getElementById('likecounter'+postId)!.textContent;
+          let likes: any = likesCount!.replace(/ .*/,'');
+          document.getElementById('likecounter'+postId)!.innerHTML = (Number(likes) - 1) + " likes this";
         }
 
         this.spinner.hide();
@@ -444,10 +484,10 @@ export class PostListComponent implements OnInit {
         this.toastr.success(data['message']);
         if (this.router.url === "/profile") {
           this.isMyProfilePage = true;
-          this.getUserFeeds();
+          this.getUserFeeds(this.postType);
         } else {
           this.isMyProfilePage = false;
-          this.getAllFeeds();
+          this.getAllFeeds(this.filterPostDateWise, this.filterPost, this.orderBy);
         }
       }
       else {
@@ -492,14 +532,15 @@ export class PostListComponent implements OnInit {
     this.editCommentPostId = postId;
   }
 
-  submitPollAnswer(postId: any, pollAnswer: any, pollOptionId: any, pollAnswerId: any, pollOptionData: any, pollOptionAnswerId: any) {
+  submitPollAnswer(postId: any, pollAnswer: any, pollOptionId: any, pollAnswerId: any, pollOptionData: any, pollOptionAnswerId: any, totalVoted: any) {
     console.log(postId);
     console.log(pollAnswer);
     console.log(pollOptionId);
     console.log(pollAnswerId);
+    console.log("total voted: " + totalVoted);
 
     let pollVotingReq = {
-      "pollid": postId,
+      "postid": postId,
       "optionid": pollOptionAnswerId
     }
 
@@ -523,11 +564,11 @@ export class PostListComponent implements OnInit {
     let divPollOptionId = document.getElementById(pollOptionId)!;
     let divPollAnswerId = document.getElementById(pollAnswerId)!;
 
-    let totalVotes: number = 1;
-    for (let i = 0; i < pollOptionData.length; i++) {
-      totalVotes = totalVotes + Number(pollOptionData[i].choose);
-      console.log(pollOptionData[i].choose);
-    }
+    let totalVotes: number = totalVoted + 1;
+    // for (let i = 0; i < pollOptionData.length; i++) {
+    //   totalVotes = totalVotes + Number(pollOptionData[i].choose);
+    //   console.log(pollOptionData[i].choose);
+    // }
 
     console.log(totalVotes);
 
@@ -558,11 +599,70 @@ export class PostListComponent implements OnInit {
     //console.log(diffTime + " milliseconds");
     //console.log(diffDays + " days");
 
-    if (duration > diffDays) {
+    if (duration >= diffDays) {
       return ''
     }
 
     return 'none'
+  }
+
+  pollDayLeft(duration: any, createdAt: any) {
+    let date1: any = new Date(createdAt);
+    let date2: any = new Date();
+    const diffTime = Math.abs(date2 - date1);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    //console.log(diffTime + " milliseconds");
+    //console.log(diffDays + " days");
+
+    if ((duration - diffDays) === 0) {
+      return '1 Day'
+    }
+
+    return (duration - diffDays) + " Days"
+  }
+
+  pollVotes(num: any) {
+    if (num > 999 && num < 1000000) {
+      return (num / 1000).toFixed(1) + 'K votes'; // convert to K for number from > 1000 < 1 million 
+    } else if (num > 1000000) {
+      return (num / 1000000).toFixed(1) + 'M votes'; // convert to M for number from > 1 million 
+    } else if (num < 900) {
+      if (num === 0 || num === 1) {
+        return num + ' vote'; // if value < 1000, nothing to do
+      } else {
+        return num + ' votes'; // if value < 1000, nothing to do
+      }
+    }
+
+    return;
+  }
+
+  pollVoted(postId: any, pollOptionId: any, pollAnswerId: any, pollOptionData: any, pollVotingData: any) {
+    let divPollOptionId = document.getElementById(pollOptionId)!;
+    let divPollAnswerId = document.getElementById(pollAnswerId)!;
+
+    let totalVotes: number = pollVotingData.length;
+
+    for (let j = 0; j < pollVotingData.length; j++) {
+      if (this.userId === pollVotingData[j]['user']) {
+        divPollOptionId.style.display! = 'none';
+        divPollAnswerId.style.display! = '';
+        for (let i = 0; i < pollOptionData.length; i++) {
+
+          if (pollVotingData[j].optionid === pollOptionData[i]._id) {
+            let id = pollOptionData[i]._id + 'paid';
+            let paid = document.getElementById(id)!;
+            console.log(paid);
+            paid.style.width! = (Number(pollOptionData[i].choose + 1) / totalVotes * 100).toFixed(2) + '%';
+            console.log((Number(pollOptionData[i].choose + 1) / totalVotes * 100));
+            return 'none';
+          }
+        }
+
+        break;
+      }
+    }
+    return 'none';
   }
 
   deleteBookmark(Id: any) {
@@ -601,10 +701,10 @@ export class PostListComponent implements OnInit {
         } else {
           if (this.totalPosts != 0) {
             this.page += 1;
-            this.getAllFeeds();
+            this.getAllFeeds(this.filterPostDateWise, this.filterPost, this.orderBy);
           }
         }
-        console.log(this.page);
+        // console.log(this.page);
       }
     }
   }
@@ -619,11 +719,13 @@ export class PostListComponent implements OnInit {
 
   numFormatter(num: any) {
     if (num > 999 && num < 1000000) {
-      return (num / 1000).toFixed(1) + 'K'; // convert to K for number from > 1000 < 1 million 
+      return (num / 1000).toFixed(1) + 'K likes this'; // convert to K for number from > 1000 < 1 million 
     } else if (num > 1000000) {
-      return (num / 1000000).toFixed(1) + 'M'; // convert to M for number from > 1 million 
+      return (num / 1000000).toFixed(1) + 'M likes this'; // convert to M for number from > 1 million 
     } else if (num < 900) {
-      return num; // if value < 1000, nothing to do
+      return num + ' likes this'; // if value < 1000, nothing to do
+    } else {
+      return num + ' likes this';
     }
   }
 
@@ -648,5 +750,9 @@ export class PostListComponent implements OnInit {
   checkBookmarkPost(bookmarkData: any) {
     var isPresent = bookmarkData.some((el: any) => { return el.user === this.userId });
     return isPresent;
+  }
+
+  viewProfile(userName: any) {
+    this.router.navigate([userName]);
   }
 }

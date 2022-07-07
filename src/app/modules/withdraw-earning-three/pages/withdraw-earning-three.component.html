@@ -60,11 +60,11 @@
                                                     data-icon="akar-icons:arrow-right"></span>VISA and VISA Debit
                                                 only</li>
                                         </div>
-                                        <div class="connect-div-banking text-center">
+                                        <!-- <div class="connect-div-banking text-center">
                                             <div class="right-side-button ">
                                                 <button>Continue</button>
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <div class="right-side-btn-divw-2">
                                         <div class="widrow-earning-button text-right">
@@ -79,112 +79,114 @@
                                             <p class="font-16 font-bold color-blue">Your Bank Account Data</p>
                                         </div>
                                         <div class="input-payments-w-e">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="payment-name-w">
-                                                        <label class="font-footer font-16 font-bold">Routing
-                                                            Number</label>
-                                                        <div class="headding-input-pe position-relative">
-                                                            <input type="text" class="w-100">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="payment-name-w">
-                                                        <label class="font-footer font-16 font-bold">Account
-                                                            Number</label>
-                                                        <div class="headding-input-pe position-relative">
-                                                            <input type="text" class="w-100">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="select-drop-city">
-                                                        <p class="font-footer font-16 font-bold">Type of Bank
-                                                            Account</p>
-                                                        <div class="select-pwe">
-                                                            <div class="form-group">
-                                                                <select class="form-select w-100"
-                                                                    aria-label="Default select example">
-                                                                    <option selected>Choose</option>
-                                                                    <option value="1">SBI</option>
-                                                                    <option value="2">BOI</option>
-                                                                </select>
+                                            <form [formGroup]="bankDetailForm" (ngSubmit)="add_Bank()">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="payment-name-w">
+                                                            <label class="font-footer font-16 font-bold">Routing
+                                                                Number</label>
+                                                            <div class="headding-input-pe position-relative">
+                                                                <input type="number" class="w-100" formControlName="routingNumber">
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="select-drop-city">
-                                                        <p class="font-footer font-16 font-bold">Country</p>
-                                                        <div class="select-pwe">
-                                                            <div class="form-group">
-                                                                <select class="form-select w-100"
-                                                                    aria-label="Default select example">
-                                                                    <option selected>USA</option>
-                                                                    <option value="1">INDIA</option>
-                                                                    <option value="2">CHINA</option>
-                                                                    <option value="3">RUSSIA</option>
-                                                                </select>
+                                                    <div class="col-md-6">
+                                                        <div class="payment-name-w">
+                                                            <label class="font-footer font-16 font-bold">Account
+                                                                Number</label>
+                                                            <div class="headding-input-pe position-relative">
+                                                                <input type="number" class="w-100" formControlName="accountNumber">
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                    <div class="col-md-6">
+                                                        <div class="select-drop-city">
+                                                            <p class="font-footer font-16 font-bold">Type of Bank
+                                                                Account</p>
+                                                            <div class="select-pwe">
+                                                                <div class="form-group">
+                                                                    <select class="form-select w-100"
+                                                                        aria-label="Default select example" formControlName="bankType">
+                                                                        <!-- <option selected>Choose</option> -->
+                                                                        <option selected value="SBI">SBI</option>
+                                                                        <option value="BOI">BOI</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="select-drop-city">
+                                                            <p class="font-footer font-16 font-bold">Country</p>
+                                                            <div class="select-pwe">
+                                                                <div class="form-group">
+                                                                    <select class="form-select w-100"
+                                                                        aria-label="Default select example" formControlName="country">
+                                                                        <option selected value="USA">USA</option>
+                                                                        <option value="INDIA">INDIA</option>
+                                                                        <option value="CHINA">CHINA</option>
+                                                                        <option value="RUSSIA">RUSSIA</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
-                                                <div class="col-md-6">
-                                                    <div class="payment-name-w">
-                                                        <label class="font-footer font-16 font-bold">First Name</label>
-                                                        <div class="headding-input-pe position-relative">
-                                                            <input type="text" class="w-100">
+                                                    <div class="col-md-6">
+                                                        <div class="payment-name-w">
+                                                            <label class="font-footer font-16 font-bold">First Name</label>
+                                                            <div class="headding-input-pe position-relative">
+                                                                <input type="text" class="w-100" formControlName="firstName">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="payment-name-w">
+                                                            <label class="font-footer font-16 font-bold">Last Name</label>
+                                                            <div class="headding-input-pe position-relative">
+                                                                <input type="text" class="w-100" formControlName="lastName">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="payment-name-w">
+                                                            <label class="font-footer font-16 font-bold">Business Name (If Applicable)</label>
+                                                            <div class="headding-input-pe position-relative">
+                                                                <input type="text" class="w-100" formControlName="businessName">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="payment-name-w">
+                                                            <label class="font-footer font-16 font-bold">Email</label>
+                                                            <div class="headding-input-pe position-relative">
+                                                                <input type="text" class="w-100" formControlName="email">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                    <div class="checkbox-w-e-3">
+                                                        <div class="form-group">
+                                                            <div
+                                                                class="check-for-age d-flex div-n-check">
+                                                                <input type="checkbox" id="agree"
+                                                                    name="agree" value="agree" formControlName="termCondition">
+                                                                <label for="agree"
+                                                                    class="font-14 color-78">I agree to Chello <a href="" class="color-blue">Terms</a> and <a href="" class="color-blue">Conditions</a></label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                    
+                                                    <div class="col-md-12">
+                                                        <div class="div-buttonsav-pay-d">
+                                                            <div class="right-side-button ">
+                                                                <button type="submit">Save Payout Details</button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <div class="payment-name-w">
-                                                        <label class="font-footer font-16 font-bold">Last Name</label>
-                                                        <div class="headding-input-pe position-relative">
-                                                            <input type="text" class="w-100">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="payment-name-w">
-                                                        <label class="font-footer font-16 font-bold">Business Name (If Applicable)</label>
-                                                        <div class="headding-input-pe position-relative">
-                                                            <input type="text" class="w-100">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="payment-name-w">
-                                                        <label class="font-footer font-16 font-bold">Email</label>
-                                                        <div class="headding-input-pe position-relative">
-                                                            <input type="text" class="w-100">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                   <div class="checkbox-w-e-3">
-                                                    <div class="form-group">
-                                                        <div
-                                                            class="check-for-age d-flex div-n-check">
-                                                            <input type="checkbox" id="agree"
-                                                                name="agree" value="agree">
-                                                            <label for="agree"
-                                                                class="font-14 color-78">I agree to Chello <a href="" class="color-blue">Terms</a> and <a href="" class="color-blue">Conditions</a></label>
-                                                        </div>
-                                                    </div>
-                                                   </div>
-                                                </div>
-                                                
-                                                <div class="col-md-12">
-                                                    <div class="div-buttonsav-pay-d">
-                                                        <div class="right-side-button ">
-                                                            <button>Save Payout Details</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>

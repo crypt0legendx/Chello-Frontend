@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { veriables } from '../../../../utils/variables';
 @Component({
   selector: 'app-footer',
   templateUrl: '../pages/footer.component.html',
@@ -7,7 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
-  constructor() { }
+  copyrightYear = new Date().getUTCFullYear();
+  
+  constructor(
+    public veriable: veriables,
+  ) { }
 
   ngOnInit(): void {
   }

@@ -11,13 +11,13 @@
                                     Video Post
                                 </div>
                                 <div class="form-group position-relative">                                    
-                                    <div rows="4" class="w-100 bg-white p-3" formControlName="postTxt"
+                                    <div rows="4" class="w-100 bg-white p-3" 
                                         [ngClass]="{ 'is-invalid': submitted && f.postTxt.errors }"
-                                        placeholder="Compose new post" contenteditable="true">
-                                        <span class="text-grey">Check out my new Video!</span> 
+                                        placeholder="Compose new post" contenteditable="true" ngDefaultControl>
+                                        <textarea class="text-grey post-text-content" formControlName="postTxt" placeholder="Check out my new Video!"></textarea> 
                                         <div style="display: flex; align-items: center; flex-wrap: wrap">
                                             <div class="selected-video m-2" *ngIf="selectedFiles.length==1">     
-                                                <video  src="{{previewFilePath[0]}}" style="cursor: pointer;"></video>
+                                                <video width="100%" height="100%"  src="{{videoSrc[0].value}}" style="cursor: pointer;"></video>
                                                 <div class="cancel-btn-i">
                                                     <a (click)="removeAttachment()" style="cursor: pointer;"><span
                                                             class="iconify" data-icon="material-symbols:cancel"></span></a>
@@ -51,10 +51,15 @@
                                         </div>                     
                                     </div>                                     
                                 </div>                                                                    -->
-                                <div class="right-side-button text-right" *ngIf="!retrievedGroupDetails">
-                                    <a href="javascript:void(0)" class="font-14 font-medium color-blue margin-l-r-a">Post
-                                        Later</a>
-                                    <button type="button" (click)="postFeed()">Post</button>
+                                <div class="under-btn-group" *ngIf="!retrievedGroupDetails">
+                                    <div class="left-side-button">
+                                        <a href="javascript:void(0)" (click)="cancelPost()" class="font-14 font-medium color-blue margin-l-r-a">Cancel</a>                                    
+                                    </div>
+                                    <div class="right-side-button">
+                                        <a href="javascript:void(0)" class="font-14 font-medium color-blue margin-l-r-a">Post
+                                            Later</a>
+                                        <button type="button" (click)="postFeed()">Post</button>
+                                    </div>                                    
                                 </div>
                                 <div class="right-side-button text-right" *ngIf="retrievedGroupDetails">
                                     <a href="javascript:void(0)" class="font-14 font-medium color-blue margin-l-r-a">Post

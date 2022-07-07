@@ -114,7 +114,7 @@ declare var $: any;
           console.log(data);
           if (data['statusCode'] === 200) {
             this.feedForm.controls.postTxt.setValue("");
-            this.postListComponent.getAllFeeds();
+            this.postListComponent.getPostsFromAnother();
             this.spinner.hide();
             this.submitted = false;
             this.toastr.success("Post added successfully");
@@ -148,6 +148,14 @@ declare var $: any;
         this.spinner.hide();
         this.submitted = false;
         this.toastr.success("Post added successfully");
+
+        this.imageSrc = [];        
+        this.selectedFiles = [];
+        this.filePath = [];
+        this.isAddImage = false; 
+        this.isAddVideo = false;
+        this.isAddAudio = false;
+        
       }
       else {
         this.spinner.hide();
@@ -284,7 +292,7 @@ declare var $: any;
     this.spinner.show();
     let today = new Date();
     const file = this.selectedFiles;
-    let res: any = await this.uploadService.uploadFile(file, filePath);
+    let res: any = await this.uploadService.uploadFile(JSON.stringify(file), filePath.toString());
     console.log(res);
     if(!this.retrievedGroupDetails){
       if (jsonKey === "story") {
@@ -427,6 +435,10 @@ declare var $: any;
       this.selectedTimeOption = 'Coming';
 
     }
+  }
+
+  cancelPost() {
+    this.homeComponent.postOption = 0;
   }
 
 }

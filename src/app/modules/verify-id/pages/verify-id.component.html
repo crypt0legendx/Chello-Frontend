@@ -40,25 +40,27 @@
                 <div class="form-group">
                   <label class="font-14 color-grey">Your Legal Full Name</label>
                   <input type="text" name="name" value="Kate Winslet" class="w-100" formControlName="legalFullName"
-                    [ngClass]="{ 'is-invalid': submitted && f.legalFullName.errors }">
+                    [ngClass]="{ 'is-invalid': submitted && f.legalFullName.errors }" placeholder="Legal Full Name">
                   <div *ngIf="submitted && f.legalFullName.errors" class="invalid-feedback">
                     <div *ngIf="f.legalFullName.errors.required" style="color:red;">Legal full name is required</div>
+                    <div *ngIf="f.legalFullName.errors.cannotContainOnlySpace" style="color:red;">Legal full name cannot contain only space</div>
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="font-14 color-grey">Address Line 1</label>
                   <input type="text" name="address1" class="w-100" formControlName="addressLine1"
-                    [ngClass]="{ 'is-invalid': submitted && f.addressLine1.errors }">
+                    [ngClass]="{ 'is-invalid': submitted && f.addressLine1.errors }" placeholder="Address Line 1">
                   <div *ngIf="submitted && f.addressLine1.errors" class="invalid-feedback">
                     <div *ngIf="f.addressLine1.errors.required" style="color:red;">Address Line 1 is required</div>
+                    <div *ngIf="f.addressLine1.errors.cannotContainOnlySpace" style="color:red;">Address Line 1 cannot contain only space</div>
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="font-14 color-grey">Address Line 2</label>
                   <input type="text" name="address1" class="w-100" formControlName="addressLine2"
-                    [ngClass]="{ 'is-invalid': submitted && f.addressLine2.errors }">
+                    [ngClass]="{ 'is-invalid': submitted && f.addressLine2.errors }" placeholder="Address Line 2">
                   <div *ngIf="submitted && f.addressLine2.errors" class="invalid-feedback">
-                    <div *ngIf="f.addressLine2.errors.required" style="color:red;">Address Line 2 is required</div>
+                    <div *ngIf="f.addressLine2.errors.required" style="color:red;">Address Line 2 is required</div>                    
                   </div>
                 </div>
                 <div class="form-group">
@@ -67,8 +69,13 @@
                     <div class="wrapper-birth-day-entry">
                       <div class="first-birthday-entry">
                         <label class="font-12 color-grey">Month</label>
-                        <input type="text" name="dob" placeholder="Jan" class="w-100 side-tab" formControlName="month"
-                          [ngClass]="{ 'is-invalid': submitted && f.month.errors }">
+                        <select id="monthId" #monthId placeholder="Jan" class="w-100 side-tab" formControlName="month"
+                        [ngClass]="{ 'is-invalid': submitted && f.month.errors }" (change)='selectMonth(monthId.value)' style="color: #7B7B7B;">
+                          <option value="" [disabled]="true" class="op-col">Month</option>
+                          <option *ngFor="let month of months; let i = index" [value]="i+1">{{month}}</option>
+                        </select>
+                        <!-- <input type="text" name="dob" placeholder="Jan" class="w-100 side-tab" formControlName="month"
+                          [ngClass]="{ 'is-invalid': submitted && f.month.errors }"> -->
                         <div *ngIf="submitted && f.month.errors" class="invalid-feedback">
                           <div *ngIf="f.month.errors.required" style="color:red;">Month name is required
                           </div>
@@ -76,8 +83,13 @@
                       </div>
                       <div class="first-birthday-entry">
                         <label class="font-12 color-grey">Day</label>
-                        <input type="text" name="dob" placeholder="01" class="w-100 side-tab" formControlName="day"
-                          [ngClass]="{ 'is-invalid': submitted && f.day.errors }">
+                        <select id="sel2" placeholder="01" class="w-100 side-tab" formControlName="day"
+                        [ngClass]="{ 'is-invalid': submitted && f.day.errors }" style="color: #7B7B7B;">
+                          <option value="" [disabled]="true" class="op-col">Day</option>
+                          <option *ngFor="let day of days" [value]="day">{{day}}</option>
+                        </select>
+                        <!-- <input type="text" name="dob" placeholder="01" class="w-100 side-tab" formControlName="day"
+                          [ngClass]="{ 'is-invalid': submitted && f.day.errors }"> -->
                         <div *ngIf="submitted && f.day.errors" class="invalid-feedback">
                           <div *ngIf="f.day.errors.required" style="color:red;">Day name is required
                           </div>
@@ -85,8 +97,13 @@
                       </div>
                       <div class="first-birthday-entry">
                         <label class="font-12 color-grey">Year</label>
-                        <input type="text" name="dob" placeholder="1993" class="w-100" formControlName="year"
-                          [ngClass]="{ 'is-invalid': submitted && f.year.errors }">
+                        <select id="yearId" #yearId  class="w-100 side-tab" formControlName="year"
+                        [ngClass]="{ 'is-invalid': submitted && f.year.errors }" (change)='selectYear(yearId.value)' style="border-right: none; color: #7B7B7B;"  >
+                          <option value="" [disabled]="true" class="op-col">Year</option>
+                          <option *ngFor="let year of years" [value]="year">{{year}}</option>
+                        </select>
+                        <!-- <input type="text" name="dob" placeholder="1993" class="w-100" formControlName="year"
+                          [ngClass]="{ 'is-invalid': submitted && f.year.errors }"> -->
                         <div *ngIf="submitted && f.year.errors" class="invalid-feedback">
                           <div *ngIf="f.year.errors.required" style="color:red;">Year name is required
                           </div>
@@ -108,12 +125,12 @@
                   </div>
                 </div>
 
-                <div class="">
+                <div class="" *ngIf="role === 'creator'">
                   <label class="font-14 color-grey">Upload ID &nbsp;<span class="font-10">(Drivers License, Passport, or
                       Government Issued ID)</span></label>
                   <div class="upload-button-file">
                     <div class="file-input ">
-                      <input type="file" name="file-input" id="file-input" class="file-input__input"
+                      <input type="file" name="file-input" id="file-input" class="file-input__input" placeholder="Upload ID"
                         formControlName="uploadId1" [ngClass]="{ 'is-invalid': submitted && f.uploadId1.errors }" (change)="selectProfileFile($event, 'uploadId1')" />
                       <div *ngIf="submitted && f.uploadId1.errors" class="invalid-feedback">
                         <div *ngIf="f.uploadId1.errors.required" style="color:red;">Government Issued ID is required
@@ -127,12 +144,12 @@
                     </div>
                   </div>
                 </div>
-                <div class="">
+                <div class="" *ngIf="role === 'creator'">
                   <label class="font-14 color-grey">Upload ID 2 &nbsp;<span class="font-10">(Please take a Selfie
                       holding your ID Card)</span></label>
                   <div class="upload-button-file">
                     <div class="file-input ">
-                      <input type="file" name="file-input" id="file-input2" class="file-input__input"
+                      <input type="file" name="file-input" id="file-input2" class="file-input__input" placeholder="Upload ID"
                         formControlName="uploadId2" [ngClass]="{ 'is-invalid': submitted && f.uploadId2.errors }" (change)="selectProfileFile($event, 'uploadId2')" />
                       <div *ngIf="submitted && f.uploadId2.errors" class="invalid-feedback">
                         <div *ngIf="f.uploadId2.errors.required" style="color:red;">Selfie holding your ID Card is
@@ -147,7 +164,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group" *ngIf="role === 'creator'">
                   <div class="label-insta-new">
                     <label>Add your
                       <a href=""><img src="assets/images/ant-design_instagram-filled.png" /></a>
@@ -155,13 +172,16 @@
                       <a href=""><img src="assets/images/Vector.png" /></a></label>
                   </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group" *ngIf="role === 'creator'">
                   <label class="font-14 color-grey">to assist with account verification.</label>
                   <input type="text" name="name" class="w-100" formControlName="socialLink"
                     [ngClass]="{ 'is-invalid': submitted && f.socialLink.errors }">
                   <div *ngIf="submitted && f.socialLink.errors" class="invalid-feedback">
                     <div *ngIf="f.socialLink.errors.required" style="color:red;">Social media link is required
                     </div>
+                    <div *ngIf="f.socialLink.errors.cannotContainOnlySpace" style="color:red;">Social media link cannot contain only space</div>
+                    <div *ngIf="f.socialLink.errors.pattern" style="color:red;">Please enter valid url</div>
+                    
                   </div>
                 </div>
 

@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgxSpinnerService } from "ngx-spinner";
 import { ToastrService } from "ngx-toastr";
+import { HomeComponent } from "src/app/modules/home/components/home.component";
 import { GroupService } from "src/app/services/group.service";
 import { PostService } from "src/app/services/post.service";
 import { UploadService } from "src/app/services/upload.service";
@@ -24,7 +25,7 @@ export class PhotoPostComponent {
     selectedFiles: any[] = [];
     imageSrc: any[] = [];
     filePath: any[] = [];
-    previewFilePath: any[] = [];
+    // previewFilePath: any[] = [];
 
     constructor(
         private formBuilder: FormBuilder,
@@ -32,13 +33,15 @@ export class PhotoPostComponent {
         private uploadService: UploadService,
         private postService: PostService,
         private groupService: GroupService,
-        private toastr: ToastrService,        
+        private toastr: ToastrService,     
+        private homeComponent: HomeComponent   
     ) {}    
 
     
   ngOnInit(): void {
     this.feedForm = this.formBuilder.group({
-      postTxt: ['', Validators.required]
+      postTxt: ['', Validators.compose(
+        [Validators.minLength(1), Validators.required])]
     });
 
     this.retrievedGroupDetails = localStorage.getItem('groupDetails');
@@ -80,8 +83,9 @@ selectFile(event: any, fileType: any) {
           for (let i = 0; i < filesAmount; i++) {            
             const reader = new FileReader();
             const file = event.target.files[i];
-            const prePath = window.URL.createObjectURL(file);
-            this.previewFilePath.push(prePath);
+            // console.log('selectFile',file);
+            // const prePath = URL.createObjectURL(file);
+            // this.previewFilePath.push(prePath);
             this.selectedFiles.push(file);
             console.log('selected file name', this.selectedFiles);
             this.filePath.push(Math.random() * 10000000000000000 + '_' + file.name);
@@ -102,37 +106,42 @@ selectFile(event: any, fileType: any) {
   async uploadImage(filePath: any, jsonKey: any) {
     this.spinner.show();
     let today = new Date();
-    const file = this.selectedFiles;
-    let res: any = await this.uploadService.uploadFile(file, filePath);
-    console.log(res);
-    if(!this.retrievedGroupDetails){        
-            let sendData = {
+    const file = this.selectedFiles[0];    
+    console.log('selected files option uploadimage', this.selectedFiles);
+    for(let postIndex=0; postIndex<this.selectedFiles.length; postIndex++) {
+      let res: any = await this.uploadService.uploadFile(this.selectedFiles[postIndex], filePath[postIndex]);
+      console.log('uploadImage',res);
+      if(!this.retrievedGroupDetails){        
+              let sendData = {
+              "title": this.f.postTxt.value,
+              "type": "image",
+              "fileName": res['Location'],
+              "thumbnail": res['Location'],
+              "scheduled": false,
+              "scheduledDateTime": today.toISOString()
+              }
+      
+              this.postFiles(sendData);    
+          }
+      else{      
+          let sendData = {
+            "group_id": this.retrievedGroupDetails['_id'],
             "title": this.f.postTxt.value,
             "type": "image",
             "fileName": res['Location'],
-            "thumbnail": res['Location'],
-            "scheduled": false,
-            "scheduledDateTime": today.toISOString()
-            }
+            "thumbnail": res['Location']
+          }        
+          this.postGroupFiles(sendData);
+        }    
+
+    }
     
-            this.postFiles(sendData);    
-        }
-     else{      
-        let sendData = {
-          "group_id": this.retrievedGroupDetails['_id'],
-          "title": this.f.postTxt.value,
-          "type": "image",
-          "fileName": res['Location'],
-          "thumbnail": res['Location']
-        }
-        this.postGroupFiles(sendData);
-      }    
   } 
 
   
   async postFiles(postData: any) {
     this.spinner.show();
-    console.log(postData);
+    console.log('postData', postData);
     this.postService.postFeed(postData).subscribe((data: any) => {
       console.log(data);
       if (data['statusCode'] === 200) {
@@ -142,7 +151,11 @@ selectFile(event: any, fileType: any) {
         this.filePath = [];
         this.spinner.hide();
         this.submitted = false;
-        this.toastr.success("Post added successfully");
+        this.toastr.success("Post added successfully");        
+        this.imageSrc = [];        
+        this.selectedFiles = [];
+        this.filePath = [];
+        this.isAddImage = false; 
       }
       else {
         this.spinner.hide();
@@ -182,6 +195,10 @@ selectFile(event: any, fileType: any) {
       this.submitted = false;
       this.toastr.error(error['message']);
     });
+  }
+
+  cancelPost() {
+    this.homeComponent.postOption = 0;
   }
 
 

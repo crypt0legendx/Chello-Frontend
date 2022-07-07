@@ -1,3 +1,87 @@
 .d-block-active{
     display: block;
   }
+
+  a {
+    cursor: pointer;
+  }
+
+  .modal-body {
+    width: auto;
+
+    background: #FFFFFF;
+    border: 1px solid #E4E4E4;
+    border-radius: 4px;
+}
+
+.modal-content{
+  // width: 426px;
+  background: #F1F1F1;
+  border: 1px solid #E4E4E4;
+  border-radius: 7px;
+  padding-inline: 14px;       
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 !important;
+  padding-top: 15px !important;
+}
+
+.modal-main {
+  padding-top: 15px !important;
+  border-bottom: none !important;
+}
+
+.modal-main input {
+  background-color: #F1F1F1 !important;
+  border: none;
+  border-radius: 0 !important;
+  border-bottom: grey 1px solid !important;
+  width: 100%;
+}
+
+.input-name {
+  display: flex;
+}
+
+input:focus {
+  border-bottom: #150AA1 1px solid !important;
+  color: black;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+  margin: 0;
+  padding-block-start: 12px;
+  border-top: none !important;
+}
+
+.modal-footer button {
+  height: 50px;
+  width: 45%;
+  border: 1px solid #150AA1;
+  border-radius: 4px;
+  margin: 20px 0;
+}
+
+.confirm-btn {
+  background-color: #150AA1 !important;
+  color: white;
+}
+
+.cancel-btn {
+  color: #150AA1;
+}
+
+.add-member {
+  display: flex;
+  float: right;
+  margin-top: 20px;
+  margin-right: 20px;
+  font-size: 30px;
+}

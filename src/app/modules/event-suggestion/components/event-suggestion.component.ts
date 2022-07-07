@@ -8,7 +8,6 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['../pages/event-suggestion.component.scss']
 })
 export class EventSuggestionComponent implements OnInit {
-
   events:any = [];
   searchText:string = "";
   constructor(
@@ -62,5 +61,4 @@ export class EventSuggestionComponent implements OnInit {
   pad(d: Number) {
     return (d < 10) ? '0' + d.toString() : d.toString();
   }
-
 }

@@ -3,10 +3,10 @@
         <div class="">
             <div class="div-for-new-post-poll">
                 <div class="wrapper-new-post-poll">
-                    <div class="text-area-for-poll" >
+                    <div class="text-area-for-poll">
                         <form [formGroup]="feedForm">
                             <div class="form-group position-relative">
-                                <textarea rows="4" class="w-100" formControlName="postTxt"
+                                <textarea rows="4" class="w-100 post-text-field" formControlName="postTxt"
                                     [ngClass]="{ 'is-invalid': submitted && f.postTxt.errors }"
                                     placeholder="Compose new post"></textarea>
                                 <div *ngIf="submitted && f.postTxt.errors" class="invalid-feedback">
@@ -21,26 +21,22 @@
                                             class="iconify" data-icon="icon-park-outline:picture-one"></span><span>Photo</span></a>
                                     <!-- <input id="addImage" type="file" class="form-control"
                                         (change)="selectFile($event, 'addImage')" style="display:none" accept="image/*"
-                                        capture multiple>
-                                     -->
-                                    <!-- Add Video   (click)="openFileSelector('addVideo')"-->
-                                    <a  (click)="selectPostOption(3)" style="cursor: pointer;" class="iconToolTip"><span
+                                        capture> -->
+
+                                     <!-- Add Video   (click)="openFileSelector('addVideo')"-->
+                                     <a  (click)="selectPostOption(3)" style="cursor: pointer;" class="iconToolTip"><span
                                             class="iconify" data-icon="ph:video-camera-bold"></span><span>Video</span></a>
                                     <!-- <input id="addVideo" type="file" class="form-control"
                                         (change)="selectFile($event, 'addVideo')" style="display:none" accept="video/*"
-                                        capture multiple> -->
+                                        capture> -->
 
                                     <!-- Add Audio (click)="openFileSelector('addAudio')"-->
                                     <a (click)="selectPostOption(4)" style="cursor: pointer;" class="iconToolTip"><span
-                                            class="iconify" data-icon="bxs:microphone-alt"></span><span>Audio</span></a>
-                                    <!-- <input id="addAudio" type="file" class="form-control"
-                                        (change)="selectFile($event, 'addAudio')" style="display:none" accept="audio/*"
-                                        capture multiple> -->
+                                        class="iconify" data-icon="bxs:microphone-alt"></span><span>Audio</span></a>
 
                                     <!-- Add Poll -->
                                     <a (click)="createPoll()" style="cursor: pointer;" class="iconToolTip"><span class="iconify"
                                             data-icon="fa6-solid:square-poll-vertical"></span><span>Polls</span></a>
-
                                     <a class="iconToolTip" (click)="selectPostOption(1)" ><span class="iconify"
                                             data-icon="fa:hourglass-3"></span><span>Timed Post</span></a>
                                     <a href="javascript:void(0)" class="iconToolTip"><span class="iconify"
@@ -48,21 +44,23 @@
                                     <a  (click)="selectPostOption(2)"  class="iconToolTip"><img src="assets/images/Mask group (2).png"
                                             alt="image" style="margin: 0 7px;" /><span>FanCam</span></a>
                                     <a href="javascript:void(0)" class="iconToolTip"><span class="iconify" data-icon="ph:vault-bold"></span><span>Chello Vault</span></a>
-                                    <a href="javascript:void(0)" class="iconToolTip"><span class="iconify" data-icon="bxs:dollar-circle"></span><span>Paid Content</span></a>
+                                    <a href="javascript:void(0)" class="iconToolTip"  (click)="changePaidState()">
+                                        <span class="iconify" data-icon="bxs:dollar-circle"></span>
+                                        <span>Paid Content</span></a>
                                 </div>
 
                             </div>
                             <div class="set-icons-image-l-n position-relative">
                                 <div *ngFor="let img of imageSrc; let index = index">
                                     <div class="set-icons-image-l-n-1 position-relative" *ngIf="isAddImage === true&&img.type === 'addImage'">                                    
-                                            <a href="javascript:void(0)"><span class="iconify"
-                                                data-icon="icon-park-outline:picture-one"></span></a>
-                                            <p class="font-14 color-49">Image</p>
-                                            <div class="cancel-btn-i">
-                                                <a (click)="removeAttachment(index)" style="cursor: pointer;"><span
-                                                        class="iconify" data-icon="material-symbols:cancel"></span></a>
-                                            </div>                                    
-                                    </div>
+                                        <a href="javascript:void(0)"><span class="iconify"
+                                            data-icon="icon-park-outline:picture-one"></span></a>
+                                        <p class="font-14 color-49">Image</p>
+                                        <div class="cancel-btn-i">
+                                            <a (click)="removeAttachment(index)" style="cursor: pointer;"><span
+                                                    class="iconify" data-icon="material-symbols:cancel"></span></a>
+                                        </div>
+                                    </div>                                    
                                     <div class="set-icons-image-l-n-1 position-relative" *ngIf="isAddVideo === true&&img.type === 'addVideo'">
                                         <a href="javascript:void(0)" routerLink="/video-post"><span class="iconify"
                                                 data-icon="ph:video-camera-bold"></span></a>

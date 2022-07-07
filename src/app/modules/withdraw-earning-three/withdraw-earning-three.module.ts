@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { WithdrawEarningThreeRoutingModule } from './withdraw-earning-three-routing.module';
 import { WithdrawEarningThreeComponent } from './components/withdraw-earning-three.component';
 import { FooterModule} from '../layout/footer/footer.module'
@@ -14,6 +14,8 @@ import {SidebarModule} from '../layout/sidebar/sidebar.module'
   imports: [
     CommonModule,
     WithdrawEarningThreeRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
     FooterModule,
     HeaderNewModule,
     SidebarModule,

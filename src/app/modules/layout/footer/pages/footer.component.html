@@ -27,19 +27,19 @@
           <div class="col-md-3">
             <div class="links-in-footer">
               <li><a routerLink="/contact" class="font-14 font-footer">Contact</a></li>
-              <li><a href="http://blog.chello.world/" target="_blank" class="font-14 font-footer">Blog</a></li>
+              <li><a href="https://blog.chello.world/" target="_blank" class="font-14 font-footer">Blog</a></li>
               <li><a routerLink="/referral" class="font-14 font-footer">Referral</a></li>
               <li><a href="javascript:void(0)" class="font-14 font-footer">Standard Agreement</a></li>
             </div>
             <div class="social-icons-for-footer">
               <p class="font-14 color-blue font-bold">Share Chello</p>
-              <a target="_blank" href="https://www.instagram.com/letschello/"><span class="iconify"
+              <a target="_blank" [href]="veriable.instagramId"><span class="iconify"
                   data-icon="typcn:social-instagram"></span></a>
-              <a target="_blank" href="https://tiktok.com/@chello.world"><span class="iconify"
+              <a target="_blank" [href]="veriable.tiktokId"><span class="iconify"
                   data-icon="cib:tiktok"></span></a>
-              <a target="_blank" href="https://twitter.com/LetsChello"><span class="iconify"
+              <a target="_blank" [href]="veriable.twitterId"><span class="iconify"
                   data-icon="ant-design:twitter-outlined"></span></a>
-              <a target="_blank" href="javascript:void(0)"><span class="iconify"
+              <a target="_blank" [href]="veriable.facebookId"><span class="iconify"
                   data-icon="eva:facebook-fill"></span></a>
               <!-- <a target="_blank"  href="javascript:void(0)"><img src="assets/images/24ent new logo white 1.png" alt="image"></a> -->
             </div>
@@ -47,21 +47,24 @@
 
         </div>
       </div>
-      <div  class="payments-icons-footer-wrapper">
-        <div  class="icons-footer-payments d-flex justify-content-center">
-          <div  class="card-images-small-pf"><img 
-              src="assets/images/visa.png" alt="image" class="img"><img 
-              src="assets/images/master.webp" alt="image" class="img"><img 
-              src="assets/images/amex.png" alt="image" class="img"><img 
-              src="assets/images/disco.png" alt="image" class="img"><img 
-              src="assets/images/image 16.png" alt="image"><img  src="assets/images/image 17.png"
-              alt="image"><img  src="assets/images/image 18.png" alt="image"><img
-               src="assets/images/image 20.png" alt="image"></div>
+      <div class="payments-icons-footer-wrapper">
+        <div class="icons-footer-payments d-flex justify-content-center">
+          <p class="color-68 font-16">We accept : &nbsp; </p>
+          <div class="card-images-small-pf">
+            <img src="assets/images/visa.png" class="img" alt="image">
+            <img src="assets/images/master.webp" class="img" alt="image">
+            <img src="assets/images/amex.png" class="img" alt="image">
+            <img src="assets/images/disco.png" class="img" alt="image">
+            <img src="assets/images/image 16.png" alt="image">
+            <img src="assets/images/image 17.png" alt="image">
+            <img src="assets/images/image 18.png" alt="image">
+            <img src="assets/images/image 20.png" alt="image">
+          </div>
         </div>
       </div>
       <div class="col-md-12">
         <div class="copyrite-text text-center">
-          <p class="font-14 color-79">© 2022 Chello. All rights reserved.</p>
+          <p class="font-14 color-79">© {{copyrightYear}} Chello. All rights reserved.</p>
         </div>
       </div>
     </div>
