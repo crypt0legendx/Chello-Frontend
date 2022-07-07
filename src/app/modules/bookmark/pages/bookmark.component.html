@@ -49,7 +49,7 @@
                                         <div class="list-div">
                                             <div class="list-d-wrap">
                                                 <a href="">
-                                                    <p class="font-20 font-bold color-blue">{{category}}</p>
+                                                    <p class="font-20 font-bold color-blue">{{category == "image"?"photo":category}}</p>
                                                 </a>
                                                 <div class="vault-section-one">
                                                     <div class="filter-vault position-relative">
@@ -134,7 +134,7 @@
                                             <div class="photo-item p-4 d-flex flex-column" *ngFor="let item of getBookmarkList()">
                                                 <div class="item-header d-flex justify-content-between align-items-center">
                                                     <div class="creator-section d-flex align-items-center">
-                                                        <img class="profile-img" src={{item.userDetail[0]?.profileImage}} width="70px" onError="this.src='assets/images/user.png'" />
+                                                        <img class="profile-img" src={{item.userDetail[0]?.profileImage}} width="60px" onError="this.src='assets/images/user.png'" />
                                                         <div class="d-flex flex-column ml-3">                                                            
                                                             <div>@{{item.userDetail[0]?.userName}}</div>
                                                         </div>
