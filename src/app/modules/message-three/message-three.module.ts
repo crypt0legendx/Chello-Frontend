@@ -3,9 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { MessageThreeRoutingModule } from './message-three-routing.module';
 import { MessageThreeComponent } from './components/message-three.component';
-import { FooterModule } from '../layout/footer/footer.module'
-import { HeaderNewModule } from '../layout/header-new/header-new.module'
-import { SidebarModule } from '../layout/sidebar/sidebar.module'
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -14,9 +13,10 @@ import { SidebarModule } from '../layout/sidebar/sidebar.module'
   imports: [
     CommonModule,
     MessageThreeRoutingModule,
-    FooterModule,
-    HeaderNewModule,
-    SidebarModule
+    FormsModule
+  ],
+  exports:[
+    MessageThreeComponent
   ]
 })
 export class MessageThreeModule { }

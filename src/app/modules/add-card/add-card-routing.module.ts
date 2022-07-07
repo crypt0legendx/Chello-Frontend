@@ -7,7 +7,6 @@ const routes: Routes = [
         component: AddCardComponent
       }
 ];
-
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]

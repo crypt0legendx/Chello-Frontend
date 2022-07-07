@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { TimedPostComponent } from './timed-post/component/timed-post.component';
 import { PostFeedModule } from '../post-feed/post-feed.module';
-import { FancamComponent } from './fancam-post/component/fancam.component';
+import { FancamComponent } from './fancam-post/component/fancam-post.component';
 import { PhotoPostComponent } from './photo-post/component/photo-post.component';
 import { RouterModule } from '@angular/router';
 import { VidoPostComponent } from './video-post/component/video-post.component';

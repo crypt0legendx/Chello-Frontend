@@ -1,39 +1,47 @@
 <div *ngIf="isBookmarkPage === false">
     <div *ngFor="let userPost of userPosts; let i=index">
-        <div class="second-home-middle third-home-middle" *ngIf="userPost.type === 'poll'" [ngStyle]="{display: pollDuration(userPost.duration, userPost.postedAt)}">
+        <div class="second-home-middle third-home-middle" *ngIf="userPost.type === 'poll'"
+            [ngStyle]="{display: pollDuration(userPost.duration, userPost.postedAt)}">
             <div class="poll-page r">
                 <div class="">
                     <div class="col-md-12 ">
                         <div class="headding-poll">
                             <div class="poll-asked-user d-flex justify-content-between">
                                 <div class="wrapper-poll-asked-user" *ngIf="isMyProfilePage === true">
-                                    <img [src]="profilePicture" onError="this.src='assets/images/user.png'" alt="image" />
+                                    <img [src]="profilePicture" onError="this.src='assets/images/user.png'" alt="image"
+                                        (click)="viewProfile(userName)" style="cursor: pointer;" />
                                     <div class="user-info-p-a">
-                                        <p class="font-14 font-bold color-49"> {{userFullName}} &nbsp;
+                                        <p class="font-14 font-bold color-49" (click)="viewProfile(userName)"
+                                            style="cursor: pointer;"> @{{userName}} &nbsp;
                                             <span class="iconify font-20 color-light-blue"
                                                 data-icon="ic:sharp-verified"></span>
                                         </p>
-                                        <p class="font-14 color-49">@{{userName}}</p>
+                                        <!-- <p class="font-14 color-49">@{{userName}}</p> -->
                                     </div>
                                 </div>
                                 <div class="wrapper-poll-asked-user" *ngIf="isMyProfilePage === false">
                                     <img [src]="userPost.userDetail[0]['profileImage']"
-                                        onError="this.src='assets/images/user.png'" alt="image" />
+                                        onError="this.src='assets/images/user.png'" alt="image"
+                                        (click)="viewProfile(userPost.userDetail[0]['userName'])"
+                                        style="cursor: pointer;" />
                                     <div class="user-info-p-a">
-                                        <p class="font-14 font-bold color-49"> {{userPost.userDetail[0]['fullName']}} &nbsp;
+                                        <p class="font-14 font-bold color-49"
+                                            (click)="viewProfile(userPost.userDetail[0]['userName'])"
+                                            style="cursor: pointer;"> @{{userPost.userDetail[0]['userName']}} &nbsp;
                                             <span class="iconify font-20 color-light-blue"
                                                 data-icon="ic:sharp-verified"></span>
                                         </p>
-                                        <p class="font-14 color-49">@{{userPost.userDetail[0]['userName']}}</p>
+                                        <!-- <p class="font-14 color-49">@{{userPost.userDetail[0]['userName']}}</p> -->
                                     </div>
                                 </div>
                                 <div class="a-for-h-3">
                                     <a href="javascript:void(0)">{{userPost.postedAt |
                                         date:'MMM dd'}} </a>
-                                    <a *ngIf="userPost.user === userId" href="javascript:void(0)" id="dropdownMenuButton"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span
-                                            class="iconify font-20" data-icon="fluent:more-circle-32-regular"></span></a>
-    
+                                    <a *ngIf="userPost.user === userId" href="javascript:void(0)"
+                                        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false"><span class="iconify font-20"
+                                            data-icon="fluent:more-circle-32-regular"></span></a>
+
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <a class="dropdown-item" href="#edit-job" data-toggle="modal"
                                             style="color: #212529;">
@@ -45,7 +53,7 @@
                                             </svg>
                                             Edit Post
                                         </a>
-    
+
                                         <a class="dropdown-item" data-toggle="modal"
                                             style="color: #212529; cursor: pointer;" (click)="deletePost(userPost._id)">
                                             <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
@@ -66,7 +74,8 @@
                             <div class="wrapper-poll-div-section">
                                 <div class="col-md-10">
                                     <div class="first-div-upper-title">
-                                        <p class="font-medium font-16 color-41 "><span class="iconify font-26 color-blue"
+                                        <p class="font-medium font-16 color-41 "><span
+                                                class="iconify font-26 color-blue"
                                                 data-icon="fa6-solid:square-poll-vertical"></span>
                                             &nbsp; {{userPost.title}}</p>
                                     </div>
@@ -74,7 +83,7 @@
                                         <div class="progress-run"
                                             *ngFor="let pollOptions of userPost.pollData; let totalVote=index">
                                             <div class="progress"
-                                                (click)="submitPollAnswer(userPost._id, pollOptions.text, userPost._id+'polloption', userPost._id+'pollanswer', userPost['pollData'], pollOptions._id)"
+                                                (click)="submitPollAnswer(userPost._id, pollOptions.text, userPost._id+'polloption', userPost._id+'pollanswer', userPost['pollData'], pollOptions._id, userPost['pollvotingdata'].length)"
                                                 style="cursor: pointer;">
                                                 <div class="progress_inner" style="width: 0%">
                                                 </div>
@@ -85,7 +94,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="poll-progressbar" [id]="userPost._id+'pollanswer'" style="display: none;">
+                                    <div class="poll-progressbar" [id]="userPost._id+'pollanswer'"
+                                        style="display: none;">
                                         <div class="progress-run"
                                             *ngFor="let pollOptions of userPost['pollData']; let totalVote=index">
                                             <div class="progress">
@@ -93,20 +103,25 @@
                                                 </div>
                                             </div>
                                             <div class="opt">
-                                                <input class="change" type="number" [value]="pollOptions.choose" READONLY>
+                                                <input class="change" type="number" [value]="pollOptions.choose"
+                                                    READONLY>
                                                 <label class="font-14 font-medium">{{pollOptions.text}}</label>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
+                                <!-- <div [ngClass]="{display: true === pollVoted(userPost._id, userPost._id+'polloption', userPost._id+'pollanswer', userPost['pollData'], userPost['pollvotingdata'])}"></div> -->
+
                                 <div class="for-vote-div">
                                     <div class="col-md-12">
                                         <div class="wrapper-vote">
-                                            <p class="color-41 font-14">77 votes &nbsp;
+                                            <p class="color-41 font-14">{{pollVotes(userPost['pollvotingdata'].length)}}
+                                                &nbsp;
                                                 <span><span class="iconify font-18" style="color: #C4C4C4;"
                                                         data-icon="ci:dot-02-s"></span></span>
                                                 &nbsp;
-                                                <span>7 Days Left</span>
+                                                <span>{{pollDayLeft(userPost.duration, userPost.postedAt)}} Left</span>
                                             </p>
                                         </div>
                                     </div>
@@ -117,33 +132,35 @@
                             <div class="col-md-7">
                                 <div class="under-second-poll">
                                     <a class="favorite" style="cursor: pointer; " [id]="'fav'+userPost._id"
-                                        (click)="favoritePost('fav'+userPost._id,userPost._id,1)" [ngClass]="{active: true === checkFavoritePost(userPost.favoritedata)}">
-                                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em"
-                                            height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 36 36">
+                                        (click)="favoritePost('fav'+userPost._id,userPost._id,1, userPost['totallikes'])"
+                                        [ngClass]="{active: true === checkFavoritePost(userPost.favoritedata)}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img"
+                                            width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
+                                            viewBox="0 0 36 36">
                                             <path fill="#A8A8A8"
                                                 d="M18 32.43a1 1 0 0 1-.61-.21C11.83 27.9 8 24.18 5.32 20.51C1.9 15.82 1.12 11.49 3 7.64c1.34-2.75 5.19-5 9.69-3.69A9.87 9.87 0 0 1 18 7.72a9.87 9.87 0 0 1 5.31-3.77c4.49-1.29 8.35.94 9.69 3.69c1.88 3.85 1.1 8.18-2.32 12.87c-2.68 3.67-6.51 7.39-12.07 11.71a1 1 0 0 1-.61.21ZM10.13 5.58A5.9 5.9 0 0 0 4.8 8.51c-1.55 3.18-.85 6.72 2.14 10.81A57.13 57.13 0 0 0 18 30.16a57.13 57.13 0 0 0 11.06-10.83c3-4.1 3.69-7.64 2.14-10.81c-1-2-4-3.59-7.34-2.65a8 8 0 0 0-4.94 4.2a1 1 0 0 1-1.85 0a7.93 7.93 0 0 0-4.94-4.2a7.31 7.31 0 0 0-2-.29Z"
                                                 class="clr-i-outline clr-i-outline-path-1" />
                                             <path fill="none" d="M0 0h36v36H0z" />
                                         </svg>
                                     </a>
-    
+
                                     <a (click)="getComment(userPost._id, 'cm'+userPost._id)"
                                         style="cursor: pointer; color: #A8A8A8;"><span class="iconify"
                                             data-icon="uil:comment-alt-message"></span></a>
-    
-    
-                                    <a href="">
+
+
+                                    <!-- <a href="">
                                         <p class="color7E font-medium"> <span class="iconify"
                                                 data-icon="nimbus:stats"></span>
                                             &nbsp; Post Statistics
                                         </p>
-                                    </a>
+                                    </a> -->
                                 </div>
-    
+
                             </div>
-    
+
                         </div>
-    
+
                     </div>
                     <div [id]="'cm'+userPost._id" style="display:none;">
                         <div class="comment-section">
@@ -154,24 +171,27 @@
                                         (keydown.enter)="addComment($event.target, userPost._id, 'cmtxt'+userPost._id)" />
                                 </div>
                                 <div class="comment-section-div-forimage-and-text" *ngIf="isPostComment === true">
-                                    <div class="wrapper-poll-asked-user" *ngFor="let postComments of postComment"
-                                        [id]="postComments._id">
-                                        <img src="assets/images/Ellipse 14 (1).png"
-                                            onError="this.src='assets/images/user.png'" alt="image">
-                                        <div class="user-info-p-a">
-                                            <p class="font-14 font-bold color-49"> Talan Bergson
-                                            </p>
-                                            <p class="font-16 color-68">{{postComments.comment}}</p>
-                                        </div>
-                                        <div class="div-for-delete-edit-comment" *ngIf="userId === postComments.user"
-                                            style="margin-left: auto; margin-right: 0;">
-                                            <div class="d-flex">
-                                                <a (click)="editCommentTxt(postComments._id, postComments.comment, userPost._id, 'cmtxt'+userPost._id)"
-                                                    style="cursor: pointer;"><span class="iconify color-blue"
-                                                        data-icon="dashicons:edit"></span></a>
-                                                <a (click)="deleteComment(postComments._id, userPost._id)"
-                                                    style="cursor: pointer;"><span class="iconify color-blue"
-                                                        data-icon="ep:delete-filled"></span></a>
+                                    <div *ngFor="let postComments of postComment" [id]="postComments._id">
+                                        <div class="wrapper-poll-asked-user" *ngFor="let userDetail of postComments['userDetail']"
+                                            >
+                                            <img [src]="userDetail.profileImage"
+                                                onError="this.src='assets/images/user.png'" alt="image">
+                                            <div class="user-info-p-a">
+                                                <p class="font-14 font-bold color-49">
+                                                    {{userDetail.fullName}}
+                                                </p>
+                                                <p class="font-16 color-68">{{postComments.comment}}</p>
+                                            </div>
+                                            <div class="div-for-delete-edit-comment" *ngIf="userId === postComments.user"
+                                                style="margin-left: auto; margin-right: 0;">
+                                                <div class="d-flex">
+                                                    <a (click)="editCommentTxt(postComments._id, postComments.comment, userPost._id, 'cmtxt'+userPost._id)"
+                                                        style="cursor: pointer;"><span class="iconify color-blue"
+                                                            data-icon="dashicons:edit"></span></a>
+                                                    <a (click)="deleteComment(postComments._id, userPost._id)"
+                                                        style="cursor: pointer;"><span class="iconify color-blue"
+                                                            data-icon="ep:delete-filled"></span></a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -182,36 +202,41 @@
                 </div>
             </div>
         </div>
-    
+
         <div class="col-md-12 second-home-middle forth-home-middle" *ngIf="userPost.type != 'poll'">
             <div class="headding-poll">
                 <div class="poll-asked-user d-flex justify-content-between">
                     <div class="wrapper-poll-asked-user" *ngIf="isMyProfilePage === true">
-                        <img [src]="profilePicture" onError="this.src='assets/images/user.png'" alt="image" />
+                        <img [src]="profilePicture" onError="this.src='assets/images/user.png'" alt="image"
+                            (click)="viewProfile(userName)" style="cursor: pointer;" />
                         <div class="user-info-p-a">
-                            <p class="font-14 font-bold color-49"> {{userFullName}} &nbsp;
+                            <p class="font-14 font-bold color-49" (click)="viewProfile(userName)"
+                                style="cursor: pointer;"> @{{userName}} &nbsp;
                                 <span class="iconify font-20 color-light-blue" data-icon="ic:sharp-verified"></span>
                             </p>
-                            <p class="font-14 color-49">@{{userName}}</p>
+                            <!-- <p class="font-14 color-49">@{{userName}}</p> -->
                         </div>
                     </div>
                     <div class="wrapper-poll-asked-user" *ngIf="isMyProfilePage === false">
                         <img [src]="userPost.userDetail[0]['profileImage']" onError="this.src='assets/images/user.png'"
-                            alt="image" *ngIf="userPost.userDetail[0]" />
+                            alt="image" *ngIf="userPost.userDetail[0]"
+                            (click)="viewProfile(userPost.userDetail[0]['userName'])" style="cursor: pointer;" />
                         <div class="user-info-p-a" *ngIf="userPost.userDetail[0]">
-                            <p class="font-14 font-bold color-49"> {{userPost.userDetail[0]['fullName']}} &nbsp;
+                            <p class="font-14 font-bold color-49"
+                                (click)="viewProfile(userPost.userDetail[0]['userName'])" style="cursor: pointer;">
+                                @{{userPost.userDetail[0]['userName']}} &nbsp;
                                 <span class="iconify font-20 color-light-blue" data-icon="ic:sharp-verified"></span>
                             </p>
-                            <p class="font-14 color-49">@{{userPost.userDetail[0]['userName']}}</p>
+                            <!-- <p class="font-14 color-49">@{{userPost.userDetail[0]['userName']}}</p> -->
                         </div>
                     </div>
                     <div class="a-for-h-3">
                         <a href="javascript:void(0)">{{userPost.postedAt |
                             date:'MMM dd'}} </a>
                         <a *ngIf="userPost.user === userId" href="javascript:void(0)" id="dropdownMenuButton"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="iconify font-20"
-                                data-icon="fluent:more-circle-32-regular"></span></a>
-    
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span
+                                class="iconify font-20" data-icon="fluent:more-circle-32-regular"></span></a>
+
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="#edit-job" data-toggle="modal" style="color: #212529;">
                                 <svg width="11" height="11" viewBox="0 0 11 11" fill="none"
@@ -222,7 +247,7 @@
                                 </svg>
                                 Edit Post
                             </a>
-    
+
                             <a class="dropdown-item" data-toggle="modal" style="color: #212529; cursor: pointer;"
                                 (click)="deletePost(userPost._id)">
                                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
@@ -234,7 +259,7 @@
                                 Delete
                             </a>
                         </div>
-    
+
                         <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuLinks">
                             <div class="radio-button-vault">
                                 <div class="form-group">
@@ -261,7 +286,7 @@
                                 </div>
                             </div>
                         </div> -->
-                        
+
                     </div>
                 </div>
             </div>
@@ -280,35 +305,43 @@
                             <source [src]="userPost.fileName" type="video/mp4">
                         </video>
                     </div>
+                    <div class="profile-div-page-t-p" *ngIf="userPost.type === 'audio'">
+                        <p>{{userPost.title}}</p>
+                        <audio controls style="width: 100%">
+                            <source [src]="userPost.fileName" type="audio/mp3">
+                        </audio>
+                    </div>
                 </div>
             </div>
             <div class="middle-up-i">
                 <div class="d-flex justify-content-between">
                     <div class="first-h-c-t">
                         <a class="favorite" style="cursor: pointer; " [id]="'fav'+userPost._id"
-                            (click)="favoritePost('fav'+userPost._id,userPost._id,1)" [ngClass]="{active: true === checkFavoritePost(userPost.favoritedata)}">
-                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
-                                preserveAspectRatio="xMidYMid meet" viewBox="0 0 36 36">
+                            (click)="favoritePost('fav'+userPost._id,userPost._id,1, userPost['totallikes'])"
+                            [ngClass]="{active: true === checkFavoritePost(userPost.favoritedata)}">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em"
+                                height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 36 36">
                                 <path fill="#A8A8A8"
                                     d="M18 32.43a1 1 0 0 1-.61-.21C11.83 27.9 8 24.18 5.32 20.51C1.9 15.82 1.12 11.49 3 7.64c1.34-2.75 5.19-5 9.69-3.69A9.87 9.87 0 0 1 18 7.72a9.87 9.87 0 0 1 5.31-3.77c4.49-1.29 8.35.94 9.69 3.69c1.88 3.85 1.1 8.18-2.32 12.87c-2.68 3.67-6.51 7.39-12.07 11.71a1 1 0 0 1-.61.21ZM10.13 5.58A5.9 5.9 0 0 0 4.8 8.51c-1.55 3.18-.85 6.72 2.14 10.81A57.13 57.13 0 0 0 18 30.16a57.13 57.13 0 0 0 11.06-10.83c3-4.1 3.69-7.64 2.14-10.81c-1-2-4-3.59-7.34-2.65a8 8 0 0 0-4.94 4.2a1 1 0 0 1-1.85 0a7.93 7.93 0 0 0-4.94-4.2a7.31 7.31 0 0 0-2-.29Z"
                                     class="clr-i-outline clr-i-outline-path-1" />
                                 <path fill="none" d="M0 0h36v36H0z" />
                             </svg>
                         </a>
-    
+
                         <a (click)="getComment(userPost._id, 'cm'+userPost._id)"
                             style="cursor: pointer; color: #A8A8A8;"><span class="iconify"
                                 data-icon="uil:comment-alt-message"></span></a>
-    
-                        <a (click)="openSendTipModal(userPost._id)" data-toggle="modal" data-target="#sendTipModal"><img src="assets/images/mask-4.png" alt="image" /> &nbsp; Send
+
+                        <a (click)="openSendTipModal(userPost._id)" data-toggle="modal" data-target="#sendTipModal"><img
+                                src="assets/images/mask-4.png" alt="image" /> &nbsp; Send
                             Tip</a>
-                        <p class="font-14 color-a8">{{numFormatter(userPost['favoritedata'].length)}} likes this</p>
+                        <p class="font-14 color-a8" [id]="'likecounter'+userPost._id" [innerHTML]="numFormatter(userPost['totallikes'])"> </p>
                     </div>
                     <div class="first-h-c-t">
                         <a class="bookmark" style="cursor: pointer; color: #A8A8A8;" [id]="'bm'+userPost._id"
                             (click)="bookmartPost('bm'+userPost._id,userPost._id,1)">
-                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
-                                preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em"
+                                height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16">
                                 <path fill="currentColor"
                                     d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
                             </svg>
@@ -326,8 +359,8 @@
                             <div class="comment-section-div-forimage-and-text" *ngIf="isPostComment === true">
                                 <div class="wrapper-poll-asked-user" *ngFor="let postComments of postComment"
                                     [id]="postComments._id">
-                                    <img src="assets/images/Ellipse 14 (1).png" onError="this.src='assets/images/user.png'"
-                                        alt="image">
+                                    <img src="assets/images/Ellipse 14 (1).png"
+                                        onError="this.src='assets/images/user.png'" alt="image">
                                     <div class="user-info-p-a">
                                         <p class="font-14 font-bold color-49"> Talan Bergson
                                         </p>
@@ -363,33 +396,40 @@
                         <div class="headding-poll">
                             <div class="poll-asked-user d-flex justify-content-between">
                                 <div class="wrapper-poll-asked-user" *ngIf="isMyProfilePage === true">
-                                    <img [src]="profilePicture" onError="this.src='assets/images/user.png'" alt="image" />
+                                    <img [src]="profilePicture" onError="this.src='assets/images/user.png'" alt="image"
+                                        (click)="viewProfile(userName)" style="cursor: pointer;" />
                                     <div class="user-info-p-a">
-                                        <p class="font-14 font-bold color-49"> {{userFullName}} &nbsp;
+                                        <p class="font-14 font-bold color-49" (click)="viewProfile(userName)"
+                                            style="cursor: pointer;"> @{{userName}} &nbsp;
                                             <span class="iconify font-20 color-light-blue"
                                                 data-icon="ic:sharp-verified"></span>
                                         </p>
-                                        <p class="font-14 color-49">@{{userName}}</p>
+                                        <!-- <p class="font-14 color-49">@{{userName}}</p> -->
                                     </div>
                                 </div>
                                 <div class="wrapper-poll-asked-user" *ngIf="isMyProfilePage === false">
                                     <img [src]="userPost.userDetail[0]['profileImage']"
-                                        onError="this.src='assets/images/user.png'" alt="image" />
+                                        onError="this.src='assets/images/user.png'" alt="image"
+                                        (click)="viewProfile(userPost.userDetail[0]['userName'])"
+                                        style="cursor: pointer;" />
                                     <div class="user-info-p-a">
-                                        <p class="font-14 font-bold color-49"> {{userPost.userDetail[0]['fullName']}} &nbsp;
+                                        <p class="font-14 font-bold color-49"
+                                            (click)="viewProfile(userPost.userDetail[0]['userName'])"
+                                            style="cursor: pointer;"> @{{userPost.userDetail[0]['userName']}} &nbsp;
                                             <span class="iconify font-20 color-light-blue"
                                                 data-icon="ic:sharp-verified"></span>
                                         </p>
-                                        <p class="font-14 color-49">@{{userPost.userDetail[0]['userName']}}</p>
+                                        <!-- <p class="font-14 color-49">@{{userPost.userDetail[0]['userName']}}</p> -->
                                     </div>
                                 </div>
                                 <div class="a-for-h-3">
                                     <a href="javascript:void(0)">{{userPost.createdAt |
                                         date:'MMM dd'}} </a>
-                                    <a *ngIf="userPost.user === userId" href="javascript:void(0)" id="dropdownMenuButton"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span
-                                            class="iconify font-20" data-icon="fluent:more-circle-32-regular"></span></a>
-    
+                                    <a *ngIf="userPost.user === userId" href="javascript:void(0)"
+                                        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false"><span class="iconify font-20"
+                                            data-icon="fluent:more-circle-32-regular"></span></a>
+
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <a class="dropdown-item" href="#edit-job" data-toggle="modal"
                                             style="color: #212529;">
@@ -401,9 +441,10 @@
                                             </svg>
                                             Edit Post
                                         </a>
-    
+
                                         <a class="dropdown-item" data-toggle="modal"
-                                            style="color: #212529; cursor: pointer;" (click)="deleteBookmark(userPost._id)">
+                                            style="color: #212529; cursor: pointer;"
+                                            (click)="deleteBookmark(userPost._id)">
                                             <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path fill-rule="evenodd" clip-rule="evenodd"
@@ -422,7 +463,8 @@
                             <div class="wrapper-poll-div-section">
                                 <div class="col-md-10">
                                     <div class="first-div-upper-title">
-                                        <p class="font-medium font-16 color-41 "><span class="iconify font-26 color-blue"
+                                        <p class="font-medium font-16 color-41 "><span
+                                                class="iconify font-26 color-blue"
                                                 data-icon="fa6-solid:square-poll-vertical"></span>
                                             &nbsp; {{userPost.title}}</p>
                                     </div>
@@ -430,7 +472,7 @@
                                         <div class="progress-run"
                                             *ngFor="let pollOptions of userPost['pollData']; let totalVote=index">
                                             <div class="progress"
-                                                (click)="submitPollAnswer(userPost._id, pollOptions.text, userPost._id+'polloption', userPost._id+'pollanswer', userPost['pollData'], pollOptions._id)"
+                                                (click)="submitPollAnswer(userPost._id, pollOptions.text, userPost._id+'polloption', userPost._id+'pollanswer', userPost['pollData'], pollOptions._id, userPost['pollvotingdata'].length)"
                                                 style="cursor: pointer;">
                                                 <div class="progress_inner" style="width: 0%">
                                                 </div>
@@ -441,7 +483,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="poll-progressbar" [id]="userPost._id+'pollanswer'" style="display: none;">
+                                    <div class="poll-progressbar" [id]="userPost._id+'pollanswer'"
+                                        style="display: none;">
                                         <div class="progress-run"
                                             *ngFor="let pollOptions of userPost['pollData']; let totalVote=index">
                                             <div class="progress">
@@ -449,7 +492,8 @@
                                                 </div>
                                             </div>
                                             <div class="opt">
-                                                <input class="change" type="number" [value]="pollOptions.choose" READONLY>
+                                                <input class="change" type="number" [value]="pollOptions.choose"
+                                                    READONLY>
                                                 <label class="font-14 font-medium">{{pollOptions.text}}</label>
                                             </div>
                                         </div>
@@ -458,11 +502,12 @@
                                 <div class="for-vote-div">
                                     <div class="col-md-12">
                                         <div class="wrapper-vote">
-                                            <p class="color-41 font-14">77 votes &nbsp;
+                                            <p class="color-41 font-14">{{pollVotes(userPost['pollvotingdata'].length)}}
+                                                &nbsp;
                                                 <span><span class="iconify font-18" style="color: #C4C4C4;"
                                                         data-icon="ci:dot-02-s"></span></span>
                                                 &nbsp;
-                                                <span>7 Days Left</span>
+                                                <span>{{pollDayLeft(userPost.duration, userPost.postedAt)}} Left</span>
                                             </p>
                                         </div>
                                     </div>
@@ -473,33 +518,34 @@
                             <div class="col-md-7">
                                 <div class="under-second-poll">
                                     <a class="favorite" style="cursor: pointer; " [id]="'fav'+userPost._id"
-                                        (click)="favoritePost('fav'+userPost._id,userPost._id,1)" [ngClass]="{active: true === checkFavoritePost(userPost.favoritedata)}">
-                                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em"
-                                            height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 36 36">
+                                        (click)="favoritePost('fav'+userPost._id,userPost._id,1, userPost['totallikes'])">
+                                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img"
+                                            width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
+                                            viewBox="0 0 36 36">
                                             <path fill="#A8A8A8"
                                                 d="M18 32.43a1 1 0 0 1-.61-.21C11.83 27.9 8 24.18 5.32 20.51C1.9 15.82 1.12 11.49 3 7.64c1.34-2.75 5.19-5 9.69-3.69A9.87 9.87 0 0 1 18 7.72a9.87 9.87 0 0 1 5.31-3.77c4.49-1.29 8.35.94 9.69 3.69c1.88 3.85 1.1 8.18-2.32 12.87c-2.68 3.67-6.51 7.39-12.07 11.71a1 1 0 0 1-.61.21ZM10.13 5.58A5.9 5.9 0 0 0 4.8 8.51c-1.55 3.18-.85 6.72 2.14 10.81A57.13 57.13 0 0 0 18 30.16a57.13 57.13 0 0 0 11.06-10.83c3-4.1 3.69-7.64 2.14-10.81c-1-2-4-3.59-7.34-2.65a8 8 0 0 0-4.94 4.2a1 1 0 0 1-1.85 0a7.93 7.93 0 0 0-4.94-4.2a7.31 7.31 0 0 0-2-.29Z"
                                                 class="clr-i-outline clr-i-outline-path-1" />
                                             <path fill="none" d="M0 0h36v36H0z" />
                                         </svg>
                                     </a>
-    
+
                                     <a (click)="getComment(userPost._id, 'cm'+userPost._id)"
                                         style="cursor: pointer; color: #A8A8A8;"><span class="iconify"
                                             data-icon="uil:comment-alt-message"></span></a>
-    
-    
-                                    <a href="">
+
+
+                                    <!-- <a href="">
                                         <p class="color7E font-medium"> <span class="iconify"
                                                 data-icon="nimbus:stats"></span>
                                             &nbsp; Post Statistics
                                         </p>
-                                    </a>
+                                    </a> -->
                                 </div>
-    
+
                             </div>
-    
+
                         </div>
-    
+
                     </div>
                     <div [id]="'cm'+userPost._id" style="display:none;">
                         <div class="comment-section">
@@ -510,24 +556,27 @@
                                         (keydown.enter)="addComment($event.target, userPost._id, 'cmtxt'+userPost._id)" />
                                 </div>
                                 <div class="comment-section-div-forimage-and-text" *ngIf="isPostComment === true">
-                                    <div class="wrapper-poll-asked-user" *ngFor="let postComments of postComment"
-                                        [id]="postComments._id">
-                                        <img src="assets/images/Ellipse 14 (1).png"
-                                            onError="this.src='assets/images/user.png'" alt="image">
-                                        <div class="user-info-p-a">
-                                            <p class="font-14 font-bold color-49"> Talan Bergson
-                                            </p>
-                                            <p class="font-16 color-68">{{postComments.comment}}</p>
-                                        </div>
-                                        <div class="div-for-delete-edit-comment" *ngIf="userId === postComments.user"
-                                            style="margin-left: auto; margin-right: 0;">
-                                            <div class="d-flex">
-                                                <a (click)="editCommentTxt(postComments._id, postComments.comment, userPost._id, 'cmtxt'+userPost._id)"
-                                                    style="cursor: pointer;"><span class="iconify color-blue"
-                                                        data-icon="dashicons:edit"></span></a>
-                                                <a (click)="deleteComment(postComments._id, userPost._id)"
-                                                    style="cursor: pointer;"><span class="iconify color-blue"
-                                                        data-icon="ep:delete-filled"></span></a>
+                                    <div *ngFor="let postComments of postComment" [id]="postComments._id">
+                                        <div class="wrapper-poll-asked-user" *ngFor="let userDetail of postComments['userDetail']"
+                                            >
+                                            <img [src]="userDetail.profileImage"
+                                                onError="this.src='assets/images/user.png'" alt="image">
+                                            <div class="user-info-p-a">
+                                                <p class="font-14 font-bold color-49">
+                                                    {{userDetail.fullName}}
+                                                </p>
+                                                <p class="font-16 color-68">{{postComments.comment}}</p>
+                                            </div>
+                                            <div class="div-for-delete-edit-comment" *ngIf="userId === postComments.user"
+                                                style="margin-left: auto; margin-right: 0;">
+                                                <div class="d-flex">
+                                                    <a (click)="editCommentTxt(postComments._id, postComments.comment, userPost._id, 'cmtxt'+userPost._id)"
+                                                        style="cursor: pointer;"><span class="iconify color-blue"
+                                                            data-icon="dashicons:edit"></span></a>
+                                                    <a (click)="deleteComment(postComments._id, userPost._id)"
+                                                        style="cursor: pointer;"><span class="iconify color-blue"
+                                                            data-icon="ep:delete-filled"></span></a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -538,36 +587,41 @@
                 </div>
             </div>
         </div>
-    
+
         <div class="col-md-12 second-home-middle forth-home-middle" *ngIf="userPost.type != 'poll'">
             <div class="headding-poll">
                 <div class="poll-asked-user d-flex justify-content-between">
                     <div class="wrapper-poll-asked-user" *ngIf="isMyProfilePage === true">
-                        <img [src]="profilePicture" onError="this.src='assets/images/user.png'" alt="image" />
+                        <img [src]="profilePicture" onError="this.src='assets/images/user.png'" alt="image"
+                            (click)="viewProfile(userName)" style="cursor: pointer;" />
                         <div class="user-info-p-a">
-                            <p class="font-14 font-bold color-49"> {{userFullName}} &nbsp;
+                            <p class="font-14 font-bold color-49" (click)="viewProfile(userName)"
+                                style="cursor: pointer;"> @{{userName}} &nbsp;
                                 <span class="iconify font-20 color-light-blue" data-icon="ic:sharp-verified"></span>
                             </p>
-                            <p class="font-14 color-49">@{{userName}}</p>
+                            <!-- <p class="font-14 color-49">@{{userName}}</p> -->
                         </div>
                     </div>
                     <div class="wrapper-poll-asked-user" *ngIf="isMyProfilePage === false">
                         <img [src]="userPost.userDetail[0]['profileImage']" onError="this.src='assets/images/user.png'"
-                            alt="image" *ngIf="userPost.userDetail[0]" />
+                            alt="image" *ngIf="userPost.userDetail[0]"
+                            (click)="viewProfile(userPost.userDetail[0]['userName'])" style="cursor: pointer;" />
                         <div class="user-info-p-a" *ngIf="userPost.userDetail[0]">
-                            <p class="font-14 font-bold color-49"> {{userPost.userDetail[0]['fullName']}} &nbsp;
+                            <p class="font-14 font-bold color-49"
+                                (click)="viewProfile(userPost.userDetail[0]['userName'])" style="cursor: pointer;">
+                                @{{userPost.userDetail[0]['userName']}} &nbsp;
                                 <span class="iconify font-20 color-light-blue" data-icon="ic:sharp-verified"></span>
                             </p>
-                            <p class="font-14 color-49">@{{userPost.userDetail[0]['userName']}}</p>
+                            <!-- <p class="font-14 color-49">@{{userPost.userDetail[0]['userName']}}</p> -->
                         </div>
                     </div>
                     <div class="a-for-h-3">
                         <a href="javascript:void(0)">{{userPost.createdAt |
                             date:'MMM dd'}} </a>
                         <a *ngIf="userPost.user === userId" href="javascript:void(0)" id="dropdownMenuButton"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="iconify font-20"
-                                data-icon="fluent:more-circle-32-regular"></span></a>
-    
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span
+                                class="iconify font-20" data-icon="fluent:more-circle-32-regular"></span></a>
+
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="#edit-job" data-toggle="modal" style="color: #212529;">
                                 <svg width="11" height="11" viewBox="0 0 11 11" fill="none"
@@ -578,7 +632,7 @@
                                 </svg>
                                 Edit Post
                             </a>
-    
+
                             <a class="dropdown-item" data-toggle="modal" style="color: #212529; cursor: pointer;"
                                 (click)="deleteBookmark(userPost.postDetail['_id'])">
                                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
@@ -590,7 +644,7 @@
                                 Delete
                             </a>
                         </div>
-    
+
                         <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuLinks">
                             <div class="radio-button-vault">
                                 <div class="form-group">
@@ -617,7 +671,7 @@
                                 </div>
                             </div>
                         </div> -->
-                        
+
                     </div>
                 </div>
             </div>
@@ -628,7 +682,8 @@
                     </div>
                     <div class="profile-div-page-t-p" *ngIf="userPost.postDetail['type'] === 'image'">
                         <p>{{userPost.postDetail['title']}}</p>
-                        <img [src]="userPost.postDetail['fileName']" onError="this.src='assets/images/8.png'" alt="image" />
+                        <img [src]="userPost.postDetail['fileName']" onError="this.src='assets/images/8.png'"
+                            alt="image" />
                     </div>
                     <div class="profile-div-page-t-p" *ngIf="userPost.postDetail['type'] === 'video'">
                         <p>{{userPost.postDetail['title']}}</p>
@@ -642,29 +697,30 @@
                 <div class="d-flex justify-content-between">
                     <div class="first-h-c-t">
                         <a class="favorite" style="cursor: pointer; " [id]="'fav'+userPost._id"
-                            (click)="favoritePost('fav'+userPost._id,userPost.postid,1)" [ngClass]="{active: true === checkFavoritePost(userPost.favoritedata)}">
-                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
-                                preserveAspectRatio="xMidYMid meet" viewBox="0 0 36 36">
+                            (click)="favoritePost('fav'+userPost._id,userPost.postid,1, userPost['totallikes'])">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em"
+                                height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 36 36">
                                 <path fill="#A8A8A8"
                                     d="M18 32.43a1 1 0 0 1-.61-.21C11.83 27.9 8 24.18 5.32 20.51C1.9 15.82 1.12 11.49 3 7.64c1.34-2.75 5.19-5 9.69-3.69A9.87 9.87 0 0 1 18 7.72a9.87 9.87 0 0 1 5.31-3.77c4.49-1.29 8.35.94 9.69 3.69c1.88 3.85 1.1 8.18-2.32 12.87c-2.68 3.67-6.51 7.39-12.07 11.71a1 1 0 0 1-.61.21ZM10.13 5.58A5.9 5.9 0 0 0 4.8 8.51c-1.55 3.18-.85 6.72 2.14 10.81A57.13 57.13 0 0 0 18 30.16a57.13 57.13 0 0 0 11.06-10.83c3-4.1 3.69-7.64 2.14-10.81c-1-2-4-3.59-7.34-2.65a8 8 0 0 0-4.94 4.2a1 1 0 0 1-1.85 0a7.93 7.93 0 0 0-4.94-4.2a7.31 7.31 0 0 0-2-.29Z"
                                     class="clr-i-outline clr-i-outline-path-1" />
                                 <path fill="none" d="M0 0h36v36H0z" />
                             </svg>
                         </a>
-    
+
                         <a (click)="getComment(userPost.postid, 'cm'+userPost._id)"
                             style="cursor: pointer; color: #A8A8A8;"><span class="iconify"
                                 data-icon="uil:comment-alt-message"></span></a>
-    
-                        <a (click)="openSendTipModal(userPost.postid)" data-toggle="modal" data-target="#sendTipModal"><img src="assets/images/mask-4.png" alt="image" /> &nbsp; Send
+
+                        <a (click)="openSendTipModal(userPost.postid)" data-toggle="modal"
+                            data-target="#sendTipModal"><img src="assets/images/mask-4.png" alt="image" /> &nbsp; Send
                             Tip</a>
                         <p class="font-14 color-a8">122 likes this</p>
                     </div>
                     <div class="first-h-c-t">
                         <a class="bookmark active" style="cursor: pointer; color: #A8A8A8;" [id]="'bm'+userPost._id"
                             (click)="bookmartPost('bm'+userPost._id,userPost.postid,1)">
-                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
-                                preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em"
+                                height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16">
                                 <path fill="currentColor"
                                     d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
                             </svg>
@@ -682,8 +738,8 @@
                             <div class="comment-section-div-forimage-and-text" *ngIf="isPostComment === true">
                                 <div class="wrapper-poll-asked-user" *ngFor="let postComments of postComment"
                                     [id]="postComments._id">
-                                    <img src="assets/images/Ellipse 14 (1).png" onError="this.src='assets/images/user.png'"
-                                        alt="image">
+                                    <img src="assets/images/Ellipse 14 (1).png"
+                                        onError="this.src='assets/images/user.png'" alt="image">
                                     <div class="user-info-p-a">
                                         <p class="font-14 font-bold color-49"> Talan Bergson
                                         </p>
@@ -707,55 +763,68 @@
                 </div>
             </div>
         </div>
-    </div>    
+    </div>
 </div>
 
-  
-  <!-- Modal -->
-  <div class="modal fade" id="sendTipModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content tip-modal-content">
-        <div class="modal-header">
-          <div class="modal-title tip_title" id="tip_title">            
-            <img class="mr-1" src="assets/images/tip.png">
-            Tips
-          </div>
-          <p class="tip_date">May 30, 2022</p>
+<div class="data-not-found-page" *ngIf="userPosts.length === 0">
+    <div class="wrapper-data-not-found text-center">
+        <img src="assets/images/no-data.png" alt="image" />
+        <p class="font-26 color-blue font-bold">Data not found!</p>
+        <div class="button-data-not-found">
+            <!-- <a href="javascript:void(0)" class="btn">Go Back</a> -->
         </div>
-        <div class="modal-body">
-            <div class="thanks-tipping row">
-                <div class="mr-3">Thank you for Tipping</div>            
-                <img src="assets/images/avatar.png" />                
-                <div class="user_name ml-1">@Jessicaalba</div>
-            </div>     
-            <div class="tip_amount">
-                <div class="enter_tip">                    
-                    <img class="mr-1" src="assets/images/tippen.png" alt="">
-                    Please Enter Tip Amount
-                </div>
-                <div class="flex align-center">
-                    <div class="usd">$</div>
-                    <input type="text" class="tip_input" required>
-                </div>
-            </div>     
-            <div class="tip_detail">
-                TIP amount from $5.00 to $300.00
-            </div>
-
-        </div>
-        <div class="modal-footer">          
-          <button type="button" class="sendTipBtn"  data-toggle="modal" data-target="#tipPaymentModal" (click)="tipPayment()">Send Tip</button>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
 
 
-  <div class="modal payment-modal fade" id="tipPaymentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<!-- Modal -->
+<div class="modal fade" id="sendTipModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-          <!-- <app-payment></app-payment> -->
-         <!-- <div id="tab2" class="tabcontent"> -->
+        <div class="modal-content tip-modal-content">
+            <div class="modal-header">
+                <div class="modal-title tip_title" id="tip_title">
+                    <img class="mr-1" src="assets/images/tip.png">
+                    Tips
+                </div>
+                <p class="tip_date">May 30, 2022</p>
+            </div>
+            <div class="modal-body">
+                <div class="thanks-tipping row">
+                    <div class="mr-3">Thank you for Tipping</div>
+                    <img src="assets/images/avatar.png" />
+                    <div class="user_name ml-1">@Jessicaalba</div>
+                </div>
+                <div class="tip_amount">
+                    <div class="enter_tip">
+                        <img class="mr-1" src="assets/images/tippen.png" alt="">
+                        Please Enter Tip Amount
+                    </div>
+                    <div class="flex align-center">
+                        <div class="usd">$</div>
+                        <input type="text" class="tip_input" required>
+                    </div>
+                </div>
+                <div class="tip_detail">
+                    TIP amount from $5.00 to $300.00
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="sendTipBtn" data-toggle="modal" data-target="#tipPaymentModal"
+                    (click)="tipPayment()">Send Tip</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal payment-modal fade" id="tipPaymentModal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <!-- <app-payment></app-payment> -->
+            <!-- <div id="tab2" class="tabcontent"> -->
             <div class="payment-content-tab">
                 <div class="radio-button-div-payments">
                     <div class="heading-payment">
@@ -768,7 +837,8 @@
                         </p>
                         <p>
                             <input type="radio" id="test22" name="radio-group">
-                            <label for="test22"> <img src="assets/images/bi_credit-card-2-front-fill.png" alt="image">Credit/Debit Card</label>
+                            <label for="test22"> <img src="assets/images/bi_credit-card-2-front-fill.png"
+                                    alt="image">Credit/Debit Card</label>
                         </p>
                         <p>
                             <input type="radio" id="test33" name="radio-group">
@@ -793,40 +863,41 @@
                                 <div class="form-group">
                                     <label class="font-14 color-grey">Email</label>
                                     <input type="email" name="address1" value="John@email.com" class="w-100">
-                                  </div>
+                                </div>
                             </div>
                             <div class="col-md-6"></div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="font-14 color-grey">Card Number</label>
                                     <input type="text" name="card" value="4000 2222 3333 8888" class="w-100">
-                                  </div>
+                                </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="font-14 color-grey">Postal Code</label>
                                     <input type="text" name="cvv" value="1970" class="w-100">
-                                  </div>
+                                </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="font-14 color-grey">Expiration Date</label>
                                     <input type="text" name="cvv" value="MM/YYYY" class="w-100">
-                                  </div>
+                                </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="font-14 color-grey">CCV</label>
                                     <input type="text" name="cvv" class="w-100">
-                                  </div>
+                                </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group border-bottom-pe">
                                     <div class="check-for-payments">
-                                      <input type="checkbox" id="agree-save" name="agree-save" value="agree-save">
-                                      <label for="agree-save" class="font-14 color-black">Save Payment Card</label><br>
+                                        <input type="checkbox" id="agree-save" name="agree-save" value="agree-save">
+                                        <label for="agree-save" class="font-14 color-black">Save Payment
+                                            Card</label><br>
                                     </div>
-                                  </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -847,24 +918,28 @@
                         </div>
                     </div>
                     <div class="payment-desc">
-                        <p class="color-grey font-14">All payments are charged in USD and all payments are final. You will be charged the prorated amount in USD immediately. You will be charged $25.00 USD every 1st of the month while you are an active Creator on Chello. Monthly payments are prorated at the start of your relationship with Chello,however, can be canceled any time.</p>
+                        <p class="color-grey font-14">All payments are charged in USD and all payments are final. You
+                            will be charged the prorated amount in USD immediately. You will be charged $25.00 USD every
+                            1st of the month while you are an active Creator on Chello. Monthly payments are prorated at
+                            the start of your relationship with Chello,however, can be canceled any time.</p>
                     </div>
                     <div class="payment-aggree">
                         <div class="form-group ">
                             <div class="check-for-payments">
-                              <input type="checkbox" id="agree" name="agree" value="agree">
-                              <label for="agree" class="font-14 color-black">I agree to the above, this payment, and the <a href="">Terms.</a></label><br>
+                                <input type="checkbox" id="agree" name="agree" value="agree">
+                                <label for="agree" class="font-14 color-black">I agree to the above, this payment, and
+                                    the <a href="">Terms.</a></label><br>
                             </div>
-                          </div>
-                          <div class="button-link button-verified-lat">
+                        </div>
+                        <div class="button-link button-verified-lat">
                             <div class="d-flex justify-content-between">
-                              <a href="javascript:void(0)" (click)="makePayment()" class="btn">Make Payment</a>
+                                <a href="javascript:void(0)" (click)="makePayment()" class="btn">Make Payment</a>
                             </div>
-                          </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        <!-- </div>  -->
-      </div>
+            <!-- </div>  -->
+        </div>
     </div>
-  </div>
+</div>

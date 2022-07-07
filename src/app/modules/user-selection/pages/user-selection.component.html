@@ -27,16 +27,36 @@
           <div class="form-div-login">
             <form [formGroup]="registerForm2" (ngSubmit)="register()">
               <div class="form-group position-relative">
-                <label class="font-14 color-grey">Enter your Phone Number</label>
-                <input id="phone" type="number" minlength=10 maxlength=10 class="w-100 " formControlName="phoneNumber"
-                  [ngClass]="{ 'is-invalid': submitted2 && rf2Validation.phoneNumber.errors }">
-                <div *ngIf="submitted2 && rf2Validation.phoneNumber.errors" class="invalid-feedback">
+                <label class="font-14 color-grey" >Enter your Phone Number</label>
+                <ngx-intl-tel-input
+                  [cssClass]="'custom w-100 itiUpdated'"
+                  [preferredCountries]="preferredCountries"
+                  [enableAutoCountrySelect]="true"
+                  [enablePlaceholder]="true"
+                  [searchCountryFlag]="true"
+                  [searchCountryField]="[
+                    SearchCountryField.Iso2,
+                    SearchCountryField.Name
+                  ]"
+                  [selectFirstCountry]="false"
+                  [selectedCountryISO]="CountryISO.UnitedStates"
+                  [phoneValidation]="true"
+                  [separateDialCode]="separateDialCode"
+                  [numberFormat]="PhoneNumberFormat.National"
+                  name="phoneNumber"
+                  formControlName="phoneNumber"
+                  [ngClass]="{ 'is-invalid': submitted && rf2Validation.phoneNumber.errors }">
+                </ngx-intl-tel-input>
+                <div *ngIf="submitted2 && rf2Validation.phoneNumber.errors" class="invalid-feedback" style="display: block;">
                   <div *ngIf="rf2Validation.phoneNumber.errors.required" style="color:red;">Phone number is required
                   </div>
                 </div>
-                <select class="form-select-for-pass" aria-label="Default select example" (change)="selectCountryCode($event.target)">
+                <div *ngIf="submitted2 && rf2Validation.phoneNumber.errors?.validatePhoneNumber" class="invalid-feedback" style="display: block;">
+                  <div *ngIf="!rf2Validation.phoneNumber.errors?.validatePhoneNumber.valid" style="color:red;">Phone number is invalid</div>
+                </div>
+                <!-- <select class="form-select-for-pass" aria-label="Default select example" (change)="selectCountryCode($event.target)">
                   <option *ngFor="let code of countryCodeList" [value]="code.dialCode">{{code.dialCode}}</option>
-                </select>
+                </select> -->
               </div>
               <!-- <div class="form-group">
                 <label class="font-14 color-grey">Enter Your Birthday</label>
@@ -76,8 +96,109 @@
                     <button type="button" class="btn-default active" id="roleCreator"
                       (click)="roleSection('creator')">Creator</button>
                     <button type="button" class="btn-default" id="roleFan" (click)="roleSection('fan')">Fan</button>
+                    <button type="button" class="btn-default" id="roleUser" (click)="roleSection('user')">User</button>
                   </div>
 
+                </div>
+              </div>
+              <div class="intrested-field">
+                <div class="intersted-field-wrapper">
+                  <p class="font-14 color-grey">Interests:</p>
+                  <div class="input-for-checkbox-l-b">
+                    <fieldset>
+                      <label class="control" for="Music">
+                        <input type="checkbox" name="topics" id="Music" (click)="addInterest('Music')">
+                        <span class="control__content">
+                          Music
+                        </span>
+                      </label>
+                      <label class="control" for="Sports">
+                        <input type="checkbox" name="topics" id="Sports" (click)="addInterest('Sports')">
+                        <span class="control__content">
+                          Sports
+                        </span>
+                      </label>
+                      <label class="control" name="Travel">
+                        <input type="checkbox" name="topics" id="Travel" (click)="addInterest('Travel')">
+                        <span class="control__content">
+                          Travel
+                        </span>
+                      </label><br>
+                      <label class="control" name="Beauty">
+                        <input type="checkbox" name="topics" id="Beauty" (click)="addInterest('Beauty')">
+                        <span class="control__content">
+                          Beauty
+                        </span>
+                      </label>
+                      <label class="control" name="Fashion">
+                        <input type="checkbox" name="topics" id="Fashion" (click)="addInterest('Fashion')">
+                        <span class="control__content">
+                          Fashion
+                        </span>
+                      </label>
+                      <label class="control" name="Fitness">
+                        <input type="checkbox" name="topics" id="Fitness" (click)="addInterest('Fitness')">
+                        <span class="control__content">
+                          Fitness
+                        </span>
+                      </label><br>
+                      <label class="control" name=" Health ">
+                        <input type="checkbox" name="topics" id=" Health" (click)="addInterest('Health')">
+                        <span class="control__content">
+                           Health 
+                        </span>
+                      </label>
+                      <label class="control" name="Cooking">
+                        <input type="checkbox" name="topics" id="Cooking" (click)="addInterest('Cooking')">
+                        <span class="control__content">
+                          Cooking
+                        </span>
+                      </label>
+                      <label class="control" name="DIY">
+                        <input type="checkbox" name="topics" id="DIY" (click)="addInterest('DIY')">
+                        <span class="control__content">
+                          DIY
+                        </span>
+                      </label><br>
+                      <label class="control" name="Comedy">
+                        <input type="checkbox" name="topics" id="Comedy" (click)="addInterest('Comedy')">
+                        <span class="control__content">
+                          Comedy
+                        </span>
+                      </label>
+                      <label class="control" name="Gaming">
+                        <input type="checkbox" name="topics" id="Gaming" (click)="addInterest('Gaming')">
+                        <span class="control__content">
+                          Gaming
+                        </span>
+                      </label>
+                      <label class="control" name="Adult Content">
+                        <input type="checkbox" name="topics" id="Adult Content" (click)="addInterest('Adult Content')">
+                        <span class="control__content">
+                          Adult Content
+                        </span>
+                      </label><br>
+                      <label class="control" name="Podcasts">
+                        <input type="checkbox" name="topics" id="Podcasts" (click)="addInterest('Podcasts')">
+                        <span class="control__content">
+                          Podcasts
+                        </span>
+                      </label>
+                      <label class="control" name="Dancing">
+                        <input type="checkbox" name="topics" id="Dancing" (click)="addInterest('Dancing')">
+                        <span class="control__content">
+                          Dancing
+                        </span>
+                      </label><label class="control" name="Investing">
+                        <input type="checkbox" name="topics" id="Investing" (click)="addInterest('Investing')">
+                        <span class="control__content">
+                          Investing
+                        </span>
+                      </label>
+                      
+                     
+                    </fieldset>
+                  </div>
                 </div>
               </div>
               <div class="button-link">

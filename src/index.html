@@ -7,7 +7,7 @@
   <base href="/">
   <meta name="robots" content="noindex,nofollow">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-  <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico?v=1">
+  <link rel="icon" type="image/x-icon" href="assets/images/chello-favicon.jpeg?v=1">
   <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
 
   <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css" />
@@ -18,7 +18,7 @@
   <!-- <link rel="stylesheet" href="assets/css/style-slider.css">
   <link href="https://www.cssscript.com/demo/sticky.css" rel="stylesheet" type="text/css"> -->
 
-   <!-- zuck lib styles -->
+  <!-- zuck lib styles -->
   <link rel="stylesheet" href="assets/css/snapssenger.css">
   <link rel="stylesheet" href="assets/css/zuck.min.css">
 
@@ -90,86 +90,107 @@
     document.getElementById("defaultOpen").click();
   </script>
 
-<script>
-  
-</script>
-
 
   <script src="assets/js/zuck.min.js"></script>
 
   <script type="text/javascript">
 
     function filterChars(s, charList) {
-        var s1 = "" + s; // force s1 to be a string data type
-        var i;
-        for (i = 0; i < s1.length;) {
-            if (charList.indexOf(s1.charAt(i)) < 0)
-                s1 = s1.substring(0, i) + s1.substring(i + 1, s1.length);
-            else
-                i++;
-        }
-        return s1;
+      var s1 = "" + s; // force s1 to be a string data type
+      var i;
+      for (i = 0; i < s1.length;) {
+        if (charList.indexOf(s1.charAt(i)) < 0)
+          s1 = s1.substring(0, i) + s1.substring(i + 1, s1.length);
+        else
+          i++;
+      }
+      return s1;
     }
     function makeNumeric(s) {
-        return filterChars(s, "1234567890.-");
+      return filterChars(s, "1234567890.-");
     }
 
     function numval(val, digits, minval, maxval) {
-        val = makeNumeric(val);
-        if (val == "" || isNaN(val)) val = 0;
-        val = parseFloat(val);
-        if (digits != null) {
-            var dec = Math.pow(10, digits);
-            val = (Math.round(val * dec)) / dec;
-        }
-        if (minval != null && val < minval) val = minval;
-        if (maxval != null && val > maxval) val = maxval;
-        return parseFloat(val);
+      val = makeNumeric(val);
+      if (val == "" || isNaN(val)) val = 0;
+      val = parseFloat(val);
+      if (digits != null) {
+        var dec = Math.pow(10, digits);
+        val = (Math.round(val * dec)) / dec;
+      }
+      if (minval != null && val < minval) val = minval;
+      if (maxval != null && val > maxval) val = maxval;
+      return parseFloat(val);
     }
 
     function formatNumber(val, digits, minval, maxval) {
-        var sval = "" + numval(val, digits, minval, maxval);
-        var i;
-        var iDecpt = sval.indexOf(".");
-        if (iDecpt < 0) iDecpt = sval.length;
-        if (digits != null && digits > 0) {
-            if (iDecpt == sval.length)
-                sval = sval + ".";
-            var places = sval.length - sval.indexOf(".") - 1;
-            for (i = 0; i < digits - places; i++)
-                sval = sval + "0";
-        }
-        var firstNumchar = 0;
-        if (sval.charAt(0) == "-") firstNumchar = 1;
-        for (i = iDecpt - 3; i > firstNumchar; i -= 3)
-            sval = sval.substring(0, i) + "," + sval.substring(i);
+      var sval = "" + numval(val, digits, minval, maxval);
+      var i;
+      var iDecpt = sval.indexOf(".");
+      if (iDecpt < 0) iDecpt = sval.length;
+      if (digits != null && digits > 0) {
+        if (iDecpt == sval.length)
+          sval = sval + ".";
+        var places = sval.length - sval.indexOf(".") - 1;
+        for (i = 0; i < digits - places; i++)
+          sval = sval + "0";
+      }
+      var firstNumchar = 0;
+      if (sval.charAt(0) == "-") firstNumchar = 1;
+      for (i = iDecpt - 3; i > firstNumchar; i -= 3)
+        sval = sval.substring(0, i) + "," + sval.substring(i);
 
-        return sval;
+      return sval;
     }
 
     function presentValue(fv, r, y) {
-        return fv / Math.pow(1 + r, y);
+      return fv / Math.pow(1 + r, y);
     }
     function zeroBlanks(formname) {
-        var i, ctrl;
-        for (i = 0; i < formname.elements.length; i++) {
-            ctrl = formname.elements[i];
-            if (ctrl.type == "text") {
-                if (makeNumeric(ctrl.value) == "")
-                    ctrl.value = "0";
-            }
+      var i, ctrl;
+      for (i = 0; i < formname.elements.length; i++) {
+        ctrl = formname.elements[i];
+        if (ctrl.type == "text") {
+          if (makeNumeric(ctrl.value) == "")
+            ctrl.value = "0";
         }
+      }
     }
 
     function dscl() {
-        var creatormade = numval(document.getElementById('earningAmount').value);
-        GrossEarning = (creatormade * 94 / 100)
-        ChelloAmount = (creatormade * 6 / 100)
-        document.getElementById('creatorNetPay').innerHTML = '$' + formatNumber(GrossEarning, 2, 0);
-        document.getElementById('chelloAmount').innerHTML = '$' + formatNumber(ChelloAmount, 2, 0);
+      var creatormade = numval(document.getElementById('earningAmount').value);
+      GrossEarning = (creatormade * 94 / 100)
+      ChelloAmount = (creatormade * 6 / 100)
+      document.getElementById('creatorNetPay').innerHTML = '$' + formatNumber(GrossEarning, 2, 0);
+      document.getElementById('chelloAmount').innerHTML = '$' + formatNumber(ChelloAmount, 2, 0);
     }
-</script>
- 
+  </script>
+
+  <script>
+    function switchVisible() {
+      if (document.getElementById('Div1')) {
+
+        if (document.getElementById('Div1').style.display == 'none') {
+          document.getElementById('Div1').style.display = 'block';
+          document.getElementById('Div2').style.display = 'none';
+        }
+        else {
+          document.getElementById('Div1').style.display = 'none';
+          document.getElementById('Div2').style.display = 'block';
+        }
+      }
+    }
+  </script>
+
+  <script>
+    const scrollContainer = document.querySelector("main");
+
+scrollContainer.addEventListener("wheel", (evt) => {
+    evt.preventDefault();
+    scrollContainer.scrollLeft += evt.deltaY;
+});
+  </script>
+  
 </body>
 
 </html>

@@ -35,6 +35,10 @@ export class SuggestionsComponent implements OnInit {
   groupMembersList: any;
   groupMembersListLength: any;
 
+  searchTxt: any = "";
+  searchForm!: FormGroup;
+  submitted: any;
+
   constructor(
     private formBuilder: FormBuilder,
     private profileService: ProfileService,
@@ -55,8 +59,8 @@ export class SuggestionsComponent implements OnInit {
     let retrievedObject: any = localStorage.getItem('userData');
     if (retrievedObject) {
       this.userJsonData = JSON.parse(retrievedObject);
-      console.log(this.userJsonData);
-      console.log(localStorage.getItem('accessToken'));
+      // console.log(this.userJsonData);
+      // console.log(localStorage.getItem('accessToken'));
       this.userName = this.userJsonData['userName'];
       this.userId = this.userJsonData['_id'];
       this.profilePicture = this.userJsonData['profileImage'];
@@ -70,8 +74,14 @@ export class SuggestionsComponent implements OnInit {
       }
     }
 
+    this.searchForm = this.formBuilder.group({
+      search: ['']
+    });
+
     this.searchUser("");
   }
+
+  get f() { return this.searchForm.controls; }
 
   searchUser(q: any) {
     var searchData = {
@@ -97,8 +107,18 @@ export class SuggestionsComponent implements OnInit {
     });
   }
 
-  viewProfile(Id: any){
+  search() {
+    if(this.f.search.value){
+      this.router.navigate([this.routernavigate.search], { queryParams: { q: this.f.search.value } });
+    }
+  }
 
+  viewAll(){
+    this.router.navigate([this.routernavigate.search], { queryParams: { q: '' } });
+  }
+
+  viewProfile(userName: any){
+    this.router.navigate([userName]);
   }
 
 }

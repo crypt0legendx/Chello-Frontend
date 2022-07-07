@@ -3,10 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { MessageTwoRoutingModule } from './message-two-routing.module';
 import { MessageTwoComponent } from './components/message-two.component';
-import { FooterModule } from '../layout/footer/footer.module'
-import { HeaderNewModule } from '../layout/header-new/header-new.module'
-import { SidebarModule } from '../layout/sidebar/sidebar.module'
-
+import { MessageThreeModule } from '../message-three/message-three.module';
 @NgModule({
   declarations: [
     MessageTwoComponent
@@ -14,9 +11,10 @@ import { SidebarModule } from '../layout/sidebar/sidebar.module'
   imports: [
     CommonModule,
     MessageTwoRoutingModule,
-    FooterModule,
-    HeaderNewModule,
-    SidebarModule
+    MessageThreeModule
+  ],
+  exports:[
+    MessageTwoComponent
   ]
 })
 export class MessageTwoModule { }

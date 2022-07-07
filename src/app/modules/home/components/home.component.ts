@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 import { PostService } from '../../../services/post.service';
@@ -13,7 +13,8 @@ import { first, map } from 'rxjs/operators';
 import * as auth from 'firebase/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
-import {PostListComponent} from '../../layout/post-list/components/post-list.component';
+import { PostListComponent } from '../../layout/post-list/components/post-list.component';
+import { StoryComponent } from '../../layout/story/components/story.component';
 
 declare var swal: any;
 declare var $: any;
@@ -25,7 +26,10 @@ declare var Zuck: any
   styleUrls: ['../pages/home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  @ViewChild(PostListComponent ) child: PostListComponent | undefined ; 
+  @ViewChild(PostListComponent) child: PostListComponent | undefined;
+  @ViewChild(StoryComponent) storyCmp: StoryComponent | undefined;
+  @ViewChild(StoryComponent) storyChild: any = StoryComponent;
+
   feedForm!: FormGroup;
   submitted: any;
   userJsonData: any;
@@ -41,7 +45,23 @@ export class HomeComponent implements OnInit {
   duration: any = 0;
   pageNumber: number = 0;
   public postOption: number = 0;
-  
+
+  storiesFileName: any;
+  storiesFileType: any;
+
+  allTime: any = "all";
+  lastThreeMonths: any = '';
+  lastMonth: any = '';
+  lastWeek: any = '';
+
+  latestPost: any = 'latest';
+  mostLiked: any = '';
+
+  filterText: any = "All";
+  filterPostDateWise: any = "all";
+  filterPost: any = "latest";
+  orderBy: any = "desc";
+
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
@@ -54,13 +74,14 @@ export class HomeComponent implements OnInit {
     private route: ActivatedRoute,
     public afs: AngularFirestore, // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
+    private cdr: ChangeDetectorRef,
   ) { }
 
   ngOnInit(): void {
     let retrievedObject: any = localStorage.getItem('userData');
     if (retrievedObject) {
       this.userJsonData = JSON.parse(retrievedObject);
-      console.log(this.userJsonData);
+      // console.log(this.userJsonData);
     } else {
       //this.router.navigate([this.routernavigate.login]);
     }
@@ -132,7 +153,7 @@ export class HomeComponent implements OnInit {
         this.feedForm.reset();
         this.selectedFiles = "";
         this.filePath = "";
-        this.child?.getAllFeeds();
+        this.child?.getAllFeeds(this.filterPostDateWise, this.filterPost, this.orderBy);
         //this.getFeed();
         this.spinner.hide();
         this.submitted = false;
@@ -152,7 +173,7 @@ export class HomeComponent implements OnInit {
 
   async getFeed() {
     this.spinner.show();
-    this.postService.getUserFeed({"pageNumber": this.pageNumber}).subscribe((data: any) => {
+    this.postService.getUserFeed({ "pageNumber": this.pageNumber }).subscribe((data: any) => {
       console.log(data);
       if (data['statusCode'] === 200) {
         this.spinner.hide();
@@ -186,14 +207,17 @@ export class HomeComponent implements OnInit {
     if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
       console.log(file.name);
+      console.log(file['type'].split('/')[0]);
+      this.storiesFileType = file['type'].split('/')[0];
       this.filePath = Math.random() * 10000000000000000 + '_' + file.name;
       reader.readAsDataURL(file);
       reader.onload = () => {
         this.imageSrc = reader.result as string;
       }
-      
+
       this.selectedFiles = file;
       if (fileType === "story") {
+        this.storiesFileName = file.name;
         this.uploadImage(this.filePath, "story");
       } else if (fileType === "addImage") {
         this.isAddImage = true;
@@ -215,8 +239,9 @@ export class HomeComponent implements OnInit {
 
     if (jsonKey === "story") {
       this.uploadStory({
-        "name": res['Location'],
-        "fileType": "image"
+        "name": this.storiesFileName,
+        "path": res['Location'],
+        "fileType": this.storiesFileType
       })
     } else if (jsonKey === "addImage") {
       let sendData = {
@@ -225,7 +250,7 @@ export class HomeComponent implements OnInit {
         "fileName": res['Location'],
         "thumbnail": res['Location']
       }
-      
+
       this.postFiles(sendData);
     } else if (jsonKey === "addVideo") {
       let sendData = {
@@ -235,7 +260,7 @@ export class HomeComponent implements OnInit {
         "thumbnail": res['Location'],
         "duration": this.duration
       }
-      
+
       this.postFiles(sendData);
     } else if (jsonKey === "addAudio") {
       let sendData = {
@@ -245,7 +270,7 @@ export class HomeComponent implements OnInit {
         "thumbnail": res['Location'],
         "duration": this.duration
       }
-      
+
       this.postFiles(sendData);
     }
   }
@@ -257,6 +282,9 @@ export class HomeComponent implements OnInit {
     this.postService.postStory(postData).subscribe((data: any) => {
       console.log(data);
       if (data['statusCode'] === 200) {
+        this.storyCmp?.getStories(1);
+        this.storyChild.show = (-1);
+        this.cdr.detectChanges();
         this.spinner.hide();
         this.toastr.success(data['message']);
       }
@@ -282,5 +310,26 @@ export class HomeComponent implements OnInit {
     this.isShown = !this.isShown;
   }
 
+  postFilter(type: any, filter: any) {
+    if (filter === "filterDate") {
+      this.filterPostDateWise = type;
+      if(type === "all"){
+        this.filterText = "All";
+      } else if(type === "threemonth"){
+        this.filterText = "Last Three Months";
+      } else if(type === "lastmonth"){
+        this.filterText = "Last Month";
+      } else if(type === "lastweek"){
+        this.filterText = "Last Week";
+      }
+    } else if (filter === "filterPosts") {
+      this.filterPost = type;
+    } else if (filter === "sort") {
+      this.orderBy = type;
+    }
+
+    this.child?.getAllFeeds(this.filterPostDateWise, this.filterPost, this.orderBy);
+    this.cdr.detectChanges();
+  }
 
 }

@@ -14,6 +14,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { PostService } from '../../../services/post.service';
 import { baseurl } from '../../../utils/base-url';
+import { veriables } from '../../../utils/variables';
 
 declare var swal: any;
 declare var $: any;
@@ -83,6 +84,11 @@ export class ProfileEditComponent implements OnInit {
   totalPosts: any;
   pageNumber: number = 0;
 
+  cardList: any = [];
+  bankAccountList: any = [];
+  bankDetail: any = {};
+  cardDetail: any = {};
+
   constructor(
     private formBuilder: FormBuilder,
     private profileService: ProfileService,
@@ -90,6 +96,7 @@ export class ProfileEditComponent implements OnInit {
     private postService: PostService,
     private userService: UserService,
     public baseurl: baseurl,
+    public variable: veriables,
     private spinner: NgxSpinnerService,
     private toastr: ToastrService,
     public routernavigate: routers,
@@ -204,6 +211,8 @@ export class ProfileEditComponent implements OnInit {
     });
 
     this.setEditVales();
+    this.fetchCard();
+    this.fetchBankAccount();
   }
 
   getUser(){
@@ -272,6 +281,47 @@ export class ProfileEditComponent implements OnInit {
         }
       }
     }
+  }
+
+  addBank() {
+    this.bankDetail.routing_number = "1234";
+    this.bankDetail.account_number = "23443234";
+    this.bankDetail.type_of_bank_account = "saving";
+    this.bankDetail.country = "india";
+    this.bankDetail.first_name = "amit";
+    this.bankDetail.last_name = "meh";
+    this.bankDetail.business_name = "dkdkkd";
+    this.bankDetail.email = "test@gmail.com";
+    console.log(this.getBankDetail());  
+    this.profileService.addBank(this.bankDetail);
+  }
+
+  getBankDetail(){
+    this.profileService.getBankDetail().subscribe((data: any)=>{
+      console.log(data);
+    }, (error)=>{
+      this.toastr.error(error['error']['message']);
+    })
+  }
+
+  getCardDetail(){
+    this.profileService.getCardDetail().subscribe((data:any)=>{
+      console.log("card detail",data);
+      alert('succeess')
+    }, (error) =>{
+      this.toastr.error(error['error']['message']);
+      alert('error')
+    })
+  }
+
+  addCard() {
+    this.cardDetail.name_on_card = "1234";
+    this.cardDetail.card_number = "23433234";
+    this.cardDetail.expire_date = "2022-05-25T08:55:45.559+00:00";
+    this.cardDetail.country = "india";
+    this.cardDetail.cvc = "amit";
+    this.getCardDetail();    
+    this.profileService.addCard(this.cardDetail);
   }
 
   get aboutFormChecker() { return this.aboutForm.controls; }
@@ -916,5 +966,104 @@ export class ProfileEditComponent implements OnInit {
         this.uploadImage(filePath, "coverImage");
       }
     }
+  }
+  fetchCard(){
+
+    this.userService.fetchCard().subscribe((data: any) => {
+
+      console.log(data);
+
+      if (data['statusCode'] === 200) {
+
+        this.cardList = data['card'];
+
+      }
+
+      else {
+
+        this.spinner.hide();
+
+        this.toastr.error(data['message']);
+
+      }
+
+    }, (error) => {
+
+      this.spinner.hide();
+
+      this.toastr.error(error['error']['message']);
+
+    });
+
+  }
+
+
+  fetchBankAccount(){
+
+    this.userService.fetchBankAccount().subscribe((data: any) => {
+
+      console.log(data);
+
+      if (data['statusCode'] === 200) {
+
+        this.bankAccountList = data['bank'];
+
+      }
+      else {
+        this.spinner.hide();
+        this.toastr.error(data['message']);
+      }
+    }, (error) => {
+      this.spinner.hide();
+      this.toastr.error(error['error']['message']);
+    });
+  }
+
+  deleteCard(Id: any){
+    let data = {"_id": Id};
+    console.log(data);
+    this.spinner.show();
+    this.userService.deleteCard(data).subscribe((data: any) => {
+      console.log(data);
+      if (data['statusCode'] === 200) {
+        this.spinner.hide();
+        this.toastr.success(data['message']);
+        this.fetchCard();
+      }
+      else {
+        this.spinner.hide();
+        this.toastr.error(data['message']);
+      }
+    }, (error) => {
+      this.spinner.hide();
+      this.toastr.error(error['error']['message']);
+    });
+  }
+
+  deleteBankAccount(Id: any){
+    console.log(Id);
+    this.spinner.show();
+    this.userService.deleteBankAccount({"_id": Id}).subscribe((data: any) => {
+      console.log(data);
+      if (data['statusCode'] === 200) {
+        this.spinner.hide();
+        this.toastr.success(data['message']);
+        this.fetchBankAccount();
+      }
+
+      else {
+        this.spinner.hide();
+        this.toastr.error(data['message']);
+      }
+    }, (error) => {
+      this.spinner.hide();
+      this.toastr.error(error['error']['message']);
+    });
+  }
+
+  replaceLastChar(number: any){
+    number = number.slice(0, -4) + "****";
+    number = number.match(/.{1,4}/g);
+    return number.join(' ')
   }
 }

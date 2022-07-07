@@ -1,3 +1,4 @@
+import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -6,7 +7,7 @@ import { GeoBlockingComponent } from './components/geo-blocking.component';
 import { FooterModule } from '../layout/footer/footer.module'
 import { HeaderNewModule } from '../layout/header-new/header-new.module'
 import { SidebarModule } from '../layout/sidebar/sidebar.module'
-
+import {SubMenuModule} from '../layout/sub-menu/sub-menu.module'
 @NgModule({
   declarations: [
     GeoBlockingComponent
@@ -16,7 +17,9 @@ import { SidebarModule } from '../layout/sidebar/sidebar.module'
     GeoBlockingRoutingModule,
     FooterModule,
     HeaderNewModule,
-    SidebarModule
+    SidebarModule,
+    FormsModule,
+    SubMenuModule
   ]
 })
 export class GeoBlockingModule { }

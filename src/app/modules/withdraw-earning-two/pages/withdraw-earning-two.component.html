@@ -80,108 +80,110 @@
                                                 DEBIT)</p>
                                         </div>
                                         <div class="input-payments-w-e">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="payment-name-w">
-                                                        <label class="font-footer font-16 font-bold">Name On The
-                                                            Card</label>
-                                                        <div class="headding-input-pe position-relative">
-                                                            <input type="text" placeholder="Jessica Alba"
-                                                                class="w-100">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="payment-name-w">
-                                                        <label class="font-footer font-16 font-bold">Card
-                                                            Number</label>
-                                                        <div class="headding-input-pe position-relative">
-                                                            <input type="text" class="w-100">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="payment-name-w">
-                                                        <label class="font-footer font-16 font-bold">Expiration
-                                                            (MM/YYYY)</label>
-                                                        <div class="row">
-                                                            <div class="col-md-5">
-                                                                <div class="headding-input-pe position-relative">
-                                                                    <input type="text" placeholder="MM"
-                                                                        class="w-100">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-5">
-                                                                <div class="headding-input-pe position-relative">
-                                                                    <input type="text" placeholder="YY"
-                                                                        class="w-100">
-                                                                </div>
+                                            <form [formGroup]="cardDetailForm" (ngSubmit)="add_Card()">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="payment-name-w">
+                                                            <label class="font-footer font-16 font-bold">Name On The
+                                                                Card</label>
+                                                            <div class="headding-input-pe position-relative">
+                                                                <input type="text"
+                                                                    class="w-100" formControlName="cardName">
                                                             </div>
                                                         </div>
-
                                                     </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="payment-name-w">
-                                                        <label class="font-footer font-16 font-bold">CVC</label>
-                                                        <div class="headding-input-pe position-relative">
-                                                            <input type="text" placeholder="CVC" class="w-100">
+                                                    <div class="col-md-6">
+                                                        <div class="payment-name-w">
+                                                            <label class="font-footer font-16 font-bold">Card
+                                                                Number</label>
+                                                            <div class="headding-input-pe position-relative">
+                                                                <input type="number" class="w-100" formControlName="cardNumber">
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="blue-div-p-w2">
-                                                        <p class="font-14 color-blue">These details will not be used
-                                                            to make changes to your account but will only be used to
-                                                            payout Withdrawals. Payout will appear on your bank
-                                                            statements as “Telos Property Media”.</p>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="diff-payment-name-w">
-                                                        <p class="font-16 font-bold color-blue">Country of your
-                                                            legal Residence</p>
-                                                        <p class="font-16 color-78">Please note you will not be able
-                                                            to change it later</p>
-                                                        <p class="font-footer font-16 font-bold">Country</p>
-                                                        <div class="row">
-                                                            <div class="col-md-7">
-                                                                <div class="select-pwe">
-                                                                    <div class="form-group">
-                                                                        <select class="form-select w-100"
-                                                                            aria-label="Default select example">
-                                                                            <option selected>USA</option>
-                                                                            <option value="1">INDIA</option>
-                                                                            <option value="2">CHINA</option>
-                                                                            <option value="3">RUSSIA</option>
-                                                                        </select>
+                                                    <div class="col-md-6">
+                                                        <div class="payment-name-w">
+                                                            <label class="font-footer font-16 font-bold">Expiration
+                                                                (MM/YYYY)</label>
+                                                            <div class="row">
+                                                                <div class="col-md-5">
+                                                                    <div class="headding-input-pe position-relative">
+                                                                        <input type="number" placeholder="MM"
+                                                                            class="w-100" formControlName="exploration_m" max="12">
                                                                     </div>
-                                                                    <div class="form-group">
-                                                                        <div class="check-for-age d-flex div-n-check">
-                                                                            <input type="checkbox" id="agree"
-                                                                                name="agree" value="agree">
-                                                                            <label for="agree"
-                                                                                class="font-14 color-78">Click here to confirm that you are atleast 18 years old and the age of majority in your place of residence</label>
+                                                                </div>
+                                                                <div class="col-md-5">
+                                                                    <div class="headding-input-pe position-relative">
+                                                                        <input type="number" placeholder="YY"
+                                                                            class="w-100" formControlName="exploration_y">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="payment-name-w">
+                                                            <label class="font-footer font-16 font-bold">CVC</label>
+                                                            <div class="headding-input-pe position-relative">
+                                                                <input type="text" placeholder="CVC" class="w-100" formControlName="cvc">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="blue-div-p-w2">
+                                                            <p class="font-14 color-blue">These details will not be used
+                                                                to make changes to your account but will only be used to
+                                                                payout Withdrawals. Payout will appear on your bank
+                                                                statements as “Telos Property Media”.</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="diff-payment-name-w">
+                                                            <p class="font-16 font-bold color-blue">Country of your
+                                                                legal Residence</p>
+                                                            <p class="font-16 color-78">Please note you will not be able
+                                                                to change it later</p>
+                                                            <p class="font-footer font-16 font-bold">Country</p>
+                                                            <div class="row">
+                                                                <div class="col-md-7">
+                                                                    <div class="select-pwe">
+                                                                        <div class="form-group">
+                                                                            <select class="form-select w-100"
+                                                                                aria-label="Default select example" formControlName="country">
+                                                                                <option selected value="USA">USA</option>
+                                                                                <option value="INDIA">INDIA</option>
+                                                                                <option value="CHINA">CHINA</option>
+                                                                                <option value="RUSSIA">RUSSIA</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <div class="check-for-age d-flex div-n-check">
+                                                                                <input type="checkbox" id="agree"
+                                                                                    name="agree" formControlName="termCondition">
+                                                                                <label for="agree"
+                                                                                    class="font-14 color-78">Click here to confirm that you are atleast 18 years old and the age of majority in your place of residence</label>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="div-buttonsav-pay-d">
-                                                        <div class="right-side-button ">
-                                                            <button>Save Payout Details</button>
+                                                    <div class="col-md-12">
+                                                        <div class="div-buttonsav-pay-d">
+                                                            <div class="right-side-button ">
+                                                                <button type="submit">Save Payout Details</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="blue-div-p-w2">
+                                                            <p class="font-14 color-blue">CHELLO will  make one time charge $0.10 when adding your payment card. The charges on your Credit card will appear as “Telos Property Media”.</p>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-12">
-                                                    <div class="blue-div-p-w2">
-                                                        <p class="font-14 color-blue">CHELLO will  make one time charge $0.10 when adding your payment card. The charges on your Credit card will appear as “Telos Property Media”.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>

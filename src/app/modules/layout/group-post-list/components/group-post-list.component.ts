@@ -419,4 +419,83 @@ export class GroupPostListComponent implements OnInit, OnChanges {
   toggleShow() {
     this.isShown = !this.isShown;
   }
+
+  checkFavoritePost(favoriteData: any) {
+    var isPresent = favoriteData.some((el: any) => { return el.user === this.userId });
+    return isPresent;
+  }
+
+  checkBookmarkPost(bookmarkData: any) {
+    var isPresent = bookmarkData.some((el: any) => { return el.user === this.userId });
+    return isPresent;
+  }
+
+  numFormatter(num: any) {
+    if (num > 999 && num < 1000000) {
+      return (num / 1000).toFixed(1) + 'K'; // convert to K for number from > 1000 < 1 million 
+    } else if (num > 1000000) {
+      return (num / 1000000).toFixed(1) + 'M'; // convert to M for number from > 1 million 
+    } else if (num < 900) {
+      return num; // if value < 1000, nothing to do
+    }
+  }
+
+  pollDuration(duration: any, createdAt: any) {
+    let date1: any = new Date(createdAt);
+    let date2: any = new Date();
+    const diffTime = Math.abs(date2 - date1);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    //console.log(diffTime + " milliseconds");
+    //console.log(diffDays + " days");
+
+    if (duration >= diffDays) {
+      return ''
+    }
+
+    return 'none'
+  }
+
+  pollDayLeft(duration: any, createdAt: any) {
+    let date1: any = new Date(createdAt);
+    let date2: any = new Date();
+    const diffTime = Math.abs(date2 - date1);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    //console.log(diffTime + " milliseconds");
+    //console.log(diffDays + " days");
+
+    if ((duration - diffDays) === 0) {
+      return '1 Day'
+    }
+
+    return (duration - diffDays) + " Days"
+  }
+
+  pollVotes(num: any) {
+    if (num > 999 && num < 1000000) {
+      return (num / 1000).toFixed(1) + 'K votes'; // convert to K for number from > 1000 < 1 million 
+    } else if (num > 1000000) {
+      return (num / 1000000).toFixed(1) + 'M votes'; // convert to M for number from > 1 million 
+    } else if (num < 900) {
+      if(num === 0 || num === 1){
+        return num + ' vote'; // if value < 1000, nothing to do
+      } else{
+        return num + ' votes'; // if value < 1000, nothing to do
+      }
+    }
+
+    return;
+  }
+
+  openSendTipModal(postId: any) {
+    $("#sendTipModal").modal('show');
+  }
+
+  tipPayment() {
+    $("#sendTipModal").modal('hide');
+    // $("#tipPaymentModal").modal('show');
+  }
+
+  makePayment() {
+    $("#tipPaymentModal").modal('hide');
+  }
 }

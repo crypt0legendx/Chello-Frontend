@@ -14,13 +14,13 @@
                                     <span class="text-grey text-right pl-3">(Maximum 8 Photos)</span> 
                                 </div>
                                 <div class="form-group position-relative">                                    
-                                    <div rows="4" class="w-100 bg-white p-3" formControlName="postTxt"
+                                    <div rows="4" class="w-100 bg-white p-3" 
                                         [ngClass]="{ 'is-invalid': submitted && f.postTxt.errors }"
-                                        placeholder="Compose new post" contenteditable="true">
-                                        <span class="text-grey">Check out my new Photos!</span> 
+                                        placeholder="Compose new post" ngDefaultControl>
+                                        <textarea class="text-grey post-text-content" formControlName="postTxt" placeholder="Check out my new Photos!"></textarea>
                                         <div style="display: flex; align-items: center; flex-wrap: wrap">
-                                            <div class="select-photo m-2" *ngFor="let img of selectedFiles; let index = index">                                                                                 
-                                                <img  src="{{previewFilePath[index]}}" style="cursor: pointer;">
+                                            <div class="select-photo m-2" *ngFor="let img of imageSrc let index = index">                                                                                 
+                                                <img  src="{{img.value}}" style="cursor: pointer;">
                                                 <div class="cancel-btn-i">
                                                     <a (click)="removeAttachment(index)" style="cursor: pointer;"><span
                                                             class="iconify" data-icon="material-symbols:cancel"></span></a>
@@ -32,8 +32,7 @@
                                                     (change)="selectFile($event, 'addImage')" style="display:none" accept="image/*"
                                                     capture multiple>                                    
                                             </div> 
-                                        </div>                                                                                 
-
+                                        </div>
                                     </div>
                                     <div *ngIf="submitted && f.postTxt.errors" class="invalid-feedback">
                                         <div *ngIf="f.postTxt.errors.required" style="color:red;">Post text is required
@@ -54,10 +53,15 @@
                                         </div>                     
                                     </div>                                     
                                 </div>                                                                    -->
-                                <div class="right-side-button text-right" *ngIf="!retrievedGroupDetails">
-                                    <a href="javascript:void(0)" class="font-14 font-medium color-blue margin-l-r-a">Post
-                                        Later</a>
-                                    <button type="button" (click)="postFeed()">Post</button>
+                                <div class="under-btn-group">
+                                    <div class="left-side-button">
+                                        <a href="javascript:void(0)" (click)="cancelPost()" class="font-14 font-medium color-blue margin-l-r-a">Cancel</a>                                    
+                                    </div>
+                                    <div class="right-side-button">
+                                        <a href="javascript:void(0)" class="font-14 font-medium color-blue margin-l-r-a">Post
+                                            Later</a>
+                                        <button type="button" (click)="postFeed()">Post</button>
+                                    </div>                                    
                                 </div>
                                 <div class="right-side-button text-right" *ngIf="retrievedGroupDetails">
                                     <a href="javascript:void(0)" class="font-14 font-medium color-blue margin-l-r-a">Post

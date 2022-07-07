@@ -63,11 +63,18 @@ export class LoginComponent implements OnInit {
     if(retrievedObject){
       this.userJsonData = JSON.parse(retrievedObject);
       console.log(this.userJsonData);
-      this.router.navigate([this.routernavigate.home]);
+
+      if(this.userJsonData['isPhoneNumberVerified'] === 0 || this.userJsonData['isPhoneNumberVerified'] === '0'){
+        this.router.navigate([this.routernavigate.userSelection]);
+      } else if(!this.userJsonData['country']){
+        this.router.navigate([this.routernavigate.verifyId]);
+      } else{
+        this.router.navigate([this.routernavigate.home]);
+      }
     }
 
     this.loginForm = this.formBuilder.group({
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.pattern(/^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$/)]],
       password: ['', Validators.required]
     });
   }
@@ -182,6 +189,7 @@ export class LoginComponent implements OnInit {
       console.log(data);
       if (data['statusCode'] === 200) {
         console.log(data);
+        localStorage.setItem('userData', JSON.stringify(data['data'].user));
         if(data['data']['user']['isPhoneNumberVerified'] === 0 || data['data']['user']['isPhoneNumberVerified'] === '0'){
           this.router.navigate([this.routernavigate.userSelection]);
         } else if(!data['data']['user']['country']){
@@ -189,13 +197,13 @@ export class LoginComponent implements OnInit {
         } else{
           localStorage.setItem('userData', JSON.stringify(data['data'].user));
 
-          this.checkOnFirebase(
-            data['data']['user']['email'],
-            data['data']['user']['_id'],
-            data['data']['user']['userName'],
-            data['data']['user']['fullName'],
-            data['data']['user']['profileImage']
-          );
+        this.checkOnFirebase(
+          data['data']['user']['email'],
+          data['data']['user']['_id'],
+          data['data']['user']['userName'],
+          data['data']['user']['fullName'],
+          data['data']['user']['profileImage']
+        );
 
           this.router.navigate([this.routernavigate.home]);
         }

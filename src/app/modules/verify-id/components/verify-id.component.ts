@@ -1,3 +1,4 @@
+import { NameValidator } from 'src/app/validators/name.validator';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProfileService } from '../../../services/profile.service';
@@ -15,6 +16,18 @@ import { UploadService } from '../../../services/upload.service';
 
 declare var swal: any;
 declare var $: any;
+
+const getMonth = (idx: any) => {
+
+  var objDate = new Date();
+  objDate.setDate(1);
+  objDate.setMonth(idx - 1);
+
+  var locale = "en-us",
+    month = objDate.toLocaleString(locale, { month: "short" });
+
+  return month;
+}
 
 @Component({
   selector: 'app-verify-id',
@@ -39,6 +52,16 @@ export class VerifyIdComponent implements OnInit {
   uploadFile1Name: any = '';
   uploadFile2Name: any = '';
 
+  userJsonData: any;
+  role: any = "creator";
+
+  months = Array(12).fill(0).map((i,idx) => getMonth(idx + 1));
+  years = Array(new Date().getUTCFullYear() - (new Date().getUTCFullYear() - 100)).fill('').map((v, idx) => new Date().getUTCFullYear() - idx) as Array<number>;
+
+  selectedYear = 1970;
+  selectedMonth = 1;
+  selectedDay = 1;
+
   constructor(
     private formBuilder: FormBuilder,
     private profileService: ProfileService,
@@ -55,23 +78,49 @@ export class VerifyIdComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.registerForm = this.formBuilder.group({
-      legalFullName: ['', Validators.required],
-      addressLine1: ['', Validators.required],
-      addressLine2: ['', Validators.required],
-      month: ['', Validators.required],
-      day: ['', Validators.required],
-      year: ['', Validators.required],
-      ageAgree: ['', Validators.required],
-      uploadId1: ['', Validators.required],
-      uploadId2: ['', Validators.required],
-      socialLink: ['', Validators.required]
-    });
+    let retrievedObject: any = localStorage.getItem('userData');
+    const reg = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
+
+    if (retrievedObject) {
+      this.userJsonData = JSON.parse(retrievedObject);
+      console.log(this.userJsonData);
+      if (this.userJsonData['role'] === "creator") {
+        this.role = this.userJsonData['role'];
+        this.registerForm = this.formBuilder.group({
+          legalFullName: ['', [Validators.required, NameValidator.cannotContainOnlySpace]],
+          addressLine1: ['', [Validators.required, NameValidator.cannotContainOnlySpace]],
+          addressLine2: [''],
+          month: ['', Validators.required],
+          day: ['', Validators.required],
+          year: ['', Validators.required],
+          ageAgree: ['', Validators.required],
+          uploadId1: ['', Validators.required],
+          uploadId2: ['', Validators.required],
+          socialLink: ['', [Validators.required, NameValidator.cannotContainOnlySpace, Validators.pattern(reg)]]
+        });
+      } else {
+        this.role = this.userJsonData['role'];
+        this.registerForm = this.formBuilder.group({
+          legalFullName: ['', [Validators.required, NameValidator.cannotContainOnlySpace]],
+          addressLine1: ['', [Validators.required, NameValidator.cannotContainOnlySpace]],
+          addressLine2: [''],
+          month: ['', Validators.required],
+          day: ['', Validators.required],
+          year: ['', Validators.required],
+          ageAgree: ['', Validators.required],
+          uploadId1: [''],
+          uploadId2: [''],
+          socialLink: ['',[Validators.required, NameValidator.cannotContainOnlySpace, Validators.pattern(reg)]]
+        });
+      }
+    }
+
+
   }
 
   get f() { return this.registerForm.controls; }
 
-  submit(){
+  submit() {
     this.submitted = true;
     if (this.registerForm.invalid) {
       return;
@@ -110,12 +159,12 @@ export class VerifyIdComponent implements OnInit {
     }
   }
 
-  selectCountryCode(code: any){
+  selectCountryCode(code: any) {
     console.log(code.value);
     this.countryName = code.value;
   }
 
-  openFileSelector(){
+  openFileSelector() {
     $("#file-input2").trigger("click");
   }
 
@@ -131,10 +180,10 @@ export class VerifyIdComponent implements OnInit {
         this.imageSrc = reader.result as string;
       }
       this.selectedFiles = file;
-      if(fileType === "uploadId1") {
+      if (fileType === "uploadId1") {
         this.uploadFile1Name = file.name;
         this.uploadImage(filePath, "uploadId1");
-      } else  if(fileType === "uploadId2") {
+      } else if (fileType === "uploadId2") {
         this.uploadFile2Name = file.name;
         this.uploadImage(filePath, "uploadId2");
       }
@@ -145,13 +194,30 @@ export class VerifyIdComponent implements OnInit {
     const file = this.selectedFiles;
     let res: any = await this.uploadService.uploadFile(file, filePath);
     console.log(res);
-    
-    if(jsonKey === "uploadId1") {
+
+    if (jsonKey === "uploadId1") {
       this.uploadId1URL = res['Location'];
-    } else if(jsonKey === "uploadId2") {
+    } else if (jsonKey === "uploadId2") {
       this.uploadId2URL = res['Location'];
     }
 
     this.spinner.hide();
+  }
+
+  selectMonth(month: any){
+    this.selectedMonth = month;
+  }
+
+  selectYear(year: any){
+    this.selectedYear = year;
+  }
+
+  public get days() {
+    const dayCount = this.getDaysInMonth(this.selectedYear, this.selectedMonth);
+    return Array(dayCount).fill(0).map((i,idx) => idx +1)
+  }
+
+  public getDaysInMonth(year: number, month: number) {
+    return 32 - new Date(year, month - 1, 32).getDate();
   }
 }

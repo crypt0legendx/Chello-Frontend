@@ -32,9 +32,10 @@
                   <label class="font-14 color-grey">Full Name</label>
 
                   <input type="text" formControlName="fullName" class="form-control"
-                    [ngClass]="{ 'is-invalid': submitted && f.fullName.errors }">
-                  <div *ngIf="submitted && f.fullName.errors" class="invalid-feedback">
-                    <div *ngIf="f.fullName.errors.required" style="color:red;">Full Name is required</div>
+                    [ngClass]="{ 'is-invalid': submitted && f.fullName.invalid }">
+                  <div *ngIf="submitted && f.fullName.invalid" class="invalid-feedback">
+                    <div *ngIf="f.fullName.errors?.required" style="color:red;">Full Name is required</div>
+                    <div *ngIf="f.fullName.errors?.cannotContainOnlySpace" style="color:red;">Full Name cannot contain only space</div>
                   </div>
                 </div>
                 <div class="form-group">
@@ -44,6 +45,7 @@
                     [ngClass]="{ 'is-invalid': submitted && f.userName.errors }">
                   <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
                     <div *ngIf="f.userName.errors.required" style="color:red;">User Name is required</div>
+                    <div *ngIf="f.userName.errors.cannotContainOnlySpace" style="color:red;">User Name cannot contain only space</div>
                   </div>
                 </div>
                 <div class="form-group">
@@ -63,9 +65,8 @@
                   <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                     <div *ngIf="f.password.errors.required" style="color:red;">Password is required</div>
                   </div>
-                  <a (click)="showPassword()"><span class="iconify"
-                      [attr.data-icon]="show? 'akar-icons:eye-slashed' : 'akar-icons:eye'"
-                      style="cursor: pointer;"></span></a>
+                  <a (click)="showPassword()" style="cursor: pointer;"><i [class]="show? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+                  </a>
                 </div>
                 <div class="form-group password-icon position-relative">
                   <label class="font-14 color-grey">Confirm Password</label>
@@ -75,9 +76,9 @@
                   <div *ngIf="submitted && f.cPassword.errors" class="invalid-feedback">
                     <div *ngIf="f.cPassword.errors.required" style="color:red;">Confirm Password is required</div>
                   </div>
-                  <a (click)="showRePassword()"><span class="iconify"
-                      [attr.data-icon]="showRe? 'akar-icons:eye-slashed' : 'akar-icons:eye'"
-                      style="cursor: pointer;"></span></a>
+                  <a (click)="showRePassword()" style="cursor: pointer;"><i [class]="showRe? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+                  </a>
+                  
                 </div>
                 <div class="button-link">
                   <div class="d-flex justify-content-between">
@@ -123,7 +124,7 @@
               </div>
               <div class="text-blue-under-login">
                 <p class="font-18 color-blue">Creators keeps 94% of their earnings!</p>
-                <p class="font-18 color-blue">Creators pay $25/mth or $250 yearly.</p>
+                <p class="font-18 color-blue">Creators pay $25/mth or $240 yearly.</p>
               </div>
             </div>
           </div>
@@ -174,4 +175,3 @@
   </div>
 </div>
 <div class="clearfix"></div>
-<app-footer></app-footer>

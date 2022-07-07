@@ -11,7 +11,6 @@ import { bool } from 'aws-sdk/clients/signer';
   styleUrls: ['../pages/event-list.component.scss']
 })
 export class EventListComponent implements OnInit {
-
   tabIndex:Number = 0; 
   page = 0;
 
@@ -44,7 +43,6 @@ export class EventListComponent implements OnInit {
     private router:Router,
     private toastrService:ToastrService
   ) { }
-
   ngOnInit(): void {
     this.initializeEvents();
   }
@@ -191,7 +189,7 @@ export class EventListComponent implements OnInit {
       "miscinfo":this.searchMiscInfo,
       "username":this.searchUsername,
       "url":this.searchURL,
-      "date":new Date(this.searchDate + " 00:00")
+      "date":this.searchDate!==""?new Date(this.searchDate + " 00:00"):""
     };
 
     console.log(data);
@@ -329,5 +327,4 @@ export class EventListComponent implements OnInit {
       }
     }
   }
-
 }

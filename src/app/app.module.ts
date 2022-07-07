@@ -13,11 +13,14 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule, ToastContainerModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { APP_BASE_HREF, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { APP_BASE_HREF, CommonModule, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { baseurl } from './utils/base-url';
 import { routers } from './utils/router-navigate';
+import { veriables } from './utils/variables';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { browserPopupRedirectResolver, browserSessionPersistence } from 'firebase/auth';
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+import { PostsFilterPipe } from './pipe/postFilter.pipe';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDN4tj9GQmKLEMoy34HpxqoW98FO9AcKDs",
@@ -31,9 +34,11 @@ const firebaseConfig = {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    // PostsFilterPipe
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(firebaseConfig),
@@ -50,14 +55,17 @@ const firebaseConfig = {
       preventDuplicates: true,
     }),
     ToastContainerModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    NgxIntlTelInputModule
   ],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },
     { provide: LocationStrategy, useClass: PathLocationStrategy },
     baseurl,
-    routers
+    routers,
+    veriables
   ],
+  // exports: [PostsFilterPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -5,7 +5,7 @@
                 <div class="div-for-new-post-poll">
                     <div class="wrapper-new-post-poll">
                         <div class="text-area-for-poll" >
-                            <div class="row"  *ngIf="!timeOptionSelected">                                
+                            <div class="time-row"  *ngIf="!timeOptionSelected">                                
                                 <div class="col-md-6">
                                     <button class="timedBtn" (click)="setTimedPost(true)">
                                         <img src="assets/images/hourglass-end.png">
@@ -17,11 +17,12 @@
                                         <img src="assets/images/hourglass-end.png">
                                         24 Hour Coming Soon Post
                                     </button>
-                                </div>
-                                <div class="right-side-button text-left" *ngIf="!timeOptionSelected">
-                                    <a href="javascript:void(0)" class="font-14 font-medium color-blue margin-l-r-a">Back
-                                        </a>                                    
-                                </div>
+                                </div>                                
+                            </div>
+                            <div class="right-side-button text-left" *ngIf="!timeOptionSelected">
+                                <a href="javascript:void(0)" (click)="cancelPost()"
+                                class="font-14 font-medium color-blue margin-l-r-a">Back
+                                    </a>                                    
                             </div>
                             <form [formGroup]="feedForm" *ngIf="timeOptionSelected">
                                 <div class="time-post-title">
@@ -38,7 +39,7 @@
                                 <div class="form-group position-relative">
                                     <textarea rows="4" class="w-100" formControlName="postTxt"
                                         [ngClass]="{ 'is-invalid': submitted && f.postTxt.errors }"
-                                        placeholder="Compose new post"></textarea>
+                                        placeholder="Compose new post" ngDefaultControl></textarea>
                                     <div *ngIf="submitted && f.postTxt.errors" class="invalid-feedback">
                                         <div *ngIf="f.postTxt.errors.required" style="color:red;">Post text is required
                                         </div>
@@ -113,11 +114,16 @@
                                         </div>
                                     </div>
                                 </div>                                
-                                    <div class="right-side-button text-right" *ngIf="!retrievedGroupDetails">
+                                <div class="under-btn-group">
+                                    <div class="left-side-button">
+                                        <a href="javascript:void(0)" (click)="cancelPost()" class="font-14 font-medium color-blue margin-l-r-a">Cancel</a>                                    
+                                    </div>
+                                    <div class="right-side-button">
                                         <a href="javascript:void(0)" class="font-14 font-medium color-blue margin-l-r-a">Post
                                             Later</a>
                                         <button type="button" (click)="postFeed()">Post</button>
-                                    </div>
+                                    </div>                                    
+                                </div>
                                     <div class="right-side-button text-right" *ngIf="retrievedGroupDetails">
                                         <a href="javascript:void(0)" class="font-14 font-medium color-blue margin-l-r-a">Post
                                             Later</a>

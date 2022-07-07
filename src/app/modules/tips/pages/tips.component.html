@@ -7,70 +7,7 @@
                     <app-sidebar></app-sidebar>
                 </div>
                 <div class="wid-2">
-                    <div class="more-side-bar mar-top-m">
-                        <div class="more-search-div-head">
-                            <div class="search-bar-home">
-                                <input type="text" placeholder="Search" class="w-100" />
-                                <span class="iconify" data-icon="akar-icons:search"></span>
-                            </div>
-                        </div>
-                        <div class="more-div-option">
-                            <div class="text-group-2-link">
-                                <a routerLink='/more'>
-                                    <p class="font-16 font-medium color-a9">Creator Unique URL</p>
-                                </a>
-                                <a href="">
-                                    <p class="font-16 font-medium color-a9">ChitChat</p>
-                                </a>
-                                <a href="">
-                                    <p class="font-16 font-medium color-a9">Pay Per View Message</p>
-                                </a>
-                                <a routerLink='/tips'>
-                                    <p class="font-16 font-medium color-blue">Tips</p>
-                                </a>
-                                <a href="">
-                                    <p class="font-16 font-medium color-a9">Schedule Post</p>
-                                </a>
-                                <a href="">
-                                    <p class="font-16 font-medium color-a9">Elite Fans</p>
-                                </a>
-                                <a href="">
-                                    <p class="font-16 font-medium color-a9">#Hashtag Trending</p>
-                                </a>
-                                <a routerLink='/poll'>
-                                    <p class="font-16 font-medium color-a9">Polls</p>
-                                </a>
-                                <a routerLink='/geo-blocking'>
-                                    <p class="font-16 font-medium color-a9">Geo-Blocking</p>
-                                </a>
-                                <a routerLink='/page-state'>
-                                    <p class="font-16 font-medium color-a9">Page Stats</p>
-                                </a>
-                                <a href="">
-                                    <p class="font-16 font-medium color-a9">Customize Subscriptions</p>
-                                </a>
-                                <div class="more-radio-option">
-                                    <p class="font-16 font-medium color-blue">Theme</p>
-                                    <div class="radio-div-more">
-                                        <div class="first-radio-div">
-                                            <span class="iconify font-20 color-blue"
-                                                data-icon="bi:moon-fill"></span>
-                                            <input type="radio" id="test1" name="radio-group" (click)="toggleDarkTheme()" [checked]="isDarkMode">
-                                            <label for="test1">
-                                            </label>
-                                        </div>
-                                        <div class="first-radio-div">
-                                            <span class="iconify font-20" data-icon="emojione:sun"></span>
-                                            <input type="radio" id="test2" name="radio-group" (click)="toggleLightTheme()" [checked]="isLightMode">
-                                            <label for="test2">
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
+                    <app-sub-menu></app-sub-menu>
                 </div>
                 <div class="col-md-7 ">
                     <div class="row">
@@ -87,7 +24,39 @@
                                     <div class="amount-form d-flex flex-column p-2 mt-3">
                                         <div class="row">
                                             <div class="font-16 font-medium col-md-5">I want to send a Tip to</div>
-                                            <div class="col-md-7"><input type="text" class="tip-input" /> </div>
+                                            <div class="col-md-7">
+                                                <div class="search-bar-home">
+                                                    <input type="text" placeholder="Search" class="w-100" #searchUsers
+                                                    (input)="searchUser(searchUsers.value)" id="searchUsers" 
+                                                    [(ngModel)] = "receptionist"
+                                                    (focus)="setFocus(true)"
+                                                    (blur)="setFocus(false)"
+                                                    autocomplete="off"
+                                                    name="searchUser"
+                                                    />
+                                                    <span class="iconify"
+                                                        data-icon="akar-icons:search"></span>
+                                                </div>
+                                                <div *ngIf = "onFocus" class="div-input-cg-search-wrap" style="overflow-y: scroll; position:absolute;z-index:2; width:calc(100% - 25px); max-height:400px;">
+                                                    <p class="font-12 color-4e font-medium">Suggested</p>
+                                                    <div class="wrapper-poll-asked-user" 
+                                                    *ngFor="let groupMembersLists of groupMembersList" [id]="groupMembersLists._id"  
+                                                    style="cursor: pointer;" 
+                                                    (click) = "setReceptionist(groupMembersLists.userName)"
+                                                    >
+                                                        <img [src]="groupMembersLists.profileImage" onError="this.src='assets/images/user.png'"
+                                                            alt="image" />
+                                                        <div class="user-info-p-a">
+                                                            <p class="font-14 font-bold color-49"> {{groupMembersLists.fullName}}
+                                                                &nbsp; <span
+                                                                    class="iconify font-20 color-light-blue"
+                                                                    data-icon="ic:sharp-verified"></span>
+                                                            </p>
+                                                            <p class="font-14 color-49">@{{groupMembersLists.userName}}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="d-flex justify-content-between font-16 font-medium color-blue mt-1 p-2 bg-amount">
                                             <div>

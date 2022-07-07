@@ -1,6 +1,5 @@
 <!-- loding -->
 <ngx-spinner bdColor="rgba(238,238,238,.4)" size="medium" color="#486ffa" type="ball-clip-rotate"></ngx-spinner>
-
 <app-header-new></app-header-new>
 <div class="homepage margin-minus-header">
     <div class="homepage-wrapper">
@@ -17,17 +16,24 @@
                                     <div class="d-flex align-items-center justify-content-between">
                                         <p class="font-16 font-bold color-blue">Add Bank (to earn)</p>
                                         <div class="right-side-button">
-                                            <button> Add Bank</button>
+                                            <a routerLink="/withdraw-earning-3" [routerLinkActive]="['active']">
+                                                <button>+ Add Bank</button>
+                                            </a>
                                         </div>
                                     </div>
-                                    <!-- bank listing  -->
-                                    <div class="add-bank-listing">
-                                        <div class="add-bank-listing-wrapper">
-                                            <div class="button-add-bank-listing">
-                                                <div  class="right-side-button right-visit-g">
-                                                    <button >Withdraw Earnings</button>
-                                                    <button >Transactions</button>
+                                    <!-- bank card listing  -->
+                                    <div class="card-listing">
+                                        <div class="card-listing-wrapper">
+                                            <p class="color-68 font-bold font-16" *ngIf="bankAccountList.length != 0">Manage Saved Bank Account</p>
+                                            <div class="add-card-list" *ngFor="let bankAccountLists of bankAccountList">
+                                                <div class="bank-name-e-op d-flex align-items-center justify-content-between">
+                                                    <p class="font-14 color-38 font-medium">{{bankAccountLists['business_name']}}</p>
+                                                    <a href="" class="font-14 color-blue">Edit</a>
                                                 </div>
+                                                <div class="bank-name-e-op d-flex align-items-center justify-content-between">
+                                                   <p class="font-14 color-9a font-medium">{{replaceLastChar(bankAccountLists['account_number'])}}</p>
+                                                   <a style="cursor: pointer;" (click)="deleteBankAccount(bankAccountLists._id)" class="color-black"><span  class="iconify" data-icon="ant-design:delete-twotone"></span></a>
+                                               </div>
                                             </div>
                                         </div>
                                     </div>
@@ -36,33 +42,25 @@
                                     <div class="d-flex align-items-center justify-content-between">
                                         <p class="font-16 font-bold color-blue">Add Card (to subscribe)</p>
                                         <div class="right-side-button">
-                                            <button> Add Card</button>
+                                            <a routerLink="/withdraw-earning-2" [routerLinkActive]="['active']">
+                                                <button>+ Add Card</button>
+                                            </a>
                                         </div>
                                     </div>
-                                     <!-- bank card listing  -->
+                                     <!-- card listing  -->
                                      <div class="card-listing">
                                          <div class="card-listing-wrapper">
-                                             <p class="color-68 font-bold font-16">Manage Sved Cards</p>
-                                             <div class="add-card-list">
+                                             <p class="color-68 font-bold font-16" *ngIf="cardList.length != 0">Manage Saved Cards</p>
+                                             <div class="add-card-list" *ngFor="let cardLists of cardList">
                                                  <div class="bank-name-e-op d-flex align-items-center justify-content-between">
-                                                     <p class="font-14 color-38 font-medium">Induslnd Bank</p>
+                                                     <p class="font-14 color-38 font-medium">{{cardLists['name_on_card']}}</p>
                                                      <a href="" class="font-14 color-blue">Edit</a>
                                                  </div>
                                                  <div class="bank-name-e-op d-flex align-items-center justify-content-between">
-                                                    <p class="font-14 color-9a font-medium">****  ****  ****  5270</p>
-                                                    <a href="" class="color-black"><span  class="iconify" data-icon="ant-design:delete-twotone"></span></a>
+                                                    <p class="font-14 color-9a font-medium">{{replaceLastChar(cardLists['card_number'])}}</p>
+                                                    <a style="cursor: pointer;" (click)="deleteCard(cardLists._id)" class="color-black"><span  class="iconify" data-icon="ant-design:delete-twotone"></span></a>
                                                 </div>
                                              </div>
-                                             <div class="add-card-list">
-                                                <div class="bank-name-e-op d-flex align-items-center justify-content-between">
-                                                    <p class="font-14 color-38 font-medium">Axis Bank Credit Card</p>
-                                                    <a href="" class="font-14 color-blue">Edit</a>
-                                                </div>
-                                                <div class="bank-name-e-op d-flex align-items-center justify-content-between">
-                                                   <p class="font-14 color-9a font-medium">****  ****  ****  5270</p>
-                                                   <a href="" class="color-black"><span  class="iconify" data-icon="ant-design:delete-twotone"></span></a>
-                                               </div>
-                                            </div>
                                          </div>
                                      </div>
                                 </div>
@@ -81,7 +79,7 @@
                             <div class="d-flex align-items-center justify-content-between">
                                 <p class="font-32"><span class="iconify" data-icon="logos:spotify"></span></p>
                                 <div class="button-connect">
-                                    <a href="" class="color-blue">Connect</a>
+                                    <a style="cursor: pointer;" (click)="connectSpotify()" class="color-blue">Connect</a>
                                 </div>
                             </div>
                         </div>
@@ -151,7 +149,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

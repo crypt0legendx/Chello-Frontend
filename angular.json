@@ -34,10 +34,12 @@
               "src/assets"
             ],
             "styles": [
-              "src/assets/css/toastr.css" 
+              "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "./node_modules/intl-tel-input/build/css/intlTelInput.css",
+              "src/assets/css/toastr.css"
             ],
-            "scripts": [
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -104,6 +106,7 @@
             ],
             "styles": [
               "src/styles.scss",
+              "./node_modules/intl-tel-input/build/css/intlTelInput.css",
               "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": []

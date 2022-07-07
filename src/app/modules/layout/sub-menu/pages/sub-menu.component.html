@@ -1,0 +1,65 @@
+<div class="more-side-bar mar-top-m">
+    <div class="more-search-div-head">
+        <div class="search-bar-home">
+            <input type="text" placeholder="Search" class="w-100" />
+            <span class="iconify" data-icon="akar-icons:search"></span>
+        </div>
+    </div>
+    <div class="more-div-option">
+        <div class="text-group-2-link">
+            <a routerLink="/more" >
+                <p class="font-16 font-medium color-a9" [routerLinkActive]="['color-blue']">Creator Unique URL</p>
+            </a>
+            <a href="">
+                <p class="font-16 font-medium color-a9">ChitChat</p>
+            </a>
+            <a href="">
+                <p class="font-16 font-medium color-a9">Pay Per View Message</p>
+            </a>
+            <a routerLink='/tips'>
+                <p class="font-16 font-medium color-a9" [routerLinkActive]="['color-blue']">Tips</p>
+            </a>
+            <a href="">
+                <p class="font-16 font-medium color-a9">Schedule Post</p>
+            </a>
+            <a href="">
+                <p class="font-16 font-medium color-a9">Elite Fans</p>
+            </a>
+            <a href="">
+                <p class="font-16 font-medium color-a9">#Hashtag Trending</p>
+            </a>
+            <a routerLink='/poll'>
+                <p class="font-16 font-medium color-a9" [routerLinkActive]="['color-blue']">Polls</p>
+            </a>
+            <a routerLink='/geo-blocking'>
+                <p class="font-16 font-medium color-a9" [routerLinkActive]="['color-blue']">Geo-Blocking</p>
+            </a>
+            <a routerLink='/page-state'>
+                <p class="font-16 font-medium color-a9" [routerLinkActive]="['color-blue']">Page Stats</p>
+            </a>
+            <a routerLink="/customize-subscription">
+                <p class="font-16 font-medium color-a9" [routerLinkActive]="['color-blue']">Customize Subscriptions</p>
+            </a>
+            <div class="more-radio-option">
+                <p class="font-16 font-medium color-blue">Theme</p>
+                <div class="radio-div-more">
+                    <div class="first-radio-div">
+                        <span class="iconify font-20 color-blue" data-icon="bi:moon-fill"></span>
+                        <input type="radio" id="test1" name="radio-group" (click)="toggleDarkTheme()"
+                            [checked]="isDarkMode">
+                        <label for="test1">
+                        </label>
+                    </div>
+                    <div class="first-radio-div">
+                        <span class="iconify font-20" data-icon="emojione:sun"></span>
+                        <input type="radio" id="test2" name="radio-group" (click)="toggleLightTheme()"
+                            [checked]="isLightMode">
+                        <label for="test2">
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

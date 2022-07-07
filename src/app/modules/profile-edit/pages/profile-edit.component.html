@@ -11,12 +11,13 @@
                 </div>
                 <div class="col-md-6 col-sm-12">
                     <div class="home-middle-div">
-                        
+
                         <div class="wrapper-home-middle-div profile-first-s" *ngIf="isUserCoverPicture === false">
                             <div class="home-middle-div-one position-relative">
                                 <div class="profile-page-container">
                                     <div class="headding-profile-middle-div d-flex">
-                                        <a routerLink="/profile" class="margin-pr-head"><span class="iconify color-grey font-20"
+                                        <a routerLink="/profile" class="margin-pr-head"><span
+                                                class="iconify color-grey font-20"
                                                 data-icon="akar-icons:arrow-left"></span></a>
                                         <p class="font-20 font-bold color-blue">
                                             {{displayName}}
@@ -36,17 +37,17 @@
                                                     style="cursor: pointer;">Add Cover Photo</p>
                                                 <input id="fileCover" type="file" class="form-control"
                                                     (change)="selectProfileFile($event, 'coverImage')"
-                                                    style="display:none" accept="image/*" capture>
+                                                    style="display:none" accept="image/*">
                                             </div>
                                             <div
                                                 class="poll-asked-user d-flex justify-content-between abso-profile-btn">
                                                 <div class="wrapper-poll-asked-user position-relative">
                                                     <input id="file" type="file" class="form-control"
                                                         (change)="selectProfileFile($event, 'profileImage')"
-                                                        style="display:none" accept="image/*" capture>
+                                                        style="display:none" accept="image/*">
                                                     <img [src]="userProfilePicture"
-                                                        onError="this.src='assets/images/user.png'"
-                                                        alt="image" (click)="openFileSelector('profile')"
+                                                        onError="this.src='assets/images/user.png'" alt="image"
+                                                        (click)="openFileSelector('profile')"
                                                         style="cursor: pointer;" />
                                                     <div class="edit-icon-pe">
                                                         <a href="javascript:void(0)"
@@ -80,7 +81,8 @@
                             <div class="home-middle-div-one position-relative group-div-extraflex">
                                 <div class="d-flex justify-content-between group-headding align-items-baseline">
                                     <div class="subscription-head d-flex">
-                                        <a routerLink="/profile" class="margin-pr-head"><span class="iconify color-black font-20"
+                                        <a routerLink="/profile" class="margin-pr-head"><span
+                                                class="iconify color-black font-20"
                                                 data-icon="akar-icons:arrow-left"></span></a>
                                         <p class="font-20 font-bold color-blue">
                                             {{displayName}}<br>
@@ -100,7 +102,7 @@
                                 <div class="profile-page-btn">
                                     <div class="wrapper-profile-page-buttons">
                                         <div class=" Add-cover-pe text-center">
-                                            
+
                                             <div
                                                 class="poll-asked-user d-flex justify-content-between abso-profile-btn">
                                                 <div class="wrapper-poll-asked-user position-relative">
@@ -108,8 +110,8 @@
                                                         (change)="selectProfileFile($event, 'profileImage')"
                                                         style="display:none" accept="image/*" capture>
                                                     <img [src]="userProfilePicture"
-                                                        onError="this.src='assets/images/user.png'"
-                                                        alt="image" (click)="openFileSelector('profile')"
+                                                        onError="this.src='assets/images/user.png'" alt="image"
+                                                        (click)="openFileSelector('profile')"
                                                         style="cursor: pointer;" />
                                                     <div class="edit-icon-pe">
                                                         <a href="javascript:void(0)"
@@ -504,8 +506,10 @@
                         <div class="col-md-12 second-home-middle position-relative" style="background-color: #F1F1FF;">
                             <div class="became-creator-pe">
                                 <p class="font-16 font-bold color-blue">Become Creator</p>
-                                <p class="font-16 color-blue">As a Creator, you will keep 94% of your earnings! Also
-                                    as a Creator, you will pay $25 per month or you can pay $240 per year.</p>
+                                <p class="font-16 color-blue">As a Creator, you will keep {{variable.creatorKeeps}}% of
+                                    your earnings! Also
+                                    as a Creator, you will pay ${{variable.adminMonthlyFee}} per month or you can pay
+                                    ${{variable.adminYearlyFee}} per year.</p>
                                 <div class="right-side-button">
                                     <button>Become a Creator</button>
                                 </div>
@@ -556,7 +560,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12 second-home-middle position-relative">
+                        <!-- <div class="col-md-12 second-home-middle position-relative">
                             <div class="add-bank-pe">
                                 <div class="wrapper-add-bank-pe">
                                     <div class="d-flex align-items-center justify-content-between">
@@ -571,6 +575,77 @@
                                         <p class="font-16 font-bold color-blue">Add Card (to subscribe)</p>
                                         <div class="right-side-button">
                                             <button>+ Add Card</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+                        <div class="col-md-12 second-home-middle position-relative">
+                            <div class="add-bank-pe">
+                                <div class="wrapper-add-bank-pe">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <p class="font-16 font-bold color-blue">Add Bank (to earn)</p>
+                                        <div class="right-side-button">
+                                            <a routerLink="/withdraw-earning-3" [routerLinkActive]="['active']">
+                                                <button> Add Bank</button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <!-- bank listing  -->
+                                    <div class="add-bank-listing">
+                                        <div class="add-bank-listing-wrapper">
+                                            <p class="font-12 color-black">Available Balance &nbsp; &nbsp;<span
+                                                    class="font-bold">$390.00</span></p>
+                                            <div class="button-add-bank-listing">
+                                                <div class="right-side-button right-visit-g">
+                                                    <button>Withdraw Earnings</button>
+                                                    <button>Transactions</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-listing-wrapper">
+                                        <div class="add-card-list" *ngFor="let bankAccountLists of bankAccountList">
+                                            <div
+                                                class="bank-name-e-op d-flex align-items-center justify-content-between">
+                                                <p class="font-14 color-38 font-medium">{{bankAccountLists['business_name']}}</p> <a href=""
+                                                    class="font-14 color-blue">Edit</a>
+                                            </div>
+                                            <div
+                                                class="bank-name-e-op d-flex align-items-center justify-content-between">
+                                                <p class="font-14 color-9a font-medium">{{replaceLastChar(bankAccountLists['account_number'])}}</p> <a
+                                                style="cursor: pointer;" (click)="deleteBankAccount(bankAccountLists._id)" class="color-black"><span class="iconify"
+                                                        data-icon="ant-design:delete-twotone"></span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="wrapper-add-bank-pe">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <p class="font-16 font-bold color-blue">Add Card (to subscribe)</p>
+                                        <div class="right-side-button">
+                                            <a routerLink="/withdraw-earning-2" [routerLinkActive]="['active']">
+                                                <button> Add Card</button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <!-- bank card listing  -->
+                                    <div class="card-listing">
+                                        <div class="card-listing-wrapper">
+                                            <p class="color-68 font-bold font-16" *ngIf="cardList.length != 0">Manage Sved Cards</p>
+                                            <div class="add-card-list" *ngFor="let cardLists of cardList">
+                                                <div
+                                                    class="bank-name-e-op d-flex align-items-center justify-content-between">
+                                                    <p class="font-14 color-38 font-medium">{{cardLists['name_on_card']}}</p>
+                                                    <a href="" class="font-14 color-blue">Edit</a>
+                                                </div>
+                                                <div
+                                                    class="bank-name-e-op d-flex align-items-center justify-content-between">
+                                                    <p class="font-14 color-9a font-medium">{{replaceLastChar(cardLists['card_number'])}}</p>
+                                                    <a style="cursor: pointer;" (click)="deleteCard(cardLists._id)" class="color-black"><span class="iconify"
+                                                            data-icon="ant-design:delete-twotone"></span></a>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -684,9 +759,53 @@
                         <div class="col-md-12 second-home-middle position-relative">
                             <div class="connect-another-chello-pe">
                                 <div class="d-flex align-items-center justify-content-between">
+                                    <p class="font-16 font-bold color-blue">Creare Free Trial Links</p>
+                                    <div class="button-connect">
+                                        <a href="" class="color-blue">Create</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 second-home-middle position-relative">
+                            <div class="connect-another-chello-pe">
+                                <div class="d-flex align-items-center justify-content-between">
                                     <p class="font-16 font-bold color-blue">Connect Another Chello Account</p>
                                     <div class="button-connect">
                                         <a href="" class="color-blue">Connect</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 second-home-middle position-relative">
+                            <div class="show-activity-chalange">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <p class="font-16 font-bold color-blue">Show Activity Status</p>
+                                    <div class="notification-switch">
+                                        <label class="switch">
+                                            <input type="checkbox" checked>
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="show-activity-chalange">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <p class="font-16 font-bold color-blue">Show Subscription Status</p>
+                                    <div class="notification-switch">
+                                        <label class="switch">
+                                            <input type="checkbox" checked>
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 second-home-middle position-relative">
+                            <div class="connect-another-chello-pe">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <p class="font-16 font-bold color-red">Delete Account</p>
+                                    <div class="button-connect button-delete">
+                                        <a href="javascript:void(0)" class="color-red">Delete</a>
                                     </div>
                                 </div>
                             </div>
@@ -745,16 +864,16 @@
                                     <p class="font-14 font-bold color-black d-flex">Share in &nbsp;
                                         &nbsp; &nbsp; &nbsp; </p>
                                     <div class="social-icons-for-footer">
-                                        <a href="https://www.instagram.com/letschello/"><span class="iconify"
+                                        <a [href]="variable.instagramId" target="_blank"><span class="iconify"
                                                 data-icon="typcn:social-instagram"></span></a>
-                                        <a href="https://tiktok.com/@chello.world"><span class="iconify"
-                                                data-icon="cib:tiktok"></span></a>
-                                        <a href="https://twitter.com/LetsChello"><span class="iconify"
+                                        <a [href]="variable.tiktokId"><span class="iconify" data-icon="cib:tiktok"
+                                                target="_blank"></span></a>
+                                        <a [href]="variable.twitterId" target="_blank"><span class="iconify"
                                                 data-icon="ant-design:twitter-outlined"></span></a>
-                                        <a href="javascript:void(0)"><span class="iconify"
+                                        <a [href]="variable.facebookId" target="_blank"><span class="iconify"
                                                 data-icon="eva:facebook-fill"></span></a>
-                                        <a href="javascript:void(0)"><img src="assets/images/24ent new logo white 1.png"
-                                                alt="image"></a>
+                                        <!-- <a href="javascript:void(0)"><img src="assets/images/24ent new logo white 1.png"
+                                                alt="image"></a> -->
                                     </div>
                                 </div>
                             </div>

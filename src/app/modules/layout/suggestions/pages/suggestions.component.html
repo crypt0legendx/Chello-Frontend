@@ -1,29 +1,31 @@
 <div class="div-for-right-side-home">
     <div class="search-bar-home">
-        <input type="text" placeholder="Search" class="w-100" />
-        <span class="iconify" data-icon="akar-icons:search"></span>
+        <form [formGroup]="searchForm">
+            <input type="text" placeholder="Search" class="w-100"  formControlName="search" (keyup.enter)="search()"/>
+            <span class="iconify" data-icon="akar-icons:search"></span>
+        </form>
     </div>
     <div class="user-right-home">
         <div class="user-wrapper-right-home">
             <div class="headding-u-r-h">
                 <div class="d-flex justify-content-between">
                     <p class="font-16 font-medium color-68">Suggestions</p>
-                    <p><a href="" class="color-9a font-14">See All</a></p>
+                    <p><a (click)="viewAll()" class="color-9a font-14" style="cursor: pointer;">See All</a></p>
                 </div>
             </div>
 
             <div class="image-up-r-u" *ngFor="let groupMembersLists of groupMembersList" [id]="groupMembersLists._id">
-                <img [src]="groupMembersLists.coverImage" onError="this.src='assets/images/11.png'" alt="image" />
+                <img [src]="groupMembersLists.coverImage" onError="this.src='assets/images/cover-placeholder.png'" alt="image" />
                 <div class="poll-asked-user">
                     <div class="wrapper-poll-asked">
                         <img [src]="groupMembersLists.profileImage" onError="this.src='assets/images/user.png'" class="round-image2"
-                            alt="image" (click)="viewProfile(groupMembersLists._id)" style="cursor: pointer;"/>
+                            alt="image" (click)="viewProfile(groupMembersLists.userName)" style="cursor: pointer;"/>
                         <div class="user-info-p-a">
-                            <p class="font-14 font-bold color-white" (click)="viewProfile(groupMembersLists._id)" style="cursor: pointer;"> {{groupMembersLists.fullName}} &nbsp; <span
+                            <p class="font-14 font-bold color-white" (click)="viewProfile(groupMembersLists.userName)" style="cursor: pointer;"> @{{groupMembersLists.userName}} &nbsp; <span
                                     class="iconify font-20 color-light-blue"
                                     data-icon="ic:sharp-verified"></span>
                             </p>
-                            <p class="font-14 color-white" (click)="viewProfile(groupMembersLists._id)" style="cursor: pointer;">@{{groupMembersLists.userName}}</p>
+                            <!-- <p class="font-14 color-white" (click)="viewProfile(groupMembersLists.userName)" style="cursor: pointer;">@{{groupMembersLists.userName}}</p> -->
                         </div>
                     </div>
                 </div>

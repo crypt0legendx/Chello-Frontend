@@ -107,7 +107,7 @@ export class GroupService {
     let header = new HttpHeaders({ "Authorization": "Bearer " + token});
     const requestOptions = {headers: header};
 
-    return this.http.post<any[]>(this.base_url + 'grouppostlike', data, requestOptions);
+    return this.http.post<any[]>(this.base_url + 'grouppost/like', data, requestOptions);
   }
 
   public postComment(data: any): Observable<any[]> {
@@ -131,7 +131,7 @@ export class GroupService {
     let header = new HttpHeaders({ "Authorization": "Bearer " + token});
     const requestOptions = {headers: header};
 
-    return this.http.post<any[]>(this.base_url + 'grouppostcomment/all', data, requestOptions);
+    return this.http.post<any[]>(this.base_url + 'grouppost/comment/all', data, requestOptions);
   }
 
   public editComment(data: any): Observable<any[]> {

@@ -1,1 +1,4 @@
-/* No CSS *//*# sourceMappingURL=message.component.css.map */
+.showMessage{
+    display: flex;
+    justify-content: end;
+}

@@ -11,9 +11,6 @@
     color: #9A9A9A;
 }
 
-.audio-content {
-    margin-top: 80px;
-}
 
 .select-audio {
     width: 178px;
@@ -38,3 +35,48 @@
     justify-content: space-around;
     cursor: pointer;
 }
+
+
+.under-btn-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.post-text-content {
+    background-color: white;
+    width: 100%;
+    height: auto;
+    border-color: white;
+    color: #1b1d1f;
+    font-size: 18px;
+}
+
+audio {
+    width: 100% !important;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 3px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(189, 188, 188);
+  }
+
+  .h-50 {
+    height: 50px;
+  }

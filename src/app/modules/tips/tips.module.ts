@@ -6,7 +6,7 @@ import { FooterModule } from './../layout/footer/footer.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TipsComponent } from './components/tips.component';
-
+import {SubMenuModule} from '../layout/sub-menu/sub-menu.module'
 
 
 @NgModule({
@@ -19,7 +19,8 @@ import { TipsComponent } from './components/tips.component';
     TipsRoutingModule,
     FooterModule,
     HeaderNewModule,
-    SidebarModule
+    SidebarModule,
+    SubMenuModule
   ]
 })
 export class TipsModule { }

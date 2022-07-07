@@ -1,0 +1,100 @@
+<app-header-new></app-header-new>
+<div class="homepage margin-minus-header">
+    <div class="homepage-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3">
+                    <app-sidebar></app-sidebar>
+                </div>
+                <div class="wid-2">
+                    <app-sub-menu></app-sub-menu>
+                </div>
+                <div class="col-md-7 ">
+                    <div class="row">
+                        <div class="home-middle-div w-100 ">
+                            <div class="col-md-12 second-home-middle position-relative">
+                                <div class="add-bank-pe">
+                                    <div class="wrapper-add-bank-pe">
+                                        <div class=" justify-content-between">
+                                            <p class="font-18 font-bold color-blue">Customize Subscriptions</p>
+                                        </div>
+                                         <!-- bank card listing  -->
+                                         <div class="card-listing">
+                                             <div class="">
+                                                 <div class="add-card-list">
+                                                     <div class="bank-name-e-op d-flex align-items-center justify-content-between">
+                                                         <p class="font-14 color-38 font-medium">Pay Monthly $5.00 to view 50 photos</p>
+                                                         <a href="" class="font-14 color-blue">Edit</a>
+                                                     </div>
+                                                     <div class="bank-name-e-op d-flex align-items-center justify-content-between">
+                                                        <p class="font-14 color-9a font-medium">$5.00</p>
+                                                        <a href="" class="color-black"><span  class="iconify" data-icon="ant-design:delete-twotone"></span></a>
+                                                    </div>
+                                                 </div>
+                                               
+                                             </div>
+                                         </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="row">
+                                        <div class=" justify-content-between" *ngIf="addSubscription === true">
+                                            <p class="font-18 font-bold color-blue">Add Customize Subscriptions</p>
+                                        </div>
+                                        <div class="div-one-for-customize-subscription w-100 customize-subscription" *ngIf="addSubscription === true">
+                                            <div class="d-flex align-items-center ">
+                                                <div class="upper-welcome-pe">
+                                                    <a href="" class="font-16 color-41 font-medium"><span
+                                                            class="iconify" data-icon="ion:pricetag"></span>Pay </a>
+                                                </div>
+                                                <div class="upper-welcome-pe upper-welcome-pe-3">
+                                                    <a href=""
+                                                        class="font-16 color-blue font-medium dolor-div">$12.00</a>
+                                                </div>
+                                                <div class="upper-welcome-pe upper-welcome-pe-3">
+                                                    <a href=""
+                                                        class="font-16 color-blue font-medium dolor-div w-100 dropdown-toggle"
+                                                        type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                                                        aria-haspopup="true" aria-expanded="false">3 month</a>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                        <a class="dropdown-item" href="#">2 month</a>
+                                                        <a class="dropdown-item" href="#">1 month</a>
+                                                    </div>
+                                                </div>
+                                                <div class="upper-welcome-pe upper-welcome-pe-2">
+                                                    <p class="font-16 color-41 font-medium">for Tier</p>
+                                                </div>
+                                                <div class="upper-welcome-pe upper-welcome-pe-3">
+                                                    <a href=""
+                                                        class="font-16 color-blue font-medium dolor-div w-100 dropdown-toggle"
+                                                        type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                                                        aria-haspopup="true" aria-expanded="false">2 &nbsp;</a>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                        <a class="dropdown-item" href="#">1</a>
+                                                        <a class="dropdown-item" href="#">3</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="text-area-for-poll">
+                                                <textarea rows="3"
+                                                    class="w-100">Pay Monthly $5.00 to view 50 photos</textarea>
+                                                <div class="right-side-button text-right">
+                                                    <button>Post</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="add-another-button"  *ngIf="addSubscription === false">
+                                            <div class="right-side-button">
+                                                <button (click)="addAnotherSubscription()">+ Add another Subscription</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <app-footer></app-footer>

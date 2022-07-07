@@ -40,3 +40,39 @@
     right: 17px;
     color: #150AA1;
 }
+
+
+.under-btn-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.post-text-content {
+    background-color: white;
+    width: 100%;
+    height: auto;
+    border-color: white;
+    color: #1b1d1f;
+    font-size: 18px;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 3px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(189, 188, 188);
+  }

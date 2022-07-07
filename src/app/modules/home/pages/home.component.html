@@ -8,11 +8,12 @@
                 </div>
                 <div class="col-md-6">
                     <div class="home-middle-div">
-                        <div class="wrapper-home-middle-div story-div-middle-home">
-                            <div class="home-middle-div-one">
+                        <div class="wrapper-home-middle-div story-div-middle-home position-relative" >
+                            <div class="home-middle-div-one " >
                                 <div class="headding-home-middle-div">
                                     <p class="font-20 font-bold color-blue">Home</p>
                                 </div>
+                                
                                 <div class="first-home-middle-flex ">
                                     <div class="story-m-h text-center">
                                         <p class="color-white font-16 font-medium" (click)="openFileSelector('story')"
@@ -20,11 +21,14 @@
                                             Add<br>
                                             Story<br></p>
                                         <input id="addStory" type="file" class="form-control"
-                                            (change)="selectFile($event, 'story')" style="display:none" accept="image/*"
-                                            capture>
+                                            (change)="selectFile($event, 'story')" style="display:none" accept="image/*,video/*">
                                     </div>
                                     <app-story></app-story>
                                 </div>
+                            <div class="arrow-in-stories">
+                               <a href="javascript:void(0)" class="s-ar-1"> <span class="iconify " data-icon="bi:arrow-left-circle-fill"></span></a>
+                               <a href="javascript:void(0)" class="s-ar-2">  <span class="iconify " data-icon="bi:arrow-right-circle-fill"></span></a>
+                            </div>
                             </div>
                         </div>
                         <div class="col-md-12 second-home-middle">                            
@@ -35,6 +39,7 @@
                             <app-video-post *ngIf="postOption == 3"></app-video-post>
                             <app-audio-post *ngIf="postOption == 4"></app-audio-post>
                             <app-fancam-post *ngIf="postOption == 5"></app-fancam-post>
+                                                        
                             <!-- <div class="poll-div-section">
                                 <div class="wrapper-poll-div-section">
                                     <div class="">
@@ -114,10 +119,77 @@
                                     </div>
                                 </div>
                             </div> -->
-                            <div class="middle-home-div-flex d-flex justify-content-between">
+                            <div class="middle-home-div-flex d-flex justify-content-between home-main-drop">
                                 <a href="" class="font-16 color-78">All</a>
-                                <a href="" class="font-20 color-78"><span class="iconify"
+                                <div class="positive-relative vault-section-one">
+                                    <a  href="javascript:void(0)" class="font-20 color-78  dropdown-toggle" role="button"
+                                    id="dropdownMenuLink" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false"><span class="iconify"
                                         data-icon="bi:filter-right"></span></a>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            <div class="radio-button-vault title-div-vtab">
+                                                <div class="form-group">
+                                                    <input type=radio id="rdo1" class="radio-input"
+                                                        name="radio-group">
+                                                    <label for="rdo1" class="color-black font-16">All
+                                                        Time
+                                                    </label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type=radio id="rdo2" class="radio-input"
+                                                        name="radio-group">
+                                                    <label for="rdo2" class="color-black font-16">Last
+                                                        Three
+                                                        Months
+                                                    </label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type=radio id="rdo3" class="radio-input"
+                                                        name="radio-group">
+                                                    <label for="rdo3" class="color-black font-16">Last
+                                                        Month
+                                                    </label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type=radio id="rdo3b" class="radio-input"
+                                                        name="radio-group">
+                                                    <label for="rdo3b" class="color-black font-16">Last
+                                                        Week
+                                                    </label>
+                                                </div>
+                                                <div class="border-e4"></div>
+                                                <div class="form-group ">
+                                                    <input type=radio id="rdo4" class="radio-input"
+                                                        name="radio-group">
+                                                    <label for="rdo4" class="color-black font-16">Latest
+                                                        Posts
+                                                    </label>
+                                                </div>
+                                                <div class="form-group ">
+                                                    <input type=radio id="rdo4b" class="radio-input"
+                                                        name="radio-group">
+                                                    <label for="rdo4b" class="color-black font-16">Most
+                                                        Liked
+                                                    </label>
+                                                </div>
+                                                <div class="border-e4"></div>
+                                                <div class="form-group">
+                                                    <input type=radio id="rdo5" class="radio-input"
+                                                        name="radio-group">
+                                                    <label for="rdo5"
+                                                        class="color-black font-16">Ascending
+                                                    </label>
+                                                </div>
+                                                <div class="form-group ">
+                                                    <input type=radio id="rdo6" class="radio-input"
+                                                        name="radio-group">
+                                                    <label for="rdo6"
+                                                        class="color-black font-16">Descending
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                   </div>
                             </div>
                         </div>
                         <app-post-list></app-post-list>

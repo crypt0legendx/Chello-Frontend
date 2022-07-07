@@ -3,7 +3,9 @@ import { Router } from '@angular/router';
 import { routers } from '../../../../utils/router-navigate';
 import { UserService } from '../../../../services/user.service';
 
+
 declare var $: any;
+
 @Component({
   selector: 'app-sidebar',
   templateUrl: '../pages/sidebar.component.html',
@@ -31,6 +33,13 @@ export class SidebarComponent implements OnInit {
     if (retrievedObject) {
       this.userJsonData = JSON.parse(retrievedObject);
       console.log(this.userJsonData);
+
+      if(this.userJsonData['isPhoneNumberVerified'] === 0 || this.userJsonData['isPhoneNumberVerified'] === '0'){
+        this.router.navigate([this.routernavigate.userSelection]);
+      } else if(!this.userJsonData['country']){
+        this.router.navigate([this.routernavigate.verifyId]);
+      }
+
       this.userName = this.userJsonData['userName'];
       this.profilePicture = this.userJsonData['profileImage'];
       this.isUserVerify = this.userJsonData['profileStatus'];
@@ -46,7 +55,7 @@ export class SidebarComponent implements OnInit {
 
   getCurrentUser() {
     this.userService.currentUser().subscribe((data: any) => {
-      console.log(data);
+      // console.log(data);
       if (data['statusCode'] === 200) {
       }
       else {

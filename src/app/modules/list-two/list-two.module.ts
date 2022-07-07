@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { FormsModule } from '@angular/forms';
 import { ListTwoRoutingModule } from './list-two-routing.module';
 import { ListTwoComponent } from './components/list-two.component';
 import { FooterModule } from '../layout/footer/footer.module'
@@ -13,10 +13,12 @@ import { SidebarModule } from '../layout/sidebar/sidebar.module'
   ],
   imports: [
     CommonModule,
+    FormsModule,
     ListTwoRoutingModule,
     FooterModule,
     HeaderNewModule,
-    SidebarModule
+    SidebarModule,
+    FormsModule
   ]
 })
 export class ListTwoModule { }
