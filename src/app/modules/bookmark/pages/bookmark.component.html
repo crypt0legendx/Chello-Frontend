@@ -128,9 +128,6 @@
                                         </div>
                                     </div>
                                     <div id="tab0" class="tabcontent">
-
-                                        
-
                                     </div>
                                     <div id="tab1" class="tabcontent d-block-active">
                                         <div *ngIf="category == 'image'"  class="photo-list">
@@ -138,8 +135,7 @@
                                                 <div class="item-header d-flex justify-content-between align-items-center">
                                                     <div class="creator-section d-flex align-items-center">
                                                         <img class="profile-img" src={{item.userDetail[0]?.profileImage}} width="70px" onError="this.src='assets/images/user.png'" />
-                                                        <div class="d-flex flex-column ml-3">
-                                                            <div class="font-medium font-16">{{item.userDetail[0]?.fullName}}</div>
+                                                        <div class="d-flex flex-column ml-3">                                                            
                                                             <div>@{{item.userDetail[0]?.userName}}</div>
                                                         </div>
                                                     </div>
