@@ -6,11 +6,13 @@
                     <div class="text-area-for-poll">
                         <form [formGroup]="feedForm">
                             <div class="form-group position-relative">
-                                <textarea rows="4" class="w-100 post-text-field" formControlName="postTxt"
-                                    [ngClass]="{ 'is-invalid': submitted && f.postTxt.errors }"
-                                    placeholder="Compose new post"></textarea>
-                                <div *ngIf="submitted && f.postTxt.errors" class="invalid-feedback">
-                                    <div *ngIf="f.postTxt.errors.required" style="color:red;">Post text is required
+                                <div class="w-100 post-input-form">
+                                    <textarea rows="4" class="w-100 post-text-field" formControlName="postTxt"
+                                        [ngClass]="{ 'is-invalid': submitted && f.postTxt.errors }"
+                                        placeholder="Compose new post"></textarea>
+                                    <div *ngIf="submitted && f.postTxt.errors" class="invalid-feedback">
+                                        <div *ngIf="f.postTxt.errors.required" style="color:red;">Post text is required
+                                        </div>
                                     </div>
                                 </div>
 

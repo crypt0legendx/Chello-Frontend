@@ -18,22 +18,25 @@
                                         <div class=" justify-content-between">
                                             <p class="font-18 font-bold color-blue">Customize Subscriptions</p>
                                         </div>
-                                         <!-- bank card listing  -->
-                                         <div class="card-listing">
-                                             <div class="">
-                                                 <div class="add-card-list">
-                                                     <div class="bank-name-e-op d-flex align-items-center justify-content-between">
-                                                         <p class="font-14 color-38 font-medium">Pay Monthly $5.00 to view 50 photos</p>
-                                                         <a href="" class="font-14 color-blue">Edit</a>
-                                                     </div>
-                                                     <div class="bank-name-e-op d-flex align-items-center justify-content-between">
-                                                        <p class="font-14 color-9a font-medium">$5.00</p>
-                                                        <a href="" class="color-black"><span  class="iconify" data-icon="ant-design:delete-twotone"></span></a>
+                                        <!-- bank card listing  -->
+                                        <div class="card-listing">
+                                            <div class="">
+                                                <div class="add-card-list" *ngFor="let subscription of getSubscriptionList">
+                                                    <div
+                                                        class="bank-name-e-op d-flex align-items-center justify-content-between">
+                                                        <p class="font-14 color-38 font-medium">{{subscription['title']}}</p>
+                                                        <a href="javascript:void(0)" class="font-14 color-blue" (click)="editSubscription(subscription)">Edit</a>
                                                     </div>
-                                                 </div>
-                                               
-                                             </div>
-                                         </div>
+                                                    <div
+                                                        class="bank-name-e-op d-flex align-items-center justify-content-between">
+                                                        <p class="font-14 color-9a font-medium">{{checkUSDSymbol(subscription['price'])}}</p>
+                                                        <a href="javascript:void(0)" class="color-black" (click)="deleteSubscription(subscription['_id'])"><span class="iconify"
+                                                                data-icon="ant-design:delete-twotone"></span></a>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-9">
@@ -41,57 +44,90 @@
                                         <div class=" justify-content-between" *ngIf="addSubscription === true">
                                             <p class="font-18 font-bold color-blue">Add Customize Subscriptions</p>
                                         </div>
-                                        <div class="div-one-for-customize-subscription w-100 customize-subscription" *ngIf="addSubscription === true">
-                                            <div class="d-flex align-items-center ">
-                                                <div class="upper-welcome-pe">
-                                                    <a href="" class="font-16 color-41 font-medium"><span
-                                                            class="iconify" data-icon="ion:pricetag"></span>Pay </a>
-                                                </div>
-                                                <div class="upper-welcome-pe upper-welcome-pe-3">
-                                                    <a href=""
-                                                        class="font-16 color-blue font-medium dolor-div">$12.00</a>
-                                                </div>
-                                                <div class="upper-welcome-pe upper-welcome-pe-3">
-                                                    <a href=""
-                                                        class="font-16 color-blue font-medium dolor-div w-100 dropdown-toggle"
-                                                        type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                                                        aria-haspopup="true" aria-expanded="false">3 month</a>
-                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                        <a class="dropdown-item" href="#">2 month</a>
-                                                        <a class="dropdown-item" href="#">1 month</a>
+                                        <div class="div-one-for-customize-subscription w-100"
+                                            *ngIf="addSubscription === true">
+                                            <form [formGroup]="subscriptionForm" (ngSubmit)="createSubscription()">
+                                                <div class="d-flex align-items-center ">
+
+                                                    <div class="upper-welcome-pe">
+                                                        <a href="javascript:void(0)"
+                                                            class="font-16 color-41 font-medium"><span class="iconify"
+                                                                data-icon="ion:pricetag"></span>Pay </a>
+                                                    </div>
+                                                    <div class="upper-welcome-pe upper-welcome-pe-3">
+                                                        <input type="text"
+                                                            class="font-16 color-blue font-medium dolor-div"
+                                                            placeholder="$5.00" formControlName="subscriptionFee" onChange="value='$'+formatNumber(value,2,0)"
+                                                            [ngClass]="{ 'is-invalid': submitted && f.subscriptionFee.errors }" />
+                                                        <div *ngIf="submitted && f.subscriptionFee.errors"
+                                                            class="invalid-feedback">
+                                                            <div *ngIf="f.subscriptionFee.errors.required"
+                                                                style="color:red;">
+                                                                Fee is required</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="upper-welcome-pe upper-welcome-pe-3">
+                                                        <a href="javascript:void(0)"
+                                                            class="font-16 color-blue font-medium dolor-div w-100 dropdown-toggle"
+                                                            type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                                                            aria-haspopup="true" aria-expanded="false">{{subscriptionPeriod}}</a>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                            <a class="dropdown-item" href="javascript:void(0)" (click)="changeSubscriptionPeriod('1 month')">1
+                                                                month</a>
+                                                            <a class="dropdown-item" href="javascript:void(0)" (click)="changeSubscriptionPeriod('2 months')">2
+                                                                months</a>
+                                                            <a class="dropdown-item" href="javascript:void(0)" (click)="changeSubscriptionPeriod('3 months')">3
+                                                                months</a>
+                                                            <a class="dropdown-item" href="javascript:void(0)" (click)="changeSubscriptionPeriod('6 months')">6
+                                                                months</a>
+                                                            <a class="dropdown-item" href="javascript:void(0)" (click)="changeSubscriptionPeriod('9 months')">9
+                                                                months</a>
+                                                            <a class="dropdown-item" href="javascript:void(0)" (click)="changeSubscriptionPeriod('12 months')">12
+                                                                months</a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="upper-welcome-pe upper-welcome-pe-2">
+                                                        <p class="font-16 color-41 font-medium">for Tier</p>
+                                                    </div>
+                                                    <div class="upper-welcome-pe upper-welcome-pe-3">
+                                                        <a href="javascript:void(0)"
+                                                            class="font-16 color-blue font-medium dolor-div w-100 dropdown-toggle"
+                                                            type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                                                            aria-haspopup="true" aria-expanded="false">{{subscriptionTier}} &nbsp;</a>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                            <a class="dropdown-item" href="javascript:void(0)" (click)="changeSubscriptionTier(1)">1</a>
+                                                            <a class="dropdown-item" href="javascript:void(0)" (click)="changeSubscriptionTier(2)">2</a>
+                                                            <a class="dropdown-item" href="javascript:void(0)" (click)="changeSubscriptionTier(3)">3</a>
+                                                            <a class="dropdown-item" href="javascript:void(0)" (click)="changeSubscriptionTier(4)">4</a>
+                                                            <a class="dropdown-item" href="javascript:void(0)" (click)="changeSubscriptionTier(5)">5</a>
+                                                            <a class="dropdown-item" href="javascript:void(0)" (click)="changeSubscriptionTier(6)">6</a>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="upper-welcome-pe upper-welcome-pe-2">
-                                                    <p class="font-16 color-41 font-medium">for Tier</p>
-                                                </div>
-                                                <div class="upper-welcome-pe upper-welcome-pe-3">
-                                                    <a href=""
-                                                        class="font-16 color-blue font-medium dolor-div w-100 dropdown-toggle"
-                                                        type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                                                        aria-haspopup="true" aria-expanded="false">2 &nbsp;</a>
-                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                        <a class="dropdown-item" href="#">1</a>
-                                                        <a class="dropdown-item" href="#">3</a>
+                                                <div class="text-area-for-poll">
+                                                    <textarea rows="3" class="w-100" formControlName="subscriptionDesc"
+                                                        [ngClass]="{ 'is-invalid': submitted && f.subscriptionDesc.errors }" placeholder="Pay Monthly $5.00 to view 50 photos"></textarea>
+                                                    <div *ngIf="submitted && f.subscriptionDesc.errors"
+                                                        class="invalid-feedback">
+                                                        <div *ngIf="f.subscriptionDesc.errors.required"
+                                                            style="color:red;">Description is required</div>
+                                                    </div>
+                                                    <div class="right-side-button text-right">
+                                                        <button type="submit">Post</button>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="text-area-for-poll">
-                                                <textarea rows="3"
-                                                    class="w-100">Pay Monthly $5.00 to view 50 photos</textarea>
-                                                <div class="right-side-button text-right">
-                                                    <button>Post</button>
-                                                </div>
-                                            </div>
+                                            </form>
                                         </div>
-                                        <div class="add-another-button"  *ngIf="addSubscription === false">
+                                        <div class="add-another-button" *ngIf="addSubscription === false">
                                             <div class="right-side-button">
-                                                <button (click)="addAnotherSubscription()">+ Add another Subscription</button>
+                                                <button (click)="addAnotherSubscription()">+ Add another
+                                                    Subscription</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>

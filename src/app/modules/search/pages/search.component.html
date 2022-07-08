@@ -30,7 +30,7 @@
                                 </div>
                                 <div class="search-listing-user">
                                     <div class="search-list-wrap" *ngFor="let groupMembersLists of groupMembersList" [id]="groupMembersLists._id">
-                                        <div class="wrapper-poll-asked-user">
+                                        <div class="wrapper-poll-asked-user" *ngIf="userId != groupMembersLists._id">
                                             <img [src]="groupMembersLists.profileImage" onError="this.src='assets/images/user.png'" alt="image" (click)="viewProfile(groupMembersLists.userName)" style="cursor: pointer;" />
                                             <div class="user-info-p-a">
                                                 <p class="font-14 font-bold color-49" (click)="viewProfile(groupMembersLists.userName)" style="cursor: pointer;"> @{{groupMembersLists.userName}}

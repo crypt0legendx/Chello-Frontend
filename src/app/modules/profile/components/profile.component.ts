@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { ProfileService } from '../../../services/profile.service';
 import { UserService } from '../../../services/user.service';
 import { PostService } from '../../../services/post.service';
@@ -30,6 +30,7 @@ export class ProfileComponent implements OnInit {
   @ViewChild(PostListComponent) child: any = PostListComponent;
 
   feedForm!: FormGroup;
+  addListForm!: FormGroup;
   submitted: any;
 
   userJsonData: any;
@@ -58,6 +59,7 @@ export class ProfileComponent implements OnInit {
   lists: any;
   listMemberData: any;
   added_user: any;
+  selectedUserId: any;
   isCheckedState: any = [{}];
 
 
@@ -143,6 +145,11 @@ export class ProfileComponent implements OnInit {
     });
 
     console.log("Username: " + this.route.snapshot.paramMap.get('username'));
+    this.selectedUserId = this.userJsonData._id;
+
+    this.addListForm = this.formBuilder.group({
+      listName: ['', Validators.required],
+    });
   }
 
   get f() { return this.feedForm.controls; }
@@ -216,15 +223,24 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  addList(user_name: any) {
+  addList() {
+    if(this.addListForm.invalid) {
+      return;
+    }
+    else {
+      var user_name = this.addListForm.controls.listName.value;
+    }
     this.closeCreateListModal();
     this.listService.addList(user_name).subscribe((data: any) => {
       // console.log("List added", data)
       this.userPosts=data.ListData;
+      this.getList();
+
     }, (error) => {
       this.toastr.error(error['error']['message']);
+      this.getList();
+
     })
-    this.getList();
     // console.log("User Json Data : ",this.userPosts)
   }
 
@@ -235,12 +251,14 @@ export class ProfileComponent implements OnInit {
 
   getList() {
       this.listService.getList().subscribe((data: any) => {
+        console.log('Selected', this.selectedUserId)
+        console.log('User', this.userJsonData._id)
       // console.log("Lists : ", data);        
       const draftData:any = data.ListData;
       for(let i = 0; i<data.ListData.length; i++) {
         const memberDetailsData = data.ListData[i].memberDetails;        
         for(let j=0; j<memberDetailsData.length; j++) {
-          if(memberDetailsData[j].member_id==this.userJsonData._id) {
+          if(memberDetailsData[j].member_id==this.selectedUserId) {
             // this.isCheckedState.push({'list_id': memberDetailsData._id, 'checkState': true});
             // memberDetailsData.checkState = true;
             draftData[i].checkState = true;
@@ -261,7 +279,7 @@ export class ProfileComponent implements OnInit {
     console.log("checked function", this.listMemberData);
     for(let i=0; i<this.listMemberData.length; i++)
     {
-      if(this.listMemberData[i].member_id==user_id)
+      if(this.listMemberData[i].member_id==this.selectedUserId)
         return true;
     }
     return false;
@@ -317,6 +335,10 @@ export class ProfileComponent implements OnInit {
     }, (error) => {
       this.toastr.error(error['error']['message']);
     })
+  }
+
+  selectUser(user_id:any) {
+    this.selectedUserId = user_id;
   }
 
   openListsModal() {

@@ -39,13 +39,15 @@ export class GroupDetailNewComponent implements OnInit {
   userId: any;
   retrievedGroupDetails: any;
   totalGroupMember: any = 0;
+  groupCoverPicture: any;
+  groupProfilePicture: any;
 
   groupMembersList: any = [];
   groupMembersListLength: any;
   inviteMemberArr: any = [];
   invitedMemberArr: any = [];
   groupId: any;
-  groupMembers: any;
+  groupMembers: any = [];
   groupAdminId: any;
   groupAdminData: any = [];
   totalGroupPosts: any = 0;
@@ -95,6 +97,8 @@ export class GroupDetailNewComponent implements OnInit {
     this.retrievedGroupDetails = JSON.parse(this.retrievedGroupDetails)
     this.groupId = this.retrievedGroupDetails['_id'];
     this.groupAdminId = this.retrievedGroupDetails['user'];
+    this.groupCoverPicture = this.retrievedGroupDetails['cover_photo'];
+    this.groupProfilePicture = this.retrievedGroupDetails['profile_pic'];
     this.totalGroupMember = this.retrievedGroupDetails['memberData'].length;
     for (let i = 0; i < this.retrievedGroupDetails['memberData'].length; i++) {
       this.invitedMemberArr.push(this.retrievedGroupDetails['memberData'][i]['member_id']);

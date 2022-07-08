@@ -64,14 +64,15 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService,
+    // private authService: AuthService,
     private postService: PostService,
     private uploadService: UploadService,
     private spinner: NgxSpinnerService,
+    // private postList: PostListComponent,
     private toastr: ToastrService,
     public routernavigate: routers,
-    private router: Router,
-    private route: ActivatedRoute,
+    // private router: Router,
+    // private route: ActivatedRoute,
     public afs: AngularFirestore, // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     private cdr: ChangeDetectorRef,
@@ -331,5 +332,6 @@ export class HomeComponent implements OnInit {
     this.child?.getAllFeeds(this.filterPostDateWise, this.filterPost, this.orderBy);
     this.cdr.detectChanges();
   }
+  
 
 }

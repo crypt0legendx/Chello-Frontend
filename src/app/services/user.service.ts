@@ -90,7 +90,7 @@ export class UserService {
   public deleteCard(data: any) {
     let token: any = localStorage.getItem('accessToken');
     let header = new HttpHeaders({ "Authorization": "Bearer " + token, 'Content-Type': 'application/json', body: data });
-    const requestOptions = { headers: header };
+    const requestOptions = { headers: header, body: data };
 
     return this.http.delete(this.base_url + 'paymentDetail/deleteCard', requestOptions)
   }
@@ -98,22 +98,33 @@ export class UserService {
   public deleteBankAccount(data: any) {
     let token: any = localStorage.getItem('accessToken');
     let header = new HttpHeaders({ "Authorization": "Bearer " + token, 'Content-Type': 'application/json', body: data });
-    const requestOptions = { headers: header };
+    const requestOptions = { headers: header, body: data };
 
     return this.http.delete(this.base_url + 'paymentDetail/deleteBank', requestOptions)
   }
 
-  public connectSpotify() {
-    var CLIENT_ID = 'a0541d4ce18545059f39a34d6b58127c';
-    var REDIRECT_URI = 'http://jmperezperez.com/spotify-oauth-jsfiddle-proxy/';
-    var scopes = [
-      'user-read-email'
-    ];
+  public getSpotifyProfileToken(code: any) {
+    var client_id = this.baseurl.spotifyClientId;
+    var client_secret = this.baseurl.spotifyClientSecret;
+
+    const body = new HttpParams()
+    .set('grant_type', 'authorization_code')
+    .set('code', code)
+    .set('redirect_uri', 'http://localhost:4200/profile-edit');
     
-    return this.http.get('https://accounts.spotify.com/authorize?client_id=' + CLIENT_ID +
-      '&redirect_uri=' + encodeURIComponent(REDIRECT_URI) +
-      '&scope=' + encodeURIComponent(scopes.join(' ')) +
-      '&response_type=token')
+    let header = new HttpHeaders({ 'Authorization': 'Basic ' + btoa(client_id + ':' + client_secret), 'Content-Type': 'application/x-www-form-urlencoded' });
+    const requestOptions = { headers: header };
+
+    console.log(body.toString());
+
+    return this.http.post('https://accounts.spotify.com/api/token', body.toString(), requestOptions)
+  }
+
+  public getSpotifyProfile(token: any) {
+    let header = new HttpHeaders({ "Authorization": "Bearer " + token });
+    const requestOptions = { headers: header };
+
+    return this.http.get('https://api.spotify.com/v1/me', requestOptions)
   }
 
   public blockUser(data:any){
@@ -148,4 +159,35 @@ export class UserService {
 	  return this.http.post(this.base_url + 'restrictUserList', data, requestOptions)
   }
 
+  public addSubscription(data: any) {
+    let token: any = localStorage.getItem('accessToken');
+    let header = new HttpHeaders({ "Authorization": "Bearer " + token, 'Content-Type': 'application/json' });
+    const requestOptions = { headers: header };
+
+    return this.http.post(this.base_url + 'subscription/addSubscriptionForPhotos', data, requestOptions)
+  }
+
+  public getSubscription() {
+    let token: any = localStorage.getItem('accessToken');
+    let header = new HttpHeaders({ "Authorization": "Bearer " + token, 'Content-Type': 'application/json' });
+    const requestOptions = { headers: header };
+
+    return this.http.post(this.base_url + 'subscription/SubscriptionDetails', null, requestOptions)
+  }
+
+  public deleteSubscription(data: any) {
+    let token: any = localStorage.getItem('accessToken');
+    let header = new HttpHeaders({ "Authorization": "Bearer " + token, 'Content-Type': 'application/json', body: data });
+    const requestOptions = { headers: header, body: data };
+
+    return this.http.delete(this.base_url + 'subscription/deleteSubscriptionForPhotos', requestOptions)
+  }
+
+  public editSubscription(data: any) {
+    let token: any = localStorage.getItem('accessToken');
+    let header = new HttpHeaders({ "Authorization": "Bearer " + token, 'Content-Type': 'application/json' });
+    const requestOptions = { headers: header };
+
+    return this.http.post(this.base_url + 'subscription/updateSubscriptionForPhotos', data, requestOptions)
+  }
 }

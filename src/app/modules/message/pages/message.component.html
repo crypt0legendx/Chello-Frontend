@@ -39,8 +39,8 @@
                             <div class="chat-list">
                                 <ul class="bt-nm">
                                     <li class="">
-                                        <a href="javascript:void(0)" class="person ">
-                                            <div class="list-wrapper-message" *ngFor="let item of chats" (click)="openParticularChat(item)">
+                                        <a href="javascript:void(0)" class="person " *ngFor="let item of chatUserList" (click)="openParticularChat(item)">
+                                            <div class="list-wrapper-message">
                                                 <div class="avtar ">
                                                     <img class="img-fluid" src="assets/images/Ellipse 14 (3).png"
                                                         alt="person-img">
@@ -53,7 +53,7 @@
                                                             <p class="font-14 color-30" *ngIf="item.formatlastDate">{{ item.formatlastDate | date:'MMMM dd' }}</p>
                                                         </div>
                                                     </div>
-                                                    <div class="detailsvds-2 ">
+                                                    <div class="detailsvds-2">
                                                         <div class="d-flex align-items-end justify-content-between">
                                                             <p class="font-14 color-68 color-30">{{item['lastMessage']}}</p>
                                                             <p><span class="iconify color-bo"
@@ -93,13 +93,11 @@
                                     <div class="message-inner">
                                         <div class="chat-message">
                                             <div class="message-c-r justify-content-between" *ngIf="showWelcome">
-                                                <a href="" type="button" data-toggle="modal"
-                                                    data-target="#exampleModalCenter">
-                                                    <p class="font-14 color-30">Welcome Mesage</p>
-                                                </a>
+                                                    <p class="font-14 color-30">Welcome Message</p>
                                                 <div class="notification-switch">
                                                     <label class="switch">
-                                                        <input type="checkbox">
+                                                        <input type="checkbox" data-toggle="modal"
+                                                        data-target="#exampleModalCenter">
                                                         <span class="slider round"></span>
                                                     </label>
                                                 </div>
@@ -112,8 +110,10 @@
                                                         <p class="font-14 color-30">{{ date | date:'MMMM dd' }}</p>
                                                     </div>
                                                 </div>
-                                                <div *ngFor="let item of chatArray">
-                                                    <div [class.showMessage]="isTrue">{{item['message']}}</div>
+                                                <div style="overflow-y: auto; height: 450px;">
+                                                    <div *ngFor="let item of allMessagesList">
+                                                        <div [ngClass]="item['messageBy']['name'] !== fullName ? 'rightMessage' : 'leftMessage'"><span [ngClass]="item['messageBy']['name'] !== fullName ? 'rightMessageWrap' : 'leftMessageWrap'">{{item['message']}}</span></div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

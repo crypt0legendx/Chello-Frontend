@@ -136,7 +136,11 @@
                         <div *ngIf="f.uploadId1.errors.required" style="color:red;">Government Issued ID is required
                         </div>
                       </div>
-                      <label class="file-input__label password-icon position-relative" for="file-input">
+                      <label class="file-input__label password-icon position-relative" for="file-input" aria-placeholder="Upload ID" *ngIf="uploadFile1 === false" style="color: #7B7B7B !important;">
+                        {{uploadFile1Name}}
+                        <span class="iconify" data-icon="gg:attachment"></span>
+                      </label>
+                      <label class="file-input__label password-icon position-relative" for="file-input" aria-placeholder="Upload ID" *ngIf="uploadFile1 === true">
                         {{uploadFile1Name}}
                         <span class="iconify" data-icon="gg:attachment"></span>
                       </label>
@@ -156,7 +160,11 @@
                           required
                         </div>
                       </div>
-                      <label class="file-input__label password-icon position-relative" for="file-input2">
+                      <label class="file-input__label password-icon position-relative" for="file-input2" *ngIf="uploadFile2 === false" style="color: #7B7B7B !important;">
+                        {{uploadFile2Name}}
+                        <span class="iconify" data-icon="gg:attachment"></span>
+                      </label>
+                      <label class="file-input__label password-icon position-relative" for="file-input2" *ngIf="uploadFile2 === true">
                         {{uploadFile2Name}}
                         <span class="iconify" data-icon="gg:attachment"></span>
                       </label>
@@ -175,7 +183,7 @@
                 <div class="form-group" *ngIf="role === 'creator'">
                   <label class="font-14 color-grey">to assist with account verification.</label>
                   <input type="text" name="name" class="w-100" formControlName="socialLink"
-                    [ngClass]="{ 'is-invalid': submitted && f.socialLink.errors }">
+                    [ngClass]="{ 'is-invalid': submitted && f.socialLink.errors }" placeholder="Add your social media account url">
                   <div *ngIf="submitted && f.socialLink.errors" class="invalid-feedback">
                     <div *ngIf="f.socialLink.errors.required" style="color:red;">Social media link is required
                     </div>

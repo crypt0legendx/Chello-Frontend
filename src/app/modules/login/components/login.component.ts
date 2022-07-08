@@ -107,7 +107,7 @@ export class LoginComponent implements OnInit {
         console.log(data);
         if (data['statusCode'] === 200) {
           localStorage.setItem('accessToken', data['accessToken']);
-
+          
           this.getUser();
         }
         else {
@@ -121,6 +121,23 @@ export class LoginComponent implements OnInit {
         this.toastr.error(error['error']['message']);
       });
     }
+  }
+
+  refreshToken() {
+    this.authService.refreshToken().subscribe((data: any) => {
+      if (data['statusCode'] === 200) {
+        localStorage.setItem('accessToken', data['accessToken']);               
+      }
+      else {
+        this.spinner.hide();
+        this.submitted = false;
+        this.toastr.error(data['message']);
+      }
+    })
+
+    setTimeout(() => {
+      this.refreshToken()
+    }, 60000);
   }
 
   // Sign in with Google

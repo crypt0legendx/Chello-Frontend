@@ -60,4 +60,5 @@ export class routers{
 	geoBlocking2 : string = '/geo-blocking-2';
 	pageState : string = '/page-state';
 	search: string = '/search';
+	customizeSubscription: string = '/customize-subscription';
 }

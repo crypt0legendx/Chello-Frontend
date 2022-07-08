@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProfileService } from '../../../../services/profile.service';
 import { PostService } from '../../../../services/post.service';
@@ -13,6 +13,8 @@ import * as auth from 'firebase/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { DomSanitizer } from '@angular/platform-browser';
+import {ProfileComponent} from '../../../../modules/profile/components/profile.component';
+
 
 declare var swal: any;
 declare var $: any;
@@ -53,6 +55,7 @@ export class SuggestionsComponent implements OnInit {
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     private sanitized: DomSanitizer,
     private cdr: ChangeDetectorRef,
+ 
   ) { }
 
   ngOnInit(): void {
@@ -80,6 +83,8 @@ export class SuggestionsComponent implements OnInit {
 
     this.searchUser("");
   }
+
+  @Input() selectedUserId = "";
 
   get f() { return this.searchForm.controls; }
 
@@ -117,8 +122,10 @@ export class SuggestionsComponent implements OnInit {
     this.router.navigate([this.routernavigate.search], { queryParams: { q: '' } });
   }
 
-  viewProfile(userName: any){
-    this.router.navigate([userName]);
+  viewProfile(userName: any, userId: any){
+    console.log('view profile selected id', userId)
+    this.selectedUserId = userId;
+    this.router.navigate([userName, userId]);
   }
 
 }

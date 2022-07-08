@@ -24,12 +24,12 @@
                         <div class="group-section notification-div-link">
                             <div class="create-group-div">
                                 <div class="create-group-wrapper">
-                                    <div class="first-div-create-group position-relative">
-                                        <div class="add-cover-photo-div text-center">
-                                            <p (click)="openFileSelector('cover')" style="cursor: pointer;"><span
+                                    <div class="first-div-create-group position-relative"  [style.backgroundImage]="'url('+ groupCoverPicture +')'">
+                                        <div class="add-cover-photo-div text-center" >
+                                            <p  *ngIf="!groupCoverPicture" (click)="openFileSelector('cover')" style="cursor: pointer;"><span *ngIf="!groupCoverPicture"
                                                     class="iconify color-blue font-26"
                                                     data-icon="ic:baseline-add-a-photo"></span></p>
-                                            <p class="font-16 color-light-blue" (click)="openFileSelector('cover')"
+                                            <p class="font-16 color-light-blue" *ngIf="!groupCoverPicture" (click)="openFileSelector('cover')"
                                                 style="cursor: pointer;">Add Cover Photo</p>
                                             <input id="fileCover" type="file" class="form-control"
                                                 (change)="selectProfileFile($event, 'coverImage')" style="display:none"
@@ -39,11 +39,11 @@
                                     <div class="second-div-group-create">
                                         <div class="row">
                                             <div class="col-md-3">
-                                                <div class="Add-profile-photo-div text-center">
-                                                    <p (click)="openFileSelector('profile')" style="cursor: pointer;">
-                                                        <span class="iconify color-blue font-26"
+                                                <div class="Add-profile-photo-div text-center" [style.backgroundImage]="'url('+ groupProfilePicture +')'">
+                                                    <p *ngIf="!groupProfilePicture" (click)="openFileSelector('profile')" style="cursor: pointer;">
+                                                        <span class="iconify color-blue font-26" *ngIf="!groupProfilePicture"
                                                             data-icon="ic:baseline-add-a-photo"></span></p>
-                                                    <p class="font-14 color-light-blue"
+                                                    <p class="font-14 color-light-blue" *ngIf="!groupProfilePicture"
                                                         (click)="openFileSelector('profile')" style="cursor: pointer;">
                                                         Add Profile
                                                         Photo</p>

@@ -89,6 +89,15 @@ export class ProfileEditComponent implements OnInit {
   bankDetail: any = {};
   cardDetail: any = {};
 
+  formattedaddress = " ";
+  options = {}
+
+  role: any;
+
+  myLanguage: any = 'English';
+
+  spotifyCode: any;
+
   constructor(
     private formBuilder: FormBuilder,
     private profileService: ProfileService,
@@ -139,8 +148,9 @@ export class ProfileEditComponent implements OnInit {
     if (retrievedObject) {
       this.userJsonData = JSON.parse(retrievedObject);
       console.log(this.userJsonData);
+      this.role = this.userJsonData['role'];
       this.userCoverPicture = this.userJsonData['coverImage'];
-      if(this.userJsonData['coverImage']){
+      if (this.userJsonData['coverImage']) {
         this.isUserCoverPicture = true;
       } else {
         this.isUserCoverPicture = false;
@@ -149,6 +159,12 @@ export class ProfileEditComponent implements OnInit {
     } else {
       this.router.navigate([this.routernavigate.login]);
     }
+
+    this.route.queryParams.subscribe(params => {
+      this.spotifyCode = params['code'];
+      console.log(this.spotifyCode);
+      this.getSpotifyAccessToken();
+    });
 
     this.getUser();
 
@@ -183,27 +199,27 @@ export class ProfileEditComponent implements OnInit {
     });
 
     this.websiteForm = this.formBuilder.group({
-      website: ['', Validators.required]
+      website: ['', [Validators.required, Validators.pattern(/^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/)]]
     });
 
     this.instagramForm = this.formBuilder.group({
-      instagram: ['', Validators.required]
+      instagram: ['', [Validators.required, Validators.pattern(/^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/)]]
     });
 
     this.tiktokForm = this.formBuilder.group({
-      tiktok: ['', Validators.required]
+      tiktok: ['', [Validators.required, Validators.pattern(/^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/)]]
     });
 
     this.twitterForm = this.formBuilder.group({
-      twitter: ['', Validators.required]
+      twitter: ['', [Validators.required, Validators.pattern(/^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/)]]
     });
 
     this.facebookForm = this.formBuilder.group({
-      facebook: ['', Validators.required]
+      facebook: ['', [Validators.required, Validators.pattern(/^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/)]]
     });
 
     this.entForm = this.formBuilder.group({
-      ent: ['', Validators.required]
+      ent: ['', [Validators.required, Validators.pattern(/^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/)]]
     });
 
     this.profileUrlForm = this.formBuilder.group({
@@ -215,7 +231,7 @@ export class ProfileEditComponent implements OnInit {
     this.fetchBankAccount();
   }
 
-  getUser(){
+  getUser() {
     this.userService.currentUser().subscribe((data: any) => {
       console.log(data);
       if (data['statusCode'] === 200) {
@@ -234,13 +250,13 @@ export class ProfileEditComponent implements OnInit {
   setEditVales() {
     let retrievedObject: any = localStorage.getItem('userData');
     this.userJsonData = JSON.parse(retrievedObject);
-
+    this.role = this.userJsonData['role'];
     this.displayName = this.userJsonData['fullName'];
     this.username = this.userJsonData['userName'];
     this.profileUrl = "chello.world/" + this.username;
     this.userProfilePicture = this.userJsonData['profileImage'];
     this.userCoverPicture = this.userJsonData['coverImage'];
-    if(this.userJsonData['coverImage']){
+    if (this.userJsonData['coverImage']) {
       this.isUserCoverPicture = true;
     } else {
       this.isUserCoverPicture = false;
@@ -564,13 +580,14 @@ export class ProfileEditComponent implements OnInit {
       "website": this.websiteFormChecker.website.value,
     }
 
-    console.log(profileValue);
+    console.log(this.websiteFormChecker.website.errors);
 
     this.submittedWebsiteForm = true;
     if (this.websiteForm.invalid) {
       return;
     }
     else {
+
       this.spinner.show();
 
       this.profileService.editProfile(profileValue).subscribe((data: any) => {
@@ -600,28 +617,28 @@ export class ProfileEditComponent implements OnInit {
       "socialMediaLinks": [
         {
           "name": "instagram",
-          "url": this.instagramFormChecker.instagram.value,
-          "_id": this.instagramId
+          "url": this.instagramFormChecker.instagram.value
+          //"_id": this.instagramId
         },
         {
           "name": "tiktok",
-          "url": this.tiktokLink,
-          "_id": this.tiktokId
+          "url": this.tiktokLink
+          //"_id": this.tiktokId
         },
         {
           "name": "twitter",
-          "url": this.twitterLink,
-          "_id": this.twitterId
+          "url": this.twitterLink
+          //"_id": this.twitterId
         },
         {
           "name": "facebook",
-          "url": this.facebookLink,
-          "_id": this.facebookId
+          "url": this.facebookLink
+          //"_id": this.facebookId
         },
         {
           "name": "24ent",
-          "url": this.entLink,
-          "_id": this.entId
+          "url": this.entLink
+          //"_id": this.entId
         }
       ]
     }
@@ -661,28 +678,28 @@ export class ProfileEditComponent implements OnInit {
       "socialMediaLinks": [
         {
           "name": "instagram",
-          "url": this.instagramLink,
-          "_id": this.instagramId
+          "url": this.instagramLink
+          // "_id": this.instagramId
         },
         {
           "name": "tiktok",
-          "url": this.tiktokFormChecker.tiktok.value,
-          "_id": this.tiktokId
+          "url": this.tiktokFormChecker.tiktok.value
+          //"_id": this.tiktokId
         },
         {
           "name": "twitter",
-          "url": this.twitterLink,
-          "_id": this.twitterId
+          "url": this.twitterLink
+          //"_id": this.twitterId
         },
         {
           "name": "facebook",
-          "url": this.facebookLink,
-          "_id": this.facebookId
+          "url": this.facebookLink
+          //"_id": this.facebookId
         },
         {
           "name": "24ent",
-          "url": this.entLink,
-          "_id": this.entId
+          "url": this.entLink
+          //"_id": this.entId
         }
       ]
     }
@@ -722,28 +739,28 @@ export class ProfileEditComponent implements OnInit {
       "socialMediaLinks": [
         {
           "name": "instagram",
-          "url": this.instagramLink,
-          "_id": this.instagramId
+          "url": this.instagramLink
+          //"_id": this.instagramId
         },
         {
           "name": "tiktok",
-          "url": this.tiktokLink,
-          "_id": this.tiktokId
+          "url": this.tiktokLink
+          //"_id": this.tiktokId
         },
         {
           "name": "twitter",
-          "url": this.twitterFormChecker.twitter.value,
-          "_id": this.twitterId
+          "url": this.twitterFormChecker.twitter.value
+          //"_id": this.twitterId
         },
         {
           "name": "facebook",
-          "url": this.facebookLink,
-          "_id": this.facebookId
+          "url": this.facebookLink
+          //"_id": this.facebookId
         },
         {
           "name": "24ent",
-          "url": this.entLink,
-          "_id": this.entId
+          "url": this.entLink
+          //"_id": this.entId
         }
       ]
     }
@@ -783,28 +800,28 @@ export class ProfileEditComponent implements OnInit {
       "socialMediaLinks": [
         {
           "name": "instagram",
-          "url": this.instagramLink,
-          "_id": this.instagramId
+          "url": this.instagramLink
+          //"_id": this.instagramId
         },
         {
           "name": "tiktok",
-          "url": this.tiktokLink,
-          "_id": this.tiktokId
+          "url": this.tiktokLink
+          //"_id": this.tiktokId
         },
         {
           "name": "twitter",
-          "url": this.twitterLink,
-          "_id": this.twitterId
+          "url": this.twitterLink
+          //"_id": this.twitterId
         },
         {
           "name": "facebook",
-          "url": this.facebookFormChecker.facebook.value,
-          "_id": this.facebookId
+          "url": this.facebookFormChecker.facebook.value
+          //"_id": this.facebookId
         },
         {
           "name": "24ent",
-          "url": this.entLink,
-          "_id": this.entId
+          "url": this.entLink
+          //"_id": this.entId
         }
       ]
     }
@@ -844,28 +861,28 @@ export class ProfileEditComponent implements OnInit {
       "socialMediaLinks": [
         {
           "name": "instagram",
-          "url": this.instagramLink,
-          "_id": this.instagramId
+          "url": this.instagramLink
+          //"_id": this.instagramId
         },
         {
           "name": "tiktok",
-          "url": this.tiktokLink,
-          "_id": this.tiktokId
+          "url": this.tiktokLink
+          //"_id": this.tiktokId
         },
         {
           "name": "twitter",
-          "url": this.twitterLink,
-          "_id": this.twitterId
+          "url": this.twitterLink
+          //"_id": this.twitterId
         },
         {
           "name": "facebook",
-          "url": this.facebookLink,
-          "_id": this.facebookId
+          "url": this.facebookLink
+          //"_id": this.facebookId
         },
         {
           "name": "24ent",
-          "url": this.entFormChecker.ent.value,
-          "_id": this.entId
+          "url": this.entFormChecker.ent.value
+          //"_id": this.entId
         }
       ]
     }
@@ -925,7 +942,7 @@ export class ProfileEditComponent implements OnInit {
   }
 
   async openFileSelector(selectorType: any) {
-    if (selectorType === "cover"){
+    if (selectorType === "cover") {
       $("#fileCover").trigger("click");
     } else if (selectorType === "profile") {
       $("#file").trigger("click");
@@ -936,12 +953,12 @@ export class ProfileEditComponent implements OnInit {
     const file = this.selectedFiles;
     let res: any = await this.uploadService.uploadFile(file, filePath);
     console.log(res);
-    
-    if(jsonKey === "profileImage") {
+
+    if (jsonKey === "profileImage") {
       this.uploadPicture({
         "profileImage": res['Location'],
       })
-    } else if(jsonKey === "coverImage") {
+    } else if (jsonKey === "coverImage") {
       this.uploadPicture({
         "coverImage": res['Location'],
       })
@@ -960,15 +977,15 @@ export class ProfileEditComponent implements OnInit {
         this.imageSrc = reader.result as string;
       }
       this.selectedFiles = file;
-      if(fileType === "profileImage") {
+      if (fileType === "profileImage") {
         this.uploadImage(filePath, "profileImage");
-      } else  if(fileType === "coverImage") {
+      } else if (fileType === "coverImage") {
         this.uploadImage(filePath, "coverImage");
       }
     }
   }
-  fetchCard(){
 
+  fetchCard() {
     this.userService.fetchCard().subscribe((data: any) => {
 
       console.log(data);
@@ -997,9 +1014,7 @@ export class ProfileEditComponent implements OnInit {
 
   }
 
-
-  fetchBankAccount(){
-
+  fetchBankAccount() {
     this.userService.fetchBankAccount().subscribe((data: any) => {
 
       console.log(data);
@@ -1019,8 +1034,8 @@ export class ProfileEditComponent implements OnInit {
     });
   }
 
-  deleteCard(Id: any){
-    let data = {"_id": Id};
+  deleteCard(Id: any) {
+    let data = { "_id": Id };
     console.log(data);
     this.spinner.show();
     this.userService.deleteCard(data).subscribe((data: any) => {
@@ -1040,10 +1055,10 @@ export class ProfileEditComponent implements OnInit {
     });
   }
 
-  deleteBankAccount(Id: any){
+  deleteBankAccount(Id: any) {
     console.log(Id);
     this.spinner.show();
-    this.userService.deleteBankAccount({"_id": Id}).subscribe((data: any) => {
+    this.userService.deleteBankAccount({ "_id": Id }).subscribe((data: any) => {
       console.log(data);
       if (data['statusCode'] === 200) {
         this.spinner.hide();
@@ -1061,9 +1076,106 @@ export class ProfileEditComponent implements OnInit {
     });
   }
 
-  replaceLastChar(number: any){
+  replaceLastChar(number: any) {
     number = number.slice(0, -4) + "****";
     number = number.match(/.{1,4}/g);
     return number.join(' ')
+  }
+
+  public AddressChange(address: any) {
+    //setting address from API to local variable
+    this.formattedaddress = address.formatted_address
+  }
+
+  shareOnSocialMedia(type: any) {
+    if (type === "facebook") {
+      const navUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + 'https://chello.world' + this.username;
+      window.open(navUrl, '_blank');
+    } else if (type === "instagram") {
+
+    } else if (type === "twitter") {
+      const navUrl = 'https://twitter.com/intent/tweet?text=' + 'https://chello.world' + this.username;
+      window.open(navUrl, '_blank');
+    } else if (type === "tiktok") {
+
+    }
+
+  }
+
+  async connectSpotify() {
+    var width = 450, height = 730, left = (screen.width / 2) - (width / 2), top = (screen.height / 2) - (height / 2);
+
+    var w = window.location.href = 'https://accounts.spotify.com/authorize?client_id=' + this.baseurl.spotifyClientId +
+      '&redirect_uri=' + this.baseurl.spotifyRedirectUrl +
+      '&scope=user-read-private user-read-email&response_type=code';
+  }
+
+  async getSpotifyAccessToken() {
+    this.spinner.show();
+    this.userService.getSpotifyProfileToken(this.spotifyCode).subscribe((data: any) => {
+      console.log(data);
+      this.getSpotifyProfile(data['access_token']);
+    }, (error) => {
+      console.log(error);
+      this.spinner.hide();
+    });
+  }
+  
+  getSpotifyProfile(accessToken: any){
+    this.userService.getSpotifyProfile(accessToken).subscribe((data: any) => {
+      console.log(data);
+      this.spinner.hide();
+    }, (error) => {
+      console.log(error);
+      this.spinner.hide();
+    });
+  }
+
+  changeRole() {
+    this.spinner.show();
+    this.profileService.editProfile({ 'role': 'creator' }).subscribe((data: any) => {
+      console.log(data);
+      if (data['statusCode'] === 200) {
+        localStorage.setItem('userData', JSON.stringify(data['data']));
+        this.role = 'creator';
+        this.setEditVales();
+        this.spinner.hide();
+        this.toastr.success(data['message']);
+      }
+      else {
+        this.spinner.hide();
+        this.toastr.error(data['message']);
+      }
+    }, (error) => {
+      this.spinner.hide();
+      this.toastr.error(error['message']);
+    });
+  }
+
+  manageSubscription() {
+    this.router.navigate([this.routernavigate.customizeSubscription]);
+  }
+
+  changeLanguage(language: string) {
+    console.log("the selected value is " + language);
+    this.myLanguage = language;
+    this.spinner.show();
+    this.profileService.editProfile({ 'language': language }).subscribe((data: any) => {
+      console.log(data);
+      if (data['statusCode'] === 200) {
+        localStorage.setItem('userData', JSON.stringify(data['data']));
+        this.role = 'creator';
+        this.setEditVales();
+        this.spinner.hide();
+        this.toastr.success(data['message']);
+      }
+      else {
+        this.spinner.hide();
+        this.toastr.error(data['message']);
+      }
+    }, (error) => {
+      this.spinner.hide();
+      this.toastr.error(error['message']);
+    });
   }
 }

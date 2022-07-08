@@ -329,6 +329,16 @@
     </div>
 </div>
 
+<div class="data-not-found-page" *ngIf="userPosts.length === 0">
+    <div class="wrapper-data-not-found text-center">
+        <img src="assets/images/no-data.png" alt="image" />
+        <p class="font-26 color-blue font-bold">Data not found!</p>
+        <div class="button-data-not-found">
+            <!-- <a href="javascript:void(0)" class="btn">Go Back</a> -->
+        </div>
+    </div>
+</div>
+
 
 <!-- Modal -->
 <div class="modal fade" id="sendTipModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"

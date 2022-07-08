@@ -27,7 +27,7 @@ export class GroupPostListComponent implements OnInit, OnChanges {
 
   isShown: boolean = false; // hidden by default
   totalPosts: any;
-  userPosts: any;
+  userPosts: any = [];
 
   userName: any;
   profilePicture: any;

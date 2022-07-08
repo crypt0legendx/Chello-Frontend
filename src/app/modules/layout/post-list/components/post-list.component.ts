@@ -56,6 +56,15 @@ export class PostListComponent implements OnInit {
   postType: any = "all";
   filterType: string = "";
 
+  allTime: any = "all";
+  lastThreeMonths: any = '';
+  lastMonth: any = '';
+  lastWeek: any = '';
+
+  latestPost: any = 'latest';
+  mostLiked: any = '';
+
+  filterText: any = "All";
   filterPostDateWise: any = "all";
   filterPost: any = "latest";
   orderBy: any = "desc";
@@ -754,5 +763,9 @@ export class PostListComponent implements OnInit {
 
   viewProfile(userName: any) {
     this.router.navigate([userName]);
+  }
+
+  showAllPosts() {
+    // this.postList.getPostsFromAnother();
   }
 }

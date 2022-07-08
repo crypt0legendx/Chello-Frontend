@@ -36,7 +36,7 @@
                 <div class="typing-box">
                     <div class="wrapper-chat-button">
                         <div class="div-for-send-message">
-                            <input type="text" class="form-control" placeholder="Type message" [(ngModel)]="name">
+                            <input type="text" class="form-control" placeholder="Type message" [(ngModel)]="inputMessage">
                             <div class="msg-btns">
                                 <div class="icons-one">
                                     <a href=""><span class="iconify" data-icon="icon-park-outline:picture"></span></a>
@@ -47,7 +47,7 @@
                                 </div>
                                 <div class="icons-two">
                                     <div class="right-side-button text-right">
-                                        <button (click) = "sendChat(name)">Send</button>
+                                        <button (click) = "sendChat()">Send</button>
                                     </div>
                                 </div>
                             </div>
