@@ -21,6 +21,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { browserPopupRedirectResolver, browserSessionPersistence } from 'firebase/auth';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { PostsFilterPipe } from './pipe/postFilter.pipe';
+// import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDN4tj9GQmKLEMoy34HpxqoW98FO9AcKDs",
@@ -56,7 +57,8 @@ const firebaseConfig = {
     }),
     ToastContainerModule,
     NgxSpinnerModule,
-    NgxIntlTelInputModule
+    NgxIntlTelInputModule,
+    // GooglePlaceModule
   ],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },

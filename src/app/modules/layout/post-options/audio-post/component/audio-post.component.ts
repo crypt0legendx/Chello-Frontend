@@ -5,7 +5,7 @@ import { ToastrService } from "ngx-toastr";
 import { GroupService } from "src/app/services/group.service";
 import { PostService } from "src/app/services/post.service";
 import { UploadService } from "src/app/services/upload.service";
-// import * as RecordRTC from 'recordrtc';
+import * as RecordRTC from 'recordrtc';
 import { DomSanitizer } from '@angular/platform-browser';
 import { HomeComponent } from "src/app/modules/home/components/home.component";
 
@@ -218,8 +218,8 @@ transform(url: any) {
     };
 
     //Start Actuall Recording
-    // var StereoAudioRecorder = RecordRTC.StereoAudioRecorder;
-    // this.record = new StereoAudioRecorder(stream, options);
+    var StereoAudioRecorder = RecordRTC.StereoAudioRecorder;
+    this.record = new StereoAudioRecorder(stream, options);
     this.record.record();
   }
 

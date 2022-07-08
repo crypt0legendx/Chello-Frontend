@@ -19,9 +19,9 @@
                 <div class="poll-asked-user">
                     <div class="wrapper-poll-asked">
                         <img [src]="groupMembersLists.profileImage" onError="this.src='assets/images/user.png'" class="round-image2"
-                            alt="image" (click)="viewProfile(groupMembersLists.userName)" style="cursor: pointer;"/>
+                            alt="image" (click)="viewProfile(groupMembersLists.userName, groupMembersLists._id)" style="cursor: pointer;"/>
                         <div class="user-info-p-a">
-                            <p class="font-14 font-bold color-white" (click)="viewProfile(groupMembersLists.userName)" style="cursor: pointer;"> @{{groupMembersLists.userName}} &nbsp; <span
+                            <p class="font-14 font-bold color-white" (click)="viewProfile(groupMembersLists.userName, groupMembersLists._id)" style="cursor: pointer;"> @{{groupMembersLists.userName}} &nbsp; <span
                                     class="iconify font-20 color-light-blue"
                                     data-icon="ic:sharp-verified"></span>
                             </p>

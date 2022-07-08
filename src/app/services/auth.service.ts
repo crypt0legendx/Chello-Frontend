@@ -38,6 +38,14 @@ export class AuthService {
     return this.http.post<any[]>(this.base_url + 'signin', loginData);
   }
 
+  public refreshToken(): Observable<any[]> {
+    let token: any = localStorage.getItem('accessToken');
+    let header = new HttpHeaders({ "Authorization": "Bearer " + token, 'Content-Type': 'application/json' });
+    const requestOptions = { headers: header };
+    const data:any = {};
+    return this.http.post<any[]>(this.base_url + '/api/v1/refreshToken', data,requestOptions);
+  }
+
   public forgetPassword(email: any): Observable<any[]> {
     return this.http.post<any[]>(this.base_url + 'passwords', email);
   }

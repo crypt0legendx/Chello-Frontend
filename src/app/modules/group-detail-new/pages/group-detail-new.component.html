@@ -8,7 +8,7 @@
                 </div>
                 <div class="col-md-6 mobile-margin-add">
                     <div class="home-middle-div">
-                        <div class="wrapper-home-middle-div profile-first-s middle-div-cg-b">
+                        <div class="wrapper-home-middle-div profile-first-s middle-div-cg-b" [style.backgroundImage]="'url('+ groupCoverPicture +')'">
                             <div class="home-middle-div-one position-relative group-div-extraflex">
                                 <div class="d-flex justify-content-between group-headding align-items-baseline">
                                     <div class="subscription-head d-flex">
@@ -17,8 +17,8 @@
                                                 data-icon="akar-icons:arrow-left"></span></a>
                                         <p class="font-20 font-bold color-white">
                                             {{retrievedGroupDetails.title}}<br>
-                                            <span class="color-white font-16 font-reg">33 Posts</span> &nbsp; <span
-                                                class="color-white font-16 font-reg">{{numFormatter(totalGroupMember)}}
+                                            <!-- <span class="color-white font-16 font-reg">33 Posts</span> &nbsp;  -->
+                                            <span class="color-white font-16 font-reg">{{numFormatter(totalGroupMember)}}
                                                 Members</span>
                                         </p>
                                     </div>
@@ -37,7 +37,8 @@
                                             <div
                                                 class="poll-asked-user d-flex justify-content-between abso-profile-btn">
                                                 <div class="wrapper-poll-asked-user">
-                                                    <img src="assets/images/Ellipse 10 (1).png" alt="image" />
+                                                    <img [src]="groupProfilePicture"
+                                                    onError="this.src='assets/images/user.png'" alt="image" />
                                                     <div class="user-info-p-a">
                                                         <p class="font-20 font-bold color-blue"><br></p>
                                                         <p class="font-20 font-bold color-blue">
@@ -51,8 +52,8 @@
                                                             class="iconify"
                                                             data-icon="akar-icons:person-add"></span>Invite
                                                         Member</a>
-                                                    <a href="" class="font-16 color-blue"><span class="iconify"
-                                                            data-icon="bi:share-fill"></span>Share</a>
+                                                    <!-- <a href="" class="font-16 color-blue"><span class="iconify"
+                                                            data-icon="bi:share-fill"></span>Share</a> -->
                                                 </div>
                                             </div>
                                         </div>
@@ -116,6 +117,16 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="data-not-found-page" *ngIf="totalGroupMember === 0">
+                                            <div class="wrapper-data-not-found text-center">
+                                                <img src="assets/images/no-data.png" alt="image" />
+                                                <p class="font-26 color-blue font-bold" style="font-family: 'Rubik'; font-style: normal;">There is no member in the group!</p>
+                                                <div class="button-data-not-found">
+                                                    <!-- <a href="javascript:void(0)" class="btn">Go Back</a> -->
                                                 </div>
                                             </div>
                                         </div>

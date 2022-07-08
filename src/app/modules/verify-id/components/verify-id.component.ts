@@ -49,8 +49,10 @@ export class VerifyIdComponent implements OnInit {
 
   uploadId1URL: any = '';
   uploadId2URL: any = '';
-  uploadFile1Name: any = '';
-  uploadFile2Name: any = '';
+  uploadFile1Name: any = 'Click here to Upload ID';
+  uploadFile2Name: any = 'Click here to Upload ID';
+  uploadFile1: boolean = false;
+  uploadFile2: boolean = false;
 
   userJsonData: any;
   role: any = "creator";
@@ -182,9 +184,11 @@ export class VerifyIdComponent implements OnInit {
       this.selectedFiles = file;
       if (fileType === "uploadId1") {
         this.uploadFile1Name = file.name;
+        this.uploadFile1 = true;
         this.uploadImage(filePath, "uploadId1");
       } else if (fileType === "uploadId2") {
         this.uploadFile2Name = file.name;
+        this.uploadFile2 = true;
         this.uploadImage(filePath, "uploadId2");
       }
     }

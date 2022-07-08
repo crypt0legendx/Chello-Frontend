@@ -29,6 +29,7 @@ export class MessageComponent implements OnInit {
   isUserCoverPicture: boolean = false;
   userJsonData: any;
   userId: any;
+  modal: boolean = false;
 
   postsCol: AngularFirestoreCollection<any> | undefined;
   posts: Observable<any> | undefined;
@@ -46,9 +47,9 @@ export class MessageComponent implements OnInit {
   noMessage: boolean = false;
   isMessageListFound: boolean = false;
   showMessageTwo: boolean = false;
-  users: any = [];
-  chats: any = [];
-  chatArray:any = [];
+  allUsersList: any = [];
+  chatUserList: any = [];
+  allMessagesList:any = [];
   showWelcome: boolean = true;
   fullName: String = "";
   date: any;
@@ -90,27 +91,28 @@ export class MessageComponent implements OnInit {
       }
     }
 
-    this.userList();
+    this.chatUsers();
     }
 
-    userList() {
-      this.chats = [];
-      this.users = [];
+  chatUsers() {
+    let Array: any = [];
     const queryChat = this.afs.collection('chats').ref.where("users", "array-contains", this.userId)
     const queryUsers = this.afs.collection('users')
-    queryChat.get().then(data => {
+    queryChat.onSnapshot(data => {
+      Array = [];
       data.forEach(el => {
-        this.chats.push(el.data())
+        Array.push(el.data())
       })
+      
       queryUsers.get().subscribe(data => {
         data.forEach(el => {
-          this.users.push(el.data())
+          this.allUsersList.push(el.data())
         })
-        this.chats.forEach((el: any) => {
+          Array.forEach((el: any) => {
           let secondUser: any = []
           el.users.forEach((ele: any) => {
             if (ele !== this.userId) {
-              secondUser = this.users.filter((element: any) => element.user_id === ele)
+              secondUser = this.allUsersList.filter((element: any) => element.user_id === ele)
             }
           });
           el['talkingTo'] = secondUser[0]
@@ -118,48 +120,43 @@ export class MessageComponent implements OnInit {
           el['formatlastDate'] = formatDate
         });
       });
+      this.chatUserList = Array;
     });
-  }
-
-  messageTwo() {
-    this.showMessageTwo = true;
   }
 
   openParticularChat(param: any) {
     this.inputMessage = param;
-    this.chatArray = [];
+    this.allMessagesList = [];
     this.date = param.formatlastDate;
     this.fullName = param.talkingTo.fullName;
     this.afs.collection("chats").doc(param.chatId).collection("messages").get().subscribe(data => {
     data.forEach(el => {
-        this.chatArray.push(el.data())
+        this.allMessagesList.push(el.data())
       })
     })  
     this.showWelcome = false
   }
 
-  messageSent() {
-    this.userList();
-    this.showMessageTwo = false
-  }
-
-   async sendMessage(){
+  async sendMessage() { 
+    if(this.message.trim()) {
     const resp = await this.afs.collection("chats").doc(this.inputMessage.chatId).collection("messages").add({
       message: this.message,
       });
 
-      const payload = {
-        message: this.message,
-        messageBy: {user_id: this.userId, name: this.userJsonData.fullName},
-        messageId:  resp.id,
-        messageTo: {
-          name: this.inputMessage.talkingTo.fullName,
-          user_id: this.inputMessage.talkingTo.user_id
+    const payload = {
+      message: this.message,
+      messageId:  resp.id,
+      messageBy: {
+        userId: this.userId,
+        name: this.userJsonData.fullName},
+      messageTo: {
+        name: this.inputMessage.talkingTo.fullName,
+        user_id: this.inputMessage.talkingTo.user_id
         }
       }
-      this.chatArray.push(payload)
+    this.allMessagesList.push(payload)
 
-     await this.afs.collection("chats").doc(this.inputMessage.chatId).collection("messages").doc(resp.id).update({
+    await this.afs.collection("chats").doc(this.inputMessage.chatId).collection("messages").doc(resp.id).update({
       messageId: resp.id,
       messageBy: {
         name: this.userJsonData.fullName,
@@ -171,11 +168,23 @@ export class MessageComponent implements OnInit {
       }
     });
     
-     await this.afs.collection("chats").doc(this.inputMessage.chatId).update({
+    await this.afs.collection("chats").doc(this.inputMessage.chatId).update({
       lastMessage: this.message,
       lastMessageSent: new Date()
     });
     this.message = "";
-    this.userList();
+    // this.chatUsers();
+    }
   }
+
+  messageTwo() {
+    this.showMessageTwo = true;
+  }
+  
+
+  messageSent() {
+    this.chatUsers();
+    this.showMessageTwo = false
+  }
+  
 }

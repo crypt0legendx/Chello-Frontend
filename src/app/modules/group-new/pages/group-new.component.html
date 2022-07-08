@@ -28,7 +28,7 @@
                         <div class="group-section notification-div-link">
                             <!--Join Group-->
                             <div class="block-group-n" *ngFor="let groupLists of joinGroups">
-                                <div class="new-group-div" *ngIf="groupLists['invitee_id'] != groupLists['member_id']">
+                                <div class="new-group-div">
                                     <div class="row-gnew">
                                         <div class="col-n-3">
                                             <div class="new-group-image">
@@ -56,10 +56,15 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="button-join-group-new">
+                                                <div class="button-join-group-new" *ngIf="groupLists['invitee_id'] != groupLists['member_id']">
                                                     <a (click)="joinGroup(groupLists, 'accepted')" style="cursor: pointer; color: #fff;">Join</a>
                                                     <a (click)="joinGroup(groupLists, 'rejected')" style="cursor: pointer; margin-left: 10px; border-radius: 4px; border: 1px solid #150AA1; color: #150AA1 !important; background: transparent;">Cancel</a>
                                                 </div>
+
+                                                <div class="button-join-group-new" *ngIf="groupLists['invitee_id'] === groupLists['member_id']">
+                                                    <a style="background-color: #5858faa6; color: #fff; cursor: none;" disabled>Requested To Join</a>
+                                                </div>
+                                                
                                             </div>
                                             <div class="detail-d-text-gn">
                                                 <p class="font-14 color-68">{{groupLists['groupData'][0]['description']}}</p>

@@ -294,7 +294,7 @@
                                                     <p class="font-16 color-blue font-bold">Location</p>
                                                     <input type="text" placeholder="Jacksonville, Florida"
                                                         class="w-100 extra-loc" formControlName="location"
-                                                        [ngClass]="{ 'is-invalid': submittedLocationForm && locationFormChecker.location.errors }">
+                                                        [ngClass]="{ 'is-invalid': submittedLocationForm && locationFormChecker.location.errors }" ngx-google-places-autocomplete (onAddressChange)="AddressChange($event)">
                                                     <div *ngIf="submittedLocationForm && locationFormChecker.location.errors"
                                                         class="invalid-feedback">
                                                         <div *ngIf="locationFormChecker.location.errors.required"
@@ -326,6 +326,8 @@
                                                         class="invalid-feedback">
                                                         <div *ngIf="websiteFormChecker.website.errors.required"
                                                             style="color:red;">Website is required</div>
+                                                            <div *ngIf="websiteFormChecker.website.errors.pattern"
+                                                            style="color:red;">Website URL is invalid</div>
                                                     </div>
                                                     <div class="button-change-pe">
                                                         <button type="submit">Add</button>
@@ -355,6 +357,8 @@
                                                         class="invalid-feedback">
                                                         <div *ngIf="instagramFormChecker.instagram.errors.required"
                                                             style="color:red;">Instagram is required</div>
+                                                            <div *ngIf="instagramFormChecker.instagram.errors.pattern"
+                                                            style="color:red;">URL is invalid</div>
                                                     </div>
                                                     <div class="position-icon-input">
                                                         <div class="social-icons-for-footer">
@@ -379,6 +383,8 @@
                                                         class="invalid-feedback">
                                                         <div *ngIf="tiktokFormChecker.tiktok.errors.required"
                                                             style="color:red;">Tiktok is required</div>
+                                                        <div *ngIf="tiktokFormChecker.tiktok.errors.pattern"
+                                                            style="color:red;">URL is invalid</div>
                                                     </div>
                                                     <div class="position-icon-input">
                                                         <div class="social-icons-for-footer">
@@ -402,6 +408,8 @@
                                                         class="invalid-feedback">
                                                         <div *ngIf="twitterFormChecker.twitter.errors.required"
                                                             style="color:red;">Twitter is required</div>
+                                                        <div *ngIf="twitterFormChecker.twitter.errors.pattern"
+                                                            style="color:red;">URL is invalid</div>
                                                     </div>
                                                     <div class="position-icon-input">
                                                         <div class="social-icons-for-footer">
@@ -426,6 +434,8 @@
                                                         class="invalid-feedback">
                                                         <div *ngIf="facebookFormChecker.facebook.errors.required"
                                                             style="color:red;">Facebook is required</div>
+                                                        <div *ngIf="facebookFormChecker.facebook.errors.pattern"
+                                                            style="color:red;">URL is invalid</div>
                                                     </div>
                                                     <div class="position-icon-input">
                                                         <div class="social-icons-for-footer">
@@ -439,7 +449,7 @@
                                                 </form>
                                             </div>
                                         </div>
-                                        <div class="p-e-input-div add-social-icon-in">
+                                        <!-- <div class="p-e-input-div add-social-icon-in">
                                             <div class="headding-input-pe position-relative">
                                                 <form [formGroup]="entForm" (ngSubmit)="submitEnt()">
                                                     <input type="text" placeholder="Insert Link here..."
@@ -449,6 +459,8 @@
                                                         class="invalid-feedback">
                                                         <div *ngIf="entFormChecker.ent.errors.required"
                                                             style="color:red;">24ent is required</div>
+                                                        <div *ngIf="entFormChecker.ent.errors.pattern"
+                                                            style="color:red;">URL is invalid</div>
                                                     </div>
                                                     <div class="position-icon-input">
                                                         <div class="social-icons-for-footer">
@@ -462,7 +474,7 @@
                                                     </div>
                                                 </form>
                                             </div>
-                                        </div>
+                                        </div> -->
 
                                     </div>
                                     <div class="w-20"></div>
@@ -490,11 +502,11 @@
                                                                 data-icon="cib:tiktok"></span></a>
                                                         <a href="https://twitter.com/LetsChello"><span class="iconify"
                                                                 data-icon="ant-design:twitter-outlined"></span></a>
-                                                        <a href="javascript:void(0)"><span class="iconify"
+                                                        <a href="https://www.facebook.com/ChelloWorld"><span class="iconify"
                                                                 data-icon="eva:facebook-fill"></span></a>
-                                                        <a href="javascript:void(0)"><img
+                                                        <!-- <a href="javascript:void(0)"><img
                                                                 src="assets/images/24ent new logo white 1.png"
-                                                                alt="image"></a>
+                                                                alt="image"></a> -->
                                                     </div>
                                                 </div>
                                             </div>
@@ -503,7 +515,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12 second-home-middle position-relative" style="background-color: #F1F1FF;">
+                        <div class="col-md-12 second-home-middle position-relative" style="background-color: #F1F1FF;" *ngIf="role != 'creator'">
                             <div class="became-creator-pe">
                                 <p class="font-16 font-bold color-blue">Become Creator</p>
                                 <p class="font-16 color-blue">As a Creator, you will keep {{variable.creatorKeeps}}% of
@@ -511,11 +523,11 @@
                                     as a Creator, you will pay ${{variable.adminMonthlyFee}} per month or you can pay
                                     ${{variable.adminYearlyFee}} per year.</p>
                                 <div class="right-side-button">
-                                    <button>Become a Creator</button>
+                                    <button (click)="changeRole()">Become a Creator</button>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12 second-home-middle position-relative">
+                        <div class="col-md-12 second-home-middle position-relative" *ngIf="role === 'creator'">
                             <div class="welcome-message-div-wrapper">
                                 <div class="headding-welcome-m">
                                     <p class="font-16 font-bold color-blue">Welcome Message</p>
@@ -580,7 +592,7 @@
                                 </div>
                             </div>
                         </div> -->
-                        <div class="col-md-12 second-home-middle position-relative">
+                        <div class="col-md-12 second-home-middle position-relative" *ngIf="role === 'creator'">
                             <div class="add-bank-pe">
                                 <div class="wrapper-add-bank-pe">
                                     <div class="d-flex align-items-center justify-content-between">
@@ -608,8 +620,8 @@
                                         <div class="add-card-list" *ngFor="let bankAccountLists of bankAccountList">
                                             <div
                                                 class="bank-name-e-op d-flex align-items-center justify-content-between">
-                                                <p class="font-14 color-38 font-medium">{{bankAccountLists['business_name']}}</p> <a href=""
-                                                    class="font-14 color-blue">Edit</a>
+                                                <p class="font-14 color-38 font-medium">{{bankAccountLists['business_name']}}</p> 
+                                                <!-- <a href="" class="font-14 color-blue">Edit</a> -->
                                             </div>
                                             <div
                                                 class="bank-name-e-op d-flex align-items-center justify-content-between">
@@ -637,7 +649,7 @@
                                                 <div
                                                     class="bank-name-e-op d-flex align-items-center justify-content-between">
                                                     <p class="font-14 color-38 font-medium">{{cardLists['name_on_card']}}</p>
-                                                    <a href="" class="font-14 color-blue">Edit</a>
+                                                    <!-- <a href="" class="font-14 color-blue">Edit</a> -->
                                                 </div>
                                                 <div
                                                     class="bank-name-e-op d-flex align-items-center justify-content-between">
@@ -658,97 +670,9 @@
                                 </div>
                                 <div class="col-md-9">
                                     <div class="row">
-                                        <div class="div-one-for-customize-subscription w-100">
-                                            <div class="d-flex align-items-center ">
-                                                <div class="upper-welcome-pe">
-                                                    <a href="" class="font-16 color-41 font-medium"><span
-                                                            class="iconify" data-icon="ion:pricetag"></span>Pay </a>
-                                                </div>
-                                                <div class="upper-welcome-pe upper-welcome-pe-3">
-                                                    <a href=""
-                                                        class="font-16 color-blue font-medium dolor-div">$5.00</a>
-                                                </div>
-                                                <div class="upper-welcome-pe upper-welcome-pe-3">
-                                                    <a href=""
-                                                        class="font-16 color-blue font-medium dolor-div w-100 dropdown-toggle"
-                                                        type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                                                        aria-haspopup="true" aria-expanded="false">1 month</a>
-                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                        <a class="dropdown-item" href="#">2 month</a>
-                                                        <a class="dropdown-item" href="#">3 month</a>
-                                                    </div>
-                                                </div>
-                                                <div class="upper-welcome-pe upper-welcome-pe-2">
-                                                    <p class="font-16 color-41 font-medium">for Tier</p>
-                                                </div>
-                                                <div class="upper-welcome-pe upper-welcome-pe-3">
-                                                    <a href=""
-                                                        class="font-16 color-blue font-medium dolor-div w-100 dropdown-toggle"
-                                                        type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                                                        aria-haspopup="true" aria-expanded="false">1 &nbsp;</a>
-                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                        <a class="dropdown-item" href="#">2</a>
-                                                        <a class="dropdown-item" href="#">3</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="text-area-for-poll">
-                                                <textarea rows="3"
-                                                    class="w-100">Pay Monthly $5.00 to view 50 photos</textarea>
-                                                <div class="right-side-button text-right">
-                                                    <button>Post</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-9">
-                                    <div class="row">
-                                        <div class="div-one-for-customize-subscription w-100">
-                                            <div class="d-flex align-items-center ">
-                                                <div class="upper-welcome-pe">
-                                                    <a href="" class="font-16 color-41 font-medium"><span
-                                                            class="iconify" data-icon="ion:pricetag"></span>Pay </a>
-                                                </div>
-                                                <div class="upper-welcome-pe upper-welcome-pe-3">
-                                                    <a href=""
-                                                        class="font-16 color-blue font-medium dolor-div">$12.00</a>
-                                                </div>
-                                                <div class="upper-welcome-pe upper-welcome-pe-3">
-                                                    <a href=""
-                                                        class="font-16 color-blue font-medium dolor-div w-100 dropdown-toggle"
-                                                        type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                                                        aria-haspopup="true" aria-expanded="false">3 month</a>
-                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                        <a class="dropdown-item" href="#">2 month</a>
-                                                        <a class="dropdown-item" href="#">1 month</a>
-                                                    </div>
-                                                </div>
-                                                <div class="upper-welcome-pe upper-welcome-pe-2">
-                                                    <p class="font-16 color-41 font-medium">for Tier</p>
-                                                </div>
-                                                <div class="upper-welcome-pe upper-welcome-pe-3">
-                                                    <a href=""
-                                                        class="font-16 color-blue font-medium dolor-div w-100 dropdown-toggle"
-                                                        type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                                                        aria-haspopup="true" aria-expanded="false">2 &nbsp;</a>
-                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                        <a class="dropdown-item" href="#">1</a>
-                                                        <a class="dropdown-item" href="#">3</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="text-area-for-poll">
-                                                <textarea rows="3"
-                                                    class="w-100">Pay Monthly $5.00 to view 50 photos</textarea>
-                                                <div class="right-side-button text-right">
-                                                    <button>Post</button>
-                                                </div>
-                                            </div>
-                                        </div>
                                         <div class="add-another-button">
                                             <div class="right-side-button">
-                                                <button>+ Add another Subscription</button>
+                                                <button (click)="manageSubscription()">Manage Subscription</button>
                                             </div>
                                         </div>
                                     </div>
@@ -759,7 +683,7 @@
                         <div class="col-md-12 second-home-middle position-relative">
                             <div class="connect-another-chello-pe">
                                 <div class="d-flex align-items-center justify-content-between">
-                                    <p class="font-16 font-bold color-blue">Creare Free Trial Links</p>
+                                    <p class="font-16 font-bold color-blue">Create Free Trial Links</p>
                                     <div class="button-connect">
                                         <a href="" class="color-blue">Create</a>
                                     </div>
@@ -814,15 +738,15 @@
                 </div>
                 <div class="col-md-3">
                     <div class="div-for-right-side-home">
-                        <div class="search-bar-home">
+                        <!-- <div class="search-bar-home">
                             <input type="text" placeholder="Search" class="w-100" />
                             <span class="iconify" data-icon="akar-icons:search"></span>
-                        </div>
+                        </div> -->
                         <div class="spotify-connect border-bottom-pe">
                             <div class="d-flex align-items-center justify-content-between">
                                 <p class="font-32"><span class="iconify" data-icon="logos:spotify"></span></p>
                                 <div class="button-connect">
-                                    <a href="" class="color-blue">Connect</a>
+                                    <a (click)="connectSpotify()" style="cursor: pointer;" class="color-blue">Connect</a>
                                 </div>
                             </div>
                         </div>
@@ -881,13 +805,22 @@
                         <div class="spotify-connect ">
                             <div class="drop-down-new-pe">
                                 <p class="font-14 color-black">Language</p>
-                                <a href="" class="font-14 color-9a w-100 dropdown-toggle" type="button"
+                                <!-- <a href="" class="font-14 color-9a w-100 dropdown-toggle" type="button"
                                     id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false">English</a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="#">Hindi</a>
-                                    <a class="dropdown-item" href="#">Gujarati</a>
-                                </div>
+                                    <a class="dropdown-item" href="javascript:void(0)">Hindi</a>
+                                    <a class="dropdown-item" href="javascript:void(0)">Gujarati</a>
+                                </div> -->
+                                <select class="form-select w-100 color-9a font-14" aria-label="Default select example" #myLanguage
+                                (change)='changeLanguage(myLanguage.value)'>
+                                    <option selected value="English">English</option>
+                                    <option value="Arabic">Arabic</option>
+                                    <option value="French">French</option>
+                                    <option value="German">German</option>
+                                    <option value="Portuguese">Portuguese</option>
+                                    <option value="Spanish">Spanish</option>
+                                  </select>
                             </div>
                         </div>
                     </div>

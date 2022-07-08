@@ -17,4 +17,8 @@ export class baseurl{
     fcmServerKey: string = "key=AAAAFLvHqsQ:APA91bEO44TMprcks7Hx20pTvU5zyC8HaxW6RrzxWG7h__NyHRsve_2tDW4EVVRnvtIS4hyEYVUWqXno2dihVJB55MxPbiklyXIkVp3-AblG4UCiKjzwERDeq4uJQkgBiDzB144m4EpO"; // Development Server
 
     //fcmServerKey: string = "key=AAAAWEWccGk:APA91bHzVdueyR-_M13Tl2CSmpGoZqNPSbebeJyaINihPjUPHY3isF25tL88sK4QlCUU9rpoNbhT_BdG6ArU7QlSpLl8ymz5gUDUE32SZxAiGSNXsb5SzK9-tS22QF8vEefpDvDVamzB"; // Live Server
+
+    spotifyClientId: any = "0aec45fd52064902915ccda7b56ddd7b";
+    spotifyClientSecret: any = "af84565b2aea4476aba63ffb2913a8bc";
+    spotifyRedirectUrl: any = "http://localhost:4200/profile-edit";
 }

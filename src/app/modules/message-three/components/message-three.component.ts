@@ -1,7 +1,6 @@
 import { devOnlyGuardedExpression } from "@angular/compiler";
 import { Component, Input, OnInit, Output, EventEmitter } from "@angular/core";
 import { AngularFirestore } from "@angular/fire/compat/firestore";
-import { Console } from "console";
 
 @Component({
   selector: "app-message-three",
@@ -13,12 +12,11 @@ export class MessageThreeComponent implements OnInit {
 
   userJsonData: any;
   userId: any;
-  name = " ";
+  inputMessage: any;
   chatArray: any = [];
   id: any;
   @Output() crossButtonEvent = new EventEmitter();
   @Output() childButtonEvent = new EventEmitter();
-  message: string = "Test"
 
   constructor(public afs: AngularFirestore) {}
 
@@ -38,9 +36,11 @@ export class MessageThreeComponent implements OnInit {
     this.crossButtonEvent.emit(this.selectedUsers.length);
   }
 
-  sendChat(input: any) {
+  sendChat() {
+    if(this.inputMessage.trim()){
     const queryChat = this.afs.collection("chats").ref.where("users", "array-contains", this.userId);
     queryChat.get().then((data) => {
+      this.chatArray = [];
       data.forEach((element) => {
       this.chatArray.push(element.data());
       });
@@ -59,7 +59,7 @@ export class MessageThreeComponent implements OnInit {
         
         if(checkExist) {
           const resp = await this.afs.collection("chats").doc(obj.chatId).collection("messages").add({
-            message: input,
+            message: this.inputMessage,
             });
           await this.afs.collection("chats").doc(obj.chatId).collection("messages").doc(resp.id).update({
             messageId: resp.id,
@@ -73,7 +73,7 @@ export class MessageThreeComponent implements OnInit {
             }
           });
           await this.afs.collection("chats").doc(obj.chatId).update({
-            lastMessage: input,
+            lastMessage: this.inputMessage,
             lastMessageSent: new Date()
           });
         }
@@ -85,11 +85,11 @@ export class MessageThreeComponent implements OnInit {
         });
         await this.afs.collection("chats").doc(addresp.id).update({
           chatId: addresp.id,
-          lastMessage: input,
+          lastMessage: this.inputMessage,
         });
 
         const resp = await this.afs.collection("chats").doc(addresp.id).collection("messages").add({
-          message: input,
+          message: this.inputMessage,
           });
         await this.afs.collection("chats").doc(addresp.id).collection("messages").doc(resp.id).update({
           messageId: resp.id,
@@ -104,11 +104,12 @@ export class MessageThreeComponent implements OnInit {
         });
         }
       });
-      this.name = " ";
-      setTimeout(() => {
+      // this.inputMessage = " ";
+      // setTimeout(() => {
         this.childButtonEvent.emit();
-      }, 2000);
+      // }, 2000);
       
     });
+    }
   }
 }

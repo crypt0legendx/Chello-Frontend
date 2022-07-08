@@ -1,0 +1,27 @@
+.rightMessage{
+    display: flex;
+    justify-content: end;
+}
+.leftMessage{
+    display: flex;
+    justify-content: start;
+}
+.rightMessageWrap{
+    background-color: rgb(219, 241, 255);
+    padding: 10px 25px;
+    word-break: break-word;
+    border-radius: 10px 10px 0px;
+    margin: 0px 5px 10px 0px;
+}
+.leftMessageWrap{
+    background-color: rgb(242, 246, 249);
+    padding: 10px 25px;
+    word-break: break-word;
+    border-radius: 0px 10px 10px;
+    margin: 0px 5px 10px 0px;
+}
+.chat-list{
+    overflow-y: auto;
+    height: 450px;
+    word-break: break-word;
+}

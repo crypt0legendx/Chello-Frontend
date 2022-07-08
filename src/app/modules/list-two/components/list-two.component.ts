@@ -3,6 +3,7 @@ import { ListService } from '../../../services/list.service';
 import { NgxSpinnerService } from "ngx-spinner";
 import { ToastrService } from 'ngx-toastr';
 import { PostService } from '../../../services/post.service';
+import { UserService } from '../../../services/user.service';
 import { GroupService } from '../../../services/group.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { routers } from '../../../utils/router-navigate';
@@ -23,7 +24,7 @@ declare var $: any;
 export class ListTwoComponent implements OnInit {
 
   totalPosts: any;
-  @Input() userPosts: any;
+  listDatas: any;
 
   userJsonData: any;
   userPhotos: any;
@@ -46,15 +47,24 @@ export class ListTwoComponent implements OnInit {
   edit_user: string = '';
   delete_user: string = '';
   list_id: any;
-  listDetail: any = [];
   listMemberData: any;
-
+  groupMembersList: any;
+  groupMembersListLength: any;
+  
+  receptionist: any = '';
+  onFocus: boolean = false;
+  current_id: any;
+  current_list: any;
+  current_members: any;
+  current_listindex: any = 0;
+  user_selected: boolean = false;
 
 
   constructor (
     private listService : ListService,
     private postService: PostService,
     private groupService: GroupService,
+    private userService: UserService,
     private spinner : NgxSpinnerService,
     private toastr : ToastrService,
     public routernavigate: routers,
@@ -67,6 +77,7 @@ export class ListTwoComponent implements OnInit {
 
   ngOnInit(): void {
     this.getList();
+
     let retrievedObject: any = localStorage.getItem('userData');
     if (retrievedObject) {
       this.userJsonData = JSON.parse(retrievedObject);
@@ -106,42 +117,6 @@ export class ListTwoComponent implements OnInit {
       tabcontents = document.getElementsByClassName("tabcontent")[0];
       tabcontents.className += " active";
   }
-
-  getAllFeeds() {
-    this.spinner.show();
-    var pagination = {
-      "pageNumber": this.page
-    }
-
-    this.postService.getGlobalFeed(pagination).subscribe((data: any) => {
-      console.log(data);
-      if (data['statusCode'] === 200) {
-        if (data['postData'].length) {
-          if (this.page === 0) {
-            this.totalPosts = data['postData'].length;
-            this.userPosts = data['postData'];
-            this.cdr.detectChanges();
-            console.log(this.userPosts);
-          } else {
-            this.userPosts = [...this.userPosts, ...data['postData']];
-            this.totalPosts = data['postData'].length;
-          }
-        } else {
-          this.totalPosts = data['postData'].length;
-        }
-        this.spinner.hide();
-      }
-      else {
-        this.spinner.hide();
-        this.toastr.error(data['message']);
-      }
-    }, (error) => {
-      this.spinner.hide();
-      console.log(error['error']['message']);
-      this.toastr.error(error['error']['message']);
-    });
-  }
-
 
   favoritePost(Id: any, postId: any, status: any) {
     console.log(Id);
@@ -193,12 +168,12 @@ export class ListTwoComponent implements OnInit {
     this.closeCreateListModal();
     this.listService.addList(user_name).subscribe((data: any) => {
       console.log("List added", data)
-      this.userPosts=data.ListData;
+      this.listDatas=data.ListData;
     }, (error) => {
       this.toastr.error(error['error']['message']);
     })
     this.getList();
-    console.log("User Json Data : ",this.userPosts)
+    console.log("List Data : ", this.listDatas)
   }
 
   updateList(head: any) {
@@ -206,7 +181,8 @@ export class ListTwoComponent implements OnInit {
     let user_id=$('#list_id').val();
     let title=head;
     this.listService.updateList(user_id, title).subscribe((data: any) => {
-      this.toastr.success("successfully Edited")
+      this.toastr.success("successfully Edited");
+      // this.getList();
     }, (error) => {
       this.toastr.error(error['error']['message']);
     })
@@ -217,29 +193,59 @@ export class ListTwoComponent implements OnInit {
     this.closeDeleteListModal();    
     let user_id = $('#delete_id').val()
     this.listService.removeList(user_id).subscribe((data: any) => {
-      this.toastr.success("successfully deleted")
+      this.toastr.success("successfully deleted");
+      this.getList();
     }, (error) => {
       this.toastr.error(error['error']['message']);
     })
     this.getList();
   }
 
-  getList() {
+  getList(isCallbackFunc :boolean= false) {
+    this.spinner.show();
     this.listService.getList().subscribe((data: any) => {
       console.log("Lists : ", data);
-      this.userPosts=data.ListData;
+      this.listDatas=data.ListData;
+      this.spinner.hide();
+      if(isCallbackFunc)
+      setTimeout(() => {
+        this.getListMember(this.current_list);   
+      }, 100);
+        
     }, (error) => {
+      this.spinner.hide();
       this.toastr.error(error['error']['message']);
     })
+
   }
 
-  addMember(list_id: any, user_id: any) {
+  getCurrentList() {
+    return this.listDatas;
+  }
+
+  addMember() {
+    this.closeAddMemberModal();
+    let user_id = this.current_id;
+    let list_id = this.current_list;
+    console.log("list_id", list_id, "user_id", user_id);
+    this.getListMember(list_id);
+    for(let i=0; i<this.listMemberData.length; i++) {
+      console.log("current_id", this.current_id, "ListMemberid", this.listMemberData[i].member_id)
+      if(this.listMemberData[i].member_id == this.current_id)
+      {
+        this.toastr.warning("already exist in this list");
+        return;
+      }
+    }
     this.listService.addMember(list_id, user_id).subscribe((data: any) => {
       this.toastr.success("successfully added");
-    }, (error) => {
+      this.getList(true);
+         }, (error) => {
       this.toastr.error(error['error']['message']);
     })
-  }
+    
+    // document.getElementsByClassName("tabcontent")[this.current_listindex].className += " active"
+}
 
   removeListMember(member_id: any) {
     this.listService.removeListMember(member_id).subscribe((data: any) => {
@@ -248,15 +254,64 @@ export class ListTwoComponent implements OnInit {
     }, (error) => {
       this.toastr.error(error['error']['message']);
     })
+
   }
 
-  getListMember(user_id: any) {
-    this.listService.getListMember(user_id).subscribe((data: any) => {
+  getListMember(list_id: any) {
+    this.spinner.show();
+    this.listService.getListMember(list_id).subscribe((data: any) => {
       console.log("ListMembers : ", data);
       this.listMemberData = data.listMemberData;
+      this.spinner.hide();
     }, (error) => {
       this.toastr.error(error['error']['message']);
+      this.spinner.hide();
     })
+    var x = document.getElementsByClassName("tablinks")[this.current_listindex] as HTMLElement;
+    console.log("selected : ", this.current_listindex)
+    x.click();
+  }
+
+  getCurrListMembers(){
+    return this.listMemberData;
+  }
+
+  setReceptionist(recep: any, listMember_id: any){
+    this.receptionist = recep;
+    this.current_id = listMember_id;
+    this.user_selected = true;
+  }
+
+  isSelected() {
+    return this.user_selected;
+   }
+
+  setFocus(state: boolean){
+    setTimeout(()=>{this.onFocus = state}, 500);
+  }
+
+  searchUser(q: any) {
+    var searchData = {
+      "search": q
+    }
+
+    console.log(searchData);
+    this.userService.searchUser(searchData).subscribe((data: any) => {
+      console.log(data);
+      if (data['statusCode'] === 200) {
+        if (q != "") {
+          this.groupMembersList = data['userData'];
+          this.groupMembersListLength = data['userData'].length;
+        } else {
+          this.groupMembersList = data['userData'].slice(0, 30);
+          this.groupMembersListLength = data['userData'].length;
+        }
+        console.log("MembersData : ",this.groupMembersList);
+      }
+      else {
+      }
+    }, (error) => {
+    });
   }
 
   calc_id(index: any) {
@@ -290,6 +345,14 @@ export class ListTwoComponent implements OnInit {
     $('#DeleteListModal').modal('hide');
   }
 
+  openAddMemberModal() {
+    $('#AddMemberModal').modal('show');
+  }
+
+  closeAddMemberModal() {
+    $('#AddMemberModal').modal('hide');
+    this.user_selected = false;
+  }
   
   fomartDate(initialDate :any) {
     let current_ms = Date.now();
@@ -305,8 +368,12 @@ export class ListTwoComponent implements OnInit {
     return date;
   }
 
-  openTabTS(evt:any, index:number, user_id: any) {
-    this.getListMember(user_id);
+  openTabTS(evt:any, index:number, list_id: any) {
+    console.log("executed", index)
+    this.current_list = list_id;
+    this.current_listindex = index;
+    this.getListMember(list_id);
+
     var cityName = 'tab' + Number(index);
     console.log('CityName : ', cityName);
     var i, tabcontents, tablinks;
@@ -319,6 +386,7 @@ export class ListTwoComponent implements OnInit {
     tablinks = document.getElementsByClassName("tablinks");
     for (i = 0; i < tablinks.length; i++) {
       tablinks[i].className = tablinks[i].className.replace(" active", "");
+      console.log('last', tablinks[i].className)
     }
     var city = document.getElementById(cityName) as HTMLElement;
       city.style.display = "block";

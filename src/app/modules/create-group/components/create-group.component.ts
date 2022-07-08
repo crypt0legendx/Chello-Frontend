@@ -41,6 +41,9 @@ export class CreateGroupComponent implements OnInit {
   retrievedGroupDetails: any;
   userId: any;
 
+  isGroupProfilePicture: boolean = false;
+  isGroupCoverPicture: boolean = false;
+
   constructor(
     private formBuilder: FormBuilder,
     private groupService: GroupService,
@@ -181,8 +184,11 @@ export class CreateGroupComponent implements OnInit {
 
     if (jsonKey === "profileImage") {
       this.groupProfilePicture = res['Location'];
+      this.isGroupProfilePicture = true;
     } else if (jsonKey === "coverImage") {
       this.groupCoverPicture = res['Location'];
+      this.isGroupProfilePicture = true;
+      console.log(this.groupCoverPicture);
     }
 
     this.spinner.hide();

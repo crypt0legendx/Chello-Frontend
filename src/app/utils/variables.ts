@@ -17,7 +17,7 @@ export class veriables{
     paymentEmail: any = "payment@chello.biz";
     mediaEmail: any = "media@chello.biz";
 
-    facebookId: any = "javascript:void(0)";
+    facebookId: any = "https://www.facebook.com/ChelloWorld";
     instagramId: any = "https://www.instagram.com/letschello/";
     tiktokId: any = "https://tiktok.com/@chello.world";
     twitterId: any = "https://twitter.com/LetsChello";

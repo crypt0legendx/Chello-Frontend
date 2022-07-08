@@ -38,7 +38,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="buttons-f-pr-e d-flex">
-                                                    <div class="favorite-star" (click)="openListsModal()">
+                                                    <div class="favorite-star" (click)="openListsModal()" *ngIf="isMyProfile !== true">
                                                         <span class="iconify favorite" data-icon="uit:favorite"></span>
                                                     </div>
                                                     <a *ngIf="isMyProfile === true" routerLink='/profile-edit' class="font-16 color-blue"><span
@@ -123,14 +123,14 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="modal-main">
+                                    <div class="modal-main" style="max-height: 400px; overflow-y: scroll">
                                         <div class="radio-button-vault" *ngFor="let list of getCurrentList(); let i=index">
                                             <div class="form-group d-flex align-items-center py-2 mb-0">
                                                 <input type="checkbox" id="{{'check_'+(i)}}" class="radio-input" name="check_status" value="{{list._id}}" style="border-radius: 50%;" (change)="check_status(i, list.user)" [checked]="list.checkState" />
                                                 <!-- [checked]="isChecked(list, userJsonData._id)" -->
                                                 <div class="user-info d-block">
                                                     <p class="font-20 color-black"
-                                                        style="margin-bottom: 5px !important;">{{list.title}}</p>
+                                                        style="margin-bottom:5px !important;">{{list.title}}</p>
                                                     <p class="color-grey">{{ list.memberDetails.length==0 ? "Empty" : list.memberDetails.length }}</p>
                                                 </div>
                                             </div>
@@ -153,25 +153,28 @@
                             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
-                                    <!-- <app-payment></app-payment> -->
-                                    <!-- <div id="tab2" class="tabcontent"> -->
-                                    <div class="modal-header">
-                                        <p class="font-20 font-bold">
-                                            CREATE NEW LIST
-                                        </p>
-                                    </div>
-                                    <div class="modal-main position-relative">
-                                        <p class="font-16 color-black list-label">Enter List Name</p>
-                                        <input id="input-name" class="input-name" [(ngModel)]="added_user" placeholder="" reqired />
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button class="cancel-btn" (click)="closeCreateListModal()">
-                                            CANCEL
-                                        </button>
-                                        <button [disabled]="!added_user" (click)="addList(added_user)">
-                                            SAVE
-                                        </button>
-                                    </div>
+                                    <form [formGroup]="addListForm" (ngSubmit)="addList()">
+
+                                        <!-- <app-payment></app-payment> -->
+                                        <!-- <div id="tab2" class="tabcontent"> -->
+                                        <div class="modal-header">
+                                            <p class="font-20 font-bold">
+                                                CREATE NEW LIST
+                                            </p>
+                                        </div>
+                                        <div class="modal-main position-relative">
+                                            <p class="font-16 color-black list-label">Enter List Name</p>
+                                            <input id="input-name" class="input-name" [(ngModel)]="added_user" placeholder="" reqired formControlName="listName" />
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="cancel-btn" (click)="closeCreateListModal()">
+                                                CANCEL
+                                            </button>
+                                            <button type="submit" class="confirm-btn">
+                                                SAVE
+                                            </button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -676,17 +679,13 @@
                                                 <div class="main-valt-section">
                                                     <div class="vault-section-one">
                                                         <div class="search-vault">
-                                                            <div class="flex align-items-center right-side-button text-right">
-                                                                <button type="button" class="addBtn" data-toggle="modal" data-target="#exampleModalCenter">+ Add To</button>
-                                                                <div class="input-show-search-m"  id="Div2" >
-                                                                    <input type="text" name="search" placeholder="search heare.." />
-                                                                </div>
-                                                                <!-- <a href="javascript:void(0)" id="Div1" type="button" value="Click" onclick="switchVisible();" ></a> -->
-                                                                <a href="javascript:void(0)">
-                                                                    <span class="iconify"
-                                                                        data-icon="akar-icons:search"></span>
-                                                                </a>
-                                                            </div>                                                            
+                                                            <div class="input-show-search-m"  id="Div2" >
+                                                                <input type="text" name="search" placeholder="search here..." />
+                                                            </div>
+                                                            <a href="javascript:void(0)" id="Div1" type="button" value="Click" onclick="switchVisible();" >
+                                                                <span class="iconify"
+                                                                    data-icon="akar-icons:search"></span>
+                                                            </a>
                                                         </div>
                                                         <div class="filter-vault position-relative">
                                                             <a href="javascript:void(0)" class="dropdown-toggle"

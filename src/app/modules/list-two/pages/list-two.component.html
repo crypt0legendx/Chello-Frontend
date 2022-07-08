@@ -42,7 +42,7 @@
                       <button class="cancel-btn" (click)="closeCreateListModal()">
                         Cancel
                       </button>
-                      <button class="confirm-btn" (click)="addList(added_user)">
+                      <button class="confirm-btn" [disabled]="!added_user" (click)="addList(added_user)">
                         Save
                       </button>
                     </div>
@@ -67,7 +67,7 @@
                       <button class="cancel-btn" (click)="closeEditListModal()">
                         Cancel
                       </button>
-                      <button class="confirm-btn" (click)="updateList(edit_user)">
+                      <button class="confirm-btn" [disabled]="!edit_user" (click)="updateList(edit_user)">
                         Save
                       </button>
                     </div>
@@ -97,6 +97,66 @@
                   </div>
                 </div>
               </div>
+              <div class="modal fade" id="AddMemberModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <p class="font-20 color-blue font-bold">
+                        Add New ListMember
+                      </p>
+                    </div>
+                    <div class="modal-main">
+                      <p class="font-18 color-black">Enter List Name</p>
+                      <div class="amount-form d-flex flex-column p-2 mt-3">
+                        <div class="row position-relative">
+                            <div class="search-bar-home w-100">
+                                <input type="text" placeholder="Search" class="w-100" #searchUsers
+                                (input)="searchUser(searchUsers.value)" id="searchUsers" 
+                                [(ngModel)] = "receptionist"
+                                (focus)="setFocus(true)"
+                                (blur)="setFocus(false)"
+                                autocomplete="off"
+                                name="searchUser"
+                                />
+                                <span class="iconify"
+                                    data-icon="akar-icons:search"></span>
+                            </div>
+                            <div *ngIf = "onFocus" class="div-input-cg-search-wrap" style="overflow-y: scroll; position:absolute;z-index:2; width:100%; max-height:300px; top: 60px;">
+                                <p class="font-12 color-4e font-medium">Suggested</p>
+                                <div class="wrapper-poll-asked-user" 
+                                *ngFor="let groupMembersLists of groupMembersList;" [id]="groupMembersLists._id"  
+                                style="cursor: pointer;" 
+                                (click) = "setReceptionist(groupMembersLists.userName, groupMembersLists._id)"
+                                >
+                                    <img [src]="groupMembersLists.profileImage" onError="this.src='assets/images/user.png'"
+                                        alt="image" />
+                                    <div class="user-info-p-a">
+                                        <p class="font-14 font-bold color-49"> {{groupMembersLists.fullName}}
+                                            &nbsp; <span
+                                                class="iconify font-20 color-light-blue"
+                                                data-icon="ic:sharp-verified"></span>
+                                        </p>
+                                        <p class="font-14 color-49">@{{groupMembersLists.userName}}</p>
+                                        <!-- <input type="hidden" [(ngModel)]="groupMembersLists._id" value="groupMembersLists._id" /> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button class="cancel-btn" (click)="closeAddMemberModal()">
+                        Cancel
+                      </button>
+                      <button class="confirm-btn" [disabled]="!isSelected()" (click)="addMember()">
+                        Save
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
               <div class="wrapper-veri-tab">
                 <div class="width-list-vertitab">
                   <div class="div-tab-p-verti">
@@ -105,24 +165,24 @@
                     </p>
                   </div>
                   <div class="tab">
-                    <div *ngFor="let userPost of userPosts; let i = index">
-                      <button class="tablinks" (click)="openTabTS($event, i, userPost._id)">
-                        {{ userPost.title }}<span>{{ userPost.memberDetails.length==0 ? "Empty" : userPost.memberDetails.length }}</span>
+                    <div *ngFor="let listData of getCurrentList(); let i = index">
+                      <button class="tablinks" (click)="openTabTS($event, i, listData._id)">
+                        {{ listData.title }}<span>{{ listData.memberDetails.length==0 ? "Empty" : listData.memberDetails.length }}</span>
                       </button>
                     </div>
                   </div>
                 </div>
                 <div class="width-list-vertitab-2">
-                  <div *ngFor="let userPost of userPosts; let i = index">
+                  <div *ngFor="let listData of getCurrentList(); let i = index">
                     <div id="{{'tab'+(i)}}" class="tabcontent">
                       <div class="title-div-vtab">
                         <div class="list-div">
                           <div class="list-d-wrap">
-                            <a href="">
+                            <button class="list-name" (click)="openTabTS($event, i, listData._id)">
                               <p class="font-20 font-bold color-blue">
-                                {{userPost.title}}
+                                {{listData.title}}
                               </p>
-                            </a>
+                            </button>
                             <div class="vault-section-one">
                               <div class="filter-vault position-relative mx-2">
                                 <a href="javascript:void(0)" class="font-20 color-black dropdown-toggle" role="button"
@@ -183,14 +243,14 @@
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                   <div class="radio-button-vault">
                                     <div class="form-group">
-                                      <a (click)="openEditListModal(userPost._id)" class="font-20 color-black dropdown-toggle"
+                                      <a (click)="openEditListModal(listData._id)" class="font-20 color-black dropdown-toggle"
                                         role="button" data-toggle="modal" data-target="#EditListModal">
                                         <span for="rdo1" class="color-black font-18">Edit
                                         </span>
                                       </a>
                                     </div>
                                     <div class="form-group">
-                                      <a (click)="openDeleteListModal(userPost._id)" class="font-20 color-black dropdown-toggle"
+                                      <a (click)="openDeleteListModal(listData._id)" class="font-20 color-black dropdown-toggle"
                                         role="button" data-toggle="modal" data-target="#DeleteListModal">
                                         <span for="rdo2" class="color-black font-18">Delete
                                         </span>
@@ -204,11 +264,12 @@
                         </div>
                       </div>
                       <div class="detail-div-vtab">
-                        <div class="wrapper-member-new-group" *ngFor="let listMember of listMemberData; let j=index">
+                        <div class="wrapper-member-new-group" *ngFor="let listMember of getCurrListMembers(); let j=index">
                           <div class="row align-items-center">
                             <div class="col-md-5">
                               <div class="wrapper-poll-asked-user">
-                                <img src="{{profilePicture}}" alt="image" />
+                                <img [src]="listMember.profileImage" onError="this.src='assets/images/user.png'"
+                                        alt="image" />
                                 <div class="user-info-p-a">
                                   <p class="font-14 font-bold color-49">
                                     {{listMember.userDetail[0].fullName}} &nbsp;
@@ -227,15 +288,16 @@
                             </div>
                             <div class="col-md-3">
                               <div class="button-member-remo">
-                                <button (click)="removeListMember(listMember.member_id)">Unfollow</button>
+                                <button (click)="removeListMember(listMember.member_id)">Remove</button>
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
                       <div class="list-create-head"></div>
-                        <a (click)="addMember(userPost._id, userJsonData._id)" class="color-black add-member" ><span class="iconify" data-icon="akar-icons:plus"></span></a>
-                      <!-- <button class="add-member font-20 float-right" (click)="addMember(userPost._id, userJsonData._id)">+</button> -->
+                        <!-- <a (click)="addMember(listData._id, userJsonData._id)" class="color-black add-member" ><span class="iconify" data-icon="akar-icons:plus"></span></a> -->
+                        <a (click)="openAddMemberModal()" class="color-black add-member" ><span class="iconify" data-icon="akar-icons:plus"></span></a>
+                     
                     </div>
                   </div>
                   

@@ -25,5 +25,9 @@ a, button {
 .post-text-field {
   padding-bottom: 15px;
   box-sizing: border-box;
-  resize: vertical;
+  resize: none;  
+}
+
+.post-input-form {
+  // background-color: white;
 }
